@@ -13,6 +13,7 @@ import { configuration } from './config/configuration'
         ConfigModule.forRoot({
             isGlobal: true,
             load: [configuration],
+            envFilePath: ['.env.local', '.env.prod'],
         }),
         TypeOrmModule.forRootAsync({
             useFactory: (config: ConfigService) => ({
