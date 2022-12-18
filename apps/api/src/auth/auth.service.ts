@@ -5,14 +5,14 @@ import * as bcrypt from 'bcrypt'
 
 import { JwtPayload, JwtSign, Payload } from './auth.interface'
 
-import { User } from 'src/base/users/users.interface'
 import { UsersService } from 'src/base/users/users.service'
+import { User } from 'src/entities/user.entity'
 
 @Injectable()
 export class AuthService {
     constructor(private jwt: JwtService, private users: UsersService, private config: ConfigService) {}
 
-    public async validateUser(username: string, password: string): Promise<User | null> {
+    public async validateUser(username: string, password: string): Promise<Partial<User> | null> {
         const user = await this.users.findOne(username)
 
         if (!user) {
