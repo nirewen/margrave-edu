@@ -5,12 +5,12 @@ import { UsersService } from 'src/base/users/users.service'
 export class DuplicateUserGuard implements CanActivate {
     constructor(@Inject(UsersService) private users: UsersService) {}
 
-    public canActivate(context: ExecutionContext) {
+    public async canActivate(context: ExecutionContext) {
         const req = context.switchToHttp().getRequest<Request>()
-        const user = this.users.findOne(req.body.username)
+        const user = await this.users.findOne(req.body.email)
 
         if (user) {
-            throw new BadRequestException('There is already an user with this username registered')
+            throw new BadRequestException('There is already an user with this email registered')
         }
 
         return true

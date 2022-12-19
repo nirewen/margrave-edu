@@ -10,7 +10,6 @@ export class User {
     email: string
 
     @Column()
-    @Exclude()
     password: string
 
     @Column('text', { default: 'STUDENT' })
