@@ -1,7 +1,8 @@
 import { Exclude } from 'class-transformer'
+import { Allow } from 'class-validator'
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
-@Entity()
+@Entity({ name: 'users' })
 export class User {
     @PrimaryGeneratedColumn()
     id: number
@@ -10,9 +11,11 @@ export class User {
     email: string
 
     @Column()
+    @Allow()
+    @Exclude({ toPlainOnly: true })
     password: string
 
-    @Column('text', { default: 'STUDENT' })
+    @Column({ nullable: true, default: 'STUDENT' })
     role: string
 
     @CreateDateColumn()
