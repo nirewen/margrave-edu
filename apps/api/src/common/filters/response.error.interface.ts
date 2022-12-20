@@ -1,6 +1,17 @@
+import { Request } from 'express'
+
 export interface IResponseError {
-    statusCode: number
-    message: string
-    code: string
     method: string
+    status: number
+    code: string
+    message: string
+    details: any
+}
+
+export interface IResponseArguments {
+    request: Request
+    status: number
+    code: string
+    message: string
+    details?: any
 }

@@ -1,16 +1,17 @@
-import { Request } from 'express'
-import { IResponseError } from './response.error.interface'
+import { IResponseArguments, IResponseError } from './response.error.interface'
 
-export const GlobalResponseError: (
-    statusCode: number,
-    message: string,
-    code: string,
-    request: Request
-) => IResponseError = (statusCode: number, message: string, code: string, request: Request): IResponseError => {
+export const GlobalResponseError: (args: IResponseArguments) => IResponseError = ({
+    status,
+    message,
+    details,
+    code,
+    request,
+}: IResponseArguments): IResponseError => {
     return {
         method: request.method,
-        statusCode: statusCode,
+        status,
         code,
         message,
+        ...(details !== message && { details }),
     }
 }
