@@ -10,7 +10,7 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
 
     async afterInsert(event: InsertEvent<User>) {
         const profile = new Profile()
-        profile.id = event.entity.id
+        profile.user = event.entity
 
         await event.manager.getRepository(Profile).save(profile)
     }

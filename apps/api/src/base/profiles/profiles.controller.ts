@@ -20,8 +20,8 @@ export class ProfilesController {
     }
 
     @Post()
-    create(@Body() createProfileDTO: CreateProfileDTO) {
-        return this.profilesService.create(createProfileDTO.id)
+    create(@Body() newProfile: CreateProfileDTO) {
+        return this.profilesService.create(newProfile)
     }
 
     @Get(':id')

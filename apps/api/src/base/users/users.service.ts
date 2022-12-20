@@ -24,7 +24,11 @@ export class UsersService {
     }
 
     async findAll() {
-        return this.users.find()
+        return this.users.find({
+            relations: {
+                profile: true,
+            },
+        })
     }
 
     async findOne(email: string) {

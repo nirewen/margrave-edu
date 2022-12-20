@@ -1,11 +1,14 @@
-import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm'
 import { User } from './user.entity'
 
 @Entity({ name: 'profiles' })
 export class Profile {
-    @PrimaryColumn()
-    @OneToOne(() => User, user => user.id)
+    @PrimaryGeneratedColumn()
     id: number
+
+    @OneToOne(() => User, user => user.profile, { onDelete: 'CASCADE' })
+    @JoinColumn()
+    user: User
 
     @Column({ default: '' })
     name: string

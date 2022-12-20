@@ -33,8 +33,7 @@ export class User {
     @Column({ type: 'enum', enum: UserRole, default: UserRole.STUDENT })
     role: UserRole
 
-    @OneToOne(() => Profile)
-    @JoinColumn({ name: 'id' })
+    @OneToOne(() => Profile, profile => profile.user)
     profile: Profile
 
     @CreateDateColumn()
