@@ -1,13 +1,14 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common'
 import { JwtAuthGuard, RolesGuard } from 'src/auth/guards'
 import { Roles } from 'src/common/decorators/roles.decorator'
+import { UserRole } from 'src/entities/user.entity'
 import { CreateUserDTO } from './dto/create-user.dto'
 import { UpdateUserDTO } from './dto/update-user.dto'
 import { UsersService } from './users.service'
 
 @Controller('/users')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles('ADMIN')
+@Roles(UserRole.ADMIN)
 export class UsersController {
     constructor(private userService: UsersService) {}
 

@@ -6,15 +6,15 @@ import {
     InternalServerErrorException,
     UnauthorizedException,
 } from '@nestjs/common'
-import { User } from 'src/entities/user.entity'
+import { User, UserRole } from 'src/entities/user.entity'
 
 @Injectable()
 export class RolesGuard implements CanActivate {
     constructor(private readonly reflector: Reflector) {}
 
     canActivate(context: ExecutionContext) {
-        const roles = this.reflector.get<string[]>('roles', context.getHandler()) || []
-        const rolesClass = this.reflector.get<string[]>('roles', context.getClass()) || []
+        const roles = this.reflector.get<UserRole[]>('roles', context.getHandler()) || []
+        const rolesClass = this.reflector.get<UserRole[]>('roles', context.getClass()) || []
 
         const req = context.switchToHttp().getRequest()
 
