@@ -18,7 +18,7 @@ export class UsersService {
     async create(user: CreateUserDTO) {
         const password = await this.hashPassword(user.password)
 
-        const newUser = this.users.create({ email: user.email, password })
+        const newUser = this.users.create({ ...user, password })
 
         return this.users.save(newUser)
     }

@@ -1,20 +1,11 @@
 import { Exclude } from 'class-transformer'
-import { Allow } from 'class-validator'
-import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    OneToOne,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
-} from 'typeorm'
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import { Profile } from './profile.entity'
 
 export enum UserRole {
-    ADMIN,
-    TEACHER,
-    STUDENT,
+    ADMIN = 'ADMIN',
+    TEACHER = 'TEACHER',
+    STUDENT = 'STUDENT',
 }
 
 @Entity({ name: 'users' })
@@ -26,7 +17,6 @@ export class User {
     email: string
 
     @Column()
-    @Allow()
     @Exclude({ toPlainOnly: true })
     password: string
 

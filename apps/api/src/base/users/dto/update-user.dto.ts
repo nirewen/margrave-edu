@@ -1,4 +1,15 @@
 import { PartialType } from '@nestjs/swagger'
-import { User } from 'src/entities/user.entity'
+import { IsEmail, IsString, Length } from 'class-validator'
+import { User, UserRole } from 'src/entities/user.entity'
 
-export class UpdateUserDTO extends PartialType(User) {}
+export class UpdateUserDTO {
+    @IsEmail()
+    email: string
+
+    @IsString()
+    @Length(6)
+    password: string
+
+    @IsString()
+    role?: UserRole
+}
