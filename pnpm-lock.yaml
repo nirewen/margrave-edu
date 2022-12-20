@@ -12,6 +12,7 @@ importers:
 
   apps/api:
     specifiers:
+      '@nest-lab/or-guard': ^2.1.0
       '@nestjs/cli': ^9.0.0
       '@nestjs/common': ^9.0.0
       '@nestjs/config': ^2.2.0
@@ -54,6 +55,7 @@ importers:
       typeorm: ^0.3.11
       typescript: ^4.7.4
     dependencies:
+      '@nest-lab/or-guard': 2.1.0_vucj3jvp2uxauu2ysjbom5ehye
       '@nestjs/common': 9.2.1_welcnyot5bzd5wa2aovbkxpi4i
       '@nestjs/config': 2.2.0_b4pxbpa7chblgbyake5iz5rdmu
       '@nestjs/core': 9.2.1_e6la6qvsclaae2becwjnmfvsuq
@@ -840,6 +842,18 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+    dev: false
+
+  /@nest-lab/or-guard/2.1.0_vucj3jvp2uxauu2ysjbom5ehye:
+    resolution: {integrity: sha512-mNcOy8B0NsqECAkJ3wBKktNz+Odsv/iKnpr7i/5q7CCDPhut8KbSOFeWESF4AcixfRPWdc4Kww33mKHm3WCnfQ==}
+    peerDependencies:
+      '@nestjs/common': ' ^8.0.0 || ^9.0.0'
+      '@nestjs/core': ^8.0.0 || ^9.0.0
+      rxjs: ^7.0.0
+    dependencies:
+      '@nestjs/common': 9.2.1_welcnyot5bzd5wa2aovbkxpi4i
+      '@nestjs/core': 9.2.1_e6la6qvsclaae2becwjnmfvsuq
+      rxjs: 7.8.0
     dev: false
 
   /@nestjs/cli/9.1.5:
