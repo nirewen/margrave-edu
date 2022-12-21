@@ -9,6 +9,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm'
+import { Answer } from './answer.entity'
 import { Profile } from './profile.entity'
 import { Subject } from './subject.entity'
 
@@ -39,6 +40,9 @@ export class User {
     @OneToMany(() => Subject, subject => subject.teacher)
     @JoinColumn({ name: 'teacherId' })
     subjects: Subject[]
+
+    @OneToMany(() => Answer, answer => answer.user)
+    answers: Answer[]
 
     @CreateDateColumn()
     createdAt: Date
