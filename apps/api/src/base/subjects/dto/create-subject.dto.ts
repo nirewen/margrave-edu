@@ -16,4 +16,7 @@ export class CreateSubjectDTO {
     @IsNumber()
     @Min(20)
     hours: number
+
+    @IsNumber()
+    teacherId: number
 }

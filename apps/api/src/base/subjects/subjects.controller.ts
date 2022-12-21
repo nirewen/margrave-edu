@@ -8,7 +8,7 @@ export class SubjectsController {
     constructor(private readonly subjectsService: SubjectsService) {}
 
     @Post()
-    create(@Body() createSubjectDto: CreateSubjectDTO) {
+    async create(@Body() createSubjectDto: CreateSubjectDTO) {
         return this.subjectsService.create(createSubjectDto)
     }
 
