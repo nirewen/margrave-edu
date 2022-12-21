@@ -4,6 +4,8 @@ import {
     CreateDateColumn,
     Entity,
     JoinColumn,
+    JoinTable,
+    ManyToMany,
     OneToMany,
     OneToOne,
     PrimaryGeneratedColumn,
@@ -11,6 +13,7 @@ import {
 } from 'typeorm'
 import { Answer } from './answer.entity'
 import { Attendance } from './attendance.entity'
+import { Class } from './class.entity'
 import { Profile } from './profile.entity'
 import { Subject } from './subject.entity'
 
@@ -47,6 +50,10 @@ export class User {
 
     @OneToMany(() => Attendance, attendance => attendance.user)
     attendances: Attendance[]
+
+    @ManyToMany(() => Class, entity => entity.users)
+    @JoinTable({ name: 'user_classes' })
+    classes: Class[]
 
     @CreateDateColumn()
     createdAt: Date
