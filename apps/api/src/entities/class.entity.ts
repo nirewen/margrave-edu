@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm'
+import { ClassSubject } from './class-subject.entity'
 import { Classroom } from './classroom.entity'
 
 export enum Shift {
@@ -22,4 +23,7 @@ export class Class {
 
     @ManyToOne(() => Classroom, classroom => classroom.classes)
     classroom: Classroom
+
+    @OneToMany(() => ClassSubject, classSubject => classSubject.class)
+    classSubjects: ClassSubject[]
 }

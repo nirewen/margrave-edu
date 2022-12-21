@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm'
+import { ClassSubject } from './class-subject.entity'
 import { Lesson } from './lesson.entity'
 import { User } from './user.entity'
 
@@ -27,4 +28,7 @@ export class Subject {
 
     @OneToMany(() => Lesson, lesson => lesson.subject)
     lessons: Lesson[]
+
+    @OneToMany(() => ClassSubject, classSubject => classSubject.subject)
+    classSubjects: ClassSubject[]
 }
