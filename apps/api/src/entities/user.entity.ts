@@ -1,6 +1,16 @@
 import { Exclude } from 'class-transformer'
-import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    OneToMany,
+    OneToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from 'typeorm'
 import { Profile } from './profile.entity'
+import { Subject } from './subject.entity'
 
 export enum UserRole {
     ADMIN = 'ADMIN',
@@ -25,6 +35,10 @@ export class User {
 
     @OneToOne(() => Profile, profile => profile.user)
     profile: Profile
+
+    @OneToMany(() => Subject, subject => subject.teacher)
+    @JoinColumn({ name: 'teacherId' })
+    subjects: Subject[]
 
     @CreateDateColumn()
     createdAt: Date
