@@ -4,8 +4,9 @@ import { Classroom } from './classroom.entity'
 import { User } from './user.entity'
 
 export enum Shift {
-    MATUTINE = 'MATUTINE',
-    VESPERTINE = 'VESPERTINE',
+    MORNING = 'MORNING',
+    AFTERNOON = 'AFTERNOON',
+    NIGHT = 'NIGHT',
 }
 
 @Entity({ name: 'classes' })
