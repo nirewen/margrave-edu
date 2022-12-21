@@ -10,6 +10,7 @@ import {
     UpdateDateColumn,
 } from 'typeorm'
 import { Answer } from './answer.entity'
+import { Attendance } from './attendance.entity'
 import { Profile } from './profile.entity'
 import { Subject } from './subject.entity'
 
@@ -43,6 +44,9 @@ export class User {
 
     @OneToMany(() => Answer, answer => answer.user)
     answers: Answer[]
+
+    @OneToMany(() => Attendance, attendance => attendance.user)
+    attendances: Attendance[]
 
     @CreateDateColumn()
     createdAt: Date

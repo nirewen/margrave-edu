@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm'
 import { Assignment } from './assignment.entity'
+import { Attendance } from './attendance.entity'
 import { Classroom } from './classroom.entity'
 import { Subject } from './subject.entity'
 
@@ -31,4 +32,7 @@ export class Lesson {
 
     @OneToMany(() => Assignment, assignment => assignment.lesson)
     assignments: Assignment[]
+
+    @OneToMany(() => Attendance, attendance => attendance.lesson)
+    attendances: Attendance[]
 }
