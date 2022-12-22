@@ -7,7 +7,7 @@ import { UpdateLessonDTO } from './dto/update-lesson.dto'
 
 @Injectable()
 export class LessonsService {
-    constructor(@InjectRepository(Lesson) private lessons: Repository<Lesson>) {}
+    constructor(@InjectRepository(Lesson) private readonly lessons: Repository<Lesson>) {}
 
     async create(body: CreateLessonDTO) {
         const lesson = this.lessons.create(body)

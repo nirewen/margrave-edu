@@ -7,7 +7,7 @@ import { UpdateClassDto } from './dto/update-class.dto'
 
 @Injectable()
 export class ClassesService {
-    constructor(@InjectRepository(Class) private classes: Repository<Class>) {}
+    constructor(@InjectRepository(Class) private readonly classes: Repository<Class>) {}
 
     async create(body: CreateClassDTO) {
         const entity = await this.findOneByNumber(body.number).catch(() => null)

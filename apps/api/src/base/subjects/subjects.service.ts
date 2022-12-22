@@ -10,7 +10,7 @@ import { UpdateSubjectDTO } from './dto/update-subject.dto'
 @Injectable()
 export class SubjectsService {
     constructor(
-        @InjectRepository(Subject) private subjects: Repository<Subject>,
+        @InjectRepository(Subject) private readonly subjects: Repository<Subject>,
         private readonly usersService: UsersService
     ) {}
 

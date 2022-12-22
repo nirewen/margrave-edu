@@ -6,7 +6,7 @@ import { UpdateProfileDTO } from './dto/update-profile.dto'
 
 @Injectable()
 export class ProfilesService {
-    constructor(@InjectRepository(Profile) private profiles: Repository<Profile>) {}
+    constructor(@InjectRepository(Profile) private readonly profiles: Repository<Profile>) {}
 
     async findAll() {
         return this.profiles.find()

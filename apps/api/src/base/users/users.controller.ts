@@ -10,7 +10,7 @@ import { UsersService } from './users.service'
 @UseGuards(RolesGuard)
 @Roles(UserRole.ADMIN)
 export class UsersController {
-    constructor(private userService: UsersService) {}
+    constructor(private readonly userService: UsersService) {}
 
     @Get()
     findAll() {

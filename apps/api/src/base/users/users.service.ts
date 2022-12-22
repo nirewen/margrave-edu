@@ -9,7 +9,7 @@ import { UpdateUserDTO } from './dto/update-user.dto'
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(User) private users: Repository<User>) {}
+    constructor(@InjectRepository(User) private readonly users: Repository<User>) {}
 
     private hashPassword(password: string) {
         return bcrypt.hash(password, 10)

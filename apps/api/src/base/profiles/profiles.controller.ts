@@ -10,7 +10,7 @@ import { ProfilesService } from './profiles.service'
 @UseGuards(OrGuard([CurrentUserGuard, RolesGuard]))
 @Roles(UserRole.ADMIN)
 export class ProfilesController {
-    constructor(private profilesService: ProfilesService) {}
+    constructor(private readonly profilesService: ProfilesService) {}
 
     @Get()
     findAll() {
