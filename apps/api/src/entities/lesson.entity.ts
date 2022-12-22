@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { Assignment } from './assignment.entity'
 import { Attendance } from './attendance.entity'
-import { Classroom } from './classroom.entity'
+import { Class } from './class.entity'
 import { Subject } from './subject.entity'
 
 @Entity({ name: 'lessons' })
@@ -27,8 +27,8 @@ export class Lesson {
     @ManyToOne(() => Subject, subject => subject.lessons)
     subject: Subject
 
-    @ManyToOne(() => Classroom, classroom => classroom.lessons)
-    classroom: Classroom
+    @ManyToOne(() => Class, entity => entity.lessons)
+    class: Class
 
     @OneToMany(() => Assignment, assignment => assignment.lesson)
     assignments: Assignment[]

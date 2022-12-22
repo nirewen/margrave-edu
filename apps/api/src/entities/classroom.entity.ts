@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { Class } from './class.entity'
-import { Lesson } from './lesson.entity'
 
 export enum ClassroomType {
     REGULAR = 'REGULAR',
@@ -25,7 +24,4 @@ export class Classroom {
 
     @OneToMany(() => Class, entity => entity.classroom)
     classes: Class[]
-
-    @OneToMany(() => Lesson, lesson => lesson.classroom)
-    lessons: Lesson[]
 }

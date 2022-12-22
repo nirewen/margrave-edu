@@ -16,4 +16,10 @@ export class CreateLessonDTO {
     @IsArray()
     @IsString({ each: true })
     tags: string[]
+
+    @IsNumber()
+    classId: number
+
+    @IsNumber()
+    subjectId: number
 }

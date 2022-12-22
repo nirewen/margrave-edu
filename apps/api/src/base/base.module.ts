@@ -8,6 +8,6 @@ import { UsersModule } from './users/users.module'
 @Global()
 @Module({
     imports: [ProfilesModule, UsersModule, ClassesModule, LessonsModule, SubjectsModule],
-    exports: [UsersModule],
+    exports: [ProfilesModule, UsersModule, ClassesModule, LessonsModule, SubjectsModule],
 })
 export class BaseModule {}

@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { ClassSubject } from './class-subject.entity'
 import { Classroom } from './classroom.entity'
+import { Lesson } from './lesson.entity'
 import { User } from './user.entity'
 
 export enum Shift {
@@ -25,6 +26,9 @@ export class Class {
 
     @ManyToOne(() => Classroom, classroom => classroom.classes)
     classroom: Classroom
+
+    @OneToMany(() => Lesson, lesson => lesson.class)
+    lessons: Lesson[]
 
     @OneToMany(() => ClassSubject, classSubject => classSubject.class)
     classSubjects: ClassSubject[]
