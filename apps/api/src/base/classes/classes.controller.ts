@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common'
-import { RolesGuard } from 'src/auth/guards'
+import { JwtAuthGuard, RolesGuard } from 'src/auth/guards'
 import { Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
 import { ClassesService } from './classes.service'
@@ -7,7 +7,7 @@ import { CreateClassDTO } from './dto/create-class.dto'
 import { UpdateClassDto } from './dto/update-class.dto'
 
 @Controller('classes')
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(UserRole.ADMIN)
 export class ClassesController {
     constructor(private readonly classesService: ClassesService) {}

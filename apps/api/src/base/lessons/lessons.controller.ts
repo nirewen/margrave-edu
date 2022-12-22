@@ -2,12 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { LessonsService } from './lessons.service'
 import { CreateLessonDTO } from './dto/create-lesson.dto'
 import { UpdateLessonDTO } from './dto/update-lesson.dto'
-import { RolesGuard } from 'src/auth/guards'
+import { JwtAuthGuard, RolesGuard } from 'src/auth/guards'
 import { Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
 
 @Controller('lessons')
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(UserRole.ADMIN)
 export class LessonsController {
     constructor(private readonly lessonsService: LessonsService) {}

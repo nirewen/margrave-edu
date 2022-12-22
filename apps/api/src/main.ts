@@ -1,6 +1,6 @@
 import * as cookieParser from 'cookie-parser'
 
-import { BadRequestException, ClassSerializerInterceptor, ValidationError, ValidationPipe } from '@nestjs/common'
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common'
 import { NestFactory, Reflector } from '@nestjs/core'
 import { AppModule } from './app.module'
 
