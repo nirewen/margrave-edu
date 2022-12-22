@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common'
 import { RolesGuard } from 'src/auth/guards'
 import { Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
@@ -23,17 +23,17 @@ export class LessonsController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.lessonsService.findOne(+id)
+    findOne(@Param('id', ParseIntPipe) id: number) {
+        return this.lessonsService.findOne(id)
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() body: UpdateLessonDTO) {
-        return this.lessonsService.update(+id, body)
+    update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateLessonDTO) {
+        return this.lessonsService.update(id, body)
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.lessonsService.remove(+id)
+    remove(@Param('id', ParseIntPipe) id: number) {
+        return this.lessonsService.remove(id)
     }
 }
