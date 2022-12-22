@@ -1,5 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common'
+import { Payload } from 'src/auth/auth.interface'
 import { RolesGuard } from 'src/auth/guards'
+import { ReqUser } from 'src/common/decorators'
 import { Roles } from 'src/common/decorators/roles.decorator'
 import { UserRole } from 'src/entities/user.entity'
 import { CreateUserDTO } from './dto/create-user.dto'
@@ -20,6 +22,14 @@ export class UsersController {
     @Post()
     create(@Body() body: CreateUserDTO) {
         return this.userService.create(body)
+    }
+
+    @Get('/@me')
+    @Roles(UserRole.STUDENT, UserRole.TEACHER)
+    public async me(@ReqUser() payload: Payload) {
+        const user = await this.userService.findOneById(payload.id)
+
+        return user
     }
 
     @Get(':id')
