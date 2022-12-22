@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Subject } from 'src/entities/subject.entity'
 import { Repository } from 'typeorm'
@@ -27,14 +27,20 @@ export class SubjectsService {
     }
 
     async findOne(id: number) {
-        return this.subjects.findOneBy({ id })
+        const subject = await this.subjects.findOneBy({ id })
+
+        if (!subject) {
+            throw new NotFoundException('subject with provided id was not found')
+        }
+
+        return subject
     }
 
-    async update(id: number, updateSubjectDto: UpdateSubjectDTO) {
+    async update(id: number, { teacherId, ...updateSubjectDto }: UpdateSubjectDTO) {
         const subject = await this.findOne(id)
 
-        if (updateSubjectDto.teacherId !== null) {
-            const teacher = await this.usersService.findOneById(updateSubjectDto.teacherId)
+        if (teacherId !== null) {
+            const teacher = await this.usersService.findOneById(teacherId)
 
             subject.teacher = teacher
         }

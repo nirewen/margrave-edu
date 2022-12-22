@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import * as bcrypt from 'bcrypt'
 import { Repository } from 'typeorm'
@@ -24,19 +24,27 @@ export class UsersService {
     }
 
     async findAll() {
-        return this.users.find({
-            relations: {
-                profile: true,
-            },
-        })
+        return this.users.find()
     }
 
     async findOne(email: string) {
-        return this.users.findOneBy({ email })
+        const user = await this.users.findOneBy({ email })
+
+        if (!user) {
+            throw new NotFoundException('user with provided email was not found')
+        }
+
+        return user
     }
 
     async findOneById(id: number) {
-        return this.users.findOneBy({ id })
+        const user = await this.users.findOneBy({ id })
+
+        if (!user) {
+            throw new NotFoundException('user with provided id was not found')
+        }
+
+        return user
     }
 
     async update(id: number, newUser: UpdateUserDTO) {
