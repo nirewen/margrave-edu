@@ -22,9 +22,9 @@ export class ProfilesService {
         return profile
     }
 
-    async update(id: number, newProfile: UpdateProfileDTO) {
+    async update(id: number, body: UpdateProfileDTO) {
         const profile = await this.findOne(id)
 
-        return this.profiles.save({ ...profile, ...newProfile })
+        return this.profiles.save({ ...profile, ...body })
     }
 }

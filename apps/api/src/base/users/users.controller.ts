@@ -18,8 +18,8 @@ export class UsersController {
     }
 
     @Post()
-    create(@Body() createUserDTO: CreateUserDTO) {
-        return this.userService.create(createUserDTO)
+    create(@Body() body: CreateUserDTO) {
+        return this.userService.create(body)
     }
 
     @Get(':id')
@@ -28,8 +28,8 @@ export class UsersController {
     }
 
     @Patch(':id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() newUser: UpdateUserDTO) {
-        return this.userService.update(id, newUser)
+    update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateUserDTO) {
+        return this.userService.update(id, body)
     }
 
     @Delete(':id')

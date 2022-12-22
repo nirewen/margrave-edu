@@ -14,9 +14,9 @@ export class SubjectsService {
         private readonly usersService: UsersService
     ) {}
 
-    async create(createSubjectDto: CreateSubjectDTO) {
-        const subject = this.subjects.create(createSubjectDto)
-        const teacher = await this.usersService.findOneById(createSubjectDto.teacherId)
+    async create({ teacherId, ...body }: CreateSubjectDTO) {
+        const subject = this.subjects.create(body)
+        const teacher = await this.usersService.findOneById(teacherId)
 
         if (teacher.role !== UserRole.TEACHER) {
             throw new BadRequestException('the provided user is not a TEACHER')
@@ -41,7 +41,7 @@ export class SubjectsService {
         return subject
     }
 
-    async update(id: number, { teacherId, ...updateSubjectDto }: UpdateSubjectDTO) {
+    async update(id: number, { teacherId, ...body }: UpdateSubjectDTO) {
         const subject = await this.findOne(id)
 
         if (teacherId !== null) {
@@ -50,7 +50,7 @@ export class SubjectsService {
             subject.teacher = teacher
         }
 
-        return this.subjects.save({ ...subject, ...updateSubjectDto })
+        return this.subjects.save({ ...subject, ...body })
     }
 
     async remove(id: number) {

@@ -23,7 +23,7 @@ export class ProfilesController {
     }
 
     @Patch(':id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() newProfile: UpdateProfileDTO) {
-        return this.profilesService.update(id, newProfile)
+    update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateProfileDTO) {
+        return this.profilesService.update(id, body)
     }
 }

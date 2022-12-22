@@ -9,8 +9,8 @@ import { UpdateLessonDTO } from './dto/update-lesson.dto'
 export class LessonsService {
     constructor(@InjectRepository(Lesson) private lessons: Repository<Lesson>) {}
 
-    async create(createLessonDto: CreateLessonDTO) {
-        const lesson = this.lessons.create(createLessonDto)
+    async create(body: CreateLessonDTO) {
+        const lesson = this.lessons.create(body)
 
         return this.lessons.save(lesson)
     }
@@ -29,10 +29,10 @@ export class LessonsService {
         return lesson
     }
 
-    async update(id: number, updateLessonDto: UpdateLessonDTO) {
+    async update(id: number, body: UpdateLessonDTO) {
         const lesson = await this.findOne(id)
 
-        return this.lessons.save({ ...lesson, ...updateLessonDto })
+        return this.lessons.save({ ...lesson, ...body })
     }
 
     async remove(id: number) {

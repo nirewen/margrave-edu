@@ -13,8 +13,8 @@ export class LessonsController {
     constructor(private readonly lessonsService: LessonsService) {}
 
     @Post()
-    create(@Body() createLessonDto: CreateLessonDTO) {
-        return this.lessonsService.create(createLessonDto)
+    create(@Body() body: CreateLessonDTO) {
+        return this.lessonsService.create(body)
     }
 
     @Get()
@@ -28,8 +28,8 @@ export class LessonsController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateLessonDto: UpdateLessonDTO) {
-        return this.lessonsService.update(+id, updateLessonDto)
+    update(@Param('id') id: string, @Body() body: UpdateLessonDTO) {
+        return this.lessonsService.update(+id, body)
     }
 
     @Delete(':id')

@@ -9,14 +9,14 @@ import { UpdateClassDto } from './dto/update-class.dto'
 export class ClassesService {
     constructor(@InjectRepository(Class) private classes: Repository<Class>) {}
 
-    async create(createClassDto: CreateClassDTO) {
-        const entity = await this.findOneByNumber(createClassDto.number).catch(() => null)
+    async create(body: CreateClassDTO) {
+        const entity = await this.findOneByNumber(body.number).catch(() => null)
 
         if (entity) {
             throw new BadRequestException('a class with this number is already registered')
         }
 
-        const obj = this.classes.create(createClassDto)
+        const obj = this.classes.create(body)
 
         return this.classes.save(obj)
     }
@@ -45,10 +45,10 @@ export class ClassesService {
         return entity
     }
 
-    async update(id: number, updateClassDto: UpdateClassDto) {
+    async update(id: number, body: UpdateClassDto) {
         const obj = await this.findOne(id)
 
-        return this.classes.save({ ...obj, ...updateClassDto })
+        return this.classes.save({ ...obj, ...body })
     }
 
     async remove(id: number) {

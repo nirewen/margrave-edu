@@ -47,16 +47,16 @@ export class UsersService {
         return user
     }
 
-    async update(id: number, newUser: UpdateUserDTO) {
+    async update(id: number, body: UpdateUserDTO) {
         const user = await this.findOneById(id)
 
-        newUser.password = newUser.password || user.password
+        body.password = body.password || user.password
 
-        if (newUser.password && newUser.password !== user.password) {
-            newUser.password = await this.hashPassword(newUser.password)
+        if (body.password && body.password !== user.password) {
+            body.password = await this.hashPassword(body.password)
         }
 
-        return this.users.save({ ...user, ...newUser })
+        return this.users.save({ ...user, ...body })
     }
 
     async remove(id: number) {
