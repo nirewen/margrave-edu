@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common'
-import { LessonsService } from './lessons.service'
-import { CreateLessonDTO } from './dto/create-lesson.dto'
-import { UpdateLessonDTO } from './dto/update-lesson.dto'
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { RolesGuard } from 'src/auth/guards'
 import { Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
+import { CreateLessonDTO } from './dto/create-lesson.dto'
+import { UpdateLessonDTO } from './dto/update-lesson.dto'
+import { LessonsService } from './lessons.service'
 
 @Controller('lessons')
 @UseGuards(RolesGuard)

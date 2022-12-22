@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common'
-import { SubjectsService } from './subjects.service'
-import { CreateSubjectDTO } from './dto/create-subject.dto'
-import { UpdateSubjectDTO } from './dto/update-subject.dto'
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { RolesGuard } from 'src/auth/guards'
 import { Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
+import { CreateSubjectDTO } from './dto/create-subject.dto'
+import { UpdateSubjectDTO } from './dto/update-subject.dto'
+import { SubjectsService } from './subjects.service'
 
 @Controller('subjects')
 @UseGuards(RolesGuard)

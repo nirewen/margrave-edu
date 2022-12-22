@@ -4,8 +4,8 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common'
 import { NestFactory, Reflector } from '@nestjs/core'
 import { AppModule } from './app.module'
 
-import { GlobalExceptionFilter } from './common/filters/exceptions.filter'
 import { JwtAuthGuard } from './auth/guards'
+import { GlobalExceptionFilter } from './common/filters/exceptions.filter'
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)

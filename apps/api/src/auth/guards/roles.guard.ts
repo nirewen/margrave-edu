@@ -1,11 +1,11 @@
-import { Reflector } from '@nestjs/core'
 import {
-    Injectable,
     CanActivate,
     ExecutionContext,
+    Injectable,
     InternalServerErrorException,
     UnauthorizedException,
 } from '@nestjs/common'
+import { Reflector } from '@nestjs/core'
 import { User, UserRole } from 'src/entities/user.entity'
 
 @Injectable()
