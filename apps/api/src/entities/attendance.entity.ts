@@ -7,7 +7,7 @@ export class Attendance {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({ default: true })
     present: boolean
 
     @ManyToOne(() => User, user => user.attendances)

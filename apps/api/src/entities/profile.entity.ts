@@ -6,10 +6,6 @@ export class Profile {
     @PrimaryGeneratedColumn()
     id: number
 
-    @OneToOne(() => User, user => user.profile, { onDelete: 'CASCADE' })
-    @JoinColumn()
-    user: User
-
     @Column({ default: '' })
     name: string
 
@@ -24,4 +20,8 @@ export class Profile {
 
     @Column({ default: 0 })
     level: number
+
+    @OneToOne(() => User, user => user.profile, { onDelete: 'CASCADE' })
+    @JoinColumn()
+    user: User
 }

@@ -11,16 +11,16 @@ export class Subject {
     @Column()
     name: string
 
-    @Column()
+    @Column({ default: '#0288d1' })
     color: string
 
-    @Column()
+    @Column({ default: 'ic:round-school' })
     icon: string
 
-    @Column()
+    @Column({ default: '' })
     type: string
 
-    @Column()
+    @Column({ default: 20 })
     hours: number
 
     @ManyToOne(() => User, user => user.subjects)

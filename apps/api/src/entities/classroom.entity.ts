@@ -14,7 +14,7 @@ export class Classroom {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({ nullable: true })
     building: string
 
     @Column()

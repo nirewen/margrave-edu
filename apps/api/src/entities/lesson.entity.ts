@@ -12,16 +12,16 @@ export class Lesson {
     @Column()
     title: string
 
-    @Column()
+    @Column({ nullable: true })
     description: string
 
     @Column()
     date: Date
 
-    @Column()
+    @Column({ default: 1 })
     timespan: number
 
-    @Column('text', { array: true })
+    @Column('text', { array: true, nullable: true, default: [] })
     tags: string[]
 
     @ManyToOne(() => Subject, subject => subject.lessons)

@@ -10,7 +10,7 @@ export class Answer {
     @Column()
     content: string
 
-    @Column()
+    @Column({ default: false })
     final: boolean
 
     @ManyToOne(() => Assignment, assignment => assignment.answers)
