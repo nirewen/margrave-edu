@@ -10,10 +10,10 @@ import { AuthService } from './auth.service'
 import { DuplicateUserGuard, JwtRefreshGuard, LocalAuthGuard } from './guards'
 
 @Controller('/auth')
-@Public()
 export class AuthController {
     constructor(private auth: AuthService, private users: UsersService) {}
 
+    @Public()
     @Post('/signin')
     @UseGuards(LocalAuthGuard)
     public signin(@Res() res: Response, @ReqUser() user: User) {
@@ -33,6 +33,7 @@ export class AuthController {
         res.json(user)
     }
 
+    @Public()
     @Post('/signup')
     @UseGuards(DuplicateUserGuard)
     public async signup(@Res() res: Response, @Body() newUser: CreateUserDTO) {
