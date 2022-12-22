@@ -2,12 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { SubjectsService } from './subjects.service'
 import { CreateSubjectDTO } from './dto/create-subject.dto'
 import { UpdateSubjectDTO } from './dto/update-subject.dto'
-import { JwtAuthGuard, RolesGuard } from 'src/auth/guards'
+import { RolesGuard } from 'src/auth/guards'
 import { Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
 
 @Controller('subjects')
-@UseGuards(JwtAuthGuard, RolesGuard)
+@UseGuards(RolesGuard)
 @Roles(UserRole.ADMIN)
 export class SubjectsController {
     constructor(private readonly subjectsService: SubjectsService) {}

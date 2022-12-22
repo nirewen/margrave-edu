@@ -19,7 +19,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         const request = ctx.getRequest<Request>()
         let message = (exception as any).message
         let code = 'HttpException'
-        let details = (exception as any).response.message
+        let details = (exception as any).response?.message
 
         // Logger.error(message, (exception as any).stack, `${request.method} ${request.url}`)
 

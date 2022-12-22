@@ -3,13 +3,14 @@ import { Response } from 'express'
 
 import { CreateUserDTO } from 'src/base/users/dto/create-user.dto'
 import { UsersService } from 'src/base/users/users.service'
-import { Cookies, ReqUser } from 'src/common/decorators'
+import { Cookies, Public, ReqUser } from 'src/common/decorators'
 import { User } from 'src/entities/user.entity'
 import { Payload } from './auth.interface'
 import { AuthService } from './auth.service'
 import { DuplicateUserGuard, JwtRefreshGuard, LocalAuthGuard } from './guards'
 
 @Controller('/auth')
+@Public()
 export class AuthController {
     constructor(private auth: AuthService, private users: UsersService) {}
 
