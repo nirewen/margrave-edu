@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Attendance } from 'src/entities/attendance.entity'
 import { Repository } from 'typeorm'
@@ -15,6 +15,12 @@ export class AttendancesService {
     }
 
     findOne(id: number) {
-        return this.attendances.findOneBy({ id })
+        const attendance = this.attendances.findOneBy({ id })
+
+        if (!attendance) {
+            throw new NotFoundException('attendance for provided id was not found')
+        }
+
+        return attendance
     }
 }

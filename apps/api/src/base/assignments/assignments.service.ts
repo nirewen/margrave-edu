@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Assignment } from 'src/entities/assignment.entity'
 import { Repository } from 'typeorm'
@@ -27,7 +27,13 @@ export class AssignmentsService {
     }
 
     async findOne(id: number) {
-        return this.assignments.findOneBy({ id })
+        const assignment = await this.assignments.findOneBy({ id })
+
+        if (!assignment) {
+            throw new NotFoundException('assignment for provided id was not found')
+        }
+
+        return assignment
     }
 
     async update(id: number, body: UpdateAssignmentDTO) {
