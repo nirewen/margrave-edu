@@ -17,8 +17,8 @@ export class ClassSubject {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column('enum', { enum: Weekday })
-    weekday: Weekday
+    @Column('enum', { enum: Weekday, array: true, default: [] })
+    weekdays: Weekday[]
 
     @ManyToOne(() => Subject, subject => subject.classSubjects)
     subject: Subject

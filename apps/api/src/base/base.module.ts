@@ -2,6 +2,7 @@ import { Global, Module } from '@nestjs/common'
 import { AnswersModule } from './answers/answers.module'
 import { AssignmentsModule } from './assignments/assignments.module'
 import { AttendancesModule } from './attendances/attendances.module'
+import { ClassSubjectsModule } from './class-subjects/class-subjects.module'
 import { ClassesModule } from './classes/classes.module'
 import { LessonsModule } from './lessons/lessons.module'
 import { ProfilesModule } from './profiles/profiles.module'
@@ -15,6 +16,7 @@ import { UsersModule } from './users/users.module'
         AssignmentsModule,
         AttendancesModule,
         ClassesModule,
+        ClassSubjectsModule,
         LessonsModule,
         ProfilesModule,
         SubjectsModule,
@@ -25,6 +27,7 @@ import { UsersModule } from './users/users.module'
         AssignmentsModule,
         AttendancesModule,
         ClassesModule,
+        ClassSubjectsModule,
         LessonsModule,
         ProfilesModule,
         SubjectsModule,
