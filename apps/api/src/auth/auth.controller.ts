@@ -48,6 +48,7 @@ export class AuthController {
         res.json({ ok: true })
     }
 
+    @Public()
     @Post('/refresh')
     @UseGuards(JwtRefreshGuard)
     public async refreshToken(
