@@ -1,8 +1,13 @@
-import { sveltekit } from '@sveltejs/kit/vite';
+import { sveltekit } from '@sveltejs/kit/vite'
 
 /** @type {import('vite').UserConfig} */
 const config = {
-	plugins: [sveltekit()]
-};
+    plugins: [sveltekit()],
+    server: {
+        proxy: {
+            '/api': 'http://localhost:3001',
+        },
+    },
+}
 
-export default config;
+export default config
