@@ -37,6 +37,21 @@ export class UsersService {
         return user
     }
 
+    async findMe(id: number) {
+        const user = await this.users.findOne({
+            where: { id },
+            relations: {
+                profile: true,
+            },
+        })
+
+        if (!user) {
+            throw new NotFoundException('user with provided id was not found')
+        }
+
+        return user
+    }
+
     async findOneById(id: number) {
         const user = await this.users.findOneBy({ id })
 
