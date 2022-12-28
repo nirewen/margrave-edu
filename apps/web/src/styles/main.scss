@@ -1,0 +1,47 @@
+:where(html) {
+    display: grid;
+    height: 100vh;
+    height: 100dvh;
+}
+
+body {
+    > div {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    transition: 1s;
+
+    &-thumb {
+        background-color: var(--gray-500);
+        background-clip: padding-box;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        transition: 1s;
+
+        &:vertical,
+        &:horizontal {
+            &:hover {
+                background-color: var(--gray-400);
+                transition: 0.3s;
+            }
+
+            &:active {
+                background: var(--gray-300);
+            }
+        }
+    }
+
+    &-track {
+        background-color: transparent;
+    }
+
+    &-corner {
+        background: none;
+    }
+}

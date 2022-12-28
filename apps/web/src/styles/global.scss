@@ -1,0 +1,23 @@
+:root {
+    --gray-000: #000000;
+    --gray-100: #1a1a1a;
+    --gray-200: #333333;
+    --gray-300: #4d4d4d;
+    --gray-400: #808080;
+    --gray-500: #999999;
+    --gray-600: #b3b3b3;
+    --gray-700: #cccccc;
+    --gray-800: #e6e6e6;
+    --gray-900: #ffffff;
+
+    --primary: #367ce1;
+    --success: #40bd6b;
+    --errored: #bd4040;
+    --warning: #e1ab36;
+
+    --font-sans: Outfit, sans-serif;
+    --font-mono: Roboto Mono, serif;
+
+    font-family: var(--font-sans);
+    color: var(--gray-000);
+}
