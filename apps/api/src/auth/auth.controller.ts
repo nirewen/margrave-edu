@@ -20,12 +20,10 @@ export class AuthController {
         const tokens = this.auth.jwtSign(user)
 
         res.cookie('access_token', tokens.access_token, {
-            path: '/api',
             httpOnly: true,
             secure: true,
         })
         res.cookie('refresh_token', tokens.refresh_token, {
-            path: '/api/auth/refresh',
             httpOnly: true,
             secure: true,
         })
@@ -44,8 +42,8 @@ export class AuthController {
 
     @Get('/logout')
     public async logout(@Res() res: Response) {
-        res.clearCookie('access_token', { path: '/api' })
-        res.clearCookie('refresh_token', { path: '/api/auth/refresh' })
+        res.clearCookie('access_token')
+        res.clearCookie('refresh_token')
 
         res.json({ ok: true })
     }
