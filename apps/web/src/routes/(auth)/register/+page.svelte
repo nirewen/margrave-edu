@@ -7,6 +7,8 @@
     export let form: ActionData
 </script>
 
+<h2><span>Registrar conta</span></h2>
+
 <form
     action="?/login"
     method="POST"
@@ -33,7 +35,27 @@
     <Button type="submit">Submit</Button>
 </form>
 
+<footer>
+    <span>Já possui uma conta?</span>
+    <a href="/login">Acessar conta</a>
+</footer>
+
 <style lang="scss" scoped>
+    h2 {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #000;
+        line-height: 0.1em;
+        margin: 10px 0 20px;
+        opacity: 60%;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    h2 span {
+        background: #fff;
+        padding: 0 10px;
+    }
     form {
         display: flex;
         flex-direction: column;
@@ -42,6 +64,16 @@
         > .form-group {
             display: flex;
             flex-direction: column;
+        }
+    }
+
+    footer {
+        margin-top: auto;
+        color: var(--gray-300);
+
+        > a {
+            text-decoration: underline;
+            text-underline-offset: 3px;
         }
     }
 </style>

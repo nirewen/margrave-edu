@@ -7,7 +7,7 @@ export const actions: Actions = {
         const email = data.get('email')
         const password = data.get('password')
 
-        const response = await fetch('/api/auth/signin', {
+        const response = await fetch('/api/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -19,15 +19,13 @@ export const actions: Actions = {
         })
         const json = await response.json()
 
-        if (json.status === 401) {
-            return fail(401, {
+        if (json.status === 400) {
+            return fail(400, {
                 error: true,
-                message: 'wrong credentials',
+                message: json.message,
             })
         } else {
-            throw redirect(301, '/panel')
+            throw redirect(301, '/dashboard')
         }
-
-        return json
     },
 }
