@@ -5,7 +5,7 @@
     import { clickOutside } from '$lib/directives/clickOutside'
     import { boolean } from '$lib/hooks/boolean'
 
-    import Icon from '@iconify/svelte'
+    import 'iconify-icon'
 
     const user: User = $page.data.user
 
@@ -16,7 +16,7 @@
     <button type="button" class="user" on:click={open.toggle}>
         <img src="/api/avatar/{user.profile.avatar}" alt="seu avatar" class="avatar" />
         {user.profile.name || user.email}
-        <Icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
+        <iconify-icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
     </button>
     {#if $open}
         <menu>
@@ -31,11 +31,11 @@
     .nav-user {
         position: relative;
 
-        :global(svg) {
+        iconify-icon {
             rotate: 0deg;
             transition: rotate 200ms linear;
         }
-        &.open :global(svg) {
+        &.open iconify-icon {
             rotate: 180deg;
         }
 

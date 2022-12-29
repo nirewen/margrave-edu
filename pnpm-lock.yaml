@@ -103,9 +103,9 @@ importers:
 
   apps/web:
     specifiers:
-      '@iconify/svelte': ^3.0.1
       '@sveltejs/adapter-auto': ^1.0.0
       '@sveltejs/kit': ^1.0.0
+      iconify-icon: ^1.0.2
       sass: ^1.57.1
       svelte: ^3.54.0
       svelte-check: ^2.9.2
@@ -113,9 +113,9 @@ importers:
       typescript: ^4.9.3
       vite: ^4.0.0
     devDependencies:
-      '@iconify/svelte': 3.0.1_svelte@3.55.0
       '@sveltejs/adapter-auto': 1.0.0_@sveltejs+kit@1.0.1
       '@sveltejs/kit': 1.0.1_svelte@3.55.0+vite@4.0.3
+      iconify-icon: 1.0.2
       sass: 1.57.1
       svelte: 3.55.0
       svelte-check: 2.10.3_sass@1.57.1+svelte@3.55.0
@@ -768,15 +768,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /@iconify/svelte/3.0.1_svelte@3.55.0:
-    resolution: {integrity: sha512-onjjl496hTXUBWJxeCxo/c5zmVHS3HnKUQv5Cqf1ZsUbY4d0wVJfSDaV1hw1m6b0BNlJCOmbpc23Q6AOO5qqKg==}
-    peerDependencies:
-      svelte: '>=3'
-    dependencies:
-      '@iconify/types': 2.0.0
-      svelte: 3.55.0
-    dev: true
 
   /@iconify/types/2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -3257,6 +3248,12 @@ packages:
   /human-signals/2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
+    dev: true
+
+  /iconify-icon/1.0.2:
+    resolution: {integrity: sha512-mehAvz2a4eUAlPo76Wul4zzsPNr3hbOHiauMhPrTVIdLOt0AnccnNloh1EeTO3tYeBv7iaJZfdCPHczvi+CkXQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: true
 
   /iconv-lite/0.4.24:
