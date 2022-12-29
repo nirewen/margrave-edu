@@ -2,29 +2,86 @@
     import { page } from '$app/stores'
     import type { User } from 'src/types/user'
 
+    import { clickOutside } from '$lib/directives/clickOutside'
+    import { boolean } from '$lib/hooks/boolean'
+
+    import Icon from '@iconify/svelte'
+
     const user: User = $page.data.user
+
+    let open = boolean(false)
 </script>
 
-<div class="user">
-    <img src="/api/avatar/{user.profile.avatar}" alt="seu avatar" class="avatar" />
-    {user.profile.name || user.email}
+<div class="nav-user" class:open={$open} use:clickOutside={() => $open && open.setFalse()}>
+    <button type="button" class="user" on:click={open.toggle}>
+        <img src="/api/avatar/{user.profile.avatar}" alt="seu avatar" class="avatar" />
+        {user.profile.name || user.email}
+        <Icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
+    </button>
+    {#if $open}
+        <menu>
+            <li>
+                <a href="/profile">Perfil</a>
+            </li>
+        </menu>
+    {/if}
 </div>
 
-<style lang="scss">
-    .user {
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-        padding: 0.4rem;
-        padding-right: 1rem;
+<style lang="scss" scoped>
+    .nav-user {
+        position: relative;
 
-        background-color: #f7f7f7;
-        border-radius: 9999px;
+        :global(svg) {
+            rotate: 0deg;
+            transition: rotate 200ms linear;
+        }
+        &.open :global(svg) {
+            rotate: 180deg;
+        }
 
-        > img {
-            width: 32px;
-            height: 32px;
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+
+            padding: 0.4rem;
+            padding-right: 1rem;
+
+            background-color: #f7f7f7;
             border-radius: 9999px;
+
+            > img {
+                width: 32px;
+                height: 32px;
+                border-radius: 9999px;
+            }
+        }
+
+        menu {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 0.4rem);
+            background-color: inherit;
+            width: 100%;
+            left: 0;
+            border-radius: 0.5rem;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+
+            > li {
+                display: flex;
+                text-align: left;
+
+                a {
+                    flex: 1;
+                    padding: 0.4rem 0.6rem;
+                }
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.016);
+                }
+            }
         }
     }
 </style>
