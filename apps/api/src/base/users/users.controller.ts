@@ -27,7 +27,7 @@ export class UsersController {
     @Get('/@me')
     @Roles(UserRole.STUDENT, UserRole.TEACHER)
     public async me(@ReqUser() payload: Payload) {
-        const user = await this.userService.findMe(payload.id)
+        const user = await this.userService.findOneById(payload.id)
 
         return user
     }

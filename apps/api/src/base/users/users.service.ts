@@ -24,11 +24,20 @@ export class UsersService {
     }
 
     async findAll() {
-        return this.users.find()
+        return this.users.find({
+            relations: {
+                profile: true,
+            },
+        })
     }
 
     async findOne(email: string) {
-        const user = await this.users.findOneBy({ email })
+        const user = await this.users.findOne({
+            where: { email },
+            relations: {
+                profile: true,
+            },
+        })
 
         if (!user) {
             throw new NotFoundException('user with provided email was not found')
@@ -37,23 +46,13 @@ export class UsersService {
         return user
     }
 
-    async findMe(id: number) {
+    async findOneById(id: number) {
         const user = await this.users.findOne({
             where: { id },
             relations: {
                 profile: true,
             },
         })
-
-        if (!user) {
-            throw new NotFoundException('user with provided id was not found')
-        }
-
-        return user
-    }
-
-    async findOneById(id: number) {
-        const user = await this.users.findOneBy({ id })
 
         if (!user) {
             throw new NotFoundException('user with provided id was not found')
