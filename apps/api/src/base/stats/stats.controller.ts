@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common'
+import { UserRole } from 'src/entities/user.entity'
 
 import { AssignmentsService } from '../assignments/assignments.service'
 import { ClassesService } from '../classes/classes.service'
@@ -18,15 +19,17 @@ export class StatsController {
 
     @Get()
     async countAll() {
-        const [assignments, classes, lessons, subjects, users] = await Promise.all([
+        const [assignments, classes, lessons, subjects, users, students, teachers] = await Promise.all([
             this.countAssignments(),
             this.countClasses(),
             this.countLessons(),
             this.countSubjects(),
             this.countUsers(),
+            this.countStudents(),
+            this.countTeachers(),
         ])
 
-        return { assignments, classes, lessons, subjects, users }
+        return { assignments, classes, lessons, subjects, users, students, teachers }
     }
 
     @Get('/assignments')
@@ -52,5 +55,15 @@ export class StatsController {
     @Get('/users')
     async countUsers() {
         return this.usersService.count()
+    }
+
+    @Get('/students')
+    async countStudents() {
+        return this.usersService.countByRole(UserRole.STUDENT)
+    }
+
+    @Get('/teachers')
+    async countTeachers() {
+        return this.usersService.countByRole(UserRole.TEACHER)
     }
 }

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import * as bcrypt from 'bcrypt'
 import { Repository } from 'typeorm'
 
-import { User } from 'src/entities/user.entity'
+import { User, UserRole } from 'src/entities/user.entity'
 import { CreateUserDTO } from './dto/create-user.dto'
 import { UpdateUserDTO } from './dto/update-user.dto'
 
@@ -13,6 +13,12 @@ export class UsersService {
 
     async count() {
         return this.users.count()
+    }
+
+    async countByRole(role: UserRole) {
+        return this.users.count({
+            where: { role },
+        })
     }
 
     private hashPassword(password: string) {
