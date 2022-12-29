@@ -1,4 +1,4 @@
-import type { Profile } from './profile'
+import type { Profile } from './Profile'
 
 export interface User {
     id: number
