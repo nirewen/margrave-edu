@@ -1,9 +1,11 @@
 <script lang="ts">
     import Menu from './components/Menu.svelte'
+    import NavBar from './components/NavBar.svelte'
 </script>
 
 <main>
     <Menu />
+    <NavBar />
     <div class="content">
         <slot />
     </div>
