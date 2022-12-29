@@ -1,8 +1,8 @@
-import { redirect, type Load, type LoadEvent } from '@sveltejs/kit'
+import { redirect, type LoadEvent } from '@sveltejs/kit'
 
-export function wrap(callback: Load) {
+export function wrap<T extends (event: LoadEvent) => ReturnType<T>>(callback: T) {
     return ({ fetch, ...rest }: LoadEvent) => {
-        async function fetcher(input: RequestInfo | URL, init?: RequestInit): Promise<any> {
+        async function fetcher(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
             const response = await fetch(input, init)
             const json = await response.json()
 
