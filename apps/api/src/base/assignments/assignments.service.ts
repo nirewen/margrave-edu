@@ -13,6 +13,10 @@ export class AssignmentsService {
         private readonly lessonsService: LessonsService
     ) {}
 
+    async count() {
+        return this.assignments.count()
+    }
+
     async create({ lessonId, ...body }: CreateAssignmentDTO) {
         const lesson = await this.lessonsService.findOne(lessonId)
         const assignment = this.assignments.create(body)

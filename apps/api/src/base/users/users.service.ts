@@ -11,6 +11,10 @@ import { UpdateUserDTO } from './dto/update-user.dto'
 export class UsersService {
     constructor(@InjectRepository(User) private readonly users: Repository<User>) {}
 
+    async count() {
+        return this.users.count()
+    }
+
     private hashPassword(password: string) {
         return bcrypt.hash(password, 10)
     }

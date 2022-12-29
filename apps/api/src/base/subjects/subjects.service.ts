@@ -14,6 +14,10 @@ export class SubjectsService {
         private readonly usersService: UsersService
     ) {}
 
+    async count() {
+        return this.subjects.count()
+    }
+
     async create({ teacherId, ...body }: CreateSubjectDTO) {
         const subject = this.subjects.create(body)
         const teacher = await this.usersService.findOneById(teacherId)

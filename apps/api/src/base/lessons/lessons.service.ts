@@ -16,6 +16,10 @@ export class LessonsService {
         private readonly subjectsService: SubjectsService
     ) {}
 
+    async count() {
+        return this.lessons.count()
+    }
+
     async create({ classId, subjectId, ...body }: CreateLessonDTO) {
         const lessonClass = await this.classesService.findOne(classId)
         const subject = await this.subjectsService.findOne(subjectId)
