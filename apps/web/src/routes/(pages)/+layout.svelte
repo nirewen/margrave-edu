@@ -25,7 +25,7 @@
             grid-area: content;
             overflow-y: auto;
             padding: 0.8rem 1.4rem;
-            background-color: rgba(0, 0, 0, 0.025);
+            background-color: var(--content-bg);
         }
     }
 </style>

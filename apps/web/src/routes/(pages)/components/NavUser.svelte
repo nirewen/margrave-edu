@@ -22,7 +22,7 @@
                 <a href="/profile">Perfil</a>
             </li>
             <li>
-                <a href="/logout">Logout</a>
+                <a href="/logout" data-sveltekit-preload-data="off">Logout</a>
             </li>
         </menu>
     {/if}
@@ -65,9 +65,10 @@
             top: calc(100% + 0.4rem);
             background-color: #ffffff;
             width: 100%;
-            left: 0;
+            max-width: 12rem;
+            right: 0;
             border-radius: 0.5rem;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--elevation-6);
             overflow: hidden;
 
             > li {
