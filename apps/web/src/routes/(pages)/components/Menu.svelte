@@ -28,10 +28,10 @@
 <style lang="scss">
     nav {
         grid-area: sidebar;
-        padding: 2rem 1rem;
+        padding: 2rem 6rem 2rem 1rem;
 
-        color: var(--accent-text);
-        background-color: var(--accent);
+        color: var(--primary-text);
+        background-color: var(--primary);
 
         header {
             margin-bottom: 1rem;
@@ -67,7 +67,7 @@
                 &.active {
                     position: relative;
                     color: var(--accent);
-                    background-color: var(--accent-text);
+                    background-color: var(--primary-text);
                 }
             }
         }
