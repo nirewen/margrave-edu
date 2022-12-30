@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import * as bcrypt from 'bcrypt'
-import { Repository } from 'typeorm'
+import { FilterQuery, FindOptionsWhere, Repository } from 'typeorm'
 
 import { User, UserRole } from 'src/entities/user.entity'
 import { CreateUserDTO } from './dto/create-user.dto'
@@ -33,17 +33,9 @@ export class UsersService {
         return this.users.save(newUser)
     }
 
-    async findAll() {
+    async findAll(filter: FindOptionsWhere<User>) {
         return this.users.find({
-            relations: {
-                profile: true,
-            },
-        })
-    }
-
-    async findAllByRole(role: UserRole) {
-        return this.users.find({
-            where: { role },
+            where: filter,
             relations: {
                 profile: true,
             },
