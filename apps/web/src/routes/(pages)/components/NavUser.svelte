@@ -64,8 +64,7 @@
             position: absolute;
             top: calc(100% + 0.4rem);
             background-color: #ffffff;
-            width: 100%;
-            max-width: 12rem;
+            width: 12rem;
             right: 0;
             border-radius: 0.5rem;
             box-shadow: var(--elevation-6);
