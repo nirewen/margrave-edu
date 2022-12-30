@@ -1,4 +1,5 @@
 import { redirect, type LoadEvent, type RequestEvent } from '@sveltejs/kit'
+import { APIError } from '$lib/types/APIError'
 
 const fetcher = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>) => {
     return async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
@@ -21,16 +22,33 @@ const fetcher = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promis
 }
 
 const api = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>) => {
-    const get = <ReturnType>(url: string) => fetch(url).then(r => r.json() as ReturnType)
-    const post = <ReturnType>(url: string, data: object, options?: RequestInit) =>
-        fetch(url, {
+    const get = async <ReturnType>(url: string) => {
+        const response = await fetch(url)
+        const json = await response.json()
+
+        if (!response.ok) {
+            throw new APIError(json as APIError)
+        }
+
+        return json as ReturnType
+    }
+    const post = async <ReturnType>(url: string, data: object, options?: RequestInit) => {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
             ...options,
-        }).then(r => r.json() as ReturnType)
+        })
+        const json = await response.json()
+
+        if (!response.ok) {
+            throw new APIError(json as APIError)
+        }
+
+        return json as ReturnType
+    }
 
     return { get, post }
 }

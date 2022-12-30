@@ -1,33 +1,30 @@
+import { actionWrapper as wrap } from '$lib/api'
 import { fail, redirect } from '@sveltejs/kit'
+import { APIError } from '$lib/types/APIError'
 import type { Actions } from './$types'
 
 export const actions: Actions = {
-    login: async ({ request, fetch }) => {
+    login: wrap(async ({ request, api }) => {
         const data = await request.formData()
         const email = data.get('email')
         const password = data.get('password')
 
-        const response = await fetch('/api/auth/signin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
+        try {
+            await api.post('/api/auth/signin', {
                 email,
                 password,
-            }),
-        })
-        const json = await response.json()
-
-        if (json.status === 401) {
-            return fail(401, {
-                error: true,
-                message: json.message,
             })
-        } else {
-            throw redirect(301, '/dashboard')
+        } catch (error: unknown) {
+            if (error instanceof APIError) {
+                if (error.status === 401) {
+                    return fail(401, {
+                        error: true,
+                        message: error.message,
+                    })
+                }
+            }
         }
 
-        return json
-    },
+        throw redirect(301, '/dashboard')
+    }),
 }
