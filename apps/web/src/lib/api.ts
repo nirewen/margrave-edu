@@ -17,7 +17,7 @@ const fetcher = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promis
             return fetcher(fetch)(input, init)
         }
 
-        return response
+        return new Response(JSON.stringify(json))
     }
 }
 
