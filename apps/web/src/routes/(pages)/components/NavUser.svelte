@@ -5,8 +5,6 @@
     import { clickOutside } from '$lib/directives/clickOutside'
     import { boolean } from '$lib/hooks/boolean'
 
-    import 'iconify-icon'
-
     const user: User = $page.data.user
 
     let open = boolean(false)

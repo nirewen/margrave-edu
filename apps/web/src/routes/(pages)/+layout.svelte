@@ -18,12 +18,14 @@
             'sidebar navbar'
             'sidebar content';
         grid-template-columns: 20rem auto;
-        grid-template-rows: 3rem auto;
-        gap: 1rem;
+        grid-template-rows: 4rem auto;
         height: 100%;
 
         > .content {
             grid-area: content;
+            overflow-y: auto;
+            padding: 0.8rem 1.4rem;
+            background-color: rgba(0, 0, 0, 0.025);
         }
     }
 </style>

@@ -1,20 +1,68 @@
 <script lang="ts">
+    import { plural as p } from '$lib/util'
+    import CountCard from '../components/CountCard.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData
 </script>
 
-<h1>Dashboard</h1>
-<h2>Bem vindo ao dashboard</h2>
-<pre>{JSON.stringify(data, null, 4)}</pre>
+<main>
+    <header>
+        <h1>Dashboard</h1>
+        <h2>Bem vindo ao dashboard! Aqui você encontra estatísticas sobre o sistema.</h2>
+    </header>
+    <section class="stats">
+        <CountCard
+            href="/students"
+            count={data.stats.students}
+            label={`estudante${p(data.stats.students)}`}
+        />
+        <CountCard
+            href="/teachers"
+            count={data.stats.teachers}
+            label={`professor${p(data.stats.teachers, 'es')}`}
+        />
+        <CountCard
+            href="/students"
+            count={data.stats.students}
+            label={`estudante${p(data.stats.students)}`}
+            style="grid-row: span 2;"
+        />
+        <CountCard href="/lessons" count={data.stats.lessons} label={`aula${p(data.stats.lessons)}`} />
+        <CountCard
+            href="/subjects"
+            count={data.stats.subjects}
+            label={`disciplina${p(data.stats.subjects)}`}
+        />
+    </section>
+    <pre>{JSON.stringify(data, null, 4)}</pre>
+    <pre>{JSON.stringify(data, null, 4)}</pre>
+    <pre>{JSON.stringify(data, null, 4)}</pre>
+    <pre>{JSON.stringify(data, null, 4)}</pre>
+</main>
 
 <style lang="scss">
-    h1 {
-        font-size: 1.6rem;
-        font-weight: 700;
-    }
+    main {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
 
-    h2 {
-        color: var(--gray-400);
+        header {
+            h1 {
+                font-size: 1.8rem;
+                font-weight: 700;
+            }
+
+            h2 {
+                color: var(--gray-400);
+            }
+        }
+
+        section.stats {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-rows: 1fr 1fr;
+        }
     }
 </style>
