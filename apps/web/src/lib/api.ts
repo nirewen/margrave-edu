@@ -17,13 +17,16 @@ const fetcher = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promis
             return fetcher(fetch)(input, init)
         }
 
-        return new Response(JSON.stringify(json))
+        return response
     }
 }
 
 const api = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>) => {
-    const get = async <ReturnType>(url: string) => {
-        const response = await fetch(url)
+    const get = async <ReturnType>(url: string, options?: RequestInit) => {
+        const response = await fetch(url, {
+            method: 'GET',
+            ...options,
+        })
         const json = await response.json()
 
         if (!response.ok) {

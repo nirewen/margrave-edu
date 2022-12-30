@@ -10,7 +10,7 @@
 <h2><span>Registrar conta</span></h2>
 
 <form
-    action="?/login"
+    action="?/register"
     method="POST"
     use:enhance={({ form }) => {
         return async ({ result, update }) => {
