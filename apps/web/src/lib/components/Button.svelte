@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
     button {
         padding: 0.6rem 0.6rem;
-        background-color: #000000;
+        background-color: var(--accent);
         color: #ffffff;
         border-radius: 0.4rem;
         text-transform: uppercase;

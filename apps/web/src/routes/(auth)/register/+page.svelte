@@ -12,7 +12,7 @@
 <form
     action="?/register"
     method="POST"
-    use:enhance={({ form }) => {
+    use:enhance={() => {
         return async ({ result, update }) => {
             if (result.type === 'failure') {
                 await applyAction(result)
@@ -26,13 +26,13 @@
         <TextInput type="email" label="Email" id="email" name="email" required />
     </div>
     <div class="form-group">
-        <TextInput type="password" label="Password" id="password" name="password" required />
+        <TextInput type="password" label="Senha" id="password" name="password" required />
     </div>
     <!-- TODO: fazer elemento de erro -->
     {#if form?.error}
         <span>{form?.message}</span>
     {/if}
-    <Button type="submit">Submit</Button>
+    <Button type="submit">Registrar conta</Button>
 </form>
 
 <footer>
