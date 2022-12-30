@@ -10,7 +10,7 @@ export class AvatarController {
     @Public()
     @Get(':key')
     downloadAvatar(@Param('key') key: string, @Res() res: Response) {
-        const { data } = this.supabase.storage.from('profiles').getPublicUrl(key)
+        const { data } = this.supabase.storage.from('avatars').getPublicUrl(key)
 
         res.redirect(data.publicUrl)
     }
