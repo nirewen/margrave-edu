@@ -1,16 +1,13 @@
 <script lang="ts">
     import type { User } from '$lib/types/User'
+    import Avatar from './Avatar.svelte'
 
     export let user: User
     export let subtitle = ''
 </script>
 
 <div class="profile-card">
-    <img
-        class="avatar"
-        src="/api/avatar/{user.profile.avatar}"
-        alt="avatar de {user.profile.name || user.email}"
-    />
+    <Avatar key={user.profile.avatar} alt="avatar de {user.profile.name}" size={3} />
     <div class="info">
         <p>{user.profile.name}</p>
         <span>{subtitle}</span>
@@ -28,12 +25,6 @@
         box-shadow: var(--elevation-3);
         cursor: pointer;
         background-color: var(--gray-900);
-
-        img.avatar {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 9999px;
-        }
 
         h1 {
             font-size: 1.6rem;

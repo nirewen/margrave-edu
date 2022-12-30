@@ -4,6 +4,7 @@
 
     import { clickOutside } from '$lib/directives/clickOutside'
     import { boolean } from '$lib/hooks/boolean'
+    import Avatar from './Avatar.svelte'
 
     const user: User = $page.data.user
 
@@ -12,7 +13,7 @@
 
 <div class="nav-user" class:open={$open} use:clickOutside={() => $open && open.setFalse()}>
     <button type="button" class="user" on:click={open.toggle}>
-        <img src="/api/avatar/{user.profile.avatar}" alt="seu avatar" class="avatar" />
+        <Avatar key={user.profile.avatar} alt="avatar de {user.profile.name}" size={2} />
         {user.profile.name || user.email}
         <iconify-icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
     </button>
@@ -50,12 +51,6 @@
 
             background-color: #f7f7f7;
             border-radius: 9999px;
-
-            > img {
-                width: 32px;
-                height: 32px;
-                border-radius: 9999px;
-            }
         }
 
         menu {

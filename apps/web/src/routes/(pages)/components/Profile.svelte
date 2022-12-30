@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { User } from '$lib/types/User'
     import { differenceInYears, format } from 'date-fns'
+    import Avatar from './Avatar.svelte'
 
     export let title: string
     export let user: User
@@ -9,11 +10,7 @@
 <div class="profile-card">
     <h2>{title}</h2>
     <div class="info">
-        <img
-            class="avatar"
-            src="/api/avatar/{user.profile.avatar}"
-            alt="avatar de {user.profile.name || user.email}"
-        />
+        <Avatar key={user.profile.avatar} alt="avatar de {user.profile.name}" size={10} shadow />
         <p>{user.profile.name}</p>
     </div>
     <div class="details">
@@ -65,14 +62,6 @@
             align-items: center;
             gap: 1rem;
             text-align: center;
-
-            img.avatar {
-                width: 10rem;
-                height: 10rem;
-                border-radius: 9999px;
-                border: 3px solid var(--gray-900);
-                box-shadow: var(--elevation-6);
-            }
 
             p {
                 text-overflow: ellipsis;
