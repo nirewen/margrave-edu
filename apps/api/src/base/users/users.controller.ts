@@ -19,6 +19,16 @@ export class UsersController {
         return this.userService.findAll()
     }
 
+    @Get('/teachers')
+    findAllTeachers() {
+        return this.userService.findAllByRole(UserRole.TEACHER)
+    }
+
+    @Get('/students')
+    findAllStudents() {
+        return this.userService.findAllByRole(UserRole.STUDENT)
+    }
+
     @Post()
     create(@Body() body: CreateUserDTO) {
         return this.userService.create(body)

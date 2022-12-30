@@ -41,6 +41,15 @@ export class UsersService {
         })
     }
 
+    async findAllByRole(role: UserRole) {
+        return this.users.find({
+            where: { role },
+            relations: {
+                profile: true,
+            },
+        })
+    }
+
     async findOne(email: string) {
         const user = await this.users.findOne({
             where: { email },
