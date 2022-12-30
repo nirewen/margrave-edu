@@ -1,54 +1,50 @@
-<main>
-    <aside>
-        <header>
-            <h1>Escola Margrave</h1>
-        </header>
+<aside>
+    <header>
+        <h1>Escola Margrave</h1>
+    </header>
 
-        <slot />
-    </aside>
-    <figure>
-        <img src="background/login-background.jpg" loading="lazy" alt="Annie Spratt" />
-        <figcaption>&copy; Annie Spratt</figcaption>
-    </figure>
-</main>
+    <slot />
+</aside>
+<figure>
+    <img src="background/login-background.jpg" loading="lazy" alt="Annie Spratt" />
+    <figcaption>&copy; Annie Spratt</figcaption>
+</figure>
 
-<style lang="scss" scoped>
-    main {
+<style lang="scss">
+    aside {
         display: flex;
-        height: 100%;
+        flex-direction: column;
+        grid-area: sidebar;
+        width: 30rem;
+        padding: 1rem;
+        z-index: 10;
+        background-color: #ffffff;
 
-        aside {
-            display: flex;
-            flex-direction: column;
+        header {
+            height: 5vw;
 
-            margin: 3rem;
-            width: 30vw;
-
-            header {
-                height: 5vw;
-
-                > h1 {
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                }
+            > h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
             }
         }
+    }
 
-        figure {
-            position: relative;
+    figure {
+        position: relative;
+        grid-area: navbar;
+        grid-row: span 2;
 
-            > figcaption {
-                position: absolute;
-                bottom: 0.4rem;
-                right: 0.4rem;
-                color: #ffffff;
-            }
-            img {
-                height: 100vh;
-                width: 70vw;
-                object-fit: cover;
-                margin-left: auto;
-            }
+        > figcaption {
+            position: absolute;
+            bottom: 0.4rem;
+            right: 0.4rem;
+            color: #ffffff;
+        }
+        img {
+            height: 100vh;
+            width: 100vw;
+            object-fit: cover;
         }
     }
 </style>
