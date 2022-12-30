@@ -1,6 +1,6 @@
 <script lang="ts">
     import { page } from '$app/stores'
-    import type { User } from 'src/types/user'
+    import type { User } from '$lib/types/User'
 
     import { clickOutside } from '$lib/directives/clickOutside'
     import { boolean } from '$lib/hooks/boolean'
@@ -20,6 +20,9 @@
         <menu>
             <li>
                 <a href="/profile">Perfil</a>
+            </li>
+            <li>
+                <a href="/logout">Logout</a>
             </li>
         </menu>
     {/if}
@@ -60,7 +63,7 @@
             flex-direction: column;
             position: absolute;
             top: calc(100% + 0.4rem);
-            background-color: inherit;
+            background-color: #ffffff;
             width: 100%;
             left: 0;
             border-radius: 0.5rem;
@@ -77,7 +80,7 @@
                 }
 
                 &:hover {
-                    background-color: rgba(0, 0, 0, 0.016);
+                    background-color: rgba(0, 0, 0, 0.02);
                 }
             }
         }
