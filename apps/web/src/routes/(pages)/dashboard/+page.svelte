@@ -28,12 +28,8 @@
             label={`estudante${p(data.stats.students)}`}
             style="grid-row: span 2;"
         />
-        <CountCard href="/lessons" count={data.stats.lessons} label={`aula${p(data.stats.lessons)}`} />
-        <CountCard
-            href="/subjects"
-            count={data.stats.subjects}
-            label={`disciplina${p(data.stats.subjects)}`}
-        />
+        <CountCard href="/classes" count={data.stats.lessons} label={`turma${p(data.stats.lessons)}`} />
+        <CountCard href="/lessons" count={data.stats.subjects} label={`aula${p(data.stats.subjects)}`} />
     </section>
     <pre>{JSON.stringify(data, null, 4)}</pre>
     <pre>{JSON.stringify(data, null, 4)}</pre>
