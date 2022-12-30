@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { dateFormat } from '$lib/util'
     import ProfileCard from '../../components/ProfileCard.svelte'
     import type { PageData } from './$types'
 
@@ -18,7 +19,10 @@
 <div class="page">
     <div class="grid">
         {#each data.students as student}
-            <ProfileCard user={student} />
+            <ProfileCard
+                user={student}
+                subtitle="aluno desde {dateFormat.format(new Date(student.createdAt))}"
+            />
         {/each}
     </div>
     <div class="selected" />

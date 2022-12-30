@@ -1,9 +1,9 @@
 <script lang="ts">
     import type { User } from '$lib/types/User'
-    import { dateFormat } from '$lib/util'
 
     export let href: string | undefined = undefined
     export let user: User
+    export let subtitle = ''
 
     $: element = !!href ? 'a' : 'div'
 </script>
@@ -16,7 +16,7 @@
     />
     <div class="info">
         <p>{user.profile.name}</p>
-        <span>aluno desde {dateFormat.format(new Date(user.createdAt))}</span>
+        <span>{subtitle}</span>
     </div>
 </svelte:element>
 
