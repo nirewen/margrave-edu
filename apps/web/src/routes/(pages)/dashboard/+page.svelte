@@ -6,6 +6,9 @@
     export let data: PageData
 </script>
 
+<svelte:head>
+    <title>Dashboard | Margrave</title>
+</svelte:head>
 <main>
     <header>
         <h1>Dashboard</h1>
@@ -13,23 +16,31 @@
     </header>
     <section class="stats">
         <CountCard
-            href="/students"
+            href="/dashboard/students"
             count={data.stats.students}
             label={`estudante${p(data.stats.students)}`}
         />
         <CountCard
-            href="/teachers"
+            href="/dashboard/teachers"
             count={data.stats.teachers}
             label={`professor${p(data.stats.teachers, 'es')}`}
         />
         <CountCard
-            href="/students"
+            href="/dashboard/students"
             count={data.stats.students}
             label={`estudante${p(data.stats.students)}`}
             style="grid-row: span 2;"
         />
-        <CountCard href="/classes" count={data.stats.lessons} label={`turma${p(data.stats.lessons)}`} />
-        <CountCard href="/lessons" count={data.stats.subjects} label={`aula${p(data.stats.subjects)}`} />
+        <CountCard
+            href="/dashboard/classes"
+            count={data.stats.lessons}
+            label={`turma${p(data.stats.lessons)}`}
+        />
+        <CountCard
+            href="/dashboard/lessons"
+            count={data.stats.subjects}
+            label={`aula${p(data.stats.subjects)}`}
+        />
     </section>
     <pre>{JSON.stringify(data, null, 4)}</pre>
     <pre>{JSON.stringify(data, null, 4)}</pre>

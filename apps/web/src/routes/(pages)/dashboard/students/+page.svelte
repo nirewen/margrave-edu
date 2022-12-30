@@ -4,4 +4,8 @@
     export let data: PageData
 </script>
 
+<svelte:head>
+    <title>Estudantes | Margrave</title>
+</svelte:head>
+
 <pre>{JSON.stringify(data, null, 4)}</pre>

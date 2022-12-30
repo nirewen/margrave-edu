@@ -3,11 +3,11 @@
 
     const links = [
         { name: 'Dashboard', route: '/dashboard', icon: '' },
-        { name: 'Estudantes', route: '/students', icon: '' },
-        { name: 'Professores', route: '/teachers', icon: '' },
-        { name: 'Aulas', route: '/lessons', icon: '' },
-        { name: 'Disciplinas', route: '/subjects', icon: '' },
-        { name: 'Turmas', route: '/classes', icon: '' },
+        { name: 'Estudantes', route: '/dashboard/students', icon: '' },
+        { name: 'Professores', route: '/dashboard/teachers', icon: '' },
+        { name: 'Aulas', route: '/dashboard/lessons', icon: '' },
+        { name: 'Disciplinas', route: '/dashboard/subjects', icon: '' },
+        { name: 'Turmas', route: '/dashboard/classes', icon: '' },
     ]
 </script>
 
@@ -18,7 +18,7 @@
     <p>Menu principal</p>
     <ul>
         {#each links as link}
-            <li class:active={$page.url.pathname.startsWith(link.route)}>
+            <li class:active={$page.url.pathname === link.route}>
                 <a href={link.route}>{link.name}</a>
             </li>
         {/each}
