@@ -42,10 +42,6 @@
             label={`aula${p(data.stats.subjects)}`}
         />
     </section>
-    <pre>{JSON.stringify(data, null, 4)}</pre>
-    <pre>{JSON.stringify(data, null, 4)}</pre>
-    <pre>{JSON.stringify(data, null, 4)}</pre>
-    <pre>{JSON.stringify(data, null, 4)}</pre>
 </main>
 
 <style lang="scss">
