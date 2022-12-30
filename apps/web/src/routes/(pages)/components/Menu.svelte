@@ -2,12 +2,12 @@
     import { page } from '$app/stores'
 
     const links = [
-        { name: 'Dashboard', route: '/dashboard', icon: '' },
-        { name: 'Estudantes', route: '/dashboard/students', icon: '' },
-        { name: 'Professores', route: '/dashboard/teachers', icon: '' },
-        { name: 'Aulas', route: '/dashboard/lessons', icon: '' },
-        { name: 'Disciplinas', route: '/dashboard/subjects', icon: '' },
-        { name: 'Turmas', route: '/dashboard/classes', icon: '' },
+        { name: 'Dashboard', route: '/dashboard', icon: 'ic:round-grid-view' },
+        { name: 'Estudantes', route: '/dashboard/students', icon: 'ic:round-school' },
+        { name: 'Professores', route: '/dashboard/teachers', icon: 'ic:round-people-alt' },
+        { name: 'Aulas', route: '/dashboard/lessons', icon: 'ic:baseline-play-lesson' },
+        { name: 'Disciplinas', route: '/dashboard/subjects', icon: 'ic:round-menu-book' },
+        { name: 'Turmas', route: '/dashboard/classes', icon: 'ic:baseline-groups-2' },
     ]
 </script>
 
@@ -17,9 +17,10 @@
     </header>
     <p>Menu principal</p>
     <ul>
-        {#each links as link}
-            <li class:active={$page.url.pathname === link.route}>
-                <a href={link.route}>{link.name}</a>
+        {#each links as { name, route, icon }}
+            <li class:active={$page.url.pathname === route}>
+                <iconify-icon {icon} width={28} />
+                <a href={route}>{name}</a>
             </li>
         {/each}
     </ul>
@@ -46,7 +47,7 @@
         p {
             font-size: 1.2rem;
             font-weight: 600;
-            margin: 0.6rem 0;
+            margin: 0.6rem 0.8rem;
         }
 
         ul {
@@ -56,7 +57,9 @@
 
             li {
                 display: flex;
-                border-radius: 8px;
+                align-items: center;
+                padding: 0.4rem 0.6rem;
+                border-radius: 0.7rem;
                 font-weight: 600;
 
                 a {
