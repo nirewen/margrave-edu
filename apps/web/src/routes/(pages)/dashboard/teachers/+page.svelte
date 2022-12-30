@@ -1,9 +1,12 @@
 <script lang="ts">
     import { dateFormat } from '$lib/util'
+    import { writable } from 'svelte/store'
+    import Profile from '../../components/Profile.svelte'
     import ProfileCard from '../../components/ProfileCard.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData
+    let selected = writable(data.teachers[0])
 </script>
 
 <svelte:head>
@@ -21,11 +24,12 @@
         {#each data.teachers as teacher}
             <ProfileCard
                 user={teacher}
-                subtitle="professor desde {dateFormat.format(new Date(teacher.createdAt))}"
+                subtitle="aluno desde {dateFormat.format(new Date(teacher.createdAt))}"
+                on:click={() => ($selected = teacher)}
             />
         {/each}
     </div>
-    <div class="selected" />
+    <Profile title="Perfil de professor" user={$selected} />
 </div>
 
 <style lang="scss">
@@ -46,7 +50,7 @@
     .page {
         display: grid;
         gap: 1rem;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto 20rem;
     }
 
     .page .grid {

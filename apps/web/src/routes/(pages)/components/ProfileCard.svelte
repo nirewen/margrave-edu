@@ -1,14 +1,11 @@
 <script lang="ts">
     import type { User } from '$lib/types/User'
 
-    export let href: string | undefined = undefined
     export let user: User
     export let subtitle = ''
-
-    $: element = !!href ? 'a' : 'div'
 </script>
 
-<svelte:element this={element} class="profile-card">
+<div class="profile-card">
     <img
         class="avatar"
         src="/api/avatar/{user.profile.avatar}"
@@ -18,7 +15,7 @@
         <p>{user.profile.name}</p>
         <span>{subtitle}</span>
     </div>
-</svelte:element>
+</div>
 
 <style lang="scss">
     .profile-card {
@@ -26,12 +23,16 @@
         align-items: center;
         gap: 1rem;
         padding: 1rem;
+        height: fit-content;
         border-radius: 8px;
         box-shadow: var(--elevation-3);
+        cursor: pointer;
+        background-color: var(--gray-900);
 
         img.avatar {
             width: 3rem;
             height: 3rem;
+            border-radius: 9999px;
         }
 
         h1 {
