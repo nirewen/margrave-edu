@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Button from '$lib/components/Button.svelte'
     import { dateFormat } from '$lib/util'
     import { writable } from 'svelte/store'
     import Profile from '../components/Profile.svelte'
@@ -17,6 +18,12 @@
     <div>
         <h1>Estudantes</h1>
         <h2>Lista de todos os estudantes registrados</h2>
+    </div>
+    <div>
+        <Button href="/students/add">
+            <iconify-icon icon="mdi:account-multiple-plus" width={28} />
+            Adicionar
+        </Button>
     </div>
 </header>
 <div class="page">
@@ -41,6 +48,7 @@
 <style lang="scss">
     header {
         display: flex;
+        align-items: center;
         justify-content: space-between;
 
         h1 {
