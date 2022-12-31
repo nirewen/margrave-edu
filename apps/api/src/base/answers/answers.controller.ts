@@ -23,22 +23,22 @@ export class AnswersController {
 
     @Get(':id')
     @Roles(UserRole.ADMIN, UserRole.TEACHER)
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    findOne(@Param('id', ParseIntPipe) id: string) {
         return this.answersService.findOne(id)
     }
 
     @Get(':id/@me')
-    findMinesByAssignmentId(@Param('id', ParseIntPipe) id: number, @ReqUser() user: Payload) {
+    findMinesByAssignmentId(@Param('id', ParseIntPipe) id: string, @ReqUser() user: Payload) {
         return this.answersService.findMine(user.id, id)
     }
 
     @Patch(':id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateAnswerDTO) {
+    update(@Param('id', ParseIntPipe) id: string, @Body() body: UpdateAnswerDTO) {
         return this.answersService.update(id, body)
     }
 
     @Delete(':id')
-    remove(@Param('id', ParseIntPipe) id: number) {
+    remove(@Param('id', ParseIntPipe) id: string) {
         return this.answersService.remove(id)
     }
 }

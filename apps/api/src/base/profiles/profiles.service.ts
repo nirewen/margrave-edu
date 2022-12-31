@@ -12,7 +12,7 @@ export class ProfilesService {
         return this.profiles.find()
     }
 
-    async findOne(userId: number) {
+    async findOne(userId: string) {
         const profile = await this.profiles.findOneBy({ id: userId })
 
         if (!profile) {
@@ -22,7 +22,7 @@ export class ProfilesService {
         return profile
     }
 
-    async update(id: number, body: UpdateProfileDTO) {
+    async update(id: string, body: UpdateProfileDTO) {
         const profile = await this.findOne(id)
 
         return this.profiles.save({ ...profile, ...body })

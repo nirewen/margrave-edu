@@ -3,8 +3,8 @@ import { User } from './user.entity'
 
 @Entity({ name: 'profiles' })
 export class Profile {
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column({ default: '' })
     name: string

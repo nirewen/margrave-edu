@@ -23,17 +23,17 @@ export class SubjectsController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    findOne(@Param('id', ParseIntPipe) id: string) {
         return this.subjectsService.findOne(id)
     }
 
     @Patch(':id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateSubjectDTO) {
+    update(@Param('id', ParseIntPipe) id: string, @Body() body: UpdateSubjectDTO) {
         return this.subjectsService.update(id, body)
     }
 
     @Delete(':id')
-    remove(@Param('id', ParseIntPipe) id: number) {
+    remove(@Param('id', ParseIntPipe) id: string) {
         return this.subjectsService.remove(id)
     }
 }

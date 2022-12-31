@@ -39,7 +39,7 @@ export class ClassesService {
         return entity
     }
 
-    async findOne(id: number) {
+    async findOne(id: string) {
         const entity = await this.classes.findOneBy({ id })
 
         if (!entity) {
@@ -49,13 +49,13 @@ export class ClassesService {
         return entity
     }
 
-    async update(id: number, body: UpdateClassDto) {
+    async update(id: string, body: UpdateClassDto) {
         const obj = await this.findOne(id)
 
         return this.classes.save({ ...obj, ...body })
     }
 
-    async remove(id: number) {
+    async remove(id: string) {
         const obj = await this.findOne(id)
 
         return this.classes.remove(obj)

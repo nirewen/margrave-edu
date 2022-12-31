@@ -45,17 +45,17 @@ export class UsersController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    findOne(@Param('id', ParseIntPipe) id: string) {
         return this.userService.findOneById(id)
     }
 
     @Patch(':id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateUserDTO) {
+    update(@Param('id', ParseIntPipe) id: string, @Body() body: UpdateUserDTO) {
         return this.userService.update(id, body)
     }
 
     @Delete(':id')
-    delete(@Param('id', ParseIntPipe) id: number) {
+    delete(@Param('id', ParseIntPipe) id: string) {
         return this.userService.remove(id)
     }
 }

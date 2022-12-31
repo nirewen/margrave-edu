@@ -1,4 +1,4 @@
-import { IsHexColor, IsNumber, IsOptional, IsString, Min } from 'class-validator'
+import { IsHexColor, IsNumber, IsOptional, IsString, IsUUID, Min } from 'class-validator'
 
 export class CreateSubjectDTO {
     @IsString()
@@ -21,6 +21,6 @@ export class CreateSubjectDTO {
     @Min(20)
     hours: number
 
-    @IsNumber()
-    teacherId: number
+    @IsUUID()
+    teacherId: string
 }

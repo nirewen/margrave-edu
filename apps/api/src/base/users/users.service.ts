@@ -57,7 +57,7 @@ export class UsersService {
         return user
     }
 
-    async findOneById(id: number) {
+    async findOneById(id: string) {
         const user = await this.users.findOne({
             where: { id },
             relations: {
@@ -72,7 +72,7 @@ export class UsersService {
         return user
     }
 
-    async update(id: number, body: UpdateUserDTO) {
+    async update(id: string, body: UpdateUserDTO) {
         const user = await this.findOneById(id)
 
         body.password = body.password || user.password
@@ -84,7 +84,7 @@ export class UsersService {
         return this.users.save({ ...user, ...body })
     }
 
-    async remove(id: number) {
+    async remove(id: string) {
         const user = await this.findOneById(id)
 
         return this.users.remove(user)

@@ -4,8 +4,8 @@ import { Lesson } from './lesson.entity'
 
 @Entity({ name: 'assignments' })
 export class Assignment {
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column()
     description: string

@@ -15,7 +15,7 @@ export class AttendancesController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    findOne(@Param('id', ParseIntPipe) id: string) {
         return this.attendancesService.findOne(id)
     }
 }

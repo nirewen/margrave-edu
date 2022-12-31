@@ -23,17 +23,17 @@ export class LessonsController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    findOne(@Param('id', ParseIntPipe) id: string) {
         return this.lessonsService.findOne(id)
     }
 
     @Patch(':id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateLessonDTO) {
+    update(@Param('id', ParseIntPipe) id: string, @Body() body: UpdateLessonDTO) {
         return this.lessonsService.update(id, body)
     }
 
     @Delete(':id')
-    remove(@Param('id', ParseIntPipe) id: number) {
+    remove(@Param('id', ParseIntPipe) id: string) {
         return this.lessonsService.remove(id)
     }
 }

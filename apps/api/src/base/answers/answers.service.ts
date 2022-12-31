@@ -15,7 +15,7 @@ export class AnswersService {
         private readonly assignmentsService: AssignmentsService
     ) {}
 
-    async create(userId: number, { assignmentId, ...body }: CreateAnswerDTO) {
+    async create(userId: string, { assignmentId, ...body }: CreateAnswerDTO) {
         const answer = this.answers.create(body)
 
         const user = await this.usersService.findOneById(userId)
@@ -31,7 +31,7 @@ export class AnswersService {
         return this.answers.find()
     }
 
-    async findOne(id: number) {
+    async findOne(id: string) {
         const answer = await this.answers.findOneBy({ id })
 
         if (!answer) {
@@ -41,17 +41,17 @@ export class AnswersService {
         return answer
     }
 
-    async findMine(userId: number, id: number) {
+    async findMine(userId: string, id: string) {
         return this.answers.findBy({ id, user: { id: userId } })
     }
 
-    async update(id: number, body: UpdateAnswerDTO) {
+    async update(id: string, body: UpdateAnswerDTO) {
         const answer = await this.findOne(id)
 
         return this.answers.save({ ...answer, ...body })
     }
 
-    async remove(id: number) {
+    async remove(id: string) {
         const answer = await this.findOne(id)
 
         return this.answers.remove(answer)

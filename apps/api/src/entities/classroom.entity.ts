@@ -10,8 +10,8 @@ export enum ClassroomType {
 
 @Entity({ name: 'classrooms' })
 export class Classroom {
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column({ nullable: true })
     building: string

@@ -15,7 +15,7 @@ export class ClassSubjectsService {
         private readonly classesService: ClassesService
     ) {}
 
-    async create(subjectId: number, classId: number, body: CreateClassSubjectDTO) {
+    async create(subjectId: string, classId: string, body: CreateClassSubjectDTO) {
         const classSubject = this.classSubjects.create(body)
         const subject = await this.subjectsService.findOne(subjectId)
         const assocClass = await this.classesService.findOne(classId)
@@ -26,7 +26,7 @@ export class ClassSubjectsService {
         return this.classSubjects.save(classSubject)
     }
 
-    async findOne(subjectId: number, classId: number) {
+    async findOne(subjectId: string, classId: string) {
         const classSubject = await this.classSubjects.findOne({
             where: {
                 subject: { id: subjectId },
@@ -41,13 +41,13 @@ export class ClassSubjectsService {
         return classSubject
     }
 
-    async update(subjectId: number, classId: number, body: UpdateClassSubjectDTO) {
+    async update(subjectId: string, classId: string, body: UpdateClassSubjectDTO) {
         const classSubject = await this.findOne(subjectId, classId)
 
         return this.classSubjects.save({ ...classSubject, ...body })
     }
 
-    async remove(subjectId: number, classId: number) {
+    async remove(subjectId: string, classId: string) {
         const classSubject = await this.findOne(subjectId, classId)
 
         return this.classSubjects.remove(classSubject)

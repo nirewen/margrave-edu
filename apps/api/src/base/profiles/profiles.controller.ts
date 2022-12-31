@@ -18,12 +18,12 @@ export class ProfilesController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    findOne(@Param('id', ParseIntPipe) id: string) {
         return this.profilesService.findOne(id)
     }
 
     @Patch(':id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateProfileDTO) {
+    update(@Param('id', ParseIntPipe) id: string, @Body() body: UpdateProfileDTO) {
         return this.profilesService.update(id, body)
     }
 }

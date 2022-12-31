@@ -1,7 +1,7 @@
 import type { Profile } from './Profile'
 
 export interface User {
-    id: number
+    id: string
     email: string
     role: string
     createdAt: string

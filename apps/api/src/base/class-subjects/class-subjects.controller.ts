@@ -9,8 +9,8 @@ export class ClassSubjectsController {
 
     @Post(':subjectId/:classId')
     create(
-        @Param('subjectId', ParseIntPipe) subjectId: number,
-        @Param('classId', ParseIntPipe) classId: number,
+        @Param('subjectId', ParseIntPipe) subjectId: string,
+        @Param('classId', ParseIntPipe) classId: string,
         @Body() body: CreateClassSubjectDTO
     ) {
         return this.classSubjectsService.create(subjectId, classId, body)
@@ -18,16 +18,16 @@ export class ClassSubjectsController {
 
     @Get(':subjectId/:classId')
     findOne(
-        @Param('subjectId', ParseIntPipe) subjectId: number,
-        @Param('classId', ParseIntPipe) classId: number
+        @Param('subjectId', ParseIntPipe) subjectId: string,
+        @Param('classId', ParseIntPipe) classId: string
     ) {
         return this.classSubjectsService.findOne(subjectId, classId)
     }
 
     @Patch(':subjectId/:classId')
     update(
-        @Param('subjectId', ParseIntPipe) subjectId: number,
-        @Param('classId', ParseIntPipe) classId: number,
+        @Param('subjectId', ParseIntPipe) subjectId: string,
+        @Param('classId', ParseIntPipe) classId: string,
         @Body() body: UpdateClassSubjectDTO
     ) {
         return this.classSubjectsService.update(subjectId, classId, body)
@@ -35,8 +35,8 @@ export class ClassSubjectsController {
 
     @Delete(':subjectId/:classId')
     delete(
-        @Param('subjectId', ParseIntPipe) subjectId: number,
-        @Param('classId', ParseIntPipe) classId: number
+        @Param('subjectId', ParseIntPipe) subjectId: string,
+        @Param('classId', ParseIntPipe) classId: string
     ) {
         return this.classSubjectsService.remove(subjectId, classId)
     }

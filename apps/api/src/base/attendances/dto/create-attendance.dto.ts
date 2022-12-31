@@ -1,12 +1,12 @@
-import { IsBoolean, IsNumber } from 'class-validator'
+import { IsBoolean, IsUUID } from 'class-validator'
 
 export class CreateAttendanceDTO {
     @IsBoolean()
     present: boolean
 
-    @IsNumber()
-    userId: number
+    @IsUUID()
+    userId: string
 
-    @IsNumber()
-    lessonId: number
+    @IsUUID()
+    lessonId: string
 }

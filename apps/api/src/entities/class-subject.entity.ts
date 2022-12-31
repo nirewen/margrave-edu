@@ -14,8 +14,8 @@ export enum Weekday {
 
 @Entity({ name: 'class_subjects' })
 export class ClassSubject {
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column('enum', { enum: Weekday, array: true, default: [] })
     weekdays: Weekday[]

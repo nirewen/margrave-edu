@@ -4,8 +4,8 @@ import { User } from './user.entity'
 
 @Entity({ name: 'attendances' })
 export class Attendance {
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column({ default: true })
     present: boolean

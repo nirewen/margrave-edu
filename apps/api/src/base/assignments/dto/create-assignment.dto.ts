@@ -1,4 +1,4 @@
-import { IsDate, IsNumber, IsString } from 'class-validator'
+import { IsDate, IsString, IsUUID } from 'class-validator'
 
 export class CreateAssignmentDTO {
     @IsString()
@@ -7,6 +7,6 @@ export class CreateAssignmentDTO {
     @IsDate()
     expiresAt: Date
 
-    @IsNumber()
-    lessonId: number
+    @IsUUID()
+    lessonId: string
 }

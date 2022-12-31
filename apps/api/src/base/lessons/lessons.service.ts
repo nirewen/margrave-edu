@@ -36,7 +36,7 @@ export class LessonsService {
         return this.lessons.find()
     }
 
-    async findOne(id: number) {
+    async findOne(id: string) {
         const lesson = await this.lessons.findOneBy({ id })
 
         if (!lesson) {
@@ -46,13 +46,13 @@ export class LessonsService {
         return lesson
     }
 
-    async update(id: number, body: UpdateLessonDTO) {
+    async update(id: string, body: UpdateLessonDTO) {
         const lesson = await this.findOne(id)
 
         return this.lessons.save({ ...lesson, ...body })
     }
 
-    async remove(id: number) {
+    async remove(id: string) {
         const lesson = await this.findOne(id)
 
         return this.lessons.remove(lesson)

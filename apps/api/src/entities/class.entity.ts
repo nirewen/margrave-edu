@@ -12,8 +12,8 @@ export enum Shift {
 
 @Entity({ name: 'classes' })
 export class Class {
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column({ unique: true })
     number: string

@@ -14,7 +14,7 @@ export class AttendancesService {
         return this.attendances.save(attendance)
     }
 
-    findOne(id: number) {
+    findOne(id: string) {
         const attendance = this.attendances.findOneBy({ id })
 
         if (!attendance) {

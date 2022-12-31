@@ -30,7 +30,7 @@ export class AssignmentsService {
         return this.assignments.find()
     }
 
-    async findOne(id: number) {
+    async findOne(id: string) {
         const assignment = await this.assignments.findOneBy({ id })
 
         if (!assignment) {
@@ -40,13 +40,13 @@ export class AssignmentsService {
         return assignment
     }
 
-    async update(id: number, body: UpdateAssignmentDTO) {
+    async update(id: string, body: UpdateAssignmentDTO) {
         const assignment = await this.findOne(id)
 
         return this.assignments.save({ ...assignment, ...body })
     }
 
-    async remove(id: number) {
+    async remove(id: string) {
         const assignment = await this.findOne(id)
 
         return this.assignments.remove(assignment)

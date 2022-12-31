@@ -35,7 +35,7 @@ export class SubjectsService {
         return this.subjects.find()
     }
 
-    async findOne(id: number) {
+    async findOne(id: string) {
         const subject = await this.subjects.findOneBy({ id })
 
         if (!subject) {
@@ -45,7 +45,7 @@ export class SubjectsService {
         return subject
     }
 
-    async update(id: number, { teacherId, ...body }: UpdateSubjectDTO) {
+    async update(id: string, { teacherId, ...body }: UpdateSubjectDTO) {
         const subject = await this.findOne(id)
 
         if (teacherId !== null) {
@@ -57,7 +57,7 @@ export class SubjectsService {
         return this.subjects.save({ ...subject, ...body })
     }
 
-    async remove(id: number) {
+    async remove(id: string) {
         const subject = await this.findOne(id)
 
         return this.subjects.remove(subject)
