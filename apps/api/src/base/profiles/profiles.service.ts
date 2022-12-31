@@ -13,7 +13,7 @@ export class ProfilesService {
     }
 
     async findOne(userId: string) {
-        const profile = await this.profiles.findOneBy({ id: userId })
+        const profile = await this.profiles.findOneBy({ user: { id: userId } })
 
         if (!profile) {
             throw new NotFoundException('profile for provided user id was not found')
