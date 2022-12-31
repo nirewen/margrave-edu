@@ -6,13 +6,13 @@
     export let subtitle = ''
 </script>
 
-<div class="profile-card">
+<button class="profile-card" on:click>
     <Avatar key={user.profile.avatar} alt="avatar de {user.profile.name}" size={3} />
     <div class="info">
         <p>{user.profile.name}</p>
         <span>{subtitle}</span>
     </div>
-</div>
+</button>
 
 <style lang="scss">
     .profile-card {
@@ -25,6 +25,7 @@
         box-shadow: var(--elevation-3);
         cursor: pointer;
         background-color: var(--gray-900);
+        text-align: left;
 
         .info {
             p {
