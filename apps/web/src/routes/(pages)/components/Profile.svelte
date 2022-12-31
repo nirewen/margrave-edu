@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Button from '$lib/components/Button.svelte'
     import type { User } from '$lib/types/User'
     import { getGender } from '$lib/util'
     import { differenceInYears, format } from 'date-fns'
@@ -6,10 +7,18 @@
 
     export let title: string
     export let user: User
+    export let editable = false
 </script>
 
 <div class="profile-card">
-    <h2>{title}</h2>
+    <header>
+        <h2>{title}</h2>
+        {#if editable}
+            <Button variant="ghost" icon href="/students/{user.id}/edit" title="Editar">
+                <iconify-icon icon="mdi:account-edit" width={24} />
+            </Button>
+        {/if}
+    </header>
     <div class="info">
         <Avatar key={user.profile.avatar} alt="avatar de {user.profile.name}" size={10} shadow />
         <p>{user.profile.name}</p>
@@ -51,15 +60,21 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        padding: 1rem 1.2rem;
+        padding: 1rem;
         border-radius: 0.5rem;
         box-shadow: var(--elevation-3);
         background-color: var(--gray-900);
         height: fit-content;
 
-        h2 {
-            font-size: 1.2rem;
-            font-weight: 500;
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h2 {
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
         }
 
         .info {

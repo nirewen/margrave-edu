@@ -13,6 +13,9 @@
 </script>
 
 <header>
+    <Button variant="ghost" icon href="../" title="Voltar">
+        <iconify-icon icon="mdi:chevron-left" width={32} />
+    </Button>
     <div>
         <h1>Editar estudante</h1>
         <h2>Preencha o formulário para editar o perfil do estudante</h2>
@@ -48,7 +51,7 @@
     header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 1rem;
 
         h1 {
             font-size: 1.8rem;

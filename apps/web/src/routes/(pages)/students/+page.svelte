@@ -38,7 +38,7 @@
             {/each}
         </div>
         {#if $selected}
-            <Profile title="Perfil de estudante" user={$selected} />
+            <Profile title="Perfil de estudante" user={$selected} editable />
         {/if}
     {:else}
         <h3>Nenhum estudante registrado...</h3>
