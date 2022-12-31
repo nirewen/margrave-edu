@@ -20,16 +20,22 @@
     </div>
 </header>
 <div class="page">
-    <div class="grid">
-        {#each data.teachers as teacher}
-            <ProfileCard
-                user={teacher}
-                subtitle="professor desde {dateFormat.format(new Date(teacher.createdAt))}"
-                on:click={() => ($selected = teacher)}
-            />
-        {/each}
-    </div>
-    <Profile title="Perfil de professor" user={$selected} />
+    {#if data.teachers.length > 0}
+        <div class="grid">
+            {#each data.teachers as teacher}
+                <ProfileCard
+                    user={teacher}
+                    subtitle="professor desde {dateFormat.format(new Date(teacher.createdAt))}"
+                    on:click={() => ($selected = teacher)}
+                />
+            {/each}
+        </div>
+        {#if $selected}
+            <Profile title="Perfil de professor" user={$selected} />
+        {/if}
+    {:else}
+        <h3>Nenhum professor registrado...</h3>
+    {/if}
 </div>
 
 <style lang="scss">
