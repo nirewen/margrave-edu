@@ -24,7 +24,7 @@
         {#each data.teachers as teacher}
             <ProfileCard
                 user={teacher}
-                subtitle="aluno desde {dateFormat.format(new Date(teacher.createdAt))}"
+                subtitle="professor desde {dateFormat.format(new Date(teacher.createdAt))}"
                 on:click={() => ($selected = teacher)}
             />
         {/each}
