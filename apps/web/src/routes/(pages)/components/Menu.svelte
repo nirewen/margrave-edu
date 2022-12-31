@@ -3,11 +3,11 @@
 
     const links = [
         { name: 'Dashboard', route: '/dashboard', icon: 'ic:round-grid-view' },
-        { name: 'Estudantes', route: '/dashboard/students', icon: 'ic:round-school' },
-        { name: 'Professores', route: '/dashboard/teachers', icon: 'ic:round-people-alt' },
-        { name: 'Aulas', route: '/dashboard/lessons', icon: 'ic:baseline-play-lesson' },
-        { name: 'Disciplinas', route: '/dashboard/subjects', icon: 'ic:round-menu-book' },
-        { name: 'Turmas', route: '/dashboard/classes', icon: 'ic:baseline-groups-2' },
+        { name: 'Estudantes', route: '/students', icon: 'ic:round-school' },
+        { name: 'Professores', route: '/teachers', icon: 'ic:round-people-alt' },
+        { name: 'Aulas', route: '/lessons', icon: 'ic:baseline-play-lesson' },
+        { name: 'Disciplinas', route: '/subjects', icon: 'ic:round-menu-book' },
+        { name: 'Turmas', route: '/classes', icon: 'ic:baseline-groups-2' },
     ]
 </script>
 
