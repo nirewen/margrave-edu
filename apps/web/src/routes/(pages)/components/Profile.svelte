@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { User } from '$lib/types/User'
+    import { getGender } from '$lib/util'
     import { differenceInYears, format } from 'date-fns'
     import Avatar from './Avatar.svelte'
 
@@ -25,7 +26,7 @@
             </div>
             <div class="field">
                 <h3>Gênero</h3>
-                <p>{user.profile.gender || ''}</p>
+                <p>{user.profile.gender ? getGender(user.profile.gender) : ''}</p>
             </div>
         </div>
         <div class="field group">
@@ -51,9 +52,10 @@
         flex-direction: column;
         gap: 1rem;
         padding: 1rem 1.2rem;
-        border-radius: 8px;
+        border-radius: 0.5rem;
         box-shadow: var(--elevation-3);
         background-color: var(--gray-900);
+        height: fit-content;
 
         h2 {
             font-size: 1.2rem;
@@ -78,7 +80,10 @@
 
         .details {
             .field {
-                margin-bottom: 0.5rem;
+                &:not(:last-child) {
+                    margin-bottom: 0.5rem;
+                }
+
                 h3 {
                     font-size: 1.1rem;
                 }
