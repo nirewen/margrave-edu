@@ -18,7 +18,7 @@
     <p>Menu principal</p>
     <ul>
         {#each links as { name, route, icon }}
-            <li class:active={$page.url.pathname === route}>
+            <li class:active={$page.url.pathname.startsWith(route)}>
                 <iconify-icon {icon} width={28} />
                 <a href={route}>{name}</a>
             </li>
