@@ -1,6 +1,8 @@
 <script lang="ts">
+    import { nanoid } from 'nanoid'
+
     import type { HTMLInputTypeAttribute } from 'svelte/elements'
-    export let id: string | undefined = undefined
+    export let id: string = nanoid()
     export let label: string | undefined = undefined
     export let type: HTMLInputTypeAttribute | 'textarea' = 'text'
     export let value: any = undefined
@@ -11,17 +13,17 @@
         <label for={id}>{label}</label>
     {/if}
     {#if type === 'email'}
-        <input type="email" bind:value {...$$props} />
+        <input type="email" bind:value {id} {...$$props} />
     {:else if type === 'password'}
-        <input type="password" bind:value {...$$props} />
+        <input type="password" bind:value {id} {...$$props} />
     {:else if type === 'number'}
-        <input type="number" bind:value {...$$props} />
+        <input type="number" bind:value {id} {...$$props} />
     {:else if type === 'date'}
-        <input type="date" bind:value {...$$props} />
+        <input type="date" bind:value {id} {...$$props} />
     {:else if type === 'textarea'}
-        <textarea bind:value {...$$props} />
+        <textarea bind:value {id} {...$$props} />
     {:else}
-        <input type="text" bind:value {...$$props} />
+        <input type="text" bind:value {id} {...$$props} />
     {/if}
 </div>
 
@@ -29,6 +31,7 @@
     div.form-group {
         display: flex;
         flex-direction: column;
+        gap: 0.2rem;
 
         input,
         textarea {
