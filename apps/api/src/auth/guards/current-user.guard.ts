@@ -6,7 +6,7 @@ import { User } from 'src/entities/user.entity'
 export class CurrentUserGuard implements CanActivate {
     canActivate(context: ExecutionContext): boolean {
         const request = context.switchToHttp().getRequest<Request>()
-        const id = parseInt(request.params.id, 10)
+        const id = request.params.id
         const user = request.user as User
 
         return user.id === id

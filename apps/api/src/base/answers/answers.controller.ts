@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
 import { Payload } from 'src/auth/auth.interface'
 import { ReqUser, Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
@@ -23,22 +23,22 @@ export class AnswersController {
 
     @Get(':id')
     @Roles(UserRole.ADMIN, UserRole.TEACHER)
-    findOne(@Param('id', ParseIntPipe) id: string) {
+    findOne(@Param('id') id: string) {
         return this.answersService.findOne(id)
     }
 
     @Get(':id/@me')
-    findMinesByAssignmentId(@Param('id', ParseIntPipe) id: string, @ReqUser() user: Payload) {
+    findMinesByAssignmentId(@Param('id') id: string, @ReqUser() user: Payload) {
         return this.answersService.findMine(user.id, id)
     }
 
     @Patch(':id')
-    update(@Param('id', ParseIntPipe) id: string, @Body() body: UpdateAnswerDTO) {
+    update(@Param('id') id: string, @Body() body: UpdateAnswerDTO) {
         return this.answersService.update(id, body)
     }
 
     @Delete(':id')
-    remove(@Param('id', ParseIntPipe) id: string) {
+    remove(@Param('id') id: string) {
         return this.answersService.remove(id)
     }
 }

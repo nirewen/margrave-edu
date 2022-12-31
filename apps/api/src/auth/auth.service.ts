@@ -35,7 +35,7 @@ export class AuthService {
             return false
         }
 
-        const payload = this.jwt.decode(refreshToken) as { sub: number }
+        const payload = this.jwt.decode(refreshToken) as { sub: string }
         return payload.sub === data.id
     }
 
@@ -52,7 +52,7 @@ export class AuthService {
         }
     }
 
-    private getRefreshToken(sub: number): string {
+    private getRefreshToken(sub: string): string {
         return this.jwt.sign(
             { sub },
             {

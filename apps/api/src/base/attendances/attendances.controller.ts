@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 import { Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
 import { AttendancesService } from './attendances.service'
@@ -15,7 +15,7 @@ export class AttendancesController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: string) {
+    findOne(@Param('id') id: string) {
         return this.attendancesService.findOne(id)
     }
 }

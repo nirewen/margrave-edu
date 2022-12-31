@@ -1,5 +1,5 @@
 import { OrGuard } from '@nest-lab/or-guard'
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, UseGuards } from '@nestjs/common'
 import { CurrentUserGuard, RolesGuard } from 'src/auth/guards'
 import { Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
@@ -18,12 +18,12 @@ export class ProfilesController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: string) {
+    findOne(@Param('id') id: string) {
         return this.profilesService.findOne(id)
     }
 
     @Patch(':id')
-    update(@Param('id', ParseIntPipe) id: string, @Body() body: UpdateProfileDTO) {
+    update(@Param('id') id: string, @Body() body: UpdateProfileDTO) {
         return this.profilesService.update(id, body)
     }
 }
