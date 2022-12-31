@@ -21,7 +21,7 @@
         <div class="field group">
             <div class="field">
                 <h3>Nível</h3>
-                <p>{user.profile.level}</p>
+                <p>{user.profile.level || 0}</p>
             </div>
             <div class="field">
                 <h3>Gênero</h3>
@@ -87,7 +87,8 @@
                     font-size: 0.9rem;
                     color: var(--gray-300);
                     line-height: normal;
-                    min-height: 1rem;
+                    min-height: 1.1rem;
+                    overflow-wrap: break-word;
                 }
 
                 &.group {
