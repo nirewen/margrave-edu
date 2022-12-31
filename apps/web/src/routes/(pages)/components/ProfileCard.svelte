@@ -26,10 +26,6 @@
         cursor: pointer;
         background-color: var(--gray-900);
 
-        h1 {
-            font-size: 1.6rem;
-        }
-
         .info {
             p {
                 text-overflow: ellipsis;

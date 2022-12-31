@@ -16,26 +16,30 @@
     <div class="details">
         <div class="field">
             <h3>Sobre</h3>
-            <span>{user.profile.bio}</span>
+            <p>{user.profile.bio || ''}</p>
         </div>
         <div class="field group">
             <div class="field">
                 <h3>Nível</h3>
-                <span>{user.profile.level}</span>
+                <p>{user.profile.level}</p>
             </div>
             <div class="field">
                 <h3>Gênero</h3>
-                <span><!-- TODO: adicionar gênero --></span>
+                <p>{user.profile.gender || ''}</p>
             </div>
         </div>
         <div class="field group">
             <div class="field">
                 <h3>Idade</h3>
-                <span>{differenceInYears(new Date(), new Date(user.profile.birthdate))}</span>
+                <p>
+                    {user.profile.birthdate
+                        ? differenceInYears(new Date(), new Date(user.profile.birthdate))
+                        : ''}
+                </p>
             </div>
             <div class="field">
                 <h3>Nascimento</h3>
-                <span>{format(new Date(user.profile.birthdate), 'dd/MM/yyyy')}</span>
+                <p>{user.profile.birthdate ? format(new Date(user.profile.birthdate), 'dd/MM/yyyy') : ''}</p>
             </div>
         </div>
     </div>
@@ -70,11 +74,6 @@
                 overflow: hidden;
                 font-size: 1.3rem;
             }
-
-            span {
-                color: var(--gray-300);
-                font-size: 0.8rem;
-            }
         }
 
         .details {
@@ -84,10 +83,11 @@
                     font-size: 1.1rem;
                 }
 
-                span {
+                p {
                     font-size: 0.9rem;
                     color: var(--gray-300);
                     line-height: normal;
+                    min-height: 1rem;
                 }
 
                 &.group {
