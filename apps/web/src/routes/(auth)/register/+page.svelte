@@ -22,12 +22,8 @@
         }
     }}
 >
-    <div class="form-group">
-        <TextInput type="email" label="Email" id="email" name="email" required />
-    </div>
-    <div class="form-group">
-        <TextInput type="password" label="Senha" id="password" name="password" required />
-    </div>
+    <TextInput type="email" label="Email" id="email" name="email" required />
+    <TextInput type="password" label="Senha" id="password" name="password" required />
     <!-- TODO: fazer elemento de erro -->
     {#if form?.error}
         <span>{form?.message}</span>
@@ -60,11 +56,6 @@
         display: flex;
         flex-direction: column;
         gap: 0.4rem;
-
-        > .form-group {
-            display: flex;
-            flex-direction: column;
-        }
     }
 
     footer {
