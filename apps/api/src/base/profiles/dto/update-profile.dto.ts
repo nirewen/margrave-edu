@@ -1,4 +1,5 @@
-import { IsDate, IsNumber, IsString, Min } from 'class-validator'
+import { IsDate, IsEnum, IsNumber, IsString, Min } from 'class-validator'
+import { Gender } from 'src/entities/profile.entity'
 
 export class UpdateProfileDTO {
     @IsString()
@@ -9,6 +10,9 @@ export class UpdateProfileDTO {
 
     @IsDate()
     birthdate?: Date
+
+    @IsEnum(Gender)
+    gender?: Gender
 
     @IsString()
     avatar?: string

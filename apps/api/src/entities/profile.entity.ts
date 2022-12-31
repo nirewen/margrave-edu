@@ -1,6 +1,12 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { User } from './user.entity'
 
+export enum Gender {
+    MALE,
+    FEMALE,
+    OTHER,
+}
+
 @Entity({ name: 'profiles' })
 export class Profile {
     @PrimaryGeneratedColumn('uuid')
@@ -17,6 +23,9 @@ export class Profile {
 
     @Column({ nullable: true })
     birthdate: Date
+
+    @Column({ type: 'enum', enum: Gender, nullable: true })
+    gender: Gender
 
     @Column({ default: 0 })
     level: number
