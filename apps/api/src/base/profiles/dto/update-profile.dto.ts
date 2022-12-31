@@ -1,23 +1,29 @@
-import { IsDate, IsEnum, IsNumber, IsString, Min } from 'class-validator'
+import { IsDateString, IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator'
 import { Gender } from 'src/entities/profile.entity'
 
 export class UpdateProfileDTO {
     @IsString()
-    name?: string
+    name: string
 
     @IsString()
-    bio?: string
+    @IsOptional()
+    bio: string
 
-    @IsDate()
-    birthdate?: Date
+    @IsDateString()
+    @IsOptional()
+    birthdate: String
 
     @IsEnum(Gender)
-    gender?: Gender
+    @IsOptional()
+    gender: Gender = Gender.OTHER
 
+    // TODO: mover isso pra /api/avatars
     @IsString()
-    avatar?: string
+    @IsOptional()
+    avatar: string
 
     @IsNumber()
+    @IsOptional()
     @Min(0)
-    level?: number
+    level: number
 }

@@ -2,9 +2,9 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'ty
 import { User } from './user.entity'
 
 export enum Gender {
-    MALE,
-    FEMALE,
-    OTHER,
+    MALE = 'MALE',
+    FEMALE = 'FEMALE',
+    OTHER = 'OTHER',
 }
 
 @Entity({ name: 'profiles' })
@@ -24,7 +24,7 @@ export class Profile {
     @Column({ nullable: true })
     birthdate: Date
 
-    @Column({ type: 'enum', enum: Gender, nullable: true })
+    @Column({ type: 'enum', enum: Gender, default: Gender.OTHER })
     gender: Gender
 
     @Column({ default: 0 })
