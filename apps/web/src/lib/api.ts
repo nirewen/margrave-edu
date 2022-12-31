@@ -52,8 +52,38 @@ const api = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Re
 
         return json as ReturnType
     }
+    const patch = async <ReturnType>(url: string, data: object, options?: RequestInit) => {
+        const response = await fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            ...options,
+        })
+        const json = await response.json()
 
-    return { get, post }
+        if (!response.ok) {
+            throw new APIError(json as APIError)
+        }
+
+        return json as ReturnType
+    }
+    const deleteFn = async <ReturnType>(url: string, options?: RequestInit) => {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            ...options,
+        })
+        const json = await response.json()
+
+        if (!response.ok) {
+            throw new APIError(json as APIError)
+        }
+
+        return json as ReturnType
+    }
+
+    return { get, post, patch, delete: deleteFn }
 }
 
 // TODO: arranjar um jeito de juntar essas duas
