@@ -21,8 +21,8 @@ export class Profile {
     @Column({ default: 'default-avatar.png' })
     avatar: string
 
-    @Column({ nullable: true })
-    birthdate: Date
+    @Column({ type: 'date', nullable: true })
+    birthdate: string
 
     @Column({ type: 'enum', enum: Gender, default: Gender.OTHER })
     gender: Gender

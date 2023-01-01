@@ -24,6 +24,7 @@ export class ProfilesController {
 
     @Patch(':id')
     update(@Param('id') id: string, @Body() body: UpdateProfileDTO) {
+        console.log('🚀 ~ file: profiles.controller.ts:27 ~ ProfilesController ~ update ~ body', body)
         return this.profilesService.update(id, body)
     }
 }

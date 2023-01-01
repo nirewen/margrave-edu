@@ -11,7 +11,7 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule)
 
     app.setGlobalPrefix('/api')
-    app.useGlobalPipes(new ValidationPipe())
+    app.useGlobalPipes(new ValidationPipe({ transform: true }))
     app.useGlobalFilters(new GlobalExceptionFilter())
     app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)))
     app.useGlobalGuards(new JwtAuthGuard(app.get(Reflector)))

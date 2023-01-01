@@ -1,4 +1,5 @@
-import { IsDateString, IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator'
+import { Type } from 'class-transformer'
+import { IsDateString, IsEnum, IsInt, IsOptional, IsString, Min } from 'class-validator'
 import { Gender } from 'src/entities/profile.entity'
 
 export class UpdateProfileDTO {
@@ -11,7 +12,7 @@ export class UpdateProfileDTO {
 
     @IsDateString()
     @IsOptional()
-    birthdate: String
+    birthdate: string
 
     @IsEnum(Gender)
     @IsOptional()
@@ -22,8 +23,9 @@ export class UpdateProfileDTO {
     @IsOptional()
     avatar: string
 
-    @IsNumber()
+    @IsInt()
     @IsOptional()
+    @Type(() => Number)
     @Min(0)
     level: number
 }

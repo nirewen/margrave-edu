@@ -10,7 +10,7 @@ export const config = {
         database: process.env.DB_NAME || 'margrave',
 
         synchronize: false,
-        logging: true,
+        logging: false,
         autoLoadEntities: true,
     } satisfies TypeOrmModuleOptions,
     storage: {
