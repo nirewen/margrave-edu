@@ -5,7 +5,7 @@
     import TextInput from '$lib/components/TextInput.svelte'
 
     import type { PageData } from './$types'
-    import Profile from '../../../components/Profile.svelte'
+    import Profile from '../../../../components/Profile.svelte'
     import Select from '$lib/components/Select.svelte'
     import { getGender } from '$lib/util'
 

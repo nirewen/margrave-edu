@@ -2,8 +2,8 @@
     import Button from '$lib/components/Button.svelte'
     import { dateFormat } from '$lib/util'
     import { writable } from 'svelte/store'
-    import Profile from '../components/Profile.svelte'
-    import ProfileCard from '../components/ProfileCard.svelte'
+    import Profile from '../../components/Profile.svelte'
+    import ProfileCard from '../../components/ProfileCard.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData
