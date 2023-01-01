@@ -68,10 +68,10 @@
                     position: absolute;
                     bottom: 1.2rem;
                     left: -0.8rem;
-                    border-width: 0 0 2px 2px;
-                    border-radius: 0 0 0 8px;
-                    width: 10px;
-                    height: 9999px;
+                    border-width: 0 0 0.2rem 0.2rem;
+                    border-radius: 0 0 0 1rem;
+                    width: calc(13px - 0.2rem);
+                    height: 100px;
                 }
             }
         }
