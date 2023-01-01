@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer'
 import { IsDateString, IsEnum, IsInt, IsOptional, IsString, Min } from 'class-validator'
+import { UpdateUserDTO } from 'src/base/users/dto/update-user.dto'
 import { Gender } from 'src/entities/profile.entity'
 
 export class UpdateProfileDTO {
@@ -28,4 +29,7 @@ export class UpdateProfileDTO {
     @Type(() => Number)
     @Min(0)
     level: number
+
+    @IsOptional()
+    user: UpdateUserDTO
 }
