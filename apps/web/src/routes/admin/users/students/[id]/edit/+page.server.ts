@@ -8,11 +8,8 @@ export const actions: Actions = {
         const formData = await request.formData()
         const data = Object.fromEntries(formData)
 
-        await api.patch<User>(`/api/profiles/${params.id}`, {
-            ...data,
-            level: parseInt(data.level as string, 10),
-        })
+        await api.patch<User>(`/api/profiles/${params.id}`, data)
 
-        throw redirect(301, `/students`)
+        throw redirect(301, `/admin/users/students`)
     }),
 }

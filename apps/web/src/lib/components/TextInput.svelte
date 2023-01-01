@@ -20,6 +20,8 @@
         <input type="number" bind:value {id} {...$$props} />
     {:else if type === 'date'}
         <input type="date" bind:value {id} {...$$props} />
+    {:else if type === 'datetime-local'}
+        <input type="datetime-local" bind:value {id} {...$$props} />
     {:else if type === 'textarea'}
         <textarea bind:value {id} {...$$props} />
     {:else}

@@ -6,7 +6,7 @@
 
     import type { PageData } from './$types'
     import Profile from '../../../../components/Profile.svelte'
-    import Select from '$lib/components/Select.svelte'
+    import RadioGroup from '$lib/components/RadioGroup.svelte'
     import { getGender } from '$lib/util'
 
     export let data: PageData
@@ -28,17 +28,31 @@
         <TextInput type="textarea" name="bio" label="Sobre" bind:value={data.student.profile.bio} />
         <div class="group">
             <TextInput type="number" name="level" label="Nível" bind:value={data.student.profile.level} />
-            <Select
+            <RadioGroup
                 name="gender"
                 label="Gênero"
-                options={['MALE', 'FEMALE', 'OTHER']}
+                bind:group={data.student.profile.gender}
+                options={[
+                    {
+                        icon: 'ic:baseline-male',
+                        value: 'MALE',
+                        color: '#226699',
+                        bgColor: 'white',
+                    },
+                    {
+                        icon: 'ic:baseline-female',
+                        value: 'FEMALE',
+                        color: '#ea596e',
+                        bgColor: 'white',
+                    },
+                    { icon: 'ic:baseline-transgender', value: 'OTHER' },
+                ]}
                 parseOption={getGender}
-                bind:value={data.student.profile.gender}
             />
         </div>
         <TextInput
             type="date"
-            name="bithdate"
+            name="birthdate"
             label="Data de Nascimento"
             bind:value={data.student.profile.birthdate}
         />
@@ -85,7 +99,7 @@
 
             > .group {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr auto;
                 gap: 1rem;
             }
         }
