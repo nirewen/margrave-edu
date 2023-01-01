@@ -18,7 +18,7 @@
         align-items: center;
         gap: 0.5rem;
 
-        padding: 0.6rem 1rem;
+        padding: 0.4rem 0.8rem;
         color: #ffffff;
         border-radius: 0.7rem;
         text-transform: uppercase;
@@ -26,12 +26,23 @@
 
         &.primary {
             background-color: var(--accent);
+
+            &:hover {
+                background-color: var(--accent-hover);
+            }
+            &:active {
+                background-color: var(--accent-pressed);
+            }
         }
 
         &.ghost {
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--gray-700);
             background-color: var(--gray-900);
             color: var(--gray-000);
+
+            &:hover {
+                border-color: var(--gray-400);
+            }
         }
 
         &.icon {
