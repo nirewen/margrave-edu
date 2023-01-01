@@ -20,7 +20,7 @@
         <h2>Lista de todos os estudantes registrados</h2>
     </div>
     <div>
-        <Button href="/students/add">
+        <Button href="/admin/users/add">
             <iconify-icon icon="mdi:account-multiple-plus" width={28} />
             Adicionar
         </Button>

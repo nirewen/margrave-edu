@@ -5,7 +5,7 @@
     import TextInput from '$lib/components/TextInput.svelte'
 
     import type { PageData } from './$types'
-    import Profile from '../../../../components/Profile.svelte'
+    import Profile from '../../../components/Profile.svelte'
     import RadioGroup from '$lib/components/RadioGroup.svelte'
     import { getGender } from '$lib/util'
 
@@ -17,8 +17,8 @@
         <iconify-icon icon="mdi:chevron-left" width={32} />
     </Button>
     <div>
-        <h1>Editar estudante</h1>
-        <h2>Preencha o formulário para editar o perfil do estudante</h2>
+        <h1>Editar usuário</h1>
+        <h2>Preencha o formulário para editar o perfil do usuário</h2>
     </div>
 </header>
 <div class="page">

@@ -2,18 +2,23 @@
     import { enhance } from '$app/forms'
     import Button from '$lib/components/Button.svelte'
     import TextInput from '$lib/components/TextInput.svelte'
+    import { getRole } from '$lib/util'
+    import type { PageData } from './$types'
+
+    export let data: PageData
+    $: ({ role } = data.query)
 </script>
 
 <header>
     <div>
-        <h1>Novo usuário</h1>
-        <h2>Preencha o formulário para adicionar um novo usuário</h2>
+        <h1>Novo {getRole(role).toLowerCase()}</h1>
+        <h2>Preencha o formulário para adicionar um novo {getRole(role).toLowerCase()}</h2>
     </div>
 </header>
 <form method="POST" use:enhance>
     <TextInput type="email" name="email" label="Email" placeholder="email@margrave.edu" />
-    <TextInput type="password" name="password" label="Senha" placeholder="passwordpassword" />
-    <Button type="submit">Criar usuário</Button>
+    <TextInput type="password" name="password" label="Senha" placeholder={'•'.repeat(16)} />
+    <Button type="submit">Criar {getRole(role)}</Button>
 </form>
 
 <style lang="scss">

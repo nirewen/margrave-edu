@@ -8,3 +8,10 @@ export const getGender = (gender: string) =>
         FEMALE: 'Feminino',
         OTHER: 'Outro',
     }[gender]!)
+
+export const getRole = (role: string) =>
+    ({
+        ADMIN: 'Admin',
+        TEACHER: 'Professor',
+        STUDENT: 'Estudante',
+    }[role]!)

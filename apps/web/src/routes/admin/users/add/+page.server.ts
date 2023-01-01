@@ -15,6 +15,6 @@ export const actions: Actions = {
             role: 'STUDENT',
         })
 
-        throw redirect(301, `/students/${response.id}/edit`)
+        throw redirect(301, `/admin/users/${response.id}/edit`)
     }),
 }
