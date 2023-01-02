@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Button from '$lib/components/Button.svelte'
     import { dateFormat } from '$lib/util'
     import { writable } from 'svelte/store'
     import Profile from '../../components/Profile.svelte'
@@ -18,6 +19,12 @@
         <h1>Professores</h1>
         <h2>Lista de todos os professores registrados</h2>
     </div>
+    <div>
+        <Button href="/admin/users/add?role=TEACHER">
+            <iconify-icon icon="mdi:account-multiple-plus" width={28} />
+            Adicionar
+        </Button>
+    </div>
 </header>
 <div class="page">
     {#if data.teachers.length > 0}
@@ -31,7 +38,7 @@
             {/each}
         </div>
         {#if $selected}
-            <Profile title="Perfil de professor" user={$selected} />
+            <Profile title="Perfil de professor" user={$selected} editable />
         {/if}
     {:else}
         <h3>Nenhum professor registrado...</h3>
@@ -41,6 +48,7 @@
 <style lang="scss">
     header {
         display: flex;
+        align-items: center;
         justify-content: space-between;
 
         h1 {
