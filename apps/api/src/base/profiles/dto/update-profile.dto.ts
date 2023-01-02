@@ -1,5 +1,5 @@
-import { Type } from 'class-transformer'
-import { IsDateString, IsEnum, IsInt, IsOptional, IsString, Min } from 'class-validator'
+import { Transform, Type } from 'class-transformer'
+import { IsDateString, IsEnum, IsInt, IsOptional, IsString, Min, ValidateIf } from 'class-validator'
 import { UpdateUserDTO } from 'src/base/users/dto/update-user.dto'
 import { Gender } from 'src/entities/profile.entity'
 
@@ -12,6 +12,8 @@ export class UpdateProfileDTO {
     bio: string
 
     @IsDateString()
+    // @ValidateIf((o, value) => value !== '')
+    @Transform(({ value }) => (value !== '' ? value : undefined))
     @IsOptional()
     birthdate: string
 
