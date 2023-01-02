@@ -1,7 +1,7 @@
 <script lang="ts">
     export let title: string | undefined = undefined
     export let href: string | undefined = undefined
-    export let variant: 'primary' | 'secondary' | 'ghost' = 'primary'
+    export let variant: string = 'primary'
     export let type: 'button' | 'submit' | 'reset' | undefined | null = 'button'
     export let icon = false
 </script>
@@ -43,6 +43,11 @@
             &:hover {
                 border-color: var(--gray-400);
             }
+        }
+
+        &.danger {
+            border-color: var(--red);
+            color: var(--red);
         }
 
         &.icon {
