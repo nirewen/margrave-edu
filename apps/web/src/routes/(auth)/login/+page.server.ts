@@ -2,6 +2,7 @@ import { actionWrapper as wrap } from '$lib/api'
 import { fail, redirect } from '@sveltejs/kit'
 import { APIError } from '$lib/types/APIError'
 import type { Actions } from './$types'
+import type { User } from '$lib/types/User'
 
 export const actions: Actions = {
     login: wrap(async ({ request, api }) => {
@@ -10,10 +11,12 @@ export const actions: Actions = {
         const password = data.get('password')
 
         try {
-            await api.post('/api/auth/signin', {
+            const response = await api.post<User>('/api/auth/signin', {
                 email,
                 password,
             })
+
+            throw redirect(301, `/${response.role.toLowerCase()}/dashboard`)
         } catch (error: unknown) {
             if (error instanceof APIError) {
                 if (error.status === 401) {
@@ -23,8 +26,8 @@ export const actions: Actions = {
                     })
                 }
             }
-        }
 
-        throw redirect(301, '/dashboard')
+            throw error
+        }
     }),
 }
