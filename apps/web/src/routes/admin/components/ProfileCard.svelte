@@ -33,6 +33,12 @@
                 white-space: nowrap;
                 width: 15ch;
                 overflow: hidden;
+                min-height: 1.5rem;
+
+                &:empty {
+                    background-color: var(--gray-800);
+                    border-radius: 0.3rem;
+                }
             }
 
             span {

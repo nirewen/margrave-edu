@@ -69,7 +69,7 @@
 
     .page .grid {
         display: grid;
-        gap: 1rem;
+        gap: 0.8rem;
         grid-template-columns: repeat(3, 1fr);
         height: fit-content;
     }

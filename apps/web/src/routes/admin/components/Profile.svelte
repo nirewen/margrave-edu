@@ -90,6 +90,12 @@
                 width: 15ch;
                 overflow: hidden;
                 font-size: 1.3rem;
+                min-height: 1.95rem;
+
+                &:empty {
+                    background-color: var(--gray-800);
+                    border-radius: 0.3rem;
+                }
             }
         }
 

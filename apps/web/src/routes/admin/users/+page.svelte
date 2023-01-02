@@ -50,6 +50,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 1rem;
 
         h1 {
             font-size: 1.8rem;
@@ -69,7 +70,7 @@
 
     .page .grid {
         display: grid;
-        gap: 1rem;
+        gap: 0.8rem;
         grid-template-columns: repeat(3, 1fr);
         height: fit-content;
     }
