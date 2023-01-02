@@ -71,5 +71,6 @@
         display: grid;
         gap: 1rem;
         grid-template-columns: repeat(3, 1fr);
+        height: fit-content;
     }
 </style>
