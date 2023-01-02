@@ -4,7 +4,8 @@ import { redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
 
 export const actions: Actions = {
-    default: wrap(async ({ request, api }) => {
+    default: wrap(async ({ request, api, url }) => {
+        const { role } = Object.fromEntries(url.searchParams)
         const formData = await request.formData()
         const email = formData.get('email')
         const password = formData.get('password')
@@ -12,7 +13,7 @@ export const actions: Actions = {
         const response = await api.post<User>('/api/users', {
             email,
             password,
-            role: 'STUDENT',
+            role,
         })
 
         throw redirect(301, `/admin/users/${response.id}/edit`)
