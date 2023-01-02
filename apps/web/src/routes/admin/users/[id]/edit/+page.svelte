@@ -23,40 +23,54 @@
 </header>
 <div class="page">
     <form method="POST" use:enhance>
-        <h2>Dados do usuário</h2>
-        <TextInput type="text" name="name" label="Nome" bind:value={data.student.profile.name} />
-        <TextInput type="textarea" name="bio" label="Sobre" bind:value={data.student.profile.bio} />
-        <div class="group">
-            <TextInput type="number" name="level" label="Nível" bind:value={data.student.profile.level} />
-            <RadioGroup
-                name="gender"
-                label="Gênero"
-                bind:group={data.student.profile.gender}
-                options={[
-                    {
-                        icon: 'ic:baseline-male',
-                        value: 'MALE',
-                        color: '#226699',
-                        bgColor: 'white',
-                    },
-                    {
-                        icon: 'ic:baseline-female',
-                        value: 'FEMALE',
-                        color: '#ea596e',
-                        bgColor: 'white',
-                    },
-                    { icon: 'ic:baseline-transgender', value: 'OTHER' },
-                ]}
-                parseOption={getGender}
+        <div class="box">
+            <TextInput type="text" name="user.email" label="Email" bind:value={data.student.email} />
+            <TextInput
+                type="password"
+                name="user.password"
+                label="Senha"
+                placeholder="inalterada"
+                bind:value={data.student.password}
             />
         </div>
-        <TextInput
-            type="date"
-            name="birthdate"
-            label="Data de Nascimento"
-            bind:value={data.student.profile.birthdate}
-        />
-        <Button type="submit">Salvar usuário</Button>
+        <div class="box">
+            <TextInput type="text" name="name" label="Nome" bind:value={data.student.profile.name} />
+            <TextInput type="textarea" name="bio" label="Sobre" bind:value={data.student.profile.bio} />
+            <div class="group">
+                <TextInput type="number" name="level" label="Nível" bind:value={data.student.profile.level} />
+                <RadioGroup
+                    name="gender"
+                    label="Gênero"
+                    bind:group={data.student.profile.gender}
+                    options={[
+                        {
+                            icon: 'ic:baseline-male',
+                            value: 'MALE',
+                            color: '#226699',
+                            bgColor: 'white',
+                        },
+                        {
+                            icon: 'ic:baseline-female',
+                            value: 'FEMALE',
+                            color: '#ea596e',
+                            bgColor: 'white',
+                        },
+                        { icon: 'ic:baseline-transgender', value: 'OTHER' },
+                    ]}
+                    parseOption={getGender}
+                />
+            </div>
+            <TextInput
+                type="date"
+                name="birthdate"
+                label="Data de Nascimento"
+                bind:value={data.student.profile.birthdate}
+            />
+        </div>
+        <div class="box">
+            <Button type="submit">Salvar usuário</Button>
+            <!-- <Button variant="danger ghost">Excluir usuário</Button> -->
+        </div>
     </form>
     <Profile title="Perfil" user={data.student} />
 </div>
@@ -86,18 +100,23 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            padding: 1rem;
-            background-color: var(--gray-900);
-            box-shadow: var(--elevation-3);
-            border-radius: 0.8rem;
-            height: fit-content;
 
-            h2 {
-                font-size: 1.2rem;
-                font-weight: 500;
+            .box {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                background-color: var(--gray-900);
+                box-shadow: var(--elevation-3);
+                border-radius: 0.8rem;
+                height: fit-content;
+
+                h2 {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                }
             }
-
-            > .group {
+            .group {
                 display: grid;
                 grid-template-columns: 1fr auto;
                 gap: 1rem;

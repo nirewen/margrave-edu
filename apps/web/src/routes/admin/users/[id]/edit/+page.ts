@@ -5,7 +5,7 @@ import type { PageLoad } from './$types'
 
 export const load = wrap(async ({ api, params }) => {
     try {
-        const student = await api.get<User>(`/api/users/${params.id}`)
+        const student = await api.get<User & { password: string }>(`/api/users/${params.id}`)
 
         return { student }
     } catch (error) {
