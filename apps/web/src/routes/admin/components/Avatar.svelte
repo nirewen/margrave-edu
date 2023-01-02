@@ -22,6 +22,7 @@
         > img {
             width: calc(var(--size) * 1rem);
             height: calc(var(--size) * 1rem);
+            pointer-events: none;
         }
 
         &.shadow {
