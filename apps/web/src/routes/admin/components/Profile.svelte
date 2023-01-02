@@ -20,7 +20,7 @@
         {/if}
     </header>
     <div class="info">
-        <Avatar key={user.profile.avatar} alt="avatar de {user.profile.name}" size={10} shadow />
+        <Avatar {user} size={10} shadow />
         <p>{user.profile.name}</p>
     </div>
     <div class="details">

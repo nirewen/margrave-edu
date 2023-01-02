@@ -11,7 +11,7 @@ export const getGender = (gender: string) =>
 
 export const getRole = (role: string) =>
     ({
-        ADMIN: 'Admin',
-        TEACHER: 'Professor',
-        STUDENT: 'Estudante',
+        ADMIN: { icon: 'ic:baseline-shield', name: 'Admin' },
+        TEACHER: { icon: 'mdi:human-male-board', name: 'Professor' },
+        STUDENT: { icon: 'ic:round-school', name: 'Estudante' },
     }[role]!)

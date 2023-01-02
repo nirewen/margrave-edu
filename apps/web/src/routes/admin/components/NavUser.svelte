@@ -13,7 +13,7 @@
 
 <div class="nav-user" class:open={$open} use:clickOutside={() => $open && open.setFalse()}>
     <button type="button" class="user" on:click={open.toggle}>
-        <Avatar key={user.profile.avatar} alt="avatar de {user.profile.name}" size={2} />
+        <Avatar {user} size={2} />
         {user.profile.name || user.email}
         <iconify-icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
     </button>

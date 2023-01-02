@@ -7,7 +7,7 @@
 </script>
 
 <button class="profile-card" on:click>
-    <Avatar key={user.profile.avatar} alt="avatar de {user.profile.name}" size={3} />
+    <Avatar {user} size={3} />
     <div class="info">
         <p>{user.profile.name}</p>
         <span>{subtitle}</span>

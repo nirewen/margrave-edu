@@ -11,14 +11,14 @@
 
 <header>
     <div>
-        <h1>Novo {getRole(role).toLowerCase()}</h1>
-        <h2>Preencha o formulário para adicionar um novo {getRole(role).toLowerCase()}</h2>
+        <h1>Novo {getRole(role).name.toLowerCase()}</h1>
+        <h2>Preencha o formulário para adicionar um novo {getRole(role).name.toLowerCase()}</h2>
     </div>
 </header>
 <form method="POST" use:enhance>
     <TextInput type="email" name="email" label="Email" placeholder="email@margrave.edu" />
     <TextInput type="password" name="password" label="Senha" placeholder={'•'.repeat(16)} />
-    <Button type="submit">Criar {getRole(role)}</Button>
+    <Button type="submit">Criar {getRole(role).name}</Button>
 </form>
 
 <style lang="scss">
