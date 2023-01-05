@@ -1,6 +1,6 @@
 <script lang="ts">
     import Button from '$lib/components/Button.svelte'
-    import { dateFormat } from '$lib/util'
+    import { dateFormat, getRole, roles } from '$lib/util'
     import { writable } from 'svelte/store'
     import Profile from '../components/Profile.svelte'
     import ProfileCard from '../components/ProfileCard.svelte'
@@ -19,11 +19,16 @@
         <h1>Usuários</h1>
         <h2>Lista de todos os usuários registrados</h2>
     </div>
-    <div>
-        <Button href="/admin/users/add">
-            <iconify-icon icon="mdi:account-multiple-plus" width={28} />
-            Adicionar
-        </Button>
+    <div class="add-user">
+        <iconify-icon icon="mdi:account-multiple-plus" width={28} />
+        <span>Adicionar</span>
+        <div class="buttons">
+            {#each Object.entries(roles) as [id, { icon, name }]}
+                <Button href="/admin/users/add?role={id}" icon round variant="ghost">
+                    <iconify-icon {icon} width={24} />
+                </Button>
+            {/each}
+        </div>
     </div>
 </header>
 <div class="page">
@@ -60,6 +65,27 @@
         h2 {
             color: var(--gray-400);
         }
+
+        .add-user {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.2rem;
+            padding-left: 1rem;
+            background-color: var(--gray-900);
+            text-transform: uppercase;
+            border-radius: 9999px;
+            font-weight: 600;
+
+            > .buttons {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                padding: 0.3rem;
+                background-color: var(--primary);
+                border-radius: 9999px;
+            }
+        }
     }
 
     .page {
@@ -71,7 +97,7 @@
     .page .grid {
         display: grid;
         gap: 0.8rem;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         height: fit-content;
     }
 </style>
