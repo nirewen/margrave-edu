@@ -77,6 +77,7 @@
             text-transform: uppercase;
             border-radius: 9999px;
             font-weight: 600;
+            box-shadow: var(--elevation-2);
 
             > .buttons {
                 display: flex;
