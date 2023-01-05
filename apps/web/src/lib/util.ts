@@ -15,4 +15,6 @@ export const roles = {
     STUDENT: { icon: 'ic:round-school', name: 'Estudante' },
 }
 
-export const getRole = (role: keyof typeof roles) => roles[role]
+export type Role = keyof typeof roles
+
+export const getRole = (role: Role) => roles[role]

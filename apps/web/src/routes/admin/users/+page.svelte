@@ -1,6 +1,6 @@
 <script lang="ts">
     import Button from '$lib/components/Button.svelte'
-    import { dateFormat, getRole, roles } from '$lib/util'
+    import { dateFormat, roles } from '$lib/util'
     import { writable } from 'svelte/store'
     import Profile from '../components/Profile.svelte'
     import ProfileCard from '../components/ProfileCard.svelte'
