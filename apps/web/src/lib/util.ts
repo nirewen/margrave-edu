@@ -9,9 +9,10 @@ export const getGender = (gender: string) =>
         OTHER: 'Outro',
     }[gender]!)
 
-export const getRole = (role: string) =>
-    ({
-        ADMIN: { icon: 'ic:baseline-shield', name: 'Admin' },
-        TEACHER: { icon: 'mdi:human-male-board', name: 'Professor' },
-        STUDENT: { icon: 'ic:round-school', name: 'Estudante' },
-    }[role]!)
+export const roles = {
+    ADMIN: { icon: 'ic:baseline-shield', name: 'Admin' },
+    TEACHER: { icon: 'mdi:human-male-board', name: 'Professor' },
+    STUDENT: { icon: 'ic:round-school', name: 'Estudante' },
+}
+
+export const getRole = (role: keyof typeof roles) => roles[role]
