@@ -4,12 +4,13 @@
     export let variant: string = 'primary'
     export let type: 'button' | 'submit' | 'reset' | undefined | null = 'button'
     export let icon = false
+    export let round = false
 </script>
 
 {#if href}
-    <a class="button {variant}" class:icon {href} {title} role="button"><slot /></a>
+    <a class="button {variant}" class:icon class:round {href} {title} role="button"><slot /></a>
 {:else}
-    <button class="button {variant}" class:icon {type} {title}><slot /></button>
+    <button class="button {variant}" class:icon class:round {type} {title}><slot /></button>
 {/if}
 
 <style lang="scss" scoped>
@@ -54,6 +55,10 @@
             padding: 0.2rem;
             border-radius: 0.4rem;
             color: #000;
+        }
+
+        &.round {
+            border-radius: 9999px;
         }
     }
 </style>
