@@ -1,6 +1,6 @@
 import { loadWrapper as wrap } from '$lib/api'
 import type { User } from '$lib/types/User'
-import { error, redirect } from '@sveltejs/kit'
+import { error } from '@sveltejs/kit'
 import type { LayoutLoad } from './$types'
 
 export const load: LayoutLoad = wrap(async ({ api }) => {
