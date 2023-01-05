@@ -34,6 +34,7 @@
                     user={student}
                     subtitle="aluno desde {dateFormat.format(new Date(student.createdAt))}"
                     on:click={() => ($selected = student)}
+                    selected={$selected.id === student.id}
                 />
             {/each}
         </div>
