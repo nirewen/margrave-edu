@@ -7,6 +7,10 @@
     export let form: ActionData
 </script>
 
+<svelte:head>
+    <title>Registrar conta | Magrave</title>
+</svelte:head>
+
 <h2><span>Registrar conta</span></h2>
 
 <form
