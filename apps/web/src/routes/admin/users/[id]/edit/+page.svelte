@@ -131,11 +131,6 @@
                 box-shadow: var(--elevation-3);
                 border-radius: 0.8rem;
                 height: fit-content;
-
-                h2 {
-                    font-size: 1.2rem;
-                    font-weight: 500;
-                }
             }
             .group {
                 display: grid;
