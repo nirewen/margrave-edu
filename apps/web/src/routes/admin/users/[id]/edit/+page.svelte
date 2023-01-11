@@ -1,15 +1,20 @@
 <script lang="ts">
+    import { merge } from 'merge-anything'
     import { enhance } from '$app/forms'
 
     import Button from '$lib/components/Button.svelte'
     import TextInput from '$lib/components/TextInput.svelte'
 
-    import type { PageData } from './$types'
+    import type { ActionData, PageData } from './$types'
     import Profile from '../../../components/Profile.svelte'
     import RadioGroup from '$lib/components/RadioGroup.svelte'
     import { getGender } from '$lib/util'
+    import { writable } from 'svelte/store'
 
     export let data: PageData
+    export let form: ActionData
+
+    const student = writable(merge(form?.data.user ?? {}, data.student))
 </script>
 
 <header>
@@ -21,59 +26,75 @@
         <h2>Preencha o formulário para editar o perfil do usuário</h2>
     </div>
 </header>
-<div class="page">
-    <form method="POST" use:enhance>
-        <div class="box">
-            <TextInput type="text" name="user.email" label="Email" bind:value={data.student.email} />
-            <TextInput
-                type="password"
-                name="user.password"
-                label="Senha"
-                placeholder="inalterada"
-                bind:value={data.student.password}
-            />
-        </div>
-        <div class="box">
-            <TextInput type="text" name="name" label="Nome" bind:value={data.student.profile.name} />
-            <TextInput type="textarea" name="bio" label="Sobre" bind:value={data.student.profile.bio} />
-            <div class="group">
-                <TextInput type="number" name="level" label="Nível" bind:value={data.student.profile.level} />
-                <RadioGroup
-                    name="gender"
-                    label="Gênero"
-                    bind:group={data.student.profile.gender}
-                    options={[
-                        {
-                            icon: 'ic:baseline-male',
-                            value: 'MALE',
-                            color: '#226699',
-                            bgColor: 'white',
-                        },
-                        {
-                            icon: 'ic:baseline-female',
-                            value: 'FEMALE',
-                            color: '#ea596e',
-                            bgColor: 'white',
-                        },
-                        { icon: 'ic:baseline-transgender', value: 'OTHER' },
-                    ]}
-                    parseOption={getGender}
+{#if $student}
+    <div class="page">
+        <form method="POST" use:enhance>
+            <div class="box">
+                <TextInput
+                    type="text"
+                    name="user.email"
+                    label="Email"
+                    bind:value={$student.email}
+                    errored={!!form?.errors.fieldErrors.user}
+                    error={form?.errors.fieldErrors.user?.at(0)}
+                />
+                <TextInput
+                    type="password"
+                    name="user.password"
+                    label="Senha"
+                    placeholder="inalterada"
+                    bind:value={$student.password}
                 />
             </div>
-            <TextInput
-                type="date"
-                name="birthdate"
-                label="Data de Nascimento"
-                bind:value={data.student.profile.birthdate}
-            />
-        </div>
-        <div class="box">
-            <Button type="submit">Salvar usuário</Button>
-            <!-- <Button variant="danger ghost">Excluir usuário</Button> -->
-        </div>
-    </form>
-    <Profile title="Perfil" user={data.student} />
-</div>
+            <div class="box">
+                <TextInput
+                    type="text"
+                    name="name"
+                    label="Nome"
+                    bind:value={$student.profile.name}
+                    errored={!!form?.errors.fieldErrors.name}
+                    error={form?.errors.fieldErrors.name?.at(0)}
+                />
+                <TextInput type="textarea" name="bio" label="Sobre" bind:value={$student.profile.bio} />
+                <div class="group">
+                    <TextInput type="number" name="level" label="Nível" bind:value={$student.profile.level} />
+                    <RadioGroup
+                        name="gender"
+                        label="Gênero"
+                        bind:group={$student.profile.gender}
+                        options={[
+                            {
+                                icon: 'ic:baseline-male',
+                                value: 'MALE',
+                                color: '#226699',
+                                bgColor: 'white',
+                            },
+                            {
+                                icon: 'ic:baseline-female',
+                                value: 'FEMALE',
+                                color: '#ea596e',
+                                bgColor: 'white',
+                            },
+                            { icon: 'ic:baseline-transgender', value: 'OTHER' },
+                        ]}
+                        parseOption={getGender}
+                    />
+                </div>
+                <TextInput
+                    type="date"
+                    name="birthdate"
+                    label="Data de Nascimento"
+                    bind:value={$student.profile.birthdate}
+                />
+            </div>
+            <div class="box">
+                <Button type="submit">Salvar usuário</Button>
+                <!-- <Button variant="danger ghost">Excluir usuário</Button> -->
+            </div>
+        </form>
+        <Profile title="Perfil" user={$student} />
+    </div>
+{/if}
 
 <style lang="scss">
     header {

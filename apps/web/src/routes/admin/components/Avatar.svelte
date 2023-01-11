@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type { User } from '$lib/types/User'
+    import type { PartialUser } from '$lib/types/User'
     import { getRole } from '$lib/util'
 
-    export let user: User
+    export let user: PartialUser
     export let size = 10
     export let shadow = false
 </script>

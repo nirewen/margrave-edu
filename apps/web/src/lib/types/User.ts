@@ -9,3 +9,10 @@ export interface User {
     updatedAt: string
     profile: Profile
 }
+
+export interface PartialUser {
+    id?: string
+    email: string
+    role?: Role
+    profile: Partial<Profile>
+}

@@ -3,7 +3,7 @@ export interface Profile {
     name: string
     bio: string
     avatar: string
-    birthdate: Date
+    birthdate: string
     gender: string
     level: number
 }

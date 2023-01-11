@@ -2,12 +2,15 @@ export const plural = (num: number, suffix = 's') => (num === 1 ? '' : suffix)
 
 export const dateFormat = new Intl.DateTimeFormat('pt-BR')
 
-export const getGender = (gender: string) =>
-    ({
-        MALE: 'Masculino',
-        FEMALE: 'Feminino',
-        OTHER: 'Outro',
-    }[gender]!)
+export const genders = {
+    MALE: 'Masculino',
+    FEMALE: 'Feminino',
+    OTHER: 'Outro',
+}
+
+export type Gender = keyof typeof genders
+
+export const getGender = (gender: string) => genders[gender as Gender]
 
 export const roles = {
     ADMIN: { icon: 'ic:baseline-shield', name: 'Admin' },

@@ -1,12 +1,12 @@
 <script lang="ts">
     import Button from '$lib/components/Button.svelte'
-    import type { User } from '$lib/types/User'
+    import type { PartialUser } from '$lib/types/User'
     import { getGender } from '$lib/util'
     import { differenceInYears, format } from 'date-fns'
     import Avatar from './Avatar.svelte'
 
     export let title: string
-    export let user: User
+    export let user: PartialUser
     export let editable = false
 </script>
 

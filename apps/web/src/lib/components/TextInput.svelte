@@ -6,11 +6,18 @@
     export let label: string | undefined = undefined
     export let type: HTMLInputTypeAttribute | 'textarea' = 'text'
     export let value: any = undefined
+    export let errored = false
+    export let error: string | undefined = undefined
 </script>
 
-<div class="form-group">
+<div class="form-group" class:errored>
     {#if !!label}
-        <label for={id}>{label}</label>
+        <label for={id}>
+            {label}
+            {#if errored}
+                <span>{error}</span>
+            {/if}
+        </label>
     {/if}
     {#if type === 'email'}
         <input type="email" bind:value {id} {...$$props} />
@@ -43,6 +50,30 @@
             color: var(--gray-300);
 
             outline-offset: 2px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        &.errored {
+            color: var(--red);
+
+            > label > span {
+                font-weight: 500;
+
+                border-left: 0.1rem solid currentColor;
+                padding-left: 0.5rem;
+            }
+
+            > :is(input, textarea) {
+                border-width: 2px;
+                border-color: var(--red);
+                outline-color: var(--red);
+                outline-width: 1px;
+            }
         }
     }
 </style>
