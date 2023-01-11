@@ -1,10 +1,10 @@
+import { z } from 'zod'
+import dot from 'dot-object'
+import { fail, redirect } from '@sveltejs/kit'
+
 import { actionWrapper as wrap } from '$lib/api'
 import type { User } from '$lib/types/User'
-import { fail, redirect } from '@sveltejs/kit'
-import dot from 'dot-object'
 import type { Actions } from './$types'
-import { z } from 'zod'
-import { genders, type Gender } from '$lib/util'
 
 const schema = z.object({
     user: z.object({
