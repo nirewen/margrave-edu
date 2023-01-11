@@ -8,8 +8,14 @@
 </script>
 
 <div class="avatar" class:shadow>
-    <img src="/api/avatar/{user.profile.avatar}" alt="avatar de {user.profile.name}" style:--size={size} />
-    <iconify-icon class="role" icon={getRole(user.role).icon} width={(size * 16) / 3.5} />
+    <img
+        src={user.profile.avatar ? `/api/avatar/${user.profile.avatar}` : '/assets/default-avatar.png'}
+        alt="avatar de {user.profile.name}"
+        style:--size={size}
+    />
+    {#if user.role}
+        <iconify-icon class="role" icon={getRole(user.role).icon} width={(size * 16) / 3.5} />
+    {/if}
 </div>
 
 <style lang="scss">

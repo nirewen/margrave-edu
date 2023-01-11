@@ -18,7 +18,7 @@ export class Profile {
     @Column({ default: '' })
     bio: string
 
-    @Column({ default: 'default-avatar.png' })
+    @Column({ default: null, nullable: true })
     avatar: string
 
     @Column({ type: 'date', nullable: true })
