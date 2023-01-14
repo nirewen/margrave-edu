@@ -11,7 +11,7 @@
 <div class="avatar" class:shadow>
     <img src={avatar ?? '/assets/default-avatar.png'} {alt} style:--size={size} />
     {#if role}
-        <iconify-icon class="role" icon={getRole(role).icon} width={(size * 16) / 3.5} />
+        <iconify-icon class="role" icon={getRole(role).icon} width={(size * 16) / 4} />
     {/if}
 </div>
 
@@ -19,7 +19,7 @@
     .avatar {
         position: relative;
         border-radius: 9999px;
-        border: 3px solid var(--gray-900);
+        border: 0.25rem solid var(--gray-900);
         flex-shrink: 0;
 
         > img {
