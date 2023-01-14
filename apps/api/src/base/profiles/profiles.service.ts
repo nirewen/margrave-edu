@@ -50,8 +50,6 @@ export class ProfilesService {
             await this.usersService.update(id, body.user)
         }
 
-        console.log(body.avatar.length)
-
         if (body.avatar) {
             const { type, buffer } = decodeBase64(body.avatar)
             const name = id + '.' + type
