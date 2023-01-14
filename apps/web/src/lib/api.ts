@@ -22,7 +22,7 @@ const fetcher = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promis
 }
 
 const api = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>) => {
-    const get = async <ReturnType>(url: string, options?: RequestInit) => {
+    const get = async <ResponseType>(url: string, options?: RequestInit) => {
         const response = await fetch(url, {
             method: 'GET',
             ...options,
@@ -33,9 +33,9 @@ const api = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Re
             throw new APIError(json as APIError)
         }
 
-        return json as ReturnType
+        return json as ResponseType
     }
-    const post = async <ReturnType>(url: string, data: object, options?: RequestInit) => {
+    const post = async <ResponseType>(url: string, data: object, options?: RequestInit) => {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -50,9 +50,9 @@ const api = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Re
             throw new APIError(json as APIError)
         }
 
-        return json as ReturnType
+        return json as ResponseType
     }
-    const patch = async <ReturnType>(url: string, data: object, options?: RequestInit) => {
+    const patch = async <ResponseType>(url: string, data: object, options?: RequestInit) => {
         const response = await fetch(url, {
             method: 'PATCH',
             headers: {
@@ -67,9 +67,9 @@ const api = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Re
             throw new APIError(json as APIError)
         }
 
-        return json as ReturnType
+        return json as ResponseType
     }
-    const deleteFn = async <ReturnType>(url: string, options?: RequestInit) => {
+    const deleteFn = async <ResponseType>(url: string, options?: RequestInit) => {
         const response = await fetch(url, {
             method: 'DELETE',
             ...options,
@@ -80,7 +80,7 @@ const api = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Re
             throw new APIError(json as APIError)
         }
 
-        return json as ReturnType
+        return json as ResponseType
     }
 
     return { get, post, patch, delete: deleteFn }
