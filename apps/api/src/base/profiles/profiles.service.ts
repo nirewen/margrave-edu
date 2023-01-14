@@ -33,12 +33,10 @@ export class ProfilesService {
         return profile
     }
 
-    async uploadAvatar(type: string, buffer: Buffer) {
-        const name = randomUUID() + '.' + type
-
+    async uploadAvatar(name: string, type: string, buffer: Buffer) {
         const { data, error } = await this.supabaseService.storage
             .from('avatars')
-            .upload(name, buffer, { contentType: `image/${type}` })
+            .upload(name, buffer, { upsert: true, contentType: `image/${type}` })
 
         if (error) throw error
 
@@ -52,11 +50,16 @@ export class ProfilesService {
             await this.usersService.update(id, body.user)
         }
 
+        console.log(body.avatar.length)
+
         if (body.avatar) {
             const { type, buffer } = decodeBase64(body.avatar)
-            const { path } = await this.uploadAvatar(type, buffer)
+            const name = id + '.' + type
+            const { path } = await this.uploadAvatar(name, type, buffer)
 
             body.avatar = '/api/avatar/' + path
+        } else {
+            body.avatar = profile.avatar
         }
 
         return this.profiles.save({ ...profile, ...body })

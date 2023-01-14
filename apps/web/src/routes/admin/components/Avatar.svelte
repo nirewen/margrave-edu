@@ -27,6 +27,7 @@
             height: calc(var(--size) * 1rem);
             pointer-events: none;
             border-radius: 9999px;
+            object-fit: cover;
         }
 
         &.shadow {

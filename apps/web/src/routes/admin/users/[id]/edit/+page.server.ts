@@ -46,7 +46,7 @@ export const actions: Actions = {
 
         const response = await api.patch<User>(`/api/profiles/${params.id}`, {
             ...obj,
-            avatar: await encodeBase64(obj.avatar),
+            avatar: obj.avatar.size > 0 ? await encodeBase64(obj.avatar) : null,
         })
 
         throw redirect(301, `/admin/users`)
