@@ -21,3 +21,18 @@ export const roles = {
 export type Role = keyof typeof roles
 
 export const getRole = (role: Role) => roles[role]
+
+export async function encodeBase64(file: File | Blob): Promise<string> {
+    if (typeof Buffer === 'function') {
+        const buffer = Buffer.from(await file.arrayBuffer())
+
+        return 'data:' + file.type + ';base64,' + buffer.toString('base64')
+    }
+
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => resolve(reader.result as string)
+        reader.onerror = error => reject(error)
+    })
+}

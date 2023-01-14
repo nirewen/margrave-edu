@@ -8,7 +8,7 @@
 </script>
 
 <button type="button" class="profile-card" class:selected on:click>
-    <Avatar {user} size={3} />
+    <Avatar avatar={user.profile.avatar} role={user.role} alt="avatar de {user.profile.name}" size={3} />
     <div class="info">
         <p>{user.profile.name}</p>
         <span>{subtitle}</span>

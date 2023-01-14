@@ -6,6 +6,7 @@
     import TextInput from '$lib/components/TextInput.svelte'
 
     import type { ActionData, PageData } from './$types'
+    import AvatarPicker from '../../../components/AvatarPicker.svelte'
     import Profile from '../../../components/Profile.svelte'
     import RadioGroup from '$lib/components/RadioGroup.svelte'
     import { getGender } from '$lib/util'
@@ -28,23 +29,26 @@
 </header>
 {#if $student}
     <div class="page">
-        <form method="POST" use:enhance>
-            <div class="box">
-                <TextInput
-                    type="text"
-                    name="user.email"
-                    label="Email"
-                    bind:value={$student.email}
-                    errored={!!form?.errors.fieldErrors.user}
-                    error={form?.errors.fieldErrors.user?.at(0)}
-                />
-                <TextInput
-                    type="password"
-                    name="user.password"
-                    label="Senha"
-                    placeholder="inalterada"
-                    bind:value={$student.password}
-                />
+        <form method="POST" use:enhance enctype="multipart/form-data">
+            <div class="box row">
+                <div class="box" style:flex="1">
+                    <TextInput
+                        type="text"
+                        name="user.email"
+                        label="Email"
+                        bind:value={$student.email}
+                        errored={!!form?.errors.fieldErrors.user}
+                        error={form?.errors.fieldErrors.user?.at(0)}
+                    />
+                    <TextInput
+                        type="password"
+                        name="user.password"
+                        label="Senha"
+                        placeholder="inalterada"
+                        bind:value={$student.password}
+                    />
+                </div>
+                <AvatarPicker bind:user={$student} name="avatar" />
             </div>
             <div class="box">
                 <TextInput
@@ -131,6 +135,15 @@
                 box-shadow: var(--elevation-3);
                 border-radius: 0.8rem;
                 height: fit-content;
+
+                &.row {
+                    flex-direction: row;
+                }
+
+                > .box {
+                    box-shadow: none;
+                    padding: 0;
+                }
             }
             .group {
                 display: grid;

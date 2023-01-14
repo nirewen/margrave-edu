@@ -1,20 +1,17 @@
 <script lang="ts">
-    import type { PartialUser } from '$lib/types/User'
-    import { getRole } from '$lib/util'
+    import { getRole, type Role } from '$lib/util'
 
-    export let user: PartialUser
+    export let avatar: string | undefined = undefined
+    export let alt: string = ''
+    export let role: Role | undefined = undefined
     export let size = 10
     export let shadow = false
 </script>
 
 <div class="avatar" class:shadow>
-    <img
-        src={user.profile.avatar ? `/api/avatar/${user.profile.avatar}` : '/assets/default-avatar.png'}
-        alt="avatar de {user.profile.name}"
-        style:--size={size}
-    />
-    {#if user.role}
-        <iconify-icon class="role" icon={getRole(user.role).icon} width={(size * 16) / 3.5} />
+    <img src={avatar ?? '/assets/default-avatar.png'} {alt} style:--size={size} />
+    {#if role}
+        <iconify-icon class="role" icon={getRole(role).icon} width={(size * 16) / 3.5} />
     {/if}
 </div>
 
@@ -29,6 +26,7 @@
             width: calc(var(--size) * 1rem);
             height: calc(var(--size) * 1rem);
             pointer-events: none;
+            border-radius: 9999px;
         }
 
         &.shadow {

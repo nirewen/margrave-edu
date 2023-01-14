@@ -20,7 +20,13 @@
         {/if}
     </header>
     <div class="info">
-        <Avatar {user} size={10} shadow />
+        <Avatar
+            avatar={user.profile.avatar}
+            alt="avatar de {user.profile.name}"
+            role={user.role}
+            size={10}
+            shadow
+        />
         <p>{user.profile.name}</p>
     </div>
     <div class="details">

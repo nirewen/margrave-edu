@@ -5,6 +5,7 @@ import { fail, redirect } from '@sveltejs/kit'
 import { actionWrapper as wrap } from '$lib/api'
 import type { User } from '$lib/types/User'
 import type { Actions } from './$types'
+import { encodeBase64 } from '$lib/util'
 
 const schema = z.object({
     user: z.object({
@@ -16,6 +17,7 @@ const schema = z.object({
     gender: z.enum(['MALE', 'FEMALE', 'OTHER']),
     birthdate: z.string(),
     level: z.coerce.number(),
+    avatar: z.instanceof(Blob),
 })
 
 export const actions: Actions = {
@@ -42,7 +44,10 @@ export const actions: Actions = {
             })
         }
 
-        await api.patch<User>(`/api/profiles/${params.id}`, obj)
+        const response = await api.patch<User>(`/api/profiles/${params.id}`, {
+            ...obj,
+            avatar: await encodeBase64(obj.avatar),
+        })
 
         throw redirect(301, `/admin/users`)
     }),
