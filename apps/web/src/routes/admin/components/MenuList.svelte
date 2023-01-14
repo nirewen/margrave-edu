@@ -8,7 +8,10 @@
 <ul class:child>
     {#each links as { name, route, icon, routes }}
         <li class:nested={routes && routes.length > 0}>
-            <span class="label" class:active={$page.url.pathname.startsWith(route)}>
+            <span
+                class="label"
+                class:active={($page.url.pathname + '?' + $page.url.searchParams).startsWith(route)}
+            >
                 <iconify-icon {icon} width={28} />
                 <a href={route}>{name}</a>
             </span>
@@ -42,6 +45,7 @@
                 a {
                     flex: 1;
                     padding: 0.4rem 0.6rem;
+                    text-transform: capitalize;
                 }
 
                 &.active {
@@ -71,7 +75,7 @@
                     border-width: 0 0 0.2rem 0.2rem;
                     border-radius: 0 0 0 1rem;
                     width: calc(13px - 0.2rem);
-                    height: 100px;
+                    height: 200px;
                 }
             }
         }

@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { page } from '$app/stores'
     import MenuList from './MenuList.svelte'
+
+    import { roles } from '$lib/util'
 
     const links = [
         { name: 'Dashboard', route: '/admin/dashboard', icon: 'ic:round-grid-view' },
@@ -8,10 +9,11 @@
             name: 'Usuários',
             route: '/admin/users',
             icon: 'mdi:account-multiple',
-            routes: [
-                { name: 'Estudantes', route: '/admin/users/students', icon: 'ic:round-school' },
-                { name: 'Professores', route: '/admin/users/teachers', icon: 'mdi:human-male-board' },
-            ],
+            routes: Object.entries(roles).map(([id, { namePlural, icon }]) => ({
+                name: namePlural,
+                route: `/admin/users?role=${id}`,
+                icon,
+            })),
         },
         { name: 'Aulas', route: '/admin/lessons', icon: 'ic:baseline-play-lesson' },
         { name: 'Disciplinas', route: '/admin/subjects', icon: 'ic:round-menu-book' },

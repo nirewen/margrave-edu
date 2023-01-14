@@ -13,9 +13,21 @@ export type Gender = keyof typeof genders
 export const getGender = (gender: string) => genders[gender as Gender]
 
 export const roles = {
-    ADMIN: { icon: 'ic:baseline-shield', name: 'Admin' },
-    TEACHER: { icon: 'mdi:human-male-board', name: 'Professor' },
-    STUDENT: { icon: 'ic:round-school', name: 'Estudante' },
+    ADMIN: {
+        icon: 'ic:baseline-shield',
+        name: 'administrador',
+        namePlural: 'administradores',
+    },
+    TEACHER: {
+        icon: 'mdi:human-male-board',
+        name: 'professor',
+        namePlural: 'professores',
+    },
+    STUDENT: {
+        icon: 'ic:round-school',
+        name: 'estudante',
+        namePlural: 'estudantes',
+    },
 }
 
 export type Role = keyof typeof roles

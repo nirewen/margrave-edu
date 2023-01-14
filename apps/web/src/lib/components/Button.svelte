@@ -26,6 +26,7 @@
         font-weight: 600;
 
         &.primary {
+            color: var(--gray-900);
             background-color: var(--accent);
 
             &:hover {
@@ -52,9 +53,8 @@
         }
 
         &.icon {
-            padding: 0.2rem;
+            padding: 0.4rem;
             border-radius: 0.4rem;
-            color: #000;
         }
 
         &.round {
