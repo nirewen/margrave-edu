@@ -18,6 +18,10 @@
     const student = writable(merge(form?.data.user ?? {}, data.student))
 </script>
 
+<svelte:head>
+    <title>Editar usuário | Margrave</title>
+</svelte:head>
+
 <header>
     <Button variant="ghost" icon href="../" title="Voltar">
         <iconify-icon icon="mdi:chevron-left" width={32} />
