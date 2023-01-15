@@ -1,5 +1,6 @@
 <script lang="ts">
     import { merge } from 'merge-anything'
+    import { writable } from 'svelte/store'
     import { enhance } from '$app/forms'
 
     import Button from '$lib/components/Button.svelte'
@@ -9,13 +10,15 @@
     import AvatarPicker from '../../../components/AvatarPicker.svelte'
     import Profile from '../../../components/Profile.svelte'
     import RadioGroup from '$lib/components/RadioGroup.svelte'
-    import { getGender } from '$lib/util'
-    import { writable } from 'svelte/store'
+    import { capitalize, getGender, getRole, roles, type Role } from '$lib/util'
 
     export let data: PageData
     export let form: ActionData
 
     const student = writable(merge(form?.data.user ?? {}, data.student))
+    function getRoleName(role: string) {
+        return capitalize(getRole(role as Role).name)
+    }
 </script>
 
 <svelte:head>
@@ -88,14 +91,27 @@
                         parseOption={getGender}
                     />
                 </div>
-                <TextInput
-                    type="date"
-                    name="birthdate"
-                    label="Data de Nascimento"
-                    bind:value={$student.profile.birthdate}
-                    errored={!!form?.errors.fieldErrors.birthdate}
-                    error={form?.errors.fieldErrors.birthdate?.at(0)}
-                />
+                <div class="group">
+                    <TextInput
+                        type="date"
+                        name="birthdate"
+                        label="Data de Nascimento"
+                        bind:value={$student.profile.birthdate}
+                        errored={!!form?.errors.fieldErrors.birthdate}
+                        error={form?.errors.fieldErrors.birthdate?.at(0)}
+                    />
+
+                    <RadioGroup
+                        name="user.role"
+                        label="Cargo"
+                        bind:group={$student.role}
+                        options={Object.entries(roles).map(([id, role]) => ({
+                            value: id,
+                            icon: role.icon,
+                        }))}
+                        parseOption={getRoleName}
+                    />
+                </div>
             </div>
             <div class="box">
                 <Button type="submit">Salvar usuário</Button>

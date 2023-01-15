@@ -24,7 +24,7 @@
     <label for={id}>Avatar</label>
     <button class="picker" type="button" on:click={() => input.click()}>
         <input bind:this={input} type="file" {name} {id} on:change={updateAvatar} accept="image/*" />
-        <Avatar bind:avatar={user.profile.avatar} size={8} />
+        <Avatar bind:avatar={user.profile.avatar} size={7.2} />
     </button>
     {#if user.profile.avatar}
         <button class="remove" type="button" on:click={() => (user.profile.avatar = undefined)}>

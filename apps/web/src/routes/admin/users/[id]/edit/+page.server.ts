@@ -10,6 +10,7 @@ import { encodeBase64 } from '$lib/util'
 const schema = z.object({
     user: z.object({
         email: z.string().email({ message: 'Email inváido' }),
+        role: z.enum(['ADMIN', 'TEACHER', 'STUDENT']),
         password: z.string().optional(),
     }),
     name: z.string().min(2, { message: 'Nome deve ter pelo menos 2 caracteres' }),
@@ -25,7 +26,6 @@ export const actions: Actions = {
         const formData = await request.formData()
         const data = Object.fromEntries(formData)
         const obj = dot.object(data) as z.infer<typeof schema>
-        console.log('🚀 ~ file: +page.server.ts:28 ~ default:wrap ~ obj', obj.birthdate)
 
         const result = schema.safeParse(obj)
 

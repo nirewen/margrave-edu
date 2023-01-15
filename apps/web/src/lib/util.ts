@@ -34,6 +34,12 @@ export type Role = keyof typeof roles
 
 export const getRole = (role: Role) => roles[role]
 
+export const capitalize = (string: string) => {
+    const [first, ...rest] = string.split('')
+
+    return [first.toUpperCase(), rest.join('').toLowerCase()].join('')
+}
+
 export async function encodeBase64(file: File | Blob): Promise<string> {
     if (typeof Buffer === 'function') {
         const buffer = Buffer.from(await file.arrayBuffer())
