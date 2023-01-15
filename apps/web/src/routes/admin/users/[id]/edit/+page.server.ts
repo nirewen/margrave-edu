@@ -15,7 +15,7 @@ const schema = z.object({
     name: z.string().min(2, { message: 'Nome deve ter pelo menos 2 caracteres' }),
     bio: z.string().optional(),
     gender: z.enum(['MALE', 'FEMALE', 'OTHER']),
-    birthdate: z.string(),
+    birthdate: z.string().regex(/^\d{4}-[01]\d-[0-3]\d$/, 'Data deve ser uma data válida'),
     level: z.coerce.number(),
     avatar: z.instanceof(Blob),
 })
@@ -25,11 +25,12 @@ export const actions: Actions = {
         const formData = await request.formData()
         const data = Object.fromEntries(formData)
         const obj = dot.object(data) as z.infer<typeof schema>
+        console.log('🚀 ~ file: +page.server.ts:28 ~ default:wrap ~ obj', obj.birthdate)
 
         const result = schema.safeParse(obj)
 
         if (!result.success) {
-            const { user, ...profile } = obj
+            const { user, avatar, ...profile } = obj
 
             return fail(400, {
                 error: true,

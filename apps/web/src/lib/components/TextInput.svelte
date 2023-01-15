@@ -15,7 +15,10 @@
         <label for={id}>
             {label}
             {#if errored}
-                <span>{error}</span>
+                <span>
+                    <iconify-icon icon="ic:baseline-error" width="1.2rem" />
+                    {error}
+                </span>
             {/if}
         </label>
     {/if}
@@ -62,17 +65,20 @@
             color: var(--red);
 
             > label > span {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
                 font-weight: 500;
 
-                border-left: 0.1rem solid currentColor;
+                border-left: 2px solid currentColor;
                 padding-left: 0.5rem;
             }
 
             > :is(input, textarea) {
-                border-width: 2px;
+                outline-style: solid;
                 border-color: var(--red);
                 outline-color: var(--red);
-                outline-width: 1px;
+                outline-width: 2px;
             }
         }
     }

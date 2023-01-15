@@ -93,6 +93,8 @@
                     name="birthdate"
                     label="Data de Nascimento"
                     bind:value={$student.profile.birthdate}
+                    errored={!!form?.errors.fieldErrors.birthdate}
+                    error={form?.errors.fieldErrors.birthdate?.at(0)}
                 />
             </div>
             <div class="box">

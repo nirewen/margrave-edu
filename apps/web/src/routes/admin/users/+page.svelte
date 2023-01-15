@@ -68,7 +68,8 @@
 
 <style lang="scss">
     header {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto auto;
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
