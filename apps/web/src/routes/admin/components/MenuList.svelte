@@ -41,6 +41,7 @@
                 padding: 0.4rem 0.8rem;
                 border-radius: 0.7rem;
                 font-weight: 600;
+                transition: all 200ms linear;
 
                 a {
                     flex: 1;

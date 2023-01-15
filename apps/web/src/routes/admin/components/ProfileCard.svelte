@@ -22,6 +22,7 @@
         gap: 1rem;
         padding: 1rem;
         height: fit-content;
+        width: 100%;
         border-radius: 8px;
         box-shadow: var(--elevation-3);
         cursor: pointer;

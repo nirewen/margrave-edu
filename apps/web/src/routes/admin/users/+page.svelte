@@ -1,5 +1,7 @@
 <script lang="ts">
     import { writable } from 'svelte/store'
+    import { flip } from 'svelte/animate'
+    import { fade } from 'svelte/transition'
     import { queryParam } from 'sveltekit-search-params'
 
     import Button from '$lib/components/Button.svelte'
@@ -49,13 +51,15 @@
 <div class="page">
     {#if data.users.length > 0}
         <div class="grid">
-            {#each data.users as user}
-                <ProfileCard
-                    {user}
-                    subtitle="usuário desde {dateFormat.format(new Date(user.createdAt))}"
-                    on:click={() => ($selected = user)}
-                    selected={$selected.id === user.id}
-                />
+            {#each data.users as user (user.id)}
+                <div class="user" animate:flip={{ duration: 300 }} transition:fade>
+                    <ProfileCard
+                        {user}
+                        subtitle="usuário desde {dateFormat.format(new Date(user.createdAt))}"
+                        on:click={() => ($selected = user)}
+                        selected={$selected.id === user.id}
+                    />
+                </div>
             {/each}
         </div>
         {#if $selected}
