@@ -29,10 +29,10 @@
     <Button variant="ghost" icon href="../" title="Voltar">
         <iconify-icon icon="mdi:chevron-left" width={32} />
     </Button>
-    <div>
+    <hgroup>
         <h1>Editar usuário</h1>
         <h2>Preencha o formulário para editar o perfil do usuário</h2>
-    </div>
+    </hgroup>
 </header>
 {#if $student}
     <div class="page">
@@ -128,13 +128,15 @@
         align-items: center;
         gap: 1rem;
 
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
+        hgroup {
+            h1 {
+                font-size: 1.8rem;
+                font-weight: 700;
+            }
 
-        h2 {
-            color: var(--gray-400);
+            h2 {
+                color: var(--gray-400);
+            }
         }
     }
 
