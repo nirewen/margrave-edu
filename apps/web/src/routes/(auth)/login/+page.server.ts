@@ -19,12 +19,10 @@ export const actions: Actions = {
             throw redirect(301, `/${response.role.toLowerCase()}/dashboard`)
         } catch (error: unknown) {
             if (error instanceof APIError) {
-                if (error.status === 401) {
-                    return fail(401, {
-                        error: true,
-                        message: error.message,
-                    })
-                }
+                return fail(error.status, {
+                    error: true,
+                    message: error.message,
+                })
             }
 
             throw error
