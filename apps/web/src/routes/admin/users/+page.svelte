@@ -52,7 +52,7 @@
     {#if data.users.length > 0}
         <div class="grid">
             {#each data.users as user (user.id)}
-                <div class="user" animate:flip={{ duration: 300 }} transition:fade>
+                <div class="user" animate:flip={{ duration: 300 }} transition:fade|local>
                     <ProfileCard
                         {user}
                         subtitle="usuário desde {dateFormat.format(new Date(user.createdAt))}"
