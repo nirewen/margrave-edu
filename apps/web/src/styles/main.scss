@@ -15,7 +15,7 @@ body {
         grid-template-areas:
             'sidebar navbar'
             'sidebar content';
-        grid-template-columns: 20rem auto;
+        grid-template-columns: auto 1fr;
         grid-template-rows: 4rem auto;
         height: 100%;
 

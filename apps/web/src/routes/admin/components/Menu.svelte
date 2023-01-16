@@ -36,6 +36,7 @@
 
         color: var(--primary-text);
         background-color: var(--primary);
+        width: 20rem;
 
         header {
             margin-bottom: 1rem;

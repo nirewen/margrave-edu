@@ -15,8 +15,8 @@
         display: flex;
         flex-direction: column;
         grid-area: sidebar;
-        width: 30rem;
-        padding: 1rem;
+        width: 40rem;
+        padding: 3rem;
         z-index: 10;
         background-color: #ffffff;
 
