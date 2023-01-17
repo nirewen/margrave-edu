@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { goto } from '$app/navigation'
     import { merge } from 'merge-anything'
     import { writable } from 'svelte/store'
     import { enhance } from '$app/forms'
@@ -19,6 +20,18 @@
     function getRoleName(role: string) {
         return capitalize(getRole(role as Role).name)
     }
+
+    async function deleteUser() {
+        const confirmed = confirm('Tem certeza que deseja excluir esse usuário?')
+
+        if (!confirmed) return
+
+        await fetch('/api/users/' + data.student.id, {
+            method: 'DELETE',
+        })
+
+        goto('..')
+    }
 </script>
 
 <svelte:head>
@@ -36,7 +49,7 @@
 </header>
 {#if $student}
     <div class="page">
-        <form method="POST" use:enhance enctype="multipart/form-data">
+        <form action="?/save" method="POST" use:enhance enctype="multipart/form-data">
             <div class="box row">
                 <div class="box" style:flex="1">
                     <TextInput
@@ -113,9 +126,15 @@
                     />
                 </div>
             </div>
-            <div class="box">
-                <Button type="submit">Salvar usuário</Button>
-                <!-- <Button variant="danger ghost">Excluir usuário</Button> -->
+            <div class="box row">
+                <div class="box" style:flex="1">
+                    <Button type="submit">Salvar usuário</Button>
+                </div>
+                <div class="box">
+                    <Button type="button" variant="danger ghost" on:click={deleteUser}>
+                        Excluir usuário
+                    </Button>
+                </div>
             </div>
         </form>
         <Profile title="Perfil" user={$student} />
