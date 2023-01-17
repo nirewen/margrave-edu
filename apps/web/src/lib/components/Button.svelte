@@ -8,9 +8,9 @@
 </script>
 
 {#if href}
-    <a class="button {variant}" class:icon class:round {href} {title} role="button"><slot /></a>
+    <a class="button {variant}" class:icon class:round {href} {title} on:click role="button"><slot /></a>
 {:else}
-    <button class="button {variant}" class:icon class:round {type} {title}><slot /></button>
+    <button class="button {variant}" class:icon class:round {type} {title} on:click><slot /></button>
 {/if}
 
 <style lang="scss" scoped>

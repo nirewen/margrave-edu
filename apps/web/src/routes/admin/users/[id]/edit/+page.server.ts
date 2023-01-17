@@ -22,7 +22,7 @@ const schema = z.object({
 })
 
 export const actions: Actions = {
-    default: wrap(async ({ request, api, params }) => {
+    save: wrap(async ({ request, api, params }) => {
         const formData = await request.formData()
         const data = Object.fromEntries(formData)
         const obj = dot.object(data) as z.infer<typeof schema>
@@ -49,6 +49,11 @@ export const actions: Actions = {
             ...obj,
             avatar: obj.avatar.size > 0 ? await encodeBase64(obj.avatar) : null,
         })
+
+        throw redirect(301, `/admin/users`)
+    }),
+    delete: wrap(async ({ request, api, params }) => {
+        await api.delete(`/api/profiles/${params.id}`)
 
         throw redirect(301, `/admin/users`)
     }),
