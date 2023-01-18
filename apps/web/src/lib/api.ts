@@ -11,7 +11,7 @@ const fetcher = (fetch: (input: RequestInfo | URL, init?: RequestInit) => Promis
             const json = await response.json()
 
             if (json.status === 401) {
-                throw redirect(301, '/login')
+                throw redirect(302, '/login')
             }
 
             return fetcher(fetch)(input, init)
