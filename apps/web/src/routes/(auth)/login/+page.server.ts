@@ -16,7 +16,7 @@ export const actions: Actions = {
                 password,
             })
 
-            throw redirect(301, `/${response.role.toLowerCase()}/dashboard`)
+            throw redirect(307, `/${response.role.toLowerCase()}/dashboard`)
         } catch (error: unknown) {
             if (error instanceof APIError) {
                 return fail(error.status, {
