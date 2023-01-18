@@ -1,5 +1,6 @@
 <script lang="ts">
     import Button from '$lib/components/Button.svelte'
+    import { clipboard } from '$lib/hooks/clipboard'
     import type { PartialUser } from '$lib/types/User'
     import { getGender } from '$lib/util'
     import { differenceInYears, format } from 'date-fns'
@@ -19,7 +20,7 @@
             </Button>
         {/if}
     </header>
-    <div class="info">
+    <div class="general">
         <Avatar
             avatar={user.profile.avatar}
             alt="avatar de {user.profile.name}"
@@ -27,7 +28,15 @@
             size={10}
             shadow
         />
-        <p>{user.profile.name}</p>
+        <div class="info">
+            <p>{user.profile.name}</p>
+            <span>
+                {user.email}
+                <Button variant="ghost" icon on:click={() => clipboard.push(user.email)}>
+                    <iconify-icon icon="ic:baseline-content-copy" width="0.8rem" />
+                </Button>
+            </span>
+        </div>
     </div>
     <div class="details">
         <div class="field">
@@ -83,24 +92,37 @@
             }
         }
 
-        .info {
+        .general {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1rem;
             text-align: center;
 
-            p {
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                width: 15ch;
-                overflow: hidden;
-                font-size: 1.3rem;
-                min-height: 1.95rem;
+            .info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.2rem;
 
-                &:empty {
-                    background-color: var(--gray-800);
-                    border-radius: 0.3rem;
+                p {
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 15ch;
+                    overflow: hidden;
+                    font-size: 1.3rem;
+                    min-height: 1.95rem;
+
+                    &:empty {
+                        background-color: var(--gray-800);
+                        border-radius: 0.3rem;
+                    }
+                }
+
+                span {
+                    display: flex;
+                    align-items: center;
+                    gap: 1ch;
                 }
             }
         }
