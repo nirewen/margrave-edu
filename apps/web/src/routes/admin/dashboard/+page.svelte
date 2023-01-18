@@ -16,17 +16,17 @@
 </header>
 <section class="stats">
     <CountCard
-        href="./users/students"
+        href="./users?role=STUDENT"
         count={data.stats.students}
         label={`estudante${p(data.stats.students)}`}
     />
     <CountCard
-        href="./users/teachers"
+        href="./users?role=TEACHER"
         count={data.stats.teachers}
         label={`professor${p(data.stats.teachers, 'es')}`}
     />
     <CountCard
-        href="./users/students"
+        href="./users?role=TEACHER"
         count={data.stats.students}
         label={`estudante${p(data.stats.students)}`}
         style="grid-row: span 2;"
