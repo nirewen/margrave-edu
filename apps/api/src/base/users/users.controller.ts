@@ -42,6 +42,12 @@ export class UsersController {
         return this.userService.findOneById(payload.id)
     }
 
+    @Patch('@me')
+    @Roles(UserRole.STUDENT, UserRole.TEACHER)
+    edit(@ReqUser() payload: Payload, @Body() body: UpdateUserDTO) {
+        return this.update(payload.id, body)
+    }
+
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.userService.findOneById(id)
