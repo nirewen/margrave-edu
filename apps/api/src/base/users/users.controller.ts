@@ -39,7 +39,7 @@ export class UsersController {
     @Get('@me')
     @Roles(UserRole.STUDENT, UserRole.TEACHER)
     me(@ReqUser() payload: Payload) {
-        return this.userService.findOneById(payload.id)
+        return this.findOne(payload.id)
     }
 
     @Patch('@me')
