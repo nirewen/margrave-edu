@@ -2,7 +2,7 @@
     import { roles } from '$lib/util'
 
     import Menu from '$lib/components/Menu.svelte'
-    import NavBar from './components/NavBar.svelte'
+    import NavBar from '$lib/components/NavBar.svelte'
 </script>
 
 <Menu
