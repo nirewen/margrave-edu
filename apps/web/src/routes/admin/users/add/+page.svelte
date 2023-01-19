@@ -10,17 +10,17 @@
     export let form: ActionData
 
     const role = (form?.data?.role || data.query.role) as Role
-    $: roleName = getRole(role).name
+    $: roleName = getRole(role).name.single
 </script>
 
 <svelte:head>
-    <title>Adicionar novo {roleName.toLowerCase()} | Magrave</title>
+    <title>Adicionar novo {roleName} | Magrave</title>
 </svelte:head>
 
 <header>
     <div>
-        <h1>Novo {roleName.toLowerCase()}</h1>
-        <h2>Preencha o formulário para adicionar um novo {roleName.toLowerCase()}</h2>
+        <h1>Novo {roleName}</h1>
+        <h2>Preencha o formulário para adicionar um novo {roleName}</h2>
     </div>
 </header>
 {#if form?.errored && form?.error}
