@@ -52,6 +52,25 @@ export type Role = keyof typeof roles
 
 export const getRole = (role: Role) => roles[role]
 
+export const classroomTypes = {
+    REGULAR: {
+        icon: 'ic:baseline-edit-note',
+        name: 'Padrão',
+    },
+    COMPUTER: {
+        icon: 'ic:baseline-computer',
+        name: 'Informática',
+    },
+    LABORATORY: {
+        icon: 'ic:baseline-science',
+        name: 'Laboratório',
+    },
+    GYMNASIUM: {
+        icon: 'ic:baseline-sports-gymnastics',
+        name: 'Ginásio',
+    },
+}
+
 export const capitalize = (string: string) => {
     const [first, ...rest] = string.split('')
 

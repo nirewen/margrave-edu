@@ -2,14 +2,16 @@
     export let title = ''
     export let subtitle = ''
     export let selected = false
+    export let clickable = true
 </script>
 
-<button type="button" class="profile-card" class:selected on:click>
+<button type="button" class:clickable class="profile-card" class:selected on:click>
     <slot name="icon" />
     <div class="info">
         <p>{title}</p>
         <span>{subtitle}</span>
     </div>
+    <slot name="right" />
 </button>
 
 <style lang="scss">
@@ -27,7 +29,7 @@
         text-align: left;
         transition: scale 50ms linear;
 
-        &:hover {
+        &.clickable:hover {
             scale: 1.025;
         }
 
@@ -47,6 +49,8 @@
         }
 
         .info {
+            flex: 1;
+
             p {
                 text-overflow: ellipsis;
                 white-space: nowrap;
