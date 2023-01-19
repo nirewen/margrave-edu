@@ -1,27 +1,19 @@
 <script lang="ts">
+    import { slide } from 'svelte/transition'
+
+    import Button from '$lib/components/Button.svelte'
+    import { boolean } from '$lib/hooks/boolean'
+
     import MenuList from './MenuList.svelte'
 
-    import { roles } from '$lib/util'
-    import { slide } from 'svelte/transition'
-    import { boolean } from '$lib/hooks/boolean'
-    import Button from '$lib/components/Button.svelte'
+    type Routes = {
+        name: string
+        route: string
+        icon: string
+        routes?: Routes[]
+    }
 
-    const links = [
-        { name: 'Dashboard', route: '/admin/dashboard', icon: 'ic:round-grid-view' },
-        {
-            name: 'Usuários',
-            route: '/admin/users',
-            icon: 'mdi:account-multiple',
-            routes: Object.entries(roles).map(([id, { namePlural, icon }]) => ({
-                name: namePlural,
-                route: `/admin/users?role=${id}`,
-                icon,
-            })),
-        },
-        { name: 'Aulas', route: '/admin/lessons', icon: 'ic:baseline-play-lesson' },
-        { name: 'Disciplinas', route: '/admin/subjects', icon: 'ic:round-menu-book' },
-        { name: 'Turmas', route: '/admin/classes', icon: 'ic:baseline-groups-2' },
-    ]
+    export let links: Routes[]
 
     let open = boolean(true)
 </script>
