@@ -8,9 +8,10 @@
     import { type Role, dateFormat, getRole, roles } from '$lib/util'
 
     import Profile from '../components/Profile.svelte'
-    import ProfileCard from '../components/ProfileCard.svelte'
+    import InfoCard from '../components/InfoCard.svelte'
 
     import type { PageData } from './$types'
+    import Avatar from '$lib/components/Avatar.svelte'
 
     export let data: PageData
 
@@ -53,12 +54,20 @@
         <div class="grid">
             {#each data.users as user (user.id)}
                 <div class="user" animate:flip={{ duration: 300 }} transition:fade|local>
-                    <ProfileCard
-                        {user}
+                    <InfoCard
+                        title={user.profile.name}
                         subtitle="usuário desde {dateFormat.format(new Date(user.createdAt))}"
                         on:click={() => ($selected = user)}
                         selected={$selected.id === user.id}
-                    />
+                    >
+                        <Avatar
+                            slot="icon"
+                            avatar={user.profile.avatar}
+                            role={user.role}
+                            alt="avatar de {user.profile.name}"
+                            size={3}
+                        />
+                    </InfoCard>
                 </div>
             {/each}
         </div>

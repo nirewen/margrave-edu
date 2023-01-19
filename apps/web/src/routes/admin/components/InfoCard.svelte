@@ -1,16 +1,13 @@
 <script lang="ts">
-    import type { User } from '$lib/types/User'
-    import Avatar from '$lib/components/Avatar.svelte'
-
-    export let user: User
+    export let title = ''
     export let subtitle = ''
     export let selected = false
 </script>
 
 <button type="button" class="profile-card" class:selected on:click>
-    <Avatar avatar={user.profile.avatar} role={user.role} alt="avatar de {user.profile.name}" size={3} />
+    <slot name="icon" />
     <div class="info">
-        <p>{user.profile.name}</p>
+        <p>{title}</p>
         <span>{subtitle}</span>
     </div>
 </button>
