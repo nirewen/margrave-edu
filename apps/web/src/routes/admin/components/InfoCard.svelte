@@ -24,7 +24,6 @@
         width: 100%;
         border-radius: 8px;
         box-shadow: var(--elevation-3);
-        cursor: pointer;
         background-color: var(--gray-900);
         text-align: left;
         transition: scale 50ms linear;
