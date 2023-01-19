@@ -2,7 +2,7 @@
     import type { PartialUser } from '$lib/types/User'
     import { encodeBase64 } from '$lib/util'
     import { nanoid } from 'nanoid'
-    import Avatar from './Avatar.svelte'
+    import Avatar from '$lib/components/Avatar.svelte'
 
     export let id = nanoid()
     export let name: string

@@ -4,7 +4,7 @@
     import type { PartialUser } from '$lib/types/User'
     import { getGender } from '$lib/util'
     import { differenceInYears, format } from 'date-fns'
-    import Avatar from './Avatar.svelte'
+    import Avatar from '$lib/components/Avatar.svelte'
 
     export let title: string
     export let user: PartialUser

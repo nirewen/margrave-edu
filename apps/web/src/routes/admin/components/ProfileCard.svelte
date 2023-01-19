@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { User } from '$lib/types/User'
-    import Avatar from './Avatar.svelte'
+    import Avatar from '$lib/components/Avatar.svelte'
 
     export let user: User
     export let subtitle = ''

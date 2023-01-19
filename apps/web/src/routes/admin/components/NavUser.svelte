@@ -4,7 +4,7 @@
 
     import { clickOutside } from '$lib/directives/clickOutside'
     import { boolean } from '$lib/hooks/boolean'
-    import Avatar from './Avatar.svelte'
+    import Avatar from '$lib/components/Avatar.svelte'
 
     const user: User = $page.data.user
 
