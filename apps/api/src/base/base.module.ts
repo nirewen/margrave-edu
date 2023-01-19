@@ -9,7 +9,8 @@ import { LessonsModule } from './lessons/lessons.module'
 import { ProfilesModule } from './profiles/profiles.module'
 import { SubjectsModule } from './subjects/subjects.module'
 import { UsersModule } from './users/users.module'
-import { StatsModule } from './stats/stats.module';
+import { StatsModule } from './stats/stats.module'
+import { ClassroomsModule } from './classrooms/classrooms.module'
 
 @Global()
 @Module({
@@ -19,12 +20,13 @@ import { StatsModule } from './stats/stats.module';
         AttendancesModule,
         AvatarModule,
         ClassesModule,
+        ClassroomsModule,
         ClassSubjectsModule,
         LessonsModule,
         ProfilesModule,
+        StatsModule,
         SubjectsModule,
         UsersModule,
-        StatsModule,
     ],
     exports: [
         AnswersModule,
@@ -32,6 +34,7 @@ import { StatsModule } from './stats/stats.module';
         AttendancesModule,
         AvatarModule,
         ClassesModule,
+        ClassroomsModule,
         ClassSubjectsModule,
         LessonsModule,
         ProfilesModule,
