@@ -26,7 +26,7 @@
         <h1>Margrave</h1>
     </header>
     {#if $open}
-        <p transition:slide>Menu principal</p>
+        <p transition:slide={{ duration: 300 }}>Menu principal</p>
     {/if}
     <MenuList open={$open} {links} />
 </nav>
