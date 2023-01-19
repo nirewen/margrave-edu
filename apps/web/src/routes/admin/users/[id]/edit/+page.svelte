@@ -18,7 +18,7 @@
 
     const student = writable(merge(form?.data.user ?? {}, data.student))
     function getRoleName(role: string) {
-        return capitalize(getRole(role as Role).name)
+        return capitalize(getRole(role as Role).name.single)
     }
 
     async function deleteUser() {

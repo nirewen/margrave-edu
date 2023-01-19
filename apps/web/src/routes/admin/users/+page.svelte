@@ -29,8 +29,8 @@
 
 <header>
     <hgroup>
-        <h1>{filteredRole?.namePlural ?? 'usuários'}</h1>
-        <h2>Lista de todos os {filteredRole?.namePlural ?? 'usuários'} registrados</h2>
+        <h1>{filteredRole?.name.formal.plural ?? 'Usuários'}</h1>
+        <h2>Lista de todos os {filteredRole?.name.plural ?? 'usuários'} registrados</h2>
     </hgroup>
     <div class="filter">
         <iconify-icon icon="ic:baseline-filter-alt" width={28} />
@@ -82,7 +82,6 @@
             h1 {
                 font-size: 1.8rem;
                 font-weight: 700;
-                text-transform: capitalize;
             }
 
             h2 {

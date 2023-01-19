@@ -52,7 +52,6 @@
 
                 > span {
                     flex: 1;
-                    text-transform: capitalize;
                     transition: all 200ms linear;
                     max-width: 0;
                     overflow: hidden;

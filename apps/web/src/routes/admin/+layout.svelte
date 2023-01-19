@@ -12,12 +12,13 @@
             name: 'Usuários',
             route: '/admin/users',
             icon: 'mdi:account-multiple',
-            routes: Object.entries(roles).map(([id, { namePlural, icon }]) => ({
-                name: namePlural,
+            routes: Object.entries(roles).map(([id, { name, icon }]) => ({
+                name: name.formal.plural,
                 route: `/admin/users?role=${id}`,
                 icon,
             })),
         },
+        { name: 'Salas de aula', route: '/admin/classrooms', icon: 'ic:baseline-meeting-room' },
         { name: 'Aulas', route: '/admin/lessons', icon: 'ic:baseline-play-lesson' },
         { name: 'Disciplinas', route: '/admin/subjects', icon: 'ic:round-menu-book' },
         { name: 'Turmas', route: '/admin/classes', icon: 'ic:baseline-groups-2' },

@@ -15,18 +15,36 @@ export const getGender = (gender: string) => genders[gender as Gender]
 export const roles = {
     ADMIN: {
         icon: 'ic:baseline-shield',
-        name: 'administrador',
-        namePlural: 'administradores',
+        name: {
+            single: 'administrador',
+            plural: 'administradores',
+            formal: {
+                single: 'Administrador',
+                plural: 'Administradores',
+            },
+        },
     },
     TEACHER: {
         icon: 'mdi:human-male-board',
-        name: 'professor',
-        namePlural: 'professores',
+        name: {
+            single: 'professor',
+            plural: 'professores',
+            formal: {
+                single: 'Professor',
+                plural: 'Professores',
+            },
+        },
     },
     STUDENT: {
         icon: 'ic:round-school',
-        name: 'estudante',
-        namePlural: 'estudantes',
+        name: {
+            single: 'estudante',
+            plural: 'estudantes',
+            formal: {
+                single: 'Estudante',
+                plural: 'Estudantes',
+            },
+        },
     },
 }
 
