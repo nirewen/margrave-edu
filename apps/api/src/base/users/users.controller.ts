@@ -36,12 +36,10 @@ export class UsersController {
         return this.userService.create(body)
     }
 
-    @Get('/@me')
+    @Get('@me')
     @Roles(UserRole.STUDENT, UserRole.TEACHER)
-    public async me(@ReqUser() payload: Payload) {
-        const user = await this.userService.findOneById(payload.id)
-
-        return user
+    me(@ReqUser() payload: Payload) {
+        return this.userService.findOneById(payload.id)
     }
 
     @Get(':id')
