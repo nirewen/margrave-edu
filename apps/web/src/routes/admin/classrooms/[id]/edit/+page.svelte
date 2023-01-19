@@ -20,13 +20,13 @@
 </script>
 
 <svelte:head>
-    <title>Adicionar nova sala de aula | Magrave</title>
+    <title>Editar sala de aula | Magrave</title>
 </svelte:head>
 
 <header>
     <div>
-        <h1>Nova sala de aula</h1>
-        <h2>Preencha o formulário para adicionar uma nova sala de aula</h2>
+        <h1>Editar sala de aula</h1>
+        <h2>Preencha o formulário para editar a sala de aula</h2>
     </div>
 </header>
 {#if form?.errored && form?.error}
