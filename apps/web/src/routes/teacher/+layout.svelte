@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { roles } from '$lib/util'
-
     import Menu from '$lib/components/Menu.svelte'
     import NavBar from '$lib/components/NavBar.svelte'
 </script>
