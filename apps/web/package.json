@@ -29,6 +29,7 @@
 	"dependencies": {
 		"copy-anything": "^3.0.3",
 		"merge-anything": "^5.1.4",
+		"svelte-headlessui": "^0.0.14",
 		"zod": "^3.20.2"
 	}
 }
