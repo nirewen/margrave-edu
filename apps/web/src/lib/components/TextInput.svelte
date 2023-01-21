@@ -55,6 +55,21 @@
             outline-offset: 2px;
         }
 
+        input[type='color'] {
+            padding: 0;
+            -webkit-appearance: none;
+            border: none;
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+        input[type='color']::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        input[type='color']::-webkit-color-swatch {
+            border: none;
+            border-radius: 0.4rem;
+        }
+
         label {
             display: flex;
             align-items: center;
