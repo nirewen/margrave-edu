@@ -21,6 +21,7 @@ export class UsersService {
         })
     }
 
+    // TODO: use afterInsert to hash the password afterwards
     private hashPassword(password: string) {
         return bcrypt.hash(password, 10)
     }
@@ -75,10 +76,10 @@ export class UsersService {
     async update(id: string, body: UpdateUserDTO) {
         const user = await this.findOneById(id)
 
-        body.password = body.password || user.password
-
         if (body.password && body.password !== user.password) {
             body.password = await this.hashPassword(body.password)
+        } else {
+            body.password = user.password
         }
 
         return this.users.save({ ...user, ...body })

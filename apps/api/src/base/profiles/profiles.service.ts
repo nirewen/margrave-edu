@@ -45,21 +45,22 @@ export class ProfilesService {
 
     async update(id: string, body: UpdateProfileDTO) {
         const profile = await this.findOne(id)
+        const { user, ...rest } = body
 
-        if (body.user) {
-            await this.usersService.update(id, body.user)
+        if (!!user) {
+            await this.usersService.update(id, user)
         }
 
-        if (body.avatar) {
-            const { type, buffer } = decodeBase64(body.avatar)
+        if (rest.avatar) {
+            const { type, buffer } = decodeBase64(rest.avatar)
             const name = id + '.' + type
             const { path } = await this.uploadAvatar(name, type, buffer)
 
-            body.avatar = '/api/avatar/' + path
+            rest.avatar = '/api/avatar/' + path
         } else {
-            body.avatar = profile.avatar
+            rest.avatar = profile.avatar
         }
 
-        return this.profiles.save({ ...profile, ...body })
+        return this.profiles.save({ ...profile, ...rest })
     }
 }
