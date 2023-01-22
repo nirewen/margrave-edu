@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Button from '$lib/components/Button.svelte'
     import { clipboard } from '$lib/hooks/clipboard'
     import type { PartialUser } from '$lib/types/User'
     import { getGender } from '$lib/util'
@@ -15,9 +14,9 @@
     <header>
         <h2>{title}</h2>
         {#if editable}
-            <Button variant="ghost" icon href="/admin/users/{user.id}/edit" title="Editar">
+            <a role="button" class="ghost icon" href="/admin/users/{user.id}/edit" title="Editar">
                 <iconify-icon icon="mdi:account-edit" width={24} />
-            </Button>
+            </a>
         {/if}
     </header>
     <div class="general">
@@ -32,9 +31,9 @@
             <p>{user.profile.name}</p>
             <span>
                 {user.email}
-                <Button variant="ghost" icon on:click={() => clipboard.push(user.email)}>
+                <button class="ghost icon" on:click={() => clipboard.push(user.email)}>
                     <iconify-icon icon="ic:baseline-content-copy" width="0.8rem" />
-                </Button>
+                </button>
             </span>
         </div>
     </div>

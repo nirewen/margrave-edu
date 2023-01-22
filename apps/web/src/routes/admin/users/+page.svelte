@@ -4,7 +4,6 @@
     import { fade } from 'svelte/transition'
     import { queryParam } from 'sveltekit-search-params'
 
-    import Button from '$lib/components/Button.svelte'
     import { type Role, dateFormat, getRole, roles } from '$lib/util'
 
     import Profile from '../components/Profile.svelte'
@@ -36,18 +35,22 @@
     <div class="filter">
         <iconify-icon icon="ic:baseline-filter-alt" width={28} />
         <div class="buttons">
-            <Button href="/admin/users" round variant={!$role ? 'primary' : 'ghost'}>Todos</Button>
+            <a role="button" href="/admin/users" class="{!$role ? 'primary' : 'ghost'} round">Todos</a>
             {#each Object.entries(roles) as [id, { icon }]}
-                <Button href="/admin/users?role={id}" icon round variant={$role === id ? 'primary' : 'ghost'}>
+                <a
+                    role="button"
+                    href="/admin/users?role={id}"
+                    class="icon round {$role === id ? 'primary' : 'ghost'}"
+                >
                     <iconify-icon {icon} width={24} />
-                </Button>
+                </a>
             {/each}
         </div>
     </div>
-    <Button href="/admin/users/add?role={$role ?? 'STUDENT'}" round variant="ghost">
+    <a role="button" href="/admin/users/add?role={$role ?? 'STUDENT'}" class="round ghost">
         <iconify-icon icon={filteredRole?.icon ?? 'ic:baseline-add'} width={24} />
         Adicionar
-    </Button>
+    </a>
 </header>
 <div class="page">
     {#if data.users.length > 0}

@@ -27,6 +27,9 @@
         background-color: var(--gray-900);
         text-align: left;
         transition: scale 50ms linear;
+        color: var(--gray-000);
+        text-transform: none;
+        font-weight: 400;
 
         &.clickable:hover {
             scale: 1.025;
