@@ -26,8 +26,10 @@
     <div class="page">
         <div class="grid">
             {#each data.subjects as subject}
-                <InfoCard title={subject.name} subtitle={subject.teacher.profile.name} clickable={false}>
-                    <a role="button" href="./subjects/{subject.id}/edit" class="ghost icon" slot="right">
+                <InfoCard>
+                    <svelte:fragment slot="title">{subject.name}</svelte:fragment>
+                    <svelte:fragment slot="subtitle">{subject.teacher.profile.name}</svelte:fragment>
+                    <a role="button" href="./subjects/{subject.id}/edit" class="ghost icon" slot="action">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
                     </a>
                 </InfoCard>
@@ -52,26 +54,6 @@
 
             h2 {
                 color: var(--gray-400);
-            }
-        }
-
-        .filter {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding-left: 1rem;
-            background-color: var(--gray-900);
-            text-transform: uppercase;
-            border-radius: 9999px;
-            font-weight: 600;
-            box-shadow: var(--elevation-2);
-
-            > .buttons {
-                display: flex;
-                align-items: center;
-                gap: 0.4rem;
-                padding: 0.3rem;
-                border-radius: 9999px;
             }
         }
     }

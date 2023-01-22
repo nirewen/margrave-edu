@@ -1,17 +1,15 @@
 <script lang="ts">
-    export let title = ''
-    export let subtitle = ''
     export let selected = false
-    export let clickable = true
+    export let scale = false
 </script>
 
-<button type="button" class:clickable class="profile-card" class:selected on:click>
+<button type="button" class:scale class="profile-card" class:selected on:click>
     <slot name="icon" />
     <div class="info">
-        <p>{title}</p>
-        <span>{subtitle}</span>
+        <p><slot name="title" /></p>
+        <span><slot name="subtitle" /></span>
     </div>
-    <slot name="right" />
+    <slot name="action" />
 </button>
 
 <style lang="scss">
@@ -31,7 +29,7 @@
         text-transform: none;
         font-weight: 400;
 
-        &.clickable:hover {
+        &.scale:hover {
             scale: 1.025;
         }
 
