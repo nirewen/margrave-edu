@@ -42,7 +42,12 @@ export class SubjectsService {
     }
 
     async findOne(id: string) {
-        const subject = await this.subjects.findOneBy({ id })
+        const subject = await this.subjects.findOne({
+            where: { id },
+            relations: {
+                teacher: true,
+            },
+        })
 
         if (!subject) {
             throw new NotFoundException('subject with provided id was not found')
