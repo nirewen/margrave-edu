@@ -56,26 +56,6 @@
                 color: var(--gray-400);
             }
         }
-
-        .filter {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding-left: 1rem;
-            background-color: var(--gray-900);
-            text-transform: uppercase;
-            border-radius: 9999px;
-            font-weight: 600;
-            box-shadow: var(--elevation-2);
-
-            > .buttons {
-                display: flex;
-                align-items: center;
-                gap: 0.4rem;
-                padding: 0.3rem;
-                border-radius: 9999px;
-            }
-        }
     }
 
     .page {
