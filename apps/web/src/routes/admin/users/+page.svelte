@@ -1,16 +1,18 @@
 <script lang="ts">
+    import { format } from 'date-fns'
+
     import { writable } from 'svelte/store'
     import { flip } from 'svelte/animate'
     import { fade } from 'svelte/transition'
     import { queryParam } from 'sveltekit-search-params'
 
-    import { type RoleID, dateFormat, roles } from '$lib/util'
+    import Avatar from '$lib/components/Avatar.svelte'
+    import { type RoleID, roles } from '$lib/util'
 
     import Profile from '../components/Profile.svelte'
     import InfoCard from '../components/InfoCard.svelte'
 
     import type { PageData } from './$types'
-    import Avatar from '$lib/components/Avatar.svelte'
 
     export let data: PageData
 
@@ -57,12 +59,7 @@
         <div class="grid">
             {#each data.users as user (user.id)}
                 <div class="user" animate:flip={{ duration: 300 }} transition:fade|local>
-                    <InfoCard
-                        title={user.profile.name}
-                        subtitle="usuário desde {dateFormat.format(new Date(user.createdAt))}"
-                        on:click={() => ($selected = user)}
-                        selected={$selected.id === user.id}
-                    >
+                    <InfoCard on:click={() => ($selected = user)} selected={$selected.id === user.id} scale>
                         <Avatar
                             slot="icon"
                             avatar={user.profile.avatar}
@@ -70,6 +67,10 @@
                             alt="avatar de {user.profile.name}"
                             size={3}
                         />
+                        <svelte:fragment slot="title">{user.profile.name}</svelte:fragment>
+                        <svelte:fragment slot="subtitle"
+                            >usuário desde {format(new Date(user.createdAt), 'dd/MM/yyyy')}</svelte:fragment
+                        >
                     </InfoCard>
                 </div>
             {/each}

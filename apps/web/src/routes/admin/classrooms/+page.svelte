@@ -24,13 +24,11 @@
         <div class="grid">
             {#each data.classrooms as classroom}
                 {@const type = classroomTypes.get(classroom.type)}
-                <InfoCard
-                    title={classroom.building}
-                    subtitle={classroom.capacity.toString()}
-                    clickable={false}
-                >
+                <InfoCard>
                     <iconify-icon slot="icon" icon={type?.icon} width="48" />
-                    <a role="button" href="./classrooms/{classroom.id}/edit" class="ghost icon" slot="right">
+                    <svelte:fragment slot="title">{classroom.building}</svelte:fragment>
+                    <svelte:fragment slot="subtitle">{classroom.capacity}</svelte:fragment>
+                    <a role="button" href="./classrooms/{classroom.id}/edit" class="ghost icon" slot="action">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
                     </a>
                 </InfoCard>
