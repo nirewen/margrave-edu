@@ -6,6 +6,10 @@
     export let data: PageData
 </script>
 
+<svelte:head>
+    <title>Salas de aula | Margrave</title>
+</svelte:head>
+
 <header>
     <hgroup>
         <h1>Salas de aula</h1>
