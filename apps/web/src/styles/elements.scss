@@ -53,15 +53,15 @@ a[role='button'] {
         border: 1px solid var(--gray-700);
         background-color: var(--gray-900);
         color: var(--gray-000);
-
-        &:hover {
-            border-color: var(--red);
-        }
     }
 
     &.danger {
         border-color: var(--red);
         color: var(--red);
+
+        &:hover {
+            border-color: var(--red);
+        }
     }
 
     &.icon {
