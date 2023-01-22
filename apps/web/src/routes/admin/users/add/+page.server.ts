@@ -45,6 +45,8 @@ export const actions: Actions = {
                     },
                 })
             }
+
+            throw error
         }
     }),
 }
