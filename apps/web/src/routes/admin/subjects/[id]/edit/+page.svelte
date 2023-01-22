@@ -1,9 +1,7 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
-    import Button from '$lib/components/Button.svelte'
     import RadioGroup from '$lib/components/RadioGroup.svelte'
-    import TextInput from '$lib/components/TextInput.svelte'
     import { classroomTypes } from '$lib/util'
     import { merge } from 'merge-anything'
     import { writable } from 'svelte/store'
@@ -33,21 +31,20 @@
     <Alert variant="danger">{form?.error}</Alert>
 {/if}
 <form method="POST" use:enhance>
-    <TextInput
-        type="text"
-        name="building"
-        label="Prédio"
-        value={form?.data?.building ?? data.classroom.building}
-        required
-    />
-    <TextInput
-        type="number"
-        name="capacity"
-        label="Capacidade"
-        value={form?.data?.capacity ?? data.classroom.capacity}
-        required
-        min={0}
-    />
+    <label>
+        <span>Prédio</span>
+        <input type="text" name="building" value={form?.data?.building ?? data.classroom.building} required />
+    </label>
+    <label>
+        <span>Capacidade</span>
+        <input
+            type="number"
+            name="capacity"
+            min="0"
+            value={form?.data?.capacity ?? data.classroom.capacity}
+            required
+        />
+    </label>
     <RadioGroup
         name="type"
         label="Tipo de sala"
@@ -55,7 +52,7 @@
         options={Object.entries(classroomTypes).map(([value, { icon }]) => ({ value, icon }))}
         parseOption={resolveType}
     />
-    <Button type="submit">Salvar</Button>
+    <button type="submit">Salvar</button>
 </form>
 
 <style lang="scss">

@@ -1,9 +1,6 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
-    import Button from '$lib/components/Button.svelte'
-    import RadioGroup from '$lib/components/RadioGroup.svelte'
-    import TextInput from '$lib/components/TextInput.svelte'
     import { classroomTypes } from '$lib/util'
     import type { ActionData, PageData } from './$types'
 
@@ -33,29 +30,33 @@
         <div class="box">
             <div class="box row">
                 <div class="box" style:flex={1}>
-                    <TextInput type="text" name="name" label="Nome" value={form?.data?.name ?? ''} required />
+                    <label>
+                        <span>Nome</span>
+                        <input type="text" name="name" value={form?.data?.name ?? ''} required />
+                    </label>
                 </div>
-                <TextInput type="color" name="color" label="Cor" value={form?.data?.color ?? ''} required />
-                <TextInput type="text" name="icon" label="Ícone" value={form?.data?.icon ?? ''} required />
+                <label>
+                    <span>Cor</span>
+                    <input type="color" name="color" value={form?.data?.color ?? ''} required />
+                </label>
+                <label>
+                    <span>Ícone</span>
+                    <input type="text" name="icon" value={form?.data?.icon ?? ''} required />
+                </label>
             </div>
             <div class="box row">
-                <TextInput
-                    type="text"
-                    name="type"
-                    label="Tipo da disciplina"
-                    value={form?.data?.type ?? ''}
-                    placeholder="Exatas"
-                />
-                <TextInput
-                    type="number"
-                    name="hours"
-                    label="Hora de demanda"
-                    value={form?.data?.hours ?? ''}
-                />
+                <label>
+                    <span>Tipo da disciplina</span>
+                    <input type="text" name="type" value={form?.data?.type ?? ''} placeholder="Exatas" />
+                </label>
+                <label>
+                    <span>Hora de demanda</span>
+                    <input type="number" name="hours" value={form?.data?.hours ?? ''} />
+                </label>
             </div>
         </div>
         <div class="box">
-            <Button type="submit">Salvar</Button>
+            <button type="submit">Salvar</button>
         </div>
     </form>
     <div class="teacher-list">

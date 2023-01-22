@@ -1,6 +1,6 @@
 <script lang="ts">
     import { nanoid } from 'nanoid'
-    import ButtonSelect from './ButtonSelect.svelte'
+    import ButtonSelect from './Option.svelte'
 
     export let id: string = nanoid()
     export let name: string

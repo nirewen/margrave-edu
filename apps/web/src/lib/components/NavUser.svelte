@@ -67,6 +67,8 @@
             width: 100%;
             border-radius: 9999px;
             background-color: #f7f7f7;
+            text-transform: none;
+            font-weight: 400;
         }
 
         > .menu {

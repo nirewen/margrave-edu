@@ -4,9 +4,6 @@
     import { writable } from 'svelte/store'
     import { enhance } from '$app/forms'
 
-    import Button from '$lib/components/Button.svelte'
-    import TextInput from '$lib/components/TextInput.svelte'
-
     import type { ActionData, PageData } from './$types'
     import AvatarPicker from '../../../components/AvatarPicker.svelte'
     import Profile from '../../../components/Profile.svelte'
@@ -39,9 +36,9 @@
 </svelte:head>
 
 <header>
-    <Button variant="ghost" icon href="../" title="Voltar">
+    <a role="button" class="ghost icon" href="../" title="Voltar">
         <iconify-icon icon="mdi:chevron-left" width={32} />
-    </Button>
+    </a>
     <hgroup>
         <h1>Editar usuário</h1>
         <h2>Preencha o formulário para editar o perfil do usuário</h2>
@@ -52,36 +49,36 @@
         <form action="?/save" method="POST" use:enhance enctype="multipart/form-data">
             <div class="box row">
                 <div class="box" style:flex="1">
-                    <TextInput
-                        type="text"
-                        name="user.email"
-                        label="Email"
-                        bind:value={$student.email}
-                        errored={!!form?.errors.fieldErrors.user}
-                        error={form?.errors.fieldErrors.user?.at(0)}
-                    />
-                    <TextInput
-                        type="password"
-                        name="user.password"
-                        label="Senha"
-                        placeholder="inalterada"
-                        bind:value={$student.password}
-                    />
+                    <label data-error={form?.errors.fieldErrors.user?.at(0)}>
+                        <span>Email</span>
+                        <input type="text" name="user.email" bind:value={$student.email} />
+                    </label>
+                    <label>
+                        <span>Senha</span>
+                        <input
+                            type="password"
+                            name="user.password"
+                            placeholder="inalterada"
+                            bind:value={$student.password}
+                        />
+                    </label>
                 </div>
                 <AvatarPicker bind:user={$student} name="avatar" />
             </div>
             <div class="box">
-                <TextInput
-                    type="text"
-                    name="name"
-                    label="Nome"
-                    bind:value={$student.profile.name}
-                    errored={!!form?.errors.fieldErrors.name}
-                    error={form?.errors.fieldErrors.name?.at(0)}
-                />
-                <TextInput type="textarea" name="bio" label="Sobre" bind:value={$student.profile.bio} />
+                <label data-error={form?.errors.fieldErrors.name?.at(0)}>
+                    <span>Nome</span>
+                    <input type="text" name="name" bind:value={$student.profile.name} />
+                </label>
+                <label>
+                    <span>Sobre</span>
+                    <textarea name="bio" bind:value={$student.profile.bio} />
+                </label>
                 <div class="group">
-                    <TextInput type="number" name="level" label="Nível" bind:value={$student.profile.level} />
+                    <label>
+                        <span>Nível</span>
+                        <input type="number" name="level" bind:value={$student.profile.level} />
+                    </label>
                     <RadioGroup
                         name="gender"
                         label="Gênero"
@@ -105,15 +102,10 @@
                     />
                 </div>
                 <div class="group">
-                    <TextInput
-                        type="date"
-                        name="birthdate"
-                        label="Data de Nascimento"
-                        bind:value={$student.profile.birthdate}
-                        errored={!!form?.errors.fieldErrors.birthdate}
-                        error={form?.errors.fieldErrors.birthdate?.at(0)}
-                    />
-
+                    <label data-error={form?.errors.fieldErrors.birthdate?.at(0)}>
+                        <span>Data de Nascimento</span>
+                        <input type="date" name="birthdate" bind:value={$student.profile.birthdate} />
+                    </label>
                     <RadioGroup
                         name="user.role"
                         label="Cargo"
@@ -128,12 +120,12 @@
             </div>
             <div class="box row">
                 <div class="box" style:flex="1">
-                    <Button type="submit">Salvar usuário</Button>
+                    <button type="submit">Salvar usuário</button>
                 </div>
                 <div class="box">
-                    <Button type="button" variant="danger ghost" on:click={deleteUser}>
+                    <button type="button" class="danger ghost" on:click={deleteUser}>
                         Excluir usuário
-                    </Button>
+                    </button>
                 </div>
             </div>
         </form>

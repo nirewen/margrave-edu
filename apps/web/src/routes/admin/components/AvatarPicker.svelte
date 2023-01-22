@@ -43,6 +43,7 @@
             position: relative;
             border-radius: 9999px;
             height: min-content;
+            padding: 0;
 
             input {
                 display: none;
