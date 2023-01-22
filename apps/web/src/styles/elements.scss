@@ -104,7 +104,7 @@ fieldset {
     gap: 0.8rem;
 
     &.inline {
-        flex-direction: row;
-        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
 }

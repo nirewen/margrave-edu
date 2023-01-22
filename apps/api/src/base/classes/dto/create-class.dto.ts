@@ -1,4 +1,4 @@
-import { IsEnum, IsString, Matches } from 'class-validator'
+import { IsEnum, IsString, IsUUID, Matches } from 'class-validator'
 import { Shift } from 'src/entities/class.entity'
 
 export class CreateClassDTO {
@@ -12,4 +12,7 @@ export class CreateClassDTO {
     @IsString()
     @IsEnum(Shift)
     shift: Shift
+
+    @IsUUID()
+    classroomId: string
 }

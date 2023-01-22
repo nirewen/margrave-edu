@@ -2,18 +2,22 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm'
 import { Class } from 'src/entities/class.entity'
 import { Repository } from 'typeorm'
+import { ClassroomsService } from '../classrooms/classrooms.service'
 import { CreateClassDTO } from './dto/create-class.dto'
 import { UpdateClassDto } from './dto/update-class.dto'
 
 @Injectable()
 export class ClassesService {
-    constructor(@InjectRepository(Class) private readonly classes: Repository<Class>) {}
+    constructor(
+        @InjectRepository(Class) private readonly classes: Repository<Class>,
+        private readonly classroomsService: ClassroomsService
+    ) {}
 
     async count() {
         return this.classes.count()
     }
 
-    async create(body: CreateClassDTO) {
+    async create({ classroomId, ...body }: CreateClassDTO) {
         const entity = await this.findOneByNumber(body.number).catch(() => null)
 
         if (entity) {
@@ -21,6 +25,9 @@ export class ClassesService {
         }
 
         const obj = this.classes.create(body)
+        const classroom = await this.classroomsService.findOne(classroomId)
+
+        obj.classroom = classroom
 
         return this.classes.save(obj)
     }
@@ -40,7 +47,12 @@ export class ClassesService {
     }
 
     async findOne(id: string) {
-        const entity = await this.classes.findOneBy({ id })
+        const entity = await this.classes.findOne({
+            where: { id },
+            relations: {
+                classroom: true,
+            },
+        })
 
         if (!entity) {
             throw new NotFoundException('class for provided id was not found')
@@ -49,8 +61,14 @@ export class ClassesService {
         return entity
     }
 
-    async update(id: string, body: UpdateClassDto) {
+    async update(id: string, { classroomId, ...body }: UpdateClassDto) {
         const obj = await this.findOne(id)
+
+        if (classroomId !== null && classroomId !== obj.classroom?.id) {
+            const classroom = await this.classroomsService.findOne(classroomId)
+
+            obj.classroom = classroom
+        }
 
         return this.classes.save({ ...obj, ...body })
     }
