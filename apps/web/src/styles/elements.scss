@@ -5,6 +5,23 @@ textarea {
     border: 1px solid rgba(0, 0, 0, 0.16);
     color: var(--gray-300);
     outline-offset: 2px;
+
+    &[type='color'] {
+        padding: 0;
+        appearance: none;
+        border: none;
+        width: 2.4rem;
+        height: 2.4rem;
+
+        &::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        &::-webkit-color-swatch {
+            border: none;
+            border-radius: 0.4rem;
+        }
+    }
 }
 
 label {
@@ -22,6 +39,10 @@ label {
             outline-color: var(--red);
             outline-width: 2px;
         }
+    }
+
+    &:has(> input[type='color']) {
+        flex: 0;
     }
 }
 
@@ -75,8 +96,13 @@ a[role='button'] {
     }
 }
 
-fieldset.inline {
-    display: inline-flex;
-    align-items: center;
+fieldset {
+    display: flex;
+    flex-direction: column;
     gap: 0.8rem;
+
+    &.inline {
+        flex-direction: row;
+        align-items: center;
+    }
 }
