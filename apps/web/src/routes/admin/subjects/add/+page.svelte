@@ -1,6 +1,8 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
+    import Avatar from '$lib/components/Avatar.svelte'
+    import Option from '$lib/components/Option.svelte'
     import type { ActionData, PageData } from './$types'
 
     export let form: ActionData
@@ -17,34 +19,34 @@
         <h2>Preencha o formulário para adicionar uma nova disciplina</h2>
     </div>
 </header>
-{#if form?.errored && form?.error}
-    <Alert variant="danger">{form?.error}</Alert>
+{#if form?.error && form?.message}
+    <Alert variant="danger">{form?.message}</Alert>
 {/if}
-<div class="page">
-    <form method="POST" use:enhance>
+<form method="POST" use:enhance>
+    <div class="form">
         <div class="box">
             <div class="box row">
                 <div class="box" style:flex={1}>
-                    <label>
+                    <label data-error={form?.errors?.name}>
                         <span>Nome</span>
                         <input type="text" name="name" value={form?.data?.name ?? ''} required />
                     </label>
                 </div>
-                <label>
-                    <span>Cor</span>
-                    <input type="color" name="color" value={form?.data?.color ?? ''} required />
-                </label>
-                <label>
+                <label data-error={form?.errors?.icon}>
                     <span>Ícone</span>
                     <input type="text" name="icon" value={form?.data?.icon ?? ''} required />
                 </label>
+                <label data-error={form?.errors?.color}>
+                    <span>Cor</span>
+                    <input type="color" name="color" value={form?.data?.color ?? ''} required />
+                </label>
             </div>
             <div class="box row">
-                <label>
+                <label data-error={form?.errors?.type}>
                     <span>Tipo da disciplina</span>
                     <input type="text" name="type" value={form?.data?.type ?? ''} placeholder="Exatas" />
                 </label>
-                <label>
+                <label data-error={form?.errors?.hours}>
                     <span>Hora de demanda</span>
                     <input type="number" name="hours" value={form?.data?.hours ?? ''} />
                 </label>
@@ -53,13 +55,22 @@
         <div class="box">
             <button type="submit">Salvar</button>
         </div>
-    </form>
-    <div class="teacher-list">
-        {#each data.teachers as teacher}
-            <span>{teacher.profile.name}</span>
-        {/each}
     </div>
-</div>
+    <div class="box">
+        <label for="teacherId" data-error={form?.errors?.teacherId}>
+            <span>Professor</span>
+            <fieldset id="teacherId" role="radiogroup">
+                {#each [...data.teachers] as teacher}
+                    <Option name="teacherId" group={form?.data?.teacherId} value={teacher.id}>
+                        <Avatar slot="icon" avatar={teacher.profile.avatar} size={3} />
+                        <span>{teacher.profile.name}</span>
+                        <small>{teacher.email}</small>
+                    </Option>
+                {/each}
+            </fieldset>
+        </label>
+    </div>
+</form>
 
 <style lang="scss">
     header {
@@ -77,38 +88,39 @@
         }
     }
 
-    .page {
+    form {
         display: grid;
         gap: 1rem;
         grid-template-columns: auto 20rem;
-        form {
+
+        .form {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             width: 100%;
+        }
 
-            .box {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-                background-color: var(--gray-900);
-                box-shadow: var(--elevation-3);
-                border-radius: 0.8rem;
-                height: fit-content;
+        .box {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--gray-900);
+            box-shadow: var(--elevation-3);
+            border-radius: 0.8rem;
+            height: fit-content;
 
-                &.row {
-                    flex-direction: row;
+            &.row {
+                flex-direction: row;
 
-                    > * {
-                        justify-self: stretch;
-                    }
+                > * {
+                    justify-self: stretch;
                 }
+            }
 
-                > .box {
-                    box-shadow: none;
-                    padding: 0;
-                }
+            > .box {
+                box-shadow: none;
+                padding: 0;
             }
         }
     }

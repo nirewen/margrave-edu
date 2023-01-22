@@ -1,15 +1,16 @@
 import { loadWrapper as wrap } from '$lib/api'
-import type { Classroom } from '$lib/types/api/Classroom'
+import type { Subject } from '$lib/types/api/Subject'
 import type { User } from '$lib/types/User'
 import { redirect } from '@sveltejs/kit'
 import type { PageLoad } from './$types'
 
 export const load = wrap(async ({ api, params }) => {
     try {
-        const classroom = await api.get<Classroom>(`/api/classrooms/${params.id}`)
+        const subject = await api.get<Subject>(`/api/subjects/${params.id}`)
+        const teachers = await api.get<User[]>('/api/users?role=TEACHER')
 
-        return { classroom }
+        return { subject, teachers }
     } catch (error) {
-        throw redirect(301, '/admin/classrooms')
+        throw redirect(301, '/admin/subjects')
     }
 }) satisfies PageLoad

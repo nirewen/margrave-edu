@@ -3,7 +3,7 @@
     export let color: string = '#000000'
     export let name: string
     export let value: string
-    export let group: string | undefined
+    export let group: string | undefined = undefined
 </script>
 
 <label
@@ -14,7 +14,7 @@
 >
     <input type="radio" {name} {value} bind:group />
     <slot name="icon" />
-    <span><slot /></span>
+    <p><slot /></p>
 </label>
 
 <style lang="scss">
@@ -35,6 +35,12 @@
             width: 0;
             height: 0;
             margin-right: -0.2rem;
+        }
+
+        > p {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
         }
 
         &.icon {
