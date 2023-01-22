@@ -29,7 +29,7 @@
             {#each data.classrooms as classroom}
                 {@const type = classroomTypes.get(classroom.type)}
                 <InfoCard>
-                    <iconify-icon slot="icon" icon={type?.icon} width="48" />
+                    <iconify-icon data-tooltip={type?.name} slot="icon" icon={type?.icon} width="48" />
                     <svelte:fragment slot="title">{classroom.building}</svelte:fragment>
                     <svelte:fragment slot="subtitle">{classroom.capacity}</svelte:fragment>
                     <a role="button" href="./classrooms/{classroom.id}/edit" class="ghost icon" slot="action">
