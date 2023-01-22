@@ -93,13 +93,13 @@
                         <span>Data de Nascimento</span>
                         <input type="date" name="birthdate" bind:value={$student.profile.birthdate} />
                     </label>
-                    <label for="gender">
+                    <label for="user.role">
                         <span>Cargo</span>
-                        <fieldset class="inline" id="role" role="radiogroup">
+                        <fieldset class="inline" id="user.role" role="radiogroup">
                             {#each [...roles] as [value, { icon, name }]}
-                                <Option name="gender" bind:group={$student.role} {value}>
+                                <Option name="user.role" bind:group={$student.role} {value}>
                                     <iconify-icon {icon} width="1.6rem" slot="icon" />
-                                    {name}
+                                    {name.formal.single}
                                 </Option>
                             {/each}
                         </fieldset>
