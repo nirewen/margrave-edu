@@ -1,7 +1,5 @@
 export const plural = (num: number, suffix = 's') => (num === 1 ? '' : suffix)
 
-export const dateFormat = new Intl.DateTimeFormat('pt-BR')
-
 export type GenderID = 'MALE' | 'FEMALE' | 'OTHER' | string
 export type RoleID = 'ADMIN' | 'TEACHER' | 'STUDENT' | string
 type GenderInfo = {
