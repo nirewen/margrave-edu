@@ -79,8 +79,14 @@
                     <label for="gender">
                         <span>Gênero</span>
                         <fieldset class="inline" id="gender" role="radiogroup">
-                            {#each [...genders] as [value, { icon, name }]}
-                                <Option name="gender" bind:group={$student.profile.gender} {value}>
+                            {#each [...genders] as [value, { icon, name, bgColor, color }]}
+                                <Option
+                                    name="gender"
+                                    bind:group={$student.profile.gender}
+                                    {value}
+                                    {bgColor}
+                                    {color}
+                                >
                                     <iconify-icon {icon} width="1.6rem" slot="icon" />
                                     {name}
                                 </Option>
