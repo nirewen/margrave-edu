@@ -1,7 +1,5 @@
 <script lang="ts">
     import { applyAction, enhance } from '$app/forms'
-    import Button from '$lib/components/Button.svelte'
-    import TextInput from '$lib/components/TextInput.svelte'
     import type { ActionData } from './$types'
 
     export let form: ActionData
@@ -26,13 +24,19 @@
         }
     }}
 >
-    <TextInput type="email" label="Email" id="email" name="email" required />
-    <TextInput type="password" label="Senha" id="password" name="password" required />
+    <label>
+        <span>Email</span>
+        <input type="email" name="email" required />
+    </label>
+    <label>
+        <span>Senha</span>
+        <input type="password" name="password" required />
+    </label>
     <!-- TODO: fazer elemento de erro -->
     {#if form?.error}
         <span>{form?.message}</span>
     {/if}
-    <Button type="submit">Fazer login</Button>
+    <button type="submit">Fazer login</button>
 </form>
 
 <footer>

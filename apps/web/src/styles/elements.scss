@@ -1,0 +1,82 @@
+input,
+textarea {
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.4rem;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    color: var(--gray-300);
+    outline-offset: 2px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+
+    &[data-error] {
+        color: var(--red);
+
+        > :is(input, textarea) {
+            outline-style: solid;
+            border-color: var(--red);
+            outline-color: var(--red);
+            outline-width: 2px;
+        }
+    }
+}
+
+button,
+a[role='button'] {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.4rem 0.8rem;
+    color: #ffffff;
+    border-radius: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    &.primary,
+    &[type='submit'] {
+        color: var(--gray-900);
+        background-color: var(--accent);
+
+        &:hover {
+            background-color: var(--accent-hover);
+        }
+        &:active {
+            background-color: var(--accent-pressed);
+        }
+    }
+
+    &.ghost {
+        border: 1px solid var(--gray-700);
+        background-color: var(--gray-900);
+        color: var(--gray-000);
+    }
+
+    &.danger {
+        border-color: var(--red);
+        color: var(--red);
+
+        &:hover {
+            border-color: var(--red);
+        }
+    }
+
+    &.icon {
+        padding: 0.4rem;
+        border-radius: 0.4rem;
+    }
+
+    &.round {
+        border-radius: 9999px;
+    }
+}
+
+fieldset.inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+}

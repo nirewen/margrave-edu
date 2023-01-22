@@ -9,13 +9,10 @@
 
 <ul class:child transition:slide>
     {#each links as { name, route, icon, routes }}
+        {@const active = ($page.url.pathname + '?' + $page.url.searchParams).startsWith(route)}
+
         <li class:nested={routes && routes.length > 0}>
-            <a
-                class="label"
-                class:open
-                class:active={($page.url.pathname + '?' + $page.url.searchParams).startsWith(route)}
-                href={route}
-            >
+            <a class="label" class:open class:active href={route}>
                 <iconify-icon {icon} width={28} />
                 <span>{name}</span>
             </a>

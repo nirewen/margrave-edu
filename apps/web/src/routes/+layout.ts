@@ -2,10 +2,10 @@ import { redirect } from '@sveltejs/kit'
 
 import { loadWrapper as wrap } from '$lib/api'
 import type { User } from '$lib/types/User'
-import type { Role } from '$lib/util'
+import type { RoleID } from '$lib/util'
 import type { LayoutLoad } from './$types'
 
-const protectedRoutes: { route: string; roles: Role[] }[] = [
+const protectedRoutes: { route: string; roles: RoleID[] }[] = [
     { route: '/admin', roles: ['ADMIN'] },
     { route: '/teacher', roles: ['TEACHER'] },
     { route: '/student', roles: ['STUDENT'] },

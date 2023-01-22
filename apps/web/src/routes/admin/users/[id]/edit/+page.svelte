@@ -4,22 +4,16 @@
     import { writable } from 'svelte/store'
     import { enhance } from '$app/forms'
 
-    import Button from '$lib/components/Button.svelte'
-    import TextInput from '$lib/components/TextInput.svelte'
-
     import type { ActionData, PageData } from './$types'
     import AvatarPicker from '../../../components/AvatarPicker.svelte'
     import Profile from '../../../components/Profile.svelte'
-    import RadioGroup from '$lib/components/RadioGroup.svelte'
-    import { capitalize, getGender, getRole, roles, type Role } from '$lib/util'
+    import Option from '$lib/components/Option.svelte'
+    import { genders, roles } from '$lib/util'
 
     export let data: PageData
     export let form: ActionData
 
     const student = writable(merge(form?.data.user ?? {}, data.student))
-    function getRoleName(role: string) {
-        return capitalize(getRole(role as Role).name.single)
-    }
 
     async function deleteUser() {
         const confirmed = confirm('Tem certeza que deseja excluir esse usuário?')
@@ -39,9 +33,9 @@
 </svelte:head>
 
 <header>
-    <Button variant="ghost" icon href="../" title="Voltar">
+    <a role="button" class="ghost icon" href="../" title="Voltar">
         <iconify-icon icon="mdi:chevron-left" width={32} />
-    </Button>
+    </a>
     <hgroup>
         <h1>Editar usuário</h1>
         <h2>Preencha o formulário para editar o perfil do usuário</h2>
@@ -52,88 +46,74 @@
         <form action="?/save" method="POST" use:enhance enctype="multipart/form-data">
             <div class="box row">
                 <div class="box" style:flex="1">
-                    <TextInput
-                        type="text"
-                        name="user.email"
-                        label="Email"
-                        bind:value={$student.email}
-                        errored={!!form?.errors.fieldErrors.user}
-                        error={form?.errors.fieldErrors.user?.at(0)}
-                    />
-                    <TextInput
-                        type="password"
-                        name="user.password"
-                        label="Senha"
-                        placeholder="inalterada"
-                        bind:value={$student.password}
-                    />
+                    <label data-error={form?.errors.fieldErrors.user?.at(0)}>
+                        <span>Email</span>
+                        <input type="text" name="user.email" bind:value={$student.email} />
+                    </label>
+                    <label>
+                        <span>Senha</span>
+                        <input
+                            type="password"
+                            name="user.password"
+                            placeholder="inalterada"
+                            bind:value={$student.password}
+                        />
+                    </label>
                 </div>
                 <AvatarPicker bind:user={$student} name="avatar" />
             </div>
             <div class="box">
-                <TextInput
-                    type="text"
-                    name="name"
-                    label="Nome"
-                    bind:value={$student.profile.name}
-                    errored={!!form?.errors.fieldErrors.name}
-                    error={form?.errors.fieldErrors.name?.at(0)}
-                />
-                <TextInput type="textarea" name="bio" label="Sobre" bind:value={$student.profile.bio} />
+                <label data-error={form?.errors.fieldErrors.name?.at(0)}>
+                    <span>Nome</span>
+                    <input type="text" name="name" bind:value={$student.profile.name} />
+                </label>
+                <label>
+                    <span>Sobre</span>
+                    <textarea name="bio" bind:value={$student.profile.bio} />
+                </label>
                 <div class="group">
-                    <TextInput type="number" name="level" label="Nível" bind:value={$student.profile.level} />
-                    <RadioGroup
-                        name="gender"
-                        label="Gênero"
-                        bind:group={$student.profile.gender}
-                        options={[
-                            {
-                                icon: 'ic:baseline-male',
-                                value: 'MALE',
-                                color: '#226699',
-                                bgColor: 'white',
-                            },
-                            {
-                                icon: 'ic:baseline-female',
-                                value: 'FEMALE',
-                                color: '#ea596e',
-                                bgColor: 'white',
-                            },
-                            { icon: 'ic:baseline-transgender', value: 'OTHER' },
-                        ]}
-                        parseOption={getGender}
-                    />
+                    <label>
+                        <span>Nível</span>
+                        <input type="number" name="level" bind:value={$student.profile.level} />
+                    </label>
+                    <label for="gender">
+                        <span>Gênero</span>
+                        <fieldset class="inline" id="gender" role="radiogroup">
+                            {#each [...genders] as [value, { icon, name }]}
+                                <Option name="gender" bind:group={$student.profile.gender} {value}>
+                                    <iconify-icon {icon} width="1.6rem" slot="icon" />
+                                    {name}
+                                </Option>
+                            {/each}
+                        </fieldset>
+                    </label>
                 </div>
                 <div class="group">
-                    <TextInput
-                        type="date"
-                        name="birthdate"
-                        label="Data de Nascimento"
-                        bind:value={$student.profile.birthdate}
-                        errored={!!form?.errors.fieldErrors.birthdate}
-                        error={form?.errors.fieldErrors.birthdate?.at(0)}
-                    />
-
-                    <RadioGroup
-                        name="user.role"
-                        label="Cargo"
-                        bind:group={$student.role}
-                        options={Object.entries(roles).map(([id, role]) => ({
-                            value: id,
-                            icon: role.icon,
-                        }))}
-                        parseOption={getRoleName}
-                    />
+                    <label data-error={form?.errors.fieldErrors.birthdate?.at(0)}>
+                        <span>Data de Nascimento</span>
+                        <input type="date" name="birthdate" bind:value={$student.profile.birthdate} />
+                    </label>
+                    <label for="gender">
+                        <span>Cargo</span>
+                        <fieldset class="inline" id="role" role="radiogroup">
+                            {#each [...roles] as [value, { icon, name }]}
+                                <Option name="gender" bind:group={$student.role} {value}>
+                                    <iconify-icon {icon} width="1.6rem" slot="icon" />
+                                    {name}
+                                </Option>
+                            {/each}
+                        </fieldset>
+                    </label>
                 </div>
             </div>
             <div class="box row">
                 <div class="box" style:flex="1">
-                    <Button type="submit">Salvar usuário</Button>
+                    <button type="submit">Salvar usuário</button>
                 </div>
                 <div class="box">
-                    <Button type="button" variant="danger ghost" on:click={deleteUser}>
+                    <button type="button" class="danger ghost" on:click={deleteUser}>
                         Excluir usuário
-                    </Button>
+                    </button>
                 </div>
             </div>
         </form>

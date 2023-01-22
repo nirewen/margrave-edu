@@ -1,7 +1,6 @@
 <script lang="ts">
     import { slide } from 'svelte/transition'
 
-    import Button from '$lib/components/Button.svelte'
     import { boolean } from '$lib/hooks/boolean'
 
     import MenuList from './MenuList.svelte'
@@ -20,9 +19,9 @@
 
 <nav class:open={$open}>
     <header>
-        <Button variant="ghost" icon on:click={open.toggle}>
+        <button class="ghost icon" on:click={open.toggle}>
             <iconify-icon icon="ic:baseline-menu" width="2rem" />
-        </Button>
+        </button>
         <h1>Margrave</h1>
     </header>
     {#if $open}

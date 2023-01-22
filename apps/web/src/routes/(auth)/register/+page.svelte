@@ -1,8 +1,6 @@
 <script lang="ts">
     import { applyAction, enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
-    import Button from '$lib/components/Button.svelte'
-    import TextInput from '$lib/components/TextInput.svelte'
     import type { ActionData } from './$types'
 
     export let form: ActionData
@@ -27,23 +25,18 @@
         }
     }}
 >
-    <TextInput type="email" label="Email" id="email" name="email" value={form?.data.email ?? ''} required />
-    <TextInput
-        type="password"
-        label="Senha"
-        id="password"
-        name="password"
-        value={form?.data.password ?? ''}
-        required
-    />
-    <TextInput
-        type="password"
-        label="Confirmar senha"
-        id="confirmPassword"
-        name="confirmPassword"
-        value={form?.data.password ?? ''}
-        required
-    />
+    <label>
+        <span>Email</span>
+        <input type="email" name="email" value={form?.data.email ?? ''} required />
+    </label>
+    <label>
+        <span>Senha</span>
+        <input type="password" name="password" value={form?.data.password ?? ''} required />
+    </label>
+    <label>
+        <span>Confirmar senha</span>
+        <input type="password" name="confirmPassword" value={form?.data.password ?? ''} required />
+    </label>
     <!-- TODO: fazer elemento de erro -->
     {#if form?.validationError}
         {#each form?.errors as error}
@@ -53,7 +46,7 @@
     {#if form?.apiError}
         <Alert icon="ic:baseline-error" variant="danger">{form.message}</Alert>
     {/if}
-    <Button type="submit">Registrar conta</Button>
+    <button type="submit">Registrar conta</button>
 </form>
 
 <footer>

@@ -1,81 +1,106 @@
 <script lang="ts">
+    import { createMenu } from 'svelte-headlessui'
+
     import { page } from '$app/stores'
     import type { User } from '$lib/types/User'
 
-    import { clickOutside } from '$lib/directives/clickOutside'
-    import { boolean } from '$lib/hooks/boolean'
     import Avatar from '$lib/components/Avatar.svelte'
+    import { slide } from 'svelte/transition'
 
     const user: User = $page.data.user
 
-    let open = boolean(false)
+    const menu = createMenu({ label: 'Actions' })
+
+    const groups = [
+        [
+            { href: '/profile', icon: 'ic:baseline-account-circle', text: `Perfil` },
+            { href: '/logout', icon: 'ic:baseline-logout', text: `Encerrar sessão`, preload: 'off' as const },
+        ],
+    ]
 </script>
 
-<div class="nav-user" class:open={$open} use:clickOutside={() => $open && open.setFalse()}>
-    <button type="button" class="user" on:click={open.toggle}>
+<menu>
+    <button type="button" use:menu.button>
         <Avatar avatar={user.profile.avatar} alt="seu avatar" size={2} />
-        {user.profile.name || user.email}
+        <span>{user.profile.name || user.email}</span>
         <iconify-icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
     </button>
-    {#if $open}
-        <menu>
-            <li>
-                <a href="/profile">Perfil</a>
-            </li>
-            <li>
-                <a href="/logout" data-sveltekit-preload-data="off">Logout</a>
-            </li>
-        </menu>
+
+    {#if $menu.expanded}
+        <div class="menu" use:menu.items transition:slide={{ duration: 150 }}>
+            {#each groups as group}
+                <div class="menu-group">
+                    {#each group as option}
+                        {@const active = $menu.active === option.text}
+                        <a
+                            use:menu.item
+                            class="menu-item"
+                            class:active
+                            href={option.href}
+                            data-sveltekit-preload-data={option.preload}
+                        >
+                            <iconify-icon icon={option.icon} width="1.2rem" />
+                            {option.text}
+                        </a>
+                    {/each}
+                </div>
+            {/each}
+        </div>
     {/if}
-</div>
+</menu>
 
 <style lang="scss" scoped>
-    .nav-user {
+    menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         position: relative;
+        text-align: right;
 
-        iconify-icon {
-            rotate: 0deg;
-            transition: rotate 200ms linear;
-        }
-        &.open iconify-icon {
-            rotate: 180deg;
-        }
-
-        .user {
-            display: flex;
+        > button {
+            display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
-
-            padding: 0.4rem;
-            padding-right: 1rem;
-
-            background-color: #f7f7f7;
+            gap: 0.6rem;
+            padding: 0.4rem 0.8rem 0.4rem 0.4rem;
+            color: var(--gray-000);
+            width: 100%;
             border-radius: 9999px;
+            background-color: #f7f7f7;
+            text-transform: none;
+            font-weight: 400;
         }
 
-        menu {
-            display: flex;
-            flex-direction: column;
+        > .menu {
             position: absolute;
-            top: calc(100% + 0.4rem);
-            background-color: #ffffff;
-            width: 12rem;
             right: 0;
-            border-radius: 0.5rem;
-            box-shadow: var(--elevation-6);
-            overflow: hidden;
+            top: 3.5rem;
+            background-color: #ffffff;
+            transform-origin: top right;
+            width: 14rem;
+            border-radius: 0.375rem;
+            border-top-width: 1px;
+            border-color: #f3f4f6;
+            box-shadow: var(--elevation-2);
 
-            > li {
-                display: flex;
-                text-align: left;
+            > .menu-group {
+                padding: 0.25rem;
 
-                a {
-                    flex: 1;
-                    padding: 0.4rem 0.6rem;
-                }
+                > a.menu-item {
+                    display: flex;
+                    gap: 0.4rem;
+                    padding: 0.5rem;
+                    font-size: 0.875rem;
+                    line-height: 1.25rem;
+                    align-items: center;
+                    width: 100%;
+                    border-radius: 0.375rem;
+                    color: var(--gray-000);
 
-                &:hover {
-                    background-color: rgba(0, 0, 0, 0.02);
+                    &.active {
+                        background-color: var(--primary);
+                        color: #ffffff;
+                    }
                 }
             }
         }

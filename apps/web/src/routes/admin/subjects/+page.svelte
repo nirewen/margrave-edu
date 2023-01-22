@@ -1,11 +1,13 @@
 <script lang="ts">
-    import Button from '$lib/components/Button.svelte'
-    import { classroomTypes } from '$lib/util'
     import InfoCard from '../components/InfoCard.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData
 </script>
+
+<svelte:head>
+    <title>Disciplinas | Margrave</title>
+</svelte:head>
 
 <header>
     <hgroup>
@@ -13,10 +15,10 @@
         <h2>Disciplinas registradas no sistema</h2>
     </hgroup>
 
-    <Button href="./subjects/add" round variant="ghost">
+    <a role="button" class="ghost round" href="./subjects/add">
         <iconify-icon icon="ic:baseline-add" width={24} />
         Adicionar
-    </Button>
+    </a>
 </header>
 {#if !data.subjects.length}
     <div class="page">Nenhuma disciplina encontrada</div>
@@ -25,9 +27,9 @@
         <div class="grid">
             {#each data.subjects as subject}
                 <InfoCard title={subject.name} subtitle={subject.teacher.profile.name} clickable={false}>
-                    <Button href="./subjects/{subject.id}/edit" variant="ghost" icon slot="right">
+                    <a role="button" href="./subjects/{subject.id}/edit" class="ghost icon" slot="right">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
-                    </Button>
+                    </a>
                 </InfoCard>
             {/each}
         </div>

@@ -1,16 +1,15 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
-    import Button from '$lib/components/Button.svelte'
-    import TextInput from '$lib/components/TextInput.svelte'
-    import { getRole, type Role } from '$lib/util'
+    import { roles, type RoleID } from '$lib/util'
     import type { ActionData, PageData } from './$types'
 
     export let data: PageData
     export let form: ActionData
 
-    const role = (form?.data?.role || data.query.role) as Role
-    $: roleName = getRole(role).name.single
+    const role = (form?.data?.role || data.query.role) as RoleID
+
+    $: roleName = roles.get(role)?.name.single
 </script>
 
 <svelte:head>
@@ -27,25 +26,20 @@
     <Alert variant="danger">{form?.error}</Alert>
 {/if}
 <form method="POST" use:enhance>
-    <TextInput
-        type="email"
-        name="email"
-        label="Email"
-        placeholder="email@margrave.edu"
-        value={form?.data?.email ?? ''}
-        errored={!!form?.errors?.email}
-        error={form?.errors?.email?.at(0)}
-    />
-    <TextInput
-        type="password"
-        name="password"
-        label="Senha"
-        placeholder={'•'.repeat(16)}
-        value={form?.data?.password ?? ''}
-        errored={!!form?.errors?.password}
-        error={form?.errors?.password?.at(0)}
-    />
-    <Button type="submit">Criar {roleName}</Button>
+    <label data-error={form?.errors?.email?.at(0)}>
+        <span>Email</span>
+        <input type="email" name="email" placeholder="email@margrave.edu" value={form?.data?.email ?? ''} />
+    </label>
+    <label data-error={form?.errors?.password?.at(0)}>
+        <span>Senha</span>
+        <input
+            type="password"
+            name="password"
+            placeholder={'•'.repeat(16)}
+            value={form?.data?.password ?? ''}
+        />
+    </label>
+    <button type="submit">Criar {roleName}</button>
 </form>
 
 <style lang="scss">

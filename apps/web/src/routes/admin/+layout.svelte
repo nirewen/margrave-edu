@@ -12,7 +12,7 @@
             name: 'Usuários',
             route: '/admin/users',
             icon: 'mdi:account-multiple',
-            routes: Object.entries(roles).map(([id, { name, icon }]) => ({
+            routes: [...roles].map(([id, { name, icon }]) => ({
                 name: name.formal.plural,
                 route: `/admin/users?role=${id}`,
                 icon,

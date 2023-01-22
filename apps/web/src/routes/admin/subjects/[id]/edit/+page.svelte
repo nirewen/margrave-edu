@@ -1,61 +1,41 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
-    import Button from '$lib/components/Button.svelte'
-    import RadioGroup from '$lib/components/RadioGroup.svelte'
-    import TextInput from '$lib/components/TextInput.svelte'
-    import { classroomTypes } from '$lib/util'
-    import { merge } from 'merge-anything'
-    import { writable } from 'svelte/store'
     import type { ActionData, PageData } from './$types'
 
     export let data: PageData
     export let form: ActionData
-
-    const classroom = writable(merge(form?.data ?? {}, data.classroom))
-
-    function resolveType(type: string) {
-        return classroomTypes[type as keyof typeof classroomTypes].name
-    }
 </script>
 
 <svelte:head>
-    <title>Adicionar nova sala de aula | Magrave</title>
+    <title>Editar disciplina | Magrave</title>
 </svelte:head>
 
 <header>
     <div>
-        <h1>Nova sala de aula</h1>
-        <h2>Preencha o formulário para adicionar uma nova sala de aula</h2>
+        <h1>Editar disciplina</h1>
+        <h2>Preencha o formulário para editar a disciplina</h2>
     </div>
 </header>
 {#if form?.errored && form?.error}
     <Alert variant="danger">{form?.error}</Alert>
 {/if}
 <form method="POST" use:enhance>
-    <TextInput
-        type="text"
-        name="building"
-        label="Prédio"
-        value={form?.data?.building ?? data.classroom.building}
-        required
-    />
-    <TextInput
-        type="number"
-        name="capacity"
-        label="Capacidade"
-        value={form?.data?.capacity ?? data.classroom.capacity}
-        required
-        min={0}
-    />
-    <RadioGroup
-        name="type"
-        label="Tipo de sala"
-        bind:group={$classroom.type}
-        options={Object.entries(classroomTypes).map(([value, { icon }]) => ({ value, icon }))}
-        parseOption={resolveType}
-    />
-    <Button type="submit">Salvar</Button>
+    <label>
+        <span>Prédio</span>
+        <input type="text" name="building" value={form?.data?.building ?? data.classroom.building} required />
+    </label>
+    <label>
+        <span>Capacidade</span>
+        <input
+            type="number"
+            name="capacity"
+            min="0"
+            value={form?.data?.capacity ?? data.classroom.capacity}
+            required
+        />
+    </label>
+    <button type="submit">Salvar</button>
 </form>
 
 <style lang="scss">

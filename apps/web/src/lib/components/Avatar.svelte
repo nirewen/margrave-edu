@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { getRole, type Role } from '$lib/util'
+    import { type RoleID, roles } from '$lib/util'
 
     export let avatar: string | undefined = undefined
     export let alt: string = ''
-    export let role: Role | undefined = undefined
+    export let role: RoleID | undefined = undefined
     export let size = 10
     export let shadow = false
 </script>
@@ -11,7 +11,7 @@
 <div class="avatar" class:shadow>
     <img src={avatar ?? '/assets/default-avatar.png'} {alt} style:--size={size} />
     {#if role}
-        <iconify-icon class="role" icon={getRole(role).icon} width={(size * 16) / 4} />
+        <iconify-icon class="role" icon={roles.get(role)?.icon} width={(size * 16) / 4} />
     {/if}
 </div>
 

@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Button from '$lib/components/Button.svelte'
     import { classroomTypes } from '$lib/util'
     import InfoCard from '../components/InfoCard.svelte'
     import type { PageData } from './$types'
@@ -13,10 +12,10 @@
         <h2>Salas de aula registradas no sistema</h2>
     </hgroup>
 
-    <Button href="./classrooms/add" round variant="ghost">
+    <a role="button" href="./classrooms/add" class="round ghost">
         <iconify-icon icon="ic:baseline-add" width={24} />
         Adicionar
-    </Button>
+    </a>
 </header>
 {#if !data.classrooms.length}
     <div class="page">Nenhuma sala de aula encontrada</div>
@@ -24,15 +23,16 @@
     <div class="page">
         <div class="grid">
             {#each data.classrooms as classroom}
+                {@const type = classroomTypes.get(classroom.type)}
                 <InfoCard
                     title={classroom.building}
                     subtitle={classroom.capacity.toString()}
                     clickable={false}
                 >
-                    <iconify-icon slot="icon" icon={classroomTypes[classroom.type].icon} width="48" />
-                    <Button href="./classrooms/{classroom.id}/edit" variant="ghost" icon slot="right">
+                    <iconify-icon slot="icon" icon={type?.icon} width="48" />
+                    <a role="button" href="./classrooms/{classroom.id}/edit" class="ghost icon" slot="right">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
-                    </Button>
+                    </a>
                 </InfoCard>
             {/each}
         </div>
@@ -55,26 +55,6 @@
 
             h2 {
                 color: var(--gray-400);
-            }
-        }
-
-        .filter {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding-left: 1rem;
-            background-color: var(--gray-900);
-            text-transform: uppercase;
-            border-radius: 9999px;
-            font-weight: 600;
-            box-shadow: var(--elevation-2);
-
-            > .buttons {
-                display: flex;
-                align-items: center;
-                gap: 0.4rem;
-                padding: 0.3rem;
-                border-radius: 9999px;
             }
         }
     }
