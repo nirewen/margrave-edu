@@ -4,19 +4,12 @@
     import { page } from '$app/stores'
     import type { User } from '$lib/types/User'
 
-    import { clickOutside } from '$lib/directives/clickOutside'
-    import { boolean } from '$lib/hooks/boolean'
     import Avatar from '$lib/components/Avatar.svelte'
+    import { slide } from 'svelte/transition'
 
     const user: User = $page.data.user
 
-    let open = boolean(false)
-
     const menu = createMenu({ label: 'Actions' })
-
-    function onSelect(e: Event) {
-        console.log('select', (e as CustomEvent).detail)
-    }
 
     const groups = [
         [
@@ -27,14 +20,14 @@
 </script>
 
 <menu>
-    <button use:menu.button on:select={onSelect}>
+    <button type="button" use:menu.button>
         <Avatar avatar={user.profile.avatar} alt="seu avatar" size={2} />
         <span>{user.profile.name || user.email}</span>
         <iconify-icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
     </button>
 
     {#if $menu.expanded}
-        <div class="menu" use:menu.items>
+        <div class="menu" use:menu.items transition:slide={{ duration: 150 }}>
             {#each groups as group}
                 <div class="menu-group">
                     {#each group as option}
@@ -79,7 +72,7 @@
         > .menu {
             position: absolute;
             right: 0;
-            margin-top: 8.5rem;
+            top: 3.5rem;
             background-color: #ffffff;
             transform-origin: top right;
             width: 14rem;
