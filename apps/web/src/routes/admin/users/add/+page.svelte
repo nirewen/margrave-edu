@@ -1,14 +1,15 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
-    import { getRole, type Role } from '$lib/util'
+    import { roles, type RoleID } from '$lib/util'
     import type { ActionData, PageData } from './$types'
 
     export let data: PageData
     export let form: ActionData
 
-    const role = (form?.data?.role || data.query.role) as Role
-    $: roleName = getRole(role).name.single
+    const role = (form?.data?.role || data.query.role) as RoleID
+
+    $: roleName = roles.get(role)?.name.single
 </script>
 
 <svelte:head>

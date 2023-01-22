@@ -1,15 +1,11 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
-    import RadioGroup from '$lib/components/RadioGroup.svelte'
+    import Option from '$lib/components/Option.svelte'
     import { classroomTypes } from '$lib/util'
     import type { ActionData } from './$types'
 
     export let form: ActionData
-
-    function resolveType(type: string) {
-        return classroomTypes[type as keyof typeof classroomTypes].name
-    }
 </script>
 
 <svelte:head>
@@ -34,13 +30,17 @@
         <span>Capacidade</span>
         <input type="number" name="capacity" min="0" value={form?.data?.capacity ?? ''} required />
     </label>
-    <RadioGroup
-        name="type"
-        label="Tipo de sala"
-        group={String(form?.data.type) ?? ''}
-        options={Object.entries(classroomTypes).map(([value, { icon }]) => ({ value, icon }))}
-        parseOption={resolveType}
-    />
+    <label for="type">
+        <span>Tipo de sala</span>
+        <fieldset class="inline" id="type" role="radiogroup">
+            {#each [...classroomTypes] as [value, { icon, name }]}
+                <Option name="type" group={String(form?.data.type) ?? ''} {value}>
+                    <iconify-icon {icon} width="1.6rem" slot="icon" />
+                    {name}
+                </Option>
+            {/each}
+        </fieldset>
+    </label>
     <button type="submit">Salvar</button>
 </form>
 

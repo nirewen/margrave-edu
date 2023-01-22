@@ -23,12 +23,13 @@
     <div class="page">
         <div class="grid">
             {#each data.classrooms as classroom}
+                {@const type = classroomTypes.get(classroom.type)}
                 <InfoCard
                     title={classroom.building}
                     subtitle={classroom.capacity.toString()}
                     clickable={false}
                 >
-                    <iconify-icon slot="icon" icon={classroomTypes[classroom.type].icon} width="48" />
+                    <iconify-icon slot="icon" icon={type?.icon} width="48" />
                     <a role="button" href="./classrooms/{classroom.id}/edit" class="ghost icon" slot="right">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
                     </a>

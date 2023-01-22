@@ -74,3 +74,9 @@ a[role='button'] {
         border-radius: 9999px;
     }
 }
+
+fieldset.inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+}

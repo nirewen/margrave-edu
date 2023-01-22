@@ -1,7 +1,7 @@
 <script lang="ts">
     import { clipboard } from '$lib/hooks/clipboard'
     import type { PartialUser } from '$lib/types/User'
-    import { getGender } from '$lib/util'
+    import { genders } from '$lib/util'
     import { differenceInYears, format } from 'date-fns'
     import Avatar from '$lib/components/Avatar.svelte'
 
@@ -49,7 +49,7 @@
             </div>
             <div class="field">
                 <h3>Gênero</h3>
-                <p>{user.profile.gender ? getGender(user.profile.gender) : ''}</p>
+                <p>{genders.get(user.profile.gender || 'OTHER')?.name ?? ''}</p>
             </div>
         </div>
         <div class="field group">

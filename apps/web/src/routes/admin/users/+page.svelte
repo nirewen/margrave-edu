@@ -4,7 +4,7 @@
     import { fade } from 'svelte/transition'
     import { queryParam } from 'sveltekit-search-params'
 
-    import { type Role, dateFormat, getRole, roles } from '$lib/util'
+    import { type RoleID, dateFormat, roles } from '$lib/util'
 
     import Profile from '../components/Profile.svelte'
     import InfoCard from '../components/InfoCard.svelte'
@@ -16,10 +16,10 @@
 
     const role = queryParam('role', {
         encode: (value: string) => value,
-        decode: (value: string | null) => (value ? (value as Role) : null),
+        decode: (value: string | null) => (value ? (value as RoleID) : null),
     })
 
-    $: filteredRole = $role ? getRole($role) : null
+    $: filteredRole = $role ? roles.get($role) : null
     $: selected = writable(data.users.at(0))
 </script>
 
@@ -36,7 +36,7 @@
         <iconify-icon icon="ic:baseline-filter-alt" width={28} />
         <div class="buttons">
             <a role="button" href="/admin/users" class="{!$role ? 'primary' : 'ghost'} round">Todos</a>
-            {#each Object.entries(roles) as [id, { icon }]}
+            {#each [...roles] as [id, { icon }]}
                 <a
                     role="button"
                     href="/admin/users?role={id}"

@@ -2,74 +2,135 @@ export const plural = (num: number, suffix = 's') => (num === 1 ? '' : suffix)
 
 export const dateFormat = new Intl.DateTimeFormat('pt-BR')
 
-export const genders = {
-    MALE: 'Masculino',
-    FEMALE: 'Feminino',
-    OTHER: 'Outro',
+export type GenderID = 'MALE' | 'FEMALE' | 'OTHER' | string
+export type RoleID = 'ADMIN' | 'TEACHER' | 'STUDENT' | string
+type GenderInfo = {
+    icon: string
+    name: string
+    color: string
+    bgColor: string
 }
 
-export type Gender = keyof typeof genders
-
-export const getGender = (gender: string) => genders[gender as Gender]
-
-export const roles = {
-    ADMIN: {
-        icon: 'ic:baseline-shield',
-        name: {
-            single: 'administrador',
-            plural: 'administradores',
-            formal: {
-                single: 'Administrador',
-                plural: 'Administradores',
-            },
-        },
-    },
-    TEACHER: {
-        icon: 'mdi:human-male-board',
-        name: {
-            single: 'professor',
-            plural: 'professores',
-            formal: {
-                single: 'Professor',
-                plural: 'Professores',
-            },
-        },
-    },
-    STUDENT: {
-        icon: 'ic:round-school',
-        name: {
-            single: 'estudante',
-            plural: 'estudantes',
-            formal: {
-                single: 'Estudante',
-                plural: 'Estudantes',
-            },
-        },
-    },
+type RoleInfo = {
+    icon: string
+    name: {
+        single: string
+        plural: string
+        formal: {
+            single: string
+            plural: string
+        }
+    }
 }
 
-export type Role = keyof typeof roles
+export type Role = [RoleID, RoleInfo]
+export type Gender = [RoleID, RoleInfo]
 
-export const getRole = (role: Role) => roles[role]
+export const genders = new Map<GenderID, GenderInfo>([
+    [
+        'MALE',
+        {
+            icon: 'ic:baseline-male',
+            name: 'Masculino',
+            color: '#226699',
+            bgColor: '#ffffff',
+        },
+    ],
+    [
+        'FEMALE',
+        {
+            icon: 'ic:baseline-female',
+            name: 'Feminino',
+            color: '#ea596e',
+            bgColor: '#ffffff',
+        },
+    ],
+    [
+        'OTHER',
+        {
+            icon: 'ic:baseline-transgender',
+            name: 'Outro',
+            color: '#000000',
+            bgColor: '#ffffff',
+        },
+    ],
+])
 
-export const classroomTypes = {
-    REGULAR: {
-        icon: 'ic:baseline-edit-note',
-        name: 'Padrão',
-    },
-    COMPUTER: {
-        icon: 'ic:baseline-computer',
-        name: 'Informática',
-    },
-    LABORATORY: {
-        icon: 'ic:baseline-science',
-        name: 'Laboratório',
-    },
-    GYMNASIUM: {
-        icon: 'ic:baseline-sports-gymnastics',
-        name: 'Ginásio',
-    },
-}
+export const roles = new Map<RoleID, RoleInfo>([
+    [
+        'ADMIN',
+        {
+            icon: 'ic:baseline-shield',
+            name: {
+                single: 'administrador',
+                plural: 'administradores',
+                formal: {
+                    single: 'Administrador',
+                    plural: 'Administradores',
+                },
+            },
+        },
+    ],
+    [
+        'TEACHER',
+        {
+            icon: 'mdi:human-male-board',
+            name: {
+                single: 'professor',
+                plural: 'professores',
+                formal: {
+                    single: 'Professor',
+                    plural: 'Professores',
+                },
+            },
+        },
+    ],
+    [
+        'STUDENT',
+        {
+            icon: 'ic:round-school',
+            name: {
+                single: 'estudante',
+                plural: 'estudantes',
+                formal: {
+                    single: 'Estudante',
+                    plural: 'Estudantes',
+                },
+            },
+        },
+    ],
+])
+
+export const classroomTypes = new Map([
+    [
+        'REGULAR',
+        {
+            icon: 'ic:baseline-edit-note',
+            name: 'Padrão',
+        },
+    ],
+    [
+        'COMPUTER',
+        {
+            icon: 'ic:baseline-computer',
+            name: 'Informática',
+        },
+    ],
+    [
+        'LABORATORY',
+        {
+            icon: 'ic:baseline-science',
+            name: 'Laboratório',
+        },
+    ],
+    [
+        'GYMNASIUM',
+        {
+            icon: 'ic:baseline-sports-gymnastics',
+            name: 'Ginásio',
+        },
+    ],
+])
 
 export const capitalize = (string: string) => {
     const [first, ...rest] = string.split('')

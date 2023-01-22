@@ -1,15 +1,10 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
-    import { classroomTypes } from '$lib/util'
     import type { ActionData, PageData } from './$types'
 
     export let form: ActionData
     export let data: PageData
-
-    function resolveType(type: string) {
-        return classroomTypes[type as keyof typeof classroomTypes].name
-    }
 </script>
 
 <svelte:head>

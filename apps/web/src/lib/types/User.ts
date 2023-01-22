@@ -1,10 +1,10 @@
-import type { Role } from '$lib/util'
+import type { RoleID } from '$lib/util'
 import type { Profile } from './Profile'
 
 export interface User {
     id?: string
     email: string
-    role: Role
+    role: RoleID
     createdAt: string
     updatedAt: string
     profile: Profile
@@ -13,6 +13,6 @@ export interface User {
 export interface PartialUser {
     id?: string
     email: string
-    role?: Role
+    role?: RoleID
     profile: Partial<Profile>
 }

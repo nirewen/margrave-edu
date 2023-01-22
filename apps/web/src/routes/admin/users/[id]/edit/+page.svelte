@@ -7,16 +7,13 @@
     import type { ActionData, PageData } from './$types'
     import AvatarPicker from '../../../components/AvatarPicker.svelte'
     import Profile from '../../../components/Profile.svelte'
-    import RadioGroup from '$lib/components/RadioGroup.svelte'
-    import { capitalize, getGender, getRole, roles, type Role } from '$lib/util'
+    import Option from '$lib/components/Option.svelte'
+    import { genders, roles } from '$lib/util'
 
     export let data: PageData
     export let form: ActionData
 
     const student = writable(merge(form?.data.user ?? {}, data.student))
-    function getRoleName(role: string) {
-        return capitalize(getRole(role as Role).name.single)
-    }
 
     async function deleteUser() {
         const confirmed = confirm('Tem certeza que deseja excluir esse usuário?')
@@ -79,43 +76,34 @@
                         <span>Nível</span>
                         <input type="number" name="level" bind:value={$student.profile.level} />
                     </label>
-                    <RadioGroup
-                        name="gender"
-                        label="Gênero"
-                        bind:group={$student.profile.gender}
-                        options={[
-                            {
-                                icon: 'ic:baseline-male',
-                                value: 'MALE',
-                                color: '#226699',
-                                bgColor: 'white',
-                            },
-                            {
-                                icon: 'ic:baseline-female',
-                                value: 'FEMALE',
-                                color: '#ea596e',
-                                bgColor: 'white',
-                            },
-                            { icon: 'ic:baseline-transgender', value: 'OTHER' },
-                        ]}
-                        parseOption={getGender}
-                    />
+                    <label for="gender">
+                        <span>Gênero</span>
+                        <fieldset class="inline" id="gender" role="radiogroup">
+                            {#each [...genders] as [value, { icon, name }]}
+                                <Option name="gender" bind:group={$student.profile.gender} {value}>
+                                    <iconify-icon {icon} width="1.6rem" slot="icon" />
+                                    {name}
+                                </Option>
+                            {/each}
+                        </fieldset>
+                    </label>
                 </div>
                 <div class="group">
                     <label data-error={form?.errors.fieldErrors.birthdate?.at(0)}>
                         <span>Data de Nascimento</span>
                         <input type="date" name="birthdate" bind:value={$student.profile.birthdate} />
                     </label>
-                    <RadioGroup
-                        name="user.role"
-                        label="Cargo"
-                        bind:group={$student.role}
-                        options={Object.entries(roles).map(([id, role]) => ({
-                            value: id,
-                            icon: role.icon,
-                        }))}
-                        parseOption={getRoleName}
-                    />
+                    <label for="gender">
+                        <span>Cargo</span>
+                        <fieldset class="inline" id="role" role="radiogroup">
+                            {#each [...roles] as [value, { icon, name }]}
+                                <Option name="gender" bind:group={$student.role} {value}>
+                                    <iconify-icon {icon} width="1.6rem" slot="icon" />
+                                    {name}
+                                </Option>
+                            {/each}
+                        </fieldset>
+                    </label>
                 </div>
             </div>
             <div class="box row">
