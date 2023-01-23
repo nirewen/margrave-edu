@@ -12,8 +12,8 @@ export enum Weekday {
 }
 
 export type ClassSubject = {
-    id: string
+    id?: string
     weekdays: Weekday[]
-    subject: Subject
+    subject?: Subject
     class: Class
 }

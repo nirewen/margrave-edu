@@ -3,10 +3,52 @@
     import Alert from '$lib/components/Alert.svelte'
     import Avatar from '$lib/components/Avatar.svelte'
     import Option from '$lib/components/Option.svelte'
+    import type { Class } from '$lib/types/api/Class'
+    import type { ClassSubject } from '$lib/types/api/ClassSubject'
+    import { quintOut } from 'svelte/easing'
+    import { flip } from 'svelte/animate'
+    import { crossfade, slide } from 'svelte/transition'
+    import InfoCard from '../../../components/InfoCard.svelte'
     import type { ActionData, PageData } from './$types'
 
     export let data: PageData
     export let form: ActionData
+
+    const [send, receive] = crossfade({
+        duration: d => Math.sqrt(d * 200),
+
+        fallback(node, params) {
+            const style = getComputedStyle(node)
+            const transform = style.transform === 'none' ? '' : style.transform
+
+            return {
+                duration: 600,
+                easing: quintOut,
+                css: t => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`,
+            }
+        },
+    })
+
+    $: classSubjects = [...data.subject.classSubjects]
+    $: availableClasses = data.classes.filter(c => classSubjects.findIndex(cs => cs.class.id === c.id) === -1)
+    $: addedClasses = data.classes.filter(c => classSubjects.findIndex(cs => cs.class.id === c.id) > -1)
+
+    function addClass(turma: Class) {
+        const classSubject = {
+            class: turma,
+            weekdays: [],
+        } satisfies ClassSubject
+
+        classSubjects = [...classSubjects, classSubject]
+    }
+    function removeClass(turma: Class) {
+        classSubjects = classSubjects.filter(cs => {
+            return cs.class.id !== turma.id
+        })
+    }
 </script>
 
 <svelte:head>
@@ -65,6 +107,35 @@
                     <span>Hora de demanda</span>
                     <input type="number" name="hours" value={form?.data?.hours ?? data.subject.hours} />
                 </label>
+            </div>
+        </div>
+        <div class="box row">
+            <div class="box" style:flex="1">
+                <span>Disponíveis</span>
+                {#each availableClasses as turma (turma.id)}
+                    <div animate:flip in:receive={{ key: turma.id }} out:send={{ key: turma.id }}>
+                        <InfoCard on:click={() => addClass(turma)}>
+                            <svelte:fragment slot="title">{turma.number}</svelte:fragment>
+                            <svelte:fragment slot="subtitle">{turma.period}</svelte:fragment>
+                        </InfoCard>
+                    </div>
+                {/each}
+            </div>
+            <div class="box" style:flex="1">
+                <span>Associados</span>
+                {#each addedClasses as turma (turma.id)}
+                    <div animate:flip in:receive={{ key: turma.id }} out:send={{ key: turma.id }}>
+                        <InfoCard on:click={() => removeClass(turma)}>
+                            <svelte:fragment slot="title">{turma.number}</svelte:fragment>
+                            <svelte:fragment slot="subtitle">{turma.period}</svelte:fragment>
+                        </InfoCard>
+                        <div class="weekdays" transition:slide>
+                            {#each 'DSTQQSS'.split('') as weekday}
+                                <button>{weekday}</button>
+                            {/each}
+                        </div>
+                    </div>
+                {/each}
             </div>
         </div>
         <div class="box">
@@ -140,6 +211,20 @@
             > .box {
                 box-shadow: none;
                 padding: 0;
+            }
+
+            .weekdays {
+                display: flex;
+                align-items: center;
+                background-color: #eaeaea;
+                margin-top: -0.4rem;
+                box-shadow: var(--elevation-3);
+                border-bottom-right-radius: 0.5rem;
+                border-bottom-left-radius: 0.5rem;
+
+                > button {
+                    color: #000000;
+                }
             }
         }
     }
