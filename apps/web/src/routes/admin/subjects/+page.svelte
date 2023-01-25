@@ -27,6 +27,7 @@
         <div class="grid">
             {#each data.subjects as subject}
                 <InfoCard>
+                    <iconify-icon slot="icon" icon={subject.icon} width="48" />
                     <svelte:fragment slot="title">{subject.name}</svelte:fragment>
                     <svelte:fragment slot="subtitle">{subject.teacher.profile.name}</svelte:fragment>
                     <a role="button" href="./subjects/{subject.id}/edit" class="ghost icon" slot="action">

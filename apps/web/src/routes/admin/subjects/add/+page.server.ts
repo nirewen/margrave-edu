@@ -2,10 +2,10 @@ import { z } from 'zod'
 import dot from 'dot-object'
 
 import { actionWrapper as wrap } from '$lib/api'
-import type { Classroom } from '$lib/types/api/Classroom'
 import { APIError } from '$lib/types/APIError'
 import { fail, redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
+import type { Subject } from '$lib/types/api/Subject'
 
 const schema = z.object({
     name: z.string(),
@@ -33,7 +33,7 @@ export const actions: Actions = {
         }
 
         try {
-            const response = await api.post<Classroom>('/api/subjects', result.data)
+            const response = await api.post<Subject>('/api/subjects', result.data)
 
             throw redirect(302, `/admin/subjects/${response.id}/edit`)
         } catch (error: unknown) {

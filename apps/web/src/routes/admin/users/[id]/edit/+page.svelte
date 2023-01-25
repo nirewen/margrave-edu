@@ -78,7 +78,7 @@
                     </label>
                     <label for="gender">
                         <span>Gênero</span>
-                        <fieldset class="inline" id="gender" role="radiogroup">
+                        <fieldset class="inline-flex" id="gender" role="radiogroup">
                             {#each [...genders] as [value, { icon, name, bgColor, color }]}
                                 <Option
                                     name="gender"
@@ -101,7 +101,7 @@
                     </label>
                     <label for="user.role">
                         <span>Cargo</span>
-                        <fieldset class="inline" id="user.role" role="radiogroup">
+                        <fieldset class="inline-flex" id="user.role" role="radiogroup">
                             {#each [...roles] as [value, { icon, name }]}
                                 <Option name="user.role" bind:group={$student.role} {value}>
                                     <iconify-icon {icon} width="1.6rem" slot="icon" />

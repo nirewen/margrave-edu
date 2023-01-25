@@ -107,4 +107,9 @@ fieldset {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
+
+    &.inline-flex {
+        display: inline-flex;
+        flex-direction: row;
+    }
 }
