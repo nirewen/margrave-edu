@@ -46,7 +46,6 @@ export class SubjectsService {
             where: { id },
             relations: {
                 teacher: true,
-                classSubjects: true,
             },
         })
 

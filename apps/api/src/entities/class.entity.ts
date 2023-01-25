@@ -30,7 +30,7 @@ export class Class {
     @OneToMany(() => Lesson, lesson => lesson.class)
     lessons: Lesson[]
 
-    @OneToMany(() => ClassSubject, classSubject => classSubject.class)
+    @OneToMany(() => ClassSubject, classSubject => classSubject.class, { cascade: true })
     classSubjects: ClassSubject[]
 
     @ManyToMany(() => User, user => user.classes)

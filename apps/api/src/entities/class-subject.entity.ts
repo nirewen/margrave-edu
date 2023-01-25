@@ -1,24 +1,15 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryColumn, Unique } from 'typeorm'
 import { Class } from './class.entity'
 import { Subject } from './subject.entity'
 
-export enum Weekday {
-    SUNDAY = 1,
-    MONDAY = 2,
-    TUESDAY = 3,
-    WEDNESDAY = 4,
-    THURSDAY = 5,
-    FRIDAY = 6,
-    SATURDAY = 7,
-}
-
 @Entity({ name: 'class_subjects' })
+@Unique(['subject', 'class'])
 export class ClassSubject {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn('uuid')
     id: string
 
-    @Column('enum', { enum: Weekday, array: true, default: [] })
-    weekdays: Weekday[]
+    @Column('boolean', { array: true, default: [] })
+    weekdays: boolean[]
 
     @ManyToOne(() => Subject, subject => subject.classSubjects)
     subject: Subject

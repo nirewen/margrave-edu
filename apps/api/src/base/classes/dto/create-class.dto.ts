@@ -1,4 +1,5 @@
-import { IsEnum, IsString, IsUUID, Matches } from 'class-validator'
+import { IsArray, IsEnum, IsOptional, IsString, IsUUID, Matches } from 'class-validator'
+import { ClassSubject } from 'src/entities/class-subject.entity'
 import { Shift } from 'src/entities/class.entity'
 
 export class CreateClassDTO {
@@ -15,4 +16,11 @@ export class CreateClassDTO {
 
     @IsUUID()
     classroomId: string
+
+    @IsArray()
+    @IsOptional()
+    classSubjects: {
+        subjectId: string
+        weekdays: boolean[]
+    }[]
 }

@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Class } from 'src/entities/class.entity'
+import { Subject } from 'src/entities/subject.entity'
 import { Repository } from 'typeorm'
 import { ClassroomsService } from '../classrooms/classrooms.service'
 import { CreateClassDTO } from './dto/create-class.dto'
@@ -17,7 +18,7 @@ export class ClassesService {
         return this.classes.count()
     }
 
-    async create({ classroomId, ...body }: CreateClassDTO) {
+    async create({ classroomId, classSubjects, ...body }: CreateClassDTO) {
         const entity = await this.findOneByNumber(body.number).catch(() => null)
 
         if (entity) {
@@ -51,6 +52,10 @@ export class ClassesService {
             where: { id },
             relations: {
                 classroom: true,
+                classSubjects: {
+                    class: true,
+                    subject: true,
+                },
             },
         })
 
@@ -61,7 +66,7 @@ export class ClassesService {
         return entity
     }
 
-    async update(id: string, { classroomId, ...body }: UpdateClassDto) {
+    async update(id: string, { classroomId, classSubjects, ...body }: UpdateClassDto) {
         const obj = await this.findOne(id)
 
         if (classroomId !== null && classroomId !== obj.classroom?.id) {
@@ -69,6 +74,23 @@ export class ClassesService {
 
             obj.classroom = classroom
         }
+
+        obj.classSubjects = classSubjects
+            ? classSubjects.map(cs => {
+                  const subject = new Subject()
+                  const entity = new Class()
+
+                  subject.id = cs.subjectId
+                  entity.id = obj.id
+
+                  return {
+                      id: obj.id,
+                      subject,
+                      class: entity,
+                      weekdays: Array.from({ length: 7 }, (_, i) => !!cs.weekdays[i]),
+                  }
+              })
+            : []
 
         return this.classes.save({ ...obj, ...body })
     }

@@ -1,7 +1,6 @@
-import { IsEnum } from 'class-validator'
-import { Weekday } from 'src/entities/class-subject.entity'
+import { IsArray } from 'class-validator'
 
 export class CreateClassSubjectDTO {
-    @IsEnum(Weekday, { each: true })
-    weekdays: Weekday[]
+    @IsArray()
+    weekdays: boolean[]
 }
