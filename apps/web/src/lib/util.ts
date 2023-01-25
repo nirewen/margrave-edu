@@ -130,6 +130,30 @@ export const classroomTypes = new Map([
     ],
 ])
 
+export const shifts = new Map([
+    [
+        'MORNING',
+        {
+            name: 'Manhã',
+            icon: 'vaadin:morning',
+        },
+    ],
+    [
+        'AFTERNOON',
+        {
+            name: 'Tarde',
+            icon: 'vaadin:sun-o',
+        },
+    ],
+    [
+        'NIGHT',
+        {
+            name: 'Noite',
+            icon: 'vaadin:moon-o',
+        },
+    ],
+])
+
 export const capitalize = (string: string) => {
     const [first, ...rest] = string.split('')
 

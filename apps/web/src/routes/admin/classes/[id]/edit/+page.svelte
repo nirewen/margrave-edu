@@ -2,7 +2,7 @@
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
     import Option from '$lib/components/Option.svelte'
-    import { classroomTypes } from '$lib/util'
+    import { classroomTypes, shifts } from '$lib/util'
     import type { Class } from '$lib/types/api/Class'
     import type { ClassSubject } from '$lib/types/api/ClassSubject'
     import { flip } from 'svelte/animate'
@@ -11,7 +11,6 @@
     import InfoCard from '../../../components/InfoCard.svelte'
 
     import type { ActionData, PageData } from './$types'
-    import type { Subject } from '$lib/types/api/Subject'
 
     export let data: PageData
     export let form: ActionData
@@ -98,9 +97,10 @@
                 <label for="shift" data-error={form?.errors?.shift}>
                     <span>Turno</span>
                     <fieldset class="inline" id="shift" role="radiogroup">
-                        {#each ['MORNING', 'AFTERNOON', 'NIGHT'] as value}
-                            <Option name="shift" group={form?.data?.shift ?? data.class.shift} {value}>
-                                {value}
+                        {#each [...shifts.entries()] as [shift, { icon, name }]}
+                            <Option name="shift" group={form?.data?.shift ?? data.class.shift} value={shift}>
+                                <iconify-icon slot="icon" {icon} width="28" />
+                                {name}
                             </Option>
                         {/each}
                     </fieldset>
