@@ -76,7 +76,7 @@
     <div class="form">
         <div class="box">
             <div class="box row">
-                <div class="box" style:flex={1}>
+                <div class="box" style:flex="1">
                     <label data-error={form?.errors?.number}>
                         <span>Número</span>
                         <input
@@ -87,7 +87,7 @@
                         />
                     </label>
                 </div>
-                <label data-error={form?.errors?.period}>
+                <label data-error={form?.errors?.period} style:flex="0">
                     <span>Período</span>
                     <input
                         type="text"
@@ -96,19 +96,19 @@
                         required
                     />
                 </label>
-            </div>
-            <div class="box">
                 <label for="shift" data-error={form?.errors?.shift}>
                     <span>Turno</span>
-                    <fieldset class="inline" id="shift" role="radiogroup">
+                    <fieldset class="inline-flex" id="shift" role="radiogroup">
                         {#each [...shifts.entries()] as [shift, { icon, name }]}
                             <Option name="shift" group={form?.data?.shift ?? data.class.shift} value={shift}>
-                                <iconify-icon slot="icon" {icon} width="28" />
+                                <iconify-icon slot="icon" {icon} width="24" />
                                 {name}
                             </Option>
                         {/each}
                     </fieldset>
                 </label>
+            </div>
+            <div class="box">
                 <label for="classroomId" data-error={form?.errors?.classroomId}>
                     <span>Sala de aula</span>
                     <fieldset class="inline" id="classroomId" role="radiogroup">
