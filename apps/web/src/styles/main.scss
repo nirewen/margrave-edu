@@ -9,7 +9,7 @@ body {
     flex-direction: column;
     height: 100%;
 
-    > div {
+    > div > div {
         overflow: hidden;
         display: grid;
         grid-template-areas:
