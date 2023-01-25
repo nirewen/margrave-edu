@@ -1,9 +1,10 @@
 <script lang="ts">
     export let selected = false
     export let scale = false
+    export let color: string = '#000000'
 </script>
 
-<button type="button" class:scale class="profile-card" class:selected on:click>
+<button type="button" class:scale class="profile-card" class:selected on:click style:color>
     <slot name="icon" />
     <div class="info">
         <p><slot name="title" /></p>
@@ -57,6 +58,7 @@
                 width: 15ch;
                 overflow: hidden;
                 min-height: 1.5rem;
+                color: #000000;
 
                 &:empty {
                     background-color: var(--gray-800);
@@ -65,6 +67,9 @@
             }
 
             span {
+                display: flex;
+                align-items: center;
+                gap: 0.2rem;
                 color: var(--gray-300);
                 font-size: 0.8rem;
             }

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Avatar from '$lib/components/Avatar.svelte'
     import InfoCard from '../components/InfoCard.svelte'
     import type { PageData } from './$types'
 
@@ -26,10 +27,13 @@
     <div class="page">
         <div class="grid">
             {#each data.subjects as subject}
-                <InfoCard>
+                <InfoCard color={subject.color}>
                     <iconify-icon slot="icon" icon={subject.icon} width="48" />
                     <svelte:fragment slot="title">{subject.name}</svelte:fragment>
-                    <svelte:fragment slot="subtitle">{subject.teacher.profile.name}</svelte:fragment>
+                    <svelte:fragment slot="subtitle">
+                        <Avatar avatar={subject.teacher.profile.avatar} size={1} />
+                        {subject.teacher.profile.name}
+                    </svelte:fragment>
                     <a role="button" href="./subjects/{subject.id}/edit" class="ghost icon" slot="action">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
                     </a>

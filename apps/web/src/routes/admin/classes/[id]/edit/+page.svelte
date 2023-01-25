@@ -11,6 +11,7 @@
     import InfoCard from '../../../components/InfoCard.svelte'
 
     import type { ActionData, PageData } from './$types'
+    import Avatar from '$lib/components/Avatar.svelte'
 
     export let data: PageData
     export let form: ActionData
@@ -137,17 +138,20 @@
                     <h2 class="list-title"><span>Disponíveis</span></h2>
                     {#each availableSubjects.filter(cs => !cs.enabled) as classSubject (classSubject.subject.id)}
                         <div
-                            animate:flip
+                            animate:flip={{ duration: 100 }}
                             in:receive|local={{ key: classSubject.subject.id }}
                             out:send|local={{ key: classSubject.subject.id }}
                         >
-                            <InfoCard on:click={() => (classSubject.enabled = true)}>
-                                <svelte:fragment slot="title">
-                                    {classSubject.subject.name}
+                            <InfoCard
+                                color={classSubject.subject.color}
+                                on:click={() => (classSubject.enabled = true)}
+                            >
+                                <iconify-icon slot="icon" icon={classSubject.subject.icon} width="48" />
+                                <svelte:fragment slot="title">{classSubject.subject.name}</svelte:fragment>
+                                <svelte:fragment slot="subtitle">
+                                    <Avatar avatar={classSubject.subject.teacher.profile.avatar} size={1} />
+                                    {classSubject.subject.teacher.profile.name}
                                 </svelte:fragment>
-                                <svelte:fragment slot="subtitle"
-                                    >{classSubject.subject.teacher.profile.name}</svelte:fragment
-                                >
                             </InfoCard>
                         </div>
                     {/each}
@@ -156,7 +160,7 @@
                     <h2 class="list-title"><span>Associadas</span></h2>
                     {#each availableSubjects.filter(cs => cs.enabled) as classSubject, i (classSubject.subject.id)}
                         <div
-                            animate:flip
+                            animate:flip={{ duration: 100 }}
                             in:receive|local={{ key: classSubject.subject.id }}
                             out:send|local={{ key: classSubject.subject.id }}
                         >
@@ -170,11 +174,14 @@
                                 name="classSubjects.{i}.classId"
                                 value={classSubject.class.id}
                             />
-                            <InfoCard on:click={() => (classSubject.enabled = false)}>
-                                <svelte:fragment slot="title">
-                                    {classSubject.subject.name}
-                                </svelte:fragment>
+                            <InfoCard
+                                color={classSubject.subject.color}
+                                on:click={() => (classSubject.enabled = false)}
+                            >
+                                <iconify-icon slot="icon" icon={classSubject.subject.icon} width="48" />
+                                <svelte:fragment slot="title">{classSubject.subject.name}</svelte:fragment>
                                 <svelte:fragment slot="subtitle">
+                                    <Avatar avatar={classSubject.subject.teacher.profile.avatar} size={1} />
                                     {classSubject.subject.teacher.profile.name}
                                 </svelte:fragment>
                             </InfoCard>
