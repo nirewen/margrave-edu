@@ -61,10 +61,13 @@
 </svelte:head>
 
 <header>
-    <div>
+    <a role="button" class="ghost icon" href="../" title="Voltar">
+        <iconify-icon icon="mdi:chevron-left" width={32} />
+    </a>
+    <hgroup>
         <h1>Editar turma</h1>
         <h2>Preencha o formulário para editar a turma</h2>
-    </div>
+    </hgroup>
 </header>
 {#if form?.error && form?.message}
     <Alert variant="danger">{form?.message}</Alert>
@@ -212,15 +215,17 @@
     header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 1rem;
 
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
+        hgroup {
+            h1 {
+                font-size: 1.8rem;
+                font-weight: 700;
+            }
 
-        h2 {
-            color: var(--gray-400);
+            h2 {
+                color: var(--gray-400);
+            }
         }
     }
 
