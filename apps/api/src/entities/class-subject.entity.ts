@@ -5,7 +5,7 @@ import { Subject } from './subject.entity'
 @Entity({ name: 'class_subjects' })
 @Unique(['subject', 'class'])
 export class ClassSubject {
-    @PrimaryColumn('uuid')
+    @PrimaryColumn('text')
     id: string
 
     @Column('boolean', { array: true, default: [] })

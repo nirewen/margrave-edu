@@ -1,5 +1,7 @@
+import * as crypto from 'node:crypto'
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { ClassSubject } from 'src/entities/class-subject.entity'
 import { Class } from 'src/entities/class.entity'
 import { Subject } from 'src/entities/subject.entity'
 import { Repository } from 'typeorm'
@@ -83,12 +85,14 @@ export class ClassesService {
                   subject.id = cs.subjectId
                   entity.id = obj.id
 
-                  return {
-                      id: obj.id,
-                      subject,
-                      class: entity,
-                      weekdays: Array.from({ length: 7 }, (_, i) => !!cs.weekdays[i]),
-                  }
+                  const classSubject = new ClassSubject()
+
+                  classSubject.id = [subject.id, entity.id].join('_')
+                  classSubject.subject = subject
+                  classSubject.class = entity
+                  classSubject.weekdays = Array.from({ length: 7 }, (_, i) => !!cs.weekdays[i])
+
+                  return classSubject
               })
             : []
 
