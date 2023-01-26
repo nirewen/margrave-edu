@@ -43,10 +43,6 @@
             gap: 0.2rem;
         }
 
-        &.icon {
-            padding-left: 0.4rem;
-        }
-
         &:has(:checked) {
             color: var(--bgColor);
             background-color: var(--color);
