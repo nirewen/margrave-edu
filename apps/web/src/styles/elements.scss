@@ -114,3 +114,11 @@ fieldset {
         flex-direction: row;
     }
 }
+
+iconify-icon.inverted {
+    border-radius: 0.4rem;
+    margin: -0.2rem;
+    padding: 0.2rem;
+    background-color: var(--color);
+    color: #ffffff;
+}

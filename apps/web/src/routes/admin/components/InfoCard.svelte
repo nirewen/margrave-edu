@@ -4,7 +4,7 @@
     export let color: string = '#000000'
 </script>
 
-<button type="button" class:scale class="profile-card" class:selected on:click style:color>
+<button type="button" class:scale class="profile-card" class:selected on:click style:--color={color}>
     <slot name="icon" />
     <div class="info">
         <p><slot name="title" /></p>
@@ -29,6 +29,7 @@
         color: var(--gray-000);
         text-transform: none;
         font-weight: 400;
+        color: var(--color);
 
         &.scale:hover {
             scale: 1.025;

@@ -149,7 +149,12 @@
                                 color={classSubject.subject.color}
                                 on:click={() => (classSubject.enabled = true)}
                             >
-                                <iconify-icon slot="icon" icon={classSubject.subject.icon} width="48" />
+                                <iconify-icon
+                                    class="inverted"
+                                    slot="icon"
+                                    icon={classSubject.subject.icon}
+                                    width="48"
+                                />
                                 <svelte:fragment slot="title">{classSubject.subject.name}</svelte:fragment>
                                 <svelte:fragment slot="subtitle">
                                     <Avatar avatar={classSubject.subject.teacher.profile.avatar} size={1} />
@@ -181,7 +186,12 @@
                                 color={classSubject.subject.color}
                                 on:click={() => (classSubject.enabled = false)}
                             >
-                                <iconify-icon slot="icon" icon={classSubject.subject.icon} width="48" />
+                                <iconify-icon
+                                    class="inverted"
+                                    slot="icon"
+                                    icon={classSubject.subject.icon}
+                                    width="48"
+                                />
                                 <svelte:fragment slot="title">{classSubject.subject.name}</svelte:fragment>
                                 <svelte:fragment slot="subtitle">
                                     <Avatar avatar={classSubject.subject.teacher.profile.avatar} size={1} />
