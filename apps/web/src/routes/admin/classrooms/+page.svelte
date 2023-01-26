@@ -16,7 +16,7 @@
         <h2>Salas de aula registradas no sistema</h2>
     </hgroup>
 
-    <a role="button" href="./classrooms/add" class="round ghost">
+    <a role="button" href="./add" class="round ghost">
         <iconify-icon icon="ic:baseline-add" width={24} />
         Adicionar
     </a>
@@ -32,7 +32,7 @@
                     <iconify-icon data-tooltip={type?.name} slot="icon" icon={type?.icon} width="48" />
                     <svelte:fragment slot="title">{classroom.building}</svelte:fragment>
                     <svelte:fragment slot="subtitle">{classroom.capacity}</svelte:fragment>
-                    <a role="button" href="./classrooms/{classroom.id}/edit" class="ghost icon" slot="action">
+                    <a role="button" href="./{classroom.id}/edit" class="ghost icon" slot="action">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
                     </a>
                 </InfoCard>

@@ -15,7 +15,7 @@
         <h2>Turmas registradas no sistema</h2>
     </hgroup>
 
-    <a role="button" class="ghost round" href="./classes/add">
+    <a role="button" class="ghost round" href="./add">
         <iconify-icon icon="ic:baseline-add" width={24} />
         Adicionar
     </a>
@@ -29,7 +29,7 @@
                 <InfoCard>
                     <svelte:fragment slot="title">{it.number}</svelte:fragment>
                     <svelte:fragment slot="subtitle">{it.period}</svelte:fragment>
-                    <a role="button" href="./classes/{it.id}/edit" class="ghost icon" slot="action">
+                    <a role="button" href="./{it.id}/edit" class="ghost icon" slot="action">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
                     </a>
                 </InfoCard>

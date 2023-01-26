@@ -5,6 +5,8 @@ import type { User } from '$lib/types/User'
 import type { RoleID } from '$lib/util'
 import type { LayoutLoad } from './$types'
 
+export const trailingSlash = 'always'
+
 const protectedRoutes: { route: string; roles: RoleID[] }[] = [
     { route: '/admin', roles: ['ADMIN'] },
     { route: '/teacher', roles: ['TEACHER'] },

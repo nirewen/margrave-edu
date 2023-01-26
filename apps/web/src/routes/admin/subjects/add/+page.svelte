@@ -14,6 +14,9 @@
 </svelte:head>
 
 <header>
+    <a role="button" class="ghost icon" href="./" title="Voltar">
+        <iconify-icon icon="mdi:chevron-left" width={32} />
+    </a>
     <div>
         <h1>Nova disciplina</h1>
         <h2>Preencha o formulário para adicionar uma nova disciplina</h2>
@@ -76,7 +79,7 @@
     header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 1rem;
 
         h1 {
             font-size: 1.8rem;

@@ -16,7 +16,7 @@
         <h2>Disciplinas registradas no sistema</h2>
     </hgroup>
 
-    <a role="button" class="ghost round" href="./subjects/add">
+    <a role="button" class="ghost round" href="./add">
         <iconify-icon icon="ic:baseline-add" width={24} />
         Adicionar
     </a>

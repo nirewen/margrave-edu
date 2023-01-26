@@ -15,6 +15,9 @@
 </svelte:head>
 
 <header>
+    <a role="button" class="ghost icon" href="./" title="Voltar">
+        <iconify-icon icon="mdi:chevron-left" width={32} />
+    </a>
     <hgroup>
         <h1>Adicionar turma</h1>
         <h2>Preencha o formulário para adicionar uma turma</h2>
@@ -84,7 +87,7 @@
     header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 1rem;
 
         hgroup {
             h1 {

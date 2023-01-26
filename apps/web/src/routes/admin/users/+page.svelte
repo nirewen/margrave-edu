@@ -37,11 +37,11 @@
     <div class="filter">
         <iconify-icon icon="ic:baseline-filter-alt" width={28} />
         <div class="buttons">
-            <a role="button" href="/admin/users" class="{!$role ? 'primary' : 'ghost'} round">Todos</a>
+            <a role="button" href="/admin/users/" class="{!$role ? 'primary' : 'ghost'} round">Todos</a>
             {#each [...roles] as [id, { icon }]}
                 <a
                     role="button"
-                    href="/admin/users?role={id}"
+                    href="/admin/users/?role={id}"
                     class="icon round {$role === id ? 'primary' : 'ghost'}"
                 >
                     <iconify-icon {icon} width={24} />
@@ -49,7 +49,7 @@
             {/each}
         </div>
     </div>
-    <a role="button" href="/admin/users/add?role={$role ?? 'STUDENT'}" class="round ghost">
+    <a role="button" href="./add?role={$role ?? 'STUDENT'}" class="round ghost">
         <iconify-icon icon={filteredRole?.icon ?? 'ic:baseline-add'} width={24} />
         Adicionar
     </a>
