@@ -3,7 +3,7 @@ import type { Classroom } from '$lib/types/api/Classroom'
 import type { PageLoad } from './$types'
 
 export const load = wrap(async ({ api }) => {
-    const classrooms = await api.get<Classroom[]>('/api/classrooms')
-
-    return { classrooms }
+    return {
+        classrooms: api.get<Classroom[]>('/api/classrooms'),
+    }
 }) satisfies PageLoad

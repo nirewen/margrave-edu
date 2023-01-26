@@ -2,7 +2,8 @@
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
     import Option from '$lib/components/Option.svelte'
-    import { classroomTypes } from '$lib/util'
+    import { classroomTypes, shifts } from '$lib/util'
+
     import type { ActionData, PageData } from './$types'
 
     export let data: PageData
@@ -14,10 +15,10 @@
 </svelte:head>
 
 <header>
-    <div>
-        <h1>Editar turma</h1>
-        <h2>Preencha o formulário para editar a turma</h2>
-    </div>
+    <hgroup>
+        <h1>Adicionar turma</h1>
+        <h2>Preencha o formulário para adicionar uma turma</h2>
+    </hgroup>
 </header>
 {#if form?.error && form?.message}
     <Alert variant="danger">{form?.message}</Alert>
@@ -26,22 +27,47 @@
     <div class="form">
         <div class="box">
             <div class="box row">
-                <div class="box" style:flex={1}>
+                <div class="box" style:flex="1">
                     <label data-error={form?.errors?.number}>
                         <span>Número</span>
                         <input type="text" name="number" value={form?.data?.number ?? ''} required />
                     </label>
                 </div>
-                <label data-error={form?.errors?.period}>
+                <label data-error={form?.errors?.period} style:flex="0">
                     <span>Período</span>
                     <input type="text" name="period" value={form?.data?.period ?? ''} required />
                 </label>
                 <label for="shift" data-error={form?.errors?.shift}>
                     <span>Turno</span>
-                    <fieldset class="inline" id="shift" role="radiogroup">
-                        {#each ['MORNING', 'AFTERNOON', 'NIGHT'] as value}
-                            <Option name="shift" group={form?.data?.shift ?? ''} {value}>
-                                {value}
+                    <fieldset class="inline-flex" id="shift" role="radiogroup">
+                        {#each [...shifts.entries()] as [shift, { icon, name }]}
+                            <Option name="shift" group={form?.data?.shift ?? ''} value={shift}>
+                                <iconify-icon slot="icon" {icon} width="24" />
+                                {name}
+                            </Option>
+                        {/each}
+                    </fieldset>
+                </label>
+            </div>
+            <div class="box">
+                <label for="classroomId" data-error={form?.errors?.classroomId}>
+                    <span>Sala de aula</span>
+                    <fieldset class="inline" id="classroomId" role="radiogroup">
+                        {#each [...data.classrooms] as classroom}
+                            {@const type = classroomTypes.get(classroom.type)}
+                            <Option
+                                name="classroomId"
+                                group={form?.data?.classroomId ?? ''}
+                                value={classroom.id}
+                            >
+                                <iconify-icon
+                                    data-tooltip={type?.name}
+                                    slot="icon"
+                                    icon={type?.icon}
+                                    width="48"
+                                />
+                                <span>{classroom.building}</span>
+                                <small>{classroom.capacity}</small>
                             </Option>
                         {/each}
                     </fieldset>
@@ -49,23 +75,8 @@
             </div>
         </div>
         <div class="box">
-            <button type="submit">Salvar</button>
+            <button type="submit">Criar turma</button>
         </div>
-    </div>
-    <div class="box">
-        <label for="classroomId" data-error={form?.errors?.classroomId}>
-            <span>Sala de aula</span>
-            <fieldset id="classroomId" role="radiogroup">
-                {#each [...data.classrooms] as classroom}
-                    {@const type = classroomTypes.get(classroom.type)}
-                    <Option name="classroomId" group={form?.data?.classroomId ?? ''} value={classroom.id}>
-                        <iconify-icon data-tooltip={type?.name} slot="icon" icon={type?.icon} width="48" />
-                        <span>{classroom.building}</span>
-                        <small>{classroom.capacity}</small>
-                    </Option>
-                {/each}
-            </fieldset>
-        </label>
     </div>
 </form>
 
@@ -75,13 +86,15 @@
         align-items: center;
         justify-content: space-between;
 
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
+        hgroup {
+            h1 {
+                font-size: 1.8rem;
+                font-weight: 700;
+            }
 
-        h2 {
-            color: var(--gray-400);
+            h2 {
+                color: var(--gray-400);
+            }
         }
     }
 
