@@ -6,7 +6,7 @@
     <slot />
 </aside>
 <figure>
-    <img src="background/login-background.jpg" loading="lazy" alt="Annie Spratt" />
+    <img src="../background/login-background.jpg" loading="lazy" alt="Annie Spratt" />
     <figcaption>&copy; Annie Spratt</figcaption>
 </figure>
 

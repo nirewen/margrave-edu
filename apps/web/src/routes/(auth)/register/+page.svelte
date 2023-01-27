@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-    <title>Registrar conta | Magrave</title>
+    <title>Registrar conta | Margrave</title>
 </svelte:head>
 
 <h2><span>Registrar conta</span></h2>

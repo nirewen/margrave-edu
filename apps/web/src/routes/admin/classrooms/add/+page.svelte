@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-    <title>Adicionar nova sala de aula | Magrave</title>
+    <title>Adicionar nova sala de aula | Margrave</title>
 </svelte:head>
 
 <header>

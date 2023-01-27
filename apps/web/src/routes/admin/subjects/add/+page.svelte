@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-    <title>Adicionar nova disciplina | Magrave</title>
+    <title>Adicionar nova disciplina | Margrave</title>
 </svelte:head>
 
 <header>

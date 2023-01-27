@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-    <title>Login | Magrave</title>
+    <title>Login | Margrave</title>
 </svelte:head>
 
 <h2><span>Acessar conta</span></h2>

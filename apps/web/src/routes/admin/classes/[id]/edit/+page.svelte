@@ -48,7 +48,7 @@
 </script>
 
 <svelte:head>
-    <title>Editar turma | Magrave</title>
+    <title>Editar turma | Margrave</title>
 </svelte:head>
 
 <header>

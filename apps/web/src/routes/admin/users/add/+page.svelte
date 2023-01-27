@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-    <title>Adicionar novo {roleName} | Magrave</title>
+    <title>Adicionar novo {roleName} | Margrave</title>
 </svelte:head>
 
 <header>

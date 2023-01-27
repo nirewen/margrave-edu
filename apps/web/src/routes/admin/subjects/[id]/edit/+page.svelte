@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-    <title>Editar disciplina | Magrave</title>
+    <title>Editar disciplina | Margrave</title>
 </svelte:head>
 
 <header>

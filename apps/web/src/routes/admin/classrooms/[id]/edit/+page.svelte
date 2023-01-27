@@ -14,7 +14,7 @@
 </script>
 
 <svelte:head>
-    <title>Editar sala de aula | Magrave</title>
+    <title>Editar sala de aula | Margrave</title>
 </svelte:head>
 
 <header>
