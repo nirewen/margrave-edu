@@ -1,6 +1,6 @@
 <script lang="ts">
     import { classroomTypes } from '$lib/util'
-    import InfoCard from '../components/InfoCard.svelte'
+    import InfoCard from '$lib/components/InfoCard.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData

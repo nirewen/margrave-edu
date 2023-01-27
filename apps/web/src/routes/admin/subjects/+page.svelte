@@ -1,6 +1,6 @@
 <script lang="ts">
     import Avatar from '$lib/components/Avatar.svelte'
-    import InfoCard from '../components/InfoCard.svelte'
+    import InfoCard from '$lib/components/InfoCard.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData

@@ -10,7 +10,7 @@
     import { type RoleID, roles } from '$lib/util'
 
     import Profile from '../components/Profile.svelte'
-    import InfoCard from '../components/InfoCard.svelte'
+    import InfoCard from '$lib/components/InfoCard.svelte'
 
     import type { PageData } from './$types'
 

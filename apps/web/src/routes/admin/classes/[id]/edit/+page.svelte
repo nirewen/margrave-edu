@@ -12,7 +12,7 @@
 
     import Avatar from '$lib/components/Avatar.svelte'
     import type { Subject } from '$lib/types/api/Subject'
-    import InfoCard from '../../../components/InfoCard.svelte'
+    import InfoCard from '$lib/components/InfoCard.svelte'
 
     const [send, receive] = crossfade({
         duration: d => Math.sqrt(d * 200),
