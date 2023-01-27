@@ -41,6 +41,19 @@ export class SubjectsService {
         })
     }
 
+    async findAllMe(id: string) {
+        return this.subjects.find({
+            where: {
+                teacher: { id },
+            },
+            relations: {
+                teacher: {
+                    profile: true,
+                },
+            },
+        })
+    }
+
     async findOne(id: string) {
         const subject = await this.subjects.findOne({
             where: { id },

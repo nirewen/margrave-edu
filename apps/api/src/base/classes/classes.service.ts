@@ -38,6 +38,16 @@ export class ClassesService {
         return this.classes.find()
     }
 
+    async findAllMe(id: string) {
+        return this.classes.find({
+            where: {
+                users: {
+                    id,
+                },
+            },
+        })
+    }
+
     async findOneByNumber(number: string) {
         const entity = await this.classes.findOneBy({ number })
 

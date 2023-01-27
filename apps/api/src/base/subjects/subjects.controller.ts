@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
+import { Payload } from 'src/auth/auth.interface'
 import { RolesGuard } from 'src/auth/guards'
-import { Roles } from 'src/common/decorators'
+import { ReqUser, Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
 import { CreateSubjectDTO } from './dto/create-subject.dto'
 import { UpdateSubjectDTO } from './dto/update-subject.dto'
@@ -20,6 +21,12 @@ export class SubjectsController {
     @Get()
     findAll() {
         return this.subjectsService.findAll()
+    }
+
+    @Get('@me')
+    @Roles(UserRole.TEACHER)
+    findAllMe(@ReqUser() payload: Payload) {
+        return this.subjectsService.findAllMe(payload.id)
     }
 
     @Get(':id')

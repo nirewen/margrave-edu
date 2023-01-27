@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
+import { Payload } from 'src/auth/auth.interface'
 import { RolesGuard } from 'src/auth/guards'
-import { Roles } from 'src/common/decorators'
+import { ReqUser, Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
 import { CreateLessonDTO } from './dto/create-lesson.dto'
 import { UpdateLessonDTO } from './dto/update-lesson.dto'
@@ -13,6 +14,7 @@ export class LessonsController {
     constructor(private readonly lessonsService: LessonsService) {}
 
     @Post()
+    @Roles(UserRole.TEACHER)
     create(@Body() body: CreateLessonDTO) {
         return this.lessonsService.create(body)
     }
@@ -20,6 +22,12 @@ export class LessonsController {
     @Get()
     findAll() {
         return this.lessonsService.findAll()
+    }
+
+    @Get('@me')
+    @Roles(UserRole.TEACHER)
+    findAllMe(@ReqUser() payload: Payload) {
+        return this.lessonsService.findAllMe(payload.id)
     }
 
     @Get(':id')

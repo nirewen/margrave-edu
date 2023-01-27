@@ -36,6 +36,16 @@ export class LessonsService {
         return this.lessons.find()
     }
 
+    async findAllMe(id: string) {
+        return this.lessons.find({
+            where: {
+                subject: {
+                    teacher: { id },
+                },
+            },
+        })
+    }
+
     async findOne(id: string) {
         const lesson = await this.lessons.findOneBy({ id })
 

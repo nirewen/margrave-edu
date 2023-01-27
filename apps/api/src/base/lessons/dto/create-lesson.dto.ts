@@ -10,8 +10,8 @@ export class CreateLessonDTO {
     @IsDate()
     date: Date
 
-    @IsUUID()
-    timespan: number
+    @IsString()
+    timespan: string
 
     @IsArray()
     @IsString({ each: true })

@@ -18,8 +18,8 @@ export class Lesson {
     @Column()
     date: Date
 
-    @Column({ default: 1 })
-    timespan: number
+    @Column({ default: '1:00' })
+    timespan: string
 
     @Column('text', { array: true, nullable: true, default: [] })
     tags: string[]
