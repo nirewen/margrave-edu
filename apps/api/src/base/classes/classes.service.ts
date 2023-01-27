@@ -20,7 +20,7 @@ export class ClassesService {
         return this.classes.count()
     }
 
-    async create({ classroomId, classSubjects, ...body }: CreateClassDTO) {
+    async create({ classroomId, ...body }: CreateClassDTO) {
         const entity = await this.findOneByNumber(body.number).catch(() => null)
 
         if (entity) {
