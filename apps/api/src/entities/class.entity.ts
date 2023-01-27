@@ -1,7 +1,7 @@
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import { ClassSubject } from './class-subject.entity'
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { Classroom } from './classroom.entity'
 import { Lesson } from './lesson.entity'
+import { Subject } from './subject.entity'
 import { User } from './user.entity'
 
 export enum Shift {
@@ -30,8 +30,9 @@ export class Class {
     @OneToMany(() => Lesson, lesson => lesson.class)
     lessons: Lesson[]
 
-    @OneToMany(() => ClassSubject, classSubject => classSubject.class, { cascade: true })
-    classSubjects: ClassSubject[]
+    @ManyToMany(() => Subject, subject => subject.classes, { cascade: true })
+    @JoinTable({ name: 'class_subjects' })
+    subjects: Subject[]
 
     @ManyToMany(() => User, user => user.classes)
     users: User[]

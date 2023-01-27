@@ -34,7 +34,7 @@
                         <Avatar avatar={subject.teacher.profile.avatar} size={1} />
                         {subject.teacher.profile.name}
                     </svelte:fragment>
-                    <a role="button" href="./subjects/{subject.id}/edit" class="ghost icon" slot="action">
+                    <a role="button" href="./{subject.id}/edit" class="ghost icon" slot="action">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
                     </a>
                 </InfoCard>

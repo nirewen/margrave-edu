@@ -1,7 +1,6 @@
 import * as crypto from 'node:crypto'
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { ClassSubject } from 'src/entities/class-subject.entity'
 import { Class } from 'src/entities/class.entity'
 import { Subject } from 'src/entities/subject.entity'
 import { Repository } from 'typeorm'
@@ -54,10 +53,7 @@ export class ClassesService {
             where: { id },
             relations: {
                 classroom: true,
-                classSubjects: {
-                    class: true,
-                    subject: true,
-                },
+                subjects: true,
             },
         })
 
@@ -68,7 +64,7 @@ export class ClassesService {
         return entity
     }
 
-    async update(id: string, { classroomId, classSubjects, ...body }: UpdateClassDto) {
+    async update(id: string, { classroomId, subjects, ...body }: UpdateClassDto) {
         const obj = await this.findOne(id)
 
         if (classroomId !== null && classroomId !== obj.classroom?.id) {
@@ -77,24 +73,14 @@ export class ClassesService {
             obj.classroom = classroom
         }
 
-        obj.classSubjects = classSubjects
-            ? classSubjects.map(cs => {
-                  const subject = new Subject()
-                  const entity = new Class()
+        obj.subjects = subjects.map(s => {
+            const subject = new Subject()
 
-                  subject.id = cs.subjectId
-                  entity.id = obj.id
+            subject.id = s
 
-                  const classSubject = new ClassSubject()
-
-                  classSubject.id = [subject.id, entity.id].join('_')
-                  classSubject.subject = subject
-                  classSubject.class = entity
-                  classSubject.weekdays = Array.from({ length: 7 }, (_, i) => !!cs.weekdays[i])
-
-                  return classSubject
-              })
-            : []
+            return subject
+        })
+        console.log('🚀 ~ file: classes.service.ts:83 ~ ClassesService ~ update ~ obj.subjects', obj.subjects)
 
         return this.classes.save({ ...obj, ...body })
     }

@@ -1,4 +1,4 @@
-import type { ClassSubject } from './ClassSubject'
+import type { Class } from './Class'
 import type { Lesson } from './Lesson'
 import type { User } from '../User'
 
@@ -11,5 +11,5 @@ export type Subject = {
     hours: number
     teacher: User
     lessons: Lesson[]
-    classSubjects: ClassSubject[]
+    classes: Class[]
 }

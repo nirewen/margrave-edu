@@ -1,5 +1,5 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import { ClassSubject } from './class-subject.entity'
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Class } from './class.entity'
 import { Lesson } from './lesson.entity'
 import { User } from './user.entity'
 
@@ -26,9 +26,9 @@ export class Subject {
     @ManyToOne(() => User, user => user.subjects)
     teacher: User
 
-    @OneToMany(() => Lesson, lesson => lesson.subject)
+    @OneToMany(() => Lesson, lesson => lesson.subject, { cascade: true })
     lessons: Lesson[]
 
-    @OneToMany(() => ClassSubject, classSubject => classSubject.subject)
-    classSubjects: ClassSubject[]
+    @ManyToMany(() => Class, entity => entity.subjects)
+    classes: Class[]
 }

@@ -29,7 +29,7 @@
                 <InfoCard>
                     <svelte:fragment slot="title">{it.number}</svelte:fragment>
                     <svelte:fragment slot="subtitle">{it.period}</svelte:fragment>
-                    <a role="button" href="./{it.id}/edit" class="ghost icon" slot="action">
+                    <a role="button" href="./{it.id}/edit/" class="ghost icon" slot="action">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
                     </a>
                 </InfoCard>

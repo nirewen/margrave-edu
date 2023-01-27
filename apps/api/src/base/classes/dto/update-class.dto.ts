@@ -6,10 +6,7 @@ import { CreateClassDTO } from './create-class.dto'
 export class UpdateClassDto extends PartialType(CreateClassDTO) {
     @IsArray()
     @IsOptional()
-    classSubjects: {
-        subjectId: string
-        weekdays: boolean[]
-    }[]
+    subjects: string[]
 
     @IsArray()
     @IsOptional()
