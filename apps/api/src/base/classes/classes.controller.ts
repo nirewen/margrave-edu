@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
 import { Payload } from 'src/auth/auth.interface'
 import { RolesGuard } from 'src/auth/guards'
 import { ReqUser, Roles } from 'src/common/decorators'
@@ -19,14 +19,9 @@ export class ClassesController {
     }
 
     @Get()
+    @Roles(UserRole.TEACHER)
     findAll() {
         return this.classesService.findAll()
-    }
-
-    @Get('@me')
-    @Roles(UserRole.TEACHER)
-    findAllMe(@ReqUser() payload: Payload) {
-        return this.classesService.findAllMe(payload.id)
     }
 
     @Get(':id')

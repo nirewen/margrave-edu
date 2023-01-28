@@ -28,7 +28,7 @@
         <div class="grid">
             {#each data.subjects as subject}
                 <InfoCard color={subject.color}>
-                    <iconify-icon class="inverted" slot="icon" icon={subject.icon} width="48" />
+                    <iconify-icon class="inverted" slot="icon" icon={subject.icon} width="42" />
                     <svelte:fragment slot="title">{subject.name}</svelte:fragment>
                     <svelte:fragment slot="subtitle">
                         <Avatar avatar={subject.teacher.profile.avatar} size={1} />

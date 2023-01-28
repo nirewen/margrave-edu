@@ -1,4 +1,4 @@
-import { IsArray, IsDate, IsString, IsUUID } from 'class-validator'
+import { IsArray, IsDate, IsDateString, IsString, IsUUID } from 'class-validator'
 
 export class CreateLessonDTO {
     @IsString()
@@ -7,8 +7,8 @@ export class CreateLessonDTO {
     @IsString()
     description: string
 
-    @IsDate()
-    date: Date
+    @IsDateString()
+    date: string
 
     @IsString()
     timespan: string

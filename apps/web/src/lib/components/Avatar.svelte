@@ -19,7 +19,7 @@
     .avatar {
         position: relative;
         border-radius: 9999px;
-        border: 0.25rem solid var(--gray-900);
+        border: calc(var(--size) / 4) solid var(--gray-900);
         flex-shrink: 0;
 
         > img {

@@ -35,7 +35,11 @@ export class ClassesService {
     }
 
     async findAll() {
-        return this.classes.find()
+        return this.classes.find({
+            relations: {
+                subjects: true,
+            },
+        })
     }
 
     async findAllMe(id: string) {

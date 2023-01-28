@@ -114,7 +114,7 @@
                                     data-tooltip={type?.name}
                                     slot="icon"
                                     icon={type?.icon}
-                                    width="48"
+                                    width="42"
                                 />
                                 <span>{classroom.building}</span>
                                 <small>{classroom.capacity}</small>
@@ -145,7 +145,7 @@
                                         class="inverted"
                                         slot="icon"
                                         icon={subject.icon}
-                                        width="48"
+                                        width="42"
                                     />
                                     <svelte:fragment slot="title">{subject.name}</svelte:fragment>
                                     <svelte:fragment slot="subtitle">
@@ -170,7 +170,7 @@
                                         class="inverted"
                                         slot="icon"
                                         icon={subject.icon}
-                                        width="48"
+                                        width="42"
                                     />
                                     <svelte:fragment slot="title">{subject.name}</svelte:fragment>
                                     <svelte:fragment slot="subtitle">

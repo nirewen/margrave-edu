@@ -31,6 +31,7 @@ export class LessonsController {
     }
 
     @Get(':id')
+    @Roles(UserRole.TEACHER)
     findOne(@Param('id') id: string) {
         return this.lessonsService.findOne(id)
     }

@@ -37,7 +37,7 @@ export const actions: Actions = {
         }
 
         try {
-            const response = await api.post<Lesson>(`/api/lessons`, result.data)
+            const response = await api.patch<Lesson>(`/api/lessons`, result.data)
 
             throw redirect(302, `/teacher/lessons/${response.id}/edit`)
         } catch (error: unknown) {

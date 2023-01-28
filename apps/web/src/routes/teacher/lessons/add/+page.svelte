@@ -1,21 +1,29 @@
 <script lang="ts">
-    import { enhance } from '$app/forms'
     //@ts-ignore
     import Tags from 'svelte-tags-input'
-    import Alert from '$lib/components/Alert.svelte'
     import Avatar from '$lib/components/Avatar.svelte'
     import InfoCard from '$lib/components/InfoCard.svelte'
+    import type { Class } from '$lib/types/api/Class'
     import type { Subject } from '$lib/types/api/Subject'
+    import { createMenu } from 'svelte-headlessui'
+    import { slide } from 'svelte/transition'
 
     import type { ActionData, PageData } from './$types'
-    import type { Class } from '$lib/types/api/Class'
+    import { format } from 'date-fns'
 
     export let data: PageData
     export let form: ActionData
 
-    let subject: Subject
-    let selectedClass: Class
-    let tags: string[]
+    const subjectMenu = createMenu({ label: 'Subjects' })
+    const classesMenu = createMenu({ label: 'Classes' })
+
+    let selection = {
+        subject: form?.data ? data.subjects.find(s => s.id === form?.data.subjectId) : null,
+        class: form?.data ? data.classes.find(s => s.id === form?.data.classId) : null,
+    } as { subject: Subject | null; class: Class | null }
+    let tags: string[] = form?.data.tags ?? []
+
+    $: availableClasses = data.classes.filter(c => c.subjects.find(s => s.id === selection.subject?.id))
 </script>
 
 <svelte:head>
@@ -23,7 +31,7 @@
 </svelte:head>
 
 <header>
-    <a role="button" class="ghost icon" href="./" title="Voltar">
+    <a role="button" class="ghost icon" href="../" title="Voltar">
         <iconify-icon icon="mdi:chevron-left" width={32} />
     </a>
     <hgroup>
@@ -31,63 +39,120 @@
         <h2>Preencha o formulário para adicionar uma aula</h2>
     </hgroup>
 </header>
-{#if form?.error && form?.message}
-    <Alert variant="danger">{form?.message}</Alert>
-{/if}
-{#if !subject}
-    {#each data.subjects as s}
-        <InfoCard color={s.color} on:click={() => (subject = s)}>
-            <iconify-icon class="inverted" slot="icon" icon={s.icon} width="48" />
-            <svelte:fragment slot="title">{s.name}</svelte:fragment>
-            <svelte:fragment slot="subtitle">
-                <Avatar avatar={s.teacher.profile.avatar} size={1} />
-                {s.teacher.profile.name}
-            </svelte:fragment>
-        </InfoCard>
-    {/each}
-{/if}
-{#if subject && !selectedClass}
-    {#each data.classes as c}
-        <InfoCard on:click={() => (selectedClass = c)}>
-            <svelte:fragment slot="title">{c.number}</svelte:fragment>
-            <svelte:fragment slot="subtitle">{c.period}</svelte:fragment>
-        </InfoCard>
-    {/each}
-{/if}
-{#if subject && selectedClass}
-    <form method="POST" use:enhance>
-        <input type="hidden" name="subjectId" value={subject.id} />
-        <input type="hidden" name="classId" value={selectedClass.id} />
-        <div class="form">
+<form method="POST">
+    <div class="form">
+        <div class="box row">
+            <div class="box" style:flex="1">
+                <span>Selecione a disciplina</span>
+                <button type="button" use:subjectMenu.button>
+                    {#if selection.subject}
+                        <InfoCard color={selection.subject?.color}>
+                            <iconify-icon
+                                class="inverted"
+                                slot="icon"
+                                icon={selection.subject?.icon}
+                                width="42"
+                            />
+                            <svelte:fragment slot="title">{selection.subject?.name}</svelte:fragment>
+                            <svelte:fragment slot="subtitle">
+                                <Avatar avatar={selection.subject?.teacher.profile.avatar} size={1} />
+                                {selection.subject?.teacher.profile.name}
+                            </svelte:fragment>
+                        </InfoCard>
+                    {:else}
+                        <InfoCard>
+                            <iconify-icon slot="icon" icon="mdi:chevron-down" width="42" />
+                            <svelte:fragment slot="title">Disciplina</svelte:fragment>
+                            <svelte:fragment slot="subtitle">Selecione uma disciplina</svelte:fragment>
+                        </InfoCard>
+                    {/if}
+                    {#if $subjectMenu.expanded}
+                        <div class="menu" use:subjectMenu.items transition:slide={{ duration: 150 }}>
+                            {#each data.subjects as s}
+                                <InfoCard color={s.color} on:click={() => (selection.subject = s)}>
+                                    <iconify-icon class="inverted" slot="icon" icon={s.icon} width="42" />
+                                    <svelte:fragment slot="title">{s.name}</svelte:fragment>
+                                    <svelte:fragment slot="subtitle">
+                                        <Avatar avatar={s.teacher.profile.avatar} size={1} />
+                                        {s.teacher.profile.name}
+                                    </svelte:fragment>
+                                </InfoCard>
+                            {/each}
+                        </div>
+                    {/if}
+                </button>
+            </div>
+            <div class="box" style:flex="1">
+                {#if selection.subject}
+                    <span>Selecione a turma</span>
+                    <button type="button" use:classesMenu.button>
+                        {#if selection.class}
+                            <InfoCard>
+                                <svelte:fragment slot="title">{selection.class.number}</svelte:fragment>
+                                <svelte:fragment slot="subtitle">{selection.class.period}</svelte:fragment>
+                            </InfoCard>
+                        {:else}
+                            <InfoCard>
+                                <iconify-icon slot="icon" icon="mdi:chevron-down" width="42" />
+                                <svelte:fragment slot="title">Turma</svelte:fragment>
+                                <svelte:fragment slot="subtitle">Selecione uma turma</svelte:fragment>
+                            </InfoCard>
+                        {/if}
+                        {#if $classesMenu.expanded}
+                            <div class="menu" use:classesMenu.items transition:slide={{ duration: 150 }}>
+                                {#each availableClasses as c}
+                                    <InfoCard on:click={() => (selection.class = c)}>
+                                        <svelte:fragment slot="title">{c.number}</svelte:fragment>
+                                        <svelte:fragment slot="subtitle">{c.period}</svelte:fragment>
+                                    </InfoCard>
+                                {/each}
+                            </div>
+                        {/if}
+                    </button>
+                {/if}
+            </div>
+        </div>
+        {#if selection.class && selection.subject}
             <div class="box">
-                <div class="box">
-                    <div class="box" style:flex="1">
-                        <label data-error={form?.errors?.title}>
-                            <span>Título</span>
-                            <input type="text" name="title" value={form?.data?.title ?? ''} required />
-                        </label>
-                    </div>
-                    <label data-error={form?.errors?.description} style:flex="0">
-                        <span>Descrição</span>
-                        <textarea name="description" value={form?.data?.description ?? ''} required />
+                <input type="hidden" name="subjectId" value={selection.subject.id} />
+                <input type="hidden" name="classId" value={selection.class.id} />
+                <div class="box" style:flex="1">
+                    <label data-error={form?.errors?.title}>
+                        <span>Título</span>
+                        <input type="text" name="title" value={form?.data?.title ?? ''} required />
                     </label>
-                    <label data-error={form?.errors?.timespan} style:flex="0">
+                </div>
+                <label data-error={form?.errors?.description} style:flex="0">
+                    <span>Descrição</span>
+                    <textarea name="description" value={form?.data?.description ?? ''} required />
+                </label>
+                <div class="box row">
+                    <label data-error={form?.errors?.timespan} style:flex="1">
                         <span>Duração</span>
                         <input type="time" name="timespan" value={form?.data?.timespan ?? ''} required />
                     </label>
-                    <label data-error={form?.errors?.tags} style:flex="0">
-                        <span>Tags</span>
-                        <input type="hidden" name="tags" bind:value={tags} />
-                        <Tags addKeys={[9, 13, 188]} bind:tags />
+                    <label data-error={form?.errors?.timespan} style:flex="1">
+                        <span>Data</span>
+                        <input
+                            type="date"
+                            name="date"
+                            value={form?.data?.date ?? format(new Date(), 'yyyy-MM-dd')}
+                            required
+                        />
                     </label>
                 </div>
+                <label data-error={form?.errors?.tags} style:flex="0">
+                    <span>Tags</span>
+                    <input type="hidden" name="tags" bind:value={tags} />
+                    <Tags addKeys={[9, 13, 32, 188]} bind:tags />
+                </label>
             </div>
             <div class="box">
                 <button type="submit">Registrar aula</button>
             </div>
-        </div>
-    </form>
-{/if}
+        {/if}
+    </div>
+</form>
 
 <style lang="scss">
     header {
@@ -140,6 +205,24 @@
             > .box {
                 box-shadow: none;
                 padding: 0;
+            }
+        }
+
+        button[type='button'] {
+            position: relative;
+            padding: 0;
+            color: #000000;
+
+            .menu {
+                position: absolute;
+                top: 5rem;
+                background-color: #ffffff;
+                transform-origin: top right;
+                border-radius: 0.375rem;
+                border-top-width: 1px;
+                border-color: #f3f4f6;
+                box-shadow: var(--elevation-2);
+                width: 100%;
             }
         }
     }

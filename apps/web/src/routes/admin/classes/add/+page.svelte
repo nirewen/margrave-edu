@@ -67,7 +67,7 @@
                                     data-tooltip={type?.name}
                                     slot="icon"
                                     icon={type?.icon}
-                                    width="48"
+                                    width="42"
                                 />
                                 <span>{classroom.building}</span>
                                 <small>{classroom.capacity}</small>
