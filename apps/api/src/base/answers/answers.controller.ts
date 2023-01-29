@@ -9,11 +9,12 @@ import { UpdateAnswerDTO } from './dto/update-answer.dto'
 
 @Controller('answers')
 @UseGuards(RolesGuard)
+@Roles(UserRole.ADMIN)
 export class AnswersController {
     constructor(private readonly answersService: AnswersService) {}
 
     @Post()
-    @Roles(UserRole.STUDENT)
+    @Roles(UserRole.STUDENT, UserRole.TEACHER)
     create(@ReqUser() user: Payload, @Body() body: CreateAnswerDTO) {
         return this.answersService.create(user.id, body)
     }
