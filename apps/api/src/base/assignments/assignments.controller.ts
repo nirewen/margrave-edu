@@ -1,9 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
+import { Roles } from 'src/common/decorators'
+import { UserRole } from 'src/entities/user.entity'
 import { AssignmentsService } from './assignments.service'
 import { CreateAssignmentDTO } from './dto/create-assignment.dto'
 import { UpdateAssignmentDTO } from './dto/update-assignment.dto'
 
 @Controller('assignments')
+@Roles(UserRole.ADMIN, UserRole.TEACHER)
 export class AssignmentsController {
     constructor(private readonly assignmentsService: AssignmentsService) {}
 
