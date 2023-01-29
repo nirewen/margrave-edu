@@ -8,11 +8,11 @@
 </script>
 
 <ul class:child transition:slide>
-    {#each links as { name, route, icon, routes }}
-        {@const active = ($page.url.pathname + '?' + $page.url.searchParams).startsWith(route)}
+    {#each links as { name, route, icon, routes, hide, blank }}
+        {@const active = new RegExp(`^${route}`).test($page.url.pathname + '?' + $page.url.searchParams)}
 
-        <li class:nested={routes && routes.length > 0}>
-            <a class="label" class:open class:active href={route}>
+        <li class:nested={routes && routes.length > 0} class:hide={hide && !active}>
+            <a class="label" class:open class:active href={blank ? '#' : route}>
                 <iconify-icon {icon} width={28} />
                 <span>{name}</span>
             </a>
@@ -35,6 +35,10 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+
+            &.hide {
+                display: none;
+            }
 
             > .label {
                 display: flex;

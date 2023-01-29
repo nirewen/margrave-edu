@@ -10,6 +10,8 @@
         route: string
         icon: string
         routes?: Routes[]
+        hide?: boolean
+        blank?: boolean
     }
 
     export let links: Routes[]
