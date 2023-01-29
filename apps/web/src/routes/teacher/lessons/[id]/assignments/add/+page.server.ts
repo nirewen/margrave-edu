@@ -22,7 +22,6 @@ export const actions: Actions = {
         obj.lessonId = params.id!
 
         const result = schema.safeParse(obj)
-        console.log('🚀 ~ file: +page.server.ts:25 ~ default:wrap ~ result', result)
 
         if (!result.success) {
             return fail(400, {
@@ -37,7 +36,6 @@ export const actions: Actions = {
 
             throw redirect(302, `/teacher/lessons/${params.id}/assignments/${response.id}/edit/`)
         } catch (error: unknown) {
-            console.log('🚀 ~ file: +page.server.ts:39 ~ default:wrap ~ error', error)
             if (error instanceof APIError) {
                 return fail(error.status, {
                     error: true,

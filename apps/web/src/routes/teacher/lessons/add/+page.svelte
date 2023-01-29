@@ -10,6 +10,7 @@
 
     import type { ActionData, PageData } from './$types'
     import { format } from '$lib/util'
+    import { enhance } from '$app/forms'
 
     export let data: PageData
     export let form: ActionData
@@ -39,7 +40,7 @@
         <h2>Preencha o formulário para adicionar uma aula</h2>
     </hgroup>
 </header>
-<form method="POST">
+<form method="POST" use:enhance>
     <div class="form">
         <div class="box row">
             <div class="box" style:flex="1">
