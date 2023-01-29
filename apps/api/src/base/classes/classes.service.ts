@@ -40,6 +40,7 @@ export class ClassesService {
             relations: {
                 subjects: true,
                 users: true,
+                lessons: true,
             },
         })
     }
@@ -50,6 +51,9 @@ export class ClassesService {
                 users: {
                     id,
                 },
+            },
+            relations: {
+                lessons: true,
             },
         })
     }

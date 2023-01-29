@@ -28,6 +28,12 @@ export class ClassesController {
         return this.classesService.findAll()
     }
 
+    @Get('@me')
+    @Roles(UserRole.STUDENT)
+    findAllMe(@ReqUser() payload: Payload) {
+        return this.classesService.findAllMe(payload.id)
+    }
+
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.classesService.findOne(id)
