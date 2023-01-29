@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { Payload } from 'src/auth/auth.interface'
+import { RolesGuard } from 'src/auth/guards'
 import { ReqUser, Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
 import { AnswersService } from './answers.service'
@@ -7,10 +8,12 @@ import { CreateAnswerDTO } from './dto/create-answer.dto'
 import { UpdateAnswerDTO } from './dto/update-answer.dto'
 
 @Controller('answers')
+@UseGuards(RolesGuard)
 export class AnswersController {
     constructor(private readonly answersService: AnswersService) {}
 
     @Post()
+    @Roles(UserRole.STUDENT)
     create(@ReqUser() user: Payload, @Body() body: CreateAnswerDTO) {
         return this.answersService.create(user.id, body)
     }

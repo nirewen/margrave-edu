@@ -30,7 +30,7 @@
                 <b>Tarefas dessa aula</b>
             </div>
             {#each data.lesson.assignments as assignment}
-                <InfoCard>
+                <InfoCard href="./assignments/{assignment.id}/">
                     <svelte:fragment slot="title">{assignment.description}</svelte:fragment>
                 </InfoCard>
             {:else}

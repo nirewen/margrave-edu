@@ -31,7 +31,14 @@ export class AssignmentsService {
     }
 
     async findOne(id: string) {
-        const assignment = await this.assignments.findOneBy({ id })
+        const assignment = await this.assignments.findOne({
+            where: { id },
+            relations: {
+                answers: {
+                    user: true,
+                },
+            },
+        })
 
         if (!assignment) {
             throw new NotFoundException('assignment for provided id was not found')
