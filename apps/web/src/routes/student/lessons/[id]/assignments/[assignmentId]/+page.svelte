@@ -2,6 +2,7 @@
     import type { PageData } from './edit/$types'
     import { enhance } from '$app/forms'
     import { format } from '$lib/util'
+    import Avatar from '$lib/components/Avatar.svelte'
 
     export let data: PageData
 </script>
@@ -32,13 +33,14 @@
     </div>
 
     <div class="box">
-        {#each data.assignment.answers as answer}
-            {#if answer.user.id === data.user?.id}
-                <div class="box">
-                    <b>Resposta</b>
-                    <p>{answer.content}</p>
-                </div>
-            {/if}
+        {#each data.assignment.answers.filter(a => a.user.id === data.user?.id) as answer}
+            <div class="box">
+                <b>
+                    <Avatar avatar={answer.user.profile.avatar} size={1.2} />
+                    {answer.user.profile.name}
+                </b>
+                <p>{answer.content}</p>
+            </div>
         {:else}
             <span>Você não enviou nenhuma resposta ainda</span>
         {/each}

@@ -35,7 +35,9 @@ export class AssignmentsService {
             where: { id },
             relations: {
                 answers: {
-                    user: true,
+                    user: {
+                        profile: true,
+                    },
                 },
             },
         })
