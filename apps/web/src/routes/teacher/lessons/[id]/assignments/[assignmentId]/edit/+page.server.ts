@@ -10,7 +10,6 @@ import type { Assignment } from '$lib/types/api/Assignment'
 const schema = z.object({
     description: z.string(),
     expiresAt: z.string(),
-    lessonId: z.string().uuid(),
 })
 
 export const actions: Actions = {
@@ -18,8 +17,6 @@ export const actions: Actions = {
         const formData = await request.formData()
         const data = Object.fromEntries(formData)
         const obj = dot.object(data) as z.infer<typeof schema>
-
-        obj.lessonId = params.id!
 
         const result = schema.safeParse(obj)
 
@@ -32,9 +29,12 @@ export const actions: Actions = {
         }
 
         try {
-            const response = await api.post<Assignment>(`/api/assignments`, result.data)
+            const response = await api.patch<Assignment>(
+                `/api/assignments/${params.assignmentId}`,
+                result.data
+            )
 
-            throw redirect(302, `/teacher/lessons/${params.id}/assignments/${response.id}/edit/`)
+            throw redirect(302, `/teacher/lessons/${params.id}`)
         } catch (error: unknown) {
             if (error instanceof APIError) {
                 return fail(error.status, {

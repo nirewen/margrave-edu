@@ -35,7 +35,7 @@
             </div>
             {#each data.lesson.assignments as assignment}
                 <InfoCard>
-                    <svelte:fragment slot="subtitle">{assignment.description}</svelte:fragment>
+                    <svelte:fragment slot="title">{assignment.description}</svelte:fragment>
                 </InfoCard>
             {:else}
                 <span>Nenhuma tarefa para essa aula</span>
