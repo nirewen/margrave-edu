@@ -7,6 +7,7 @@ import { Repository } from 'typeorm'
 import { ClassroomsService } from '../classrooms/classrooms.service'
 import { CreateClassDTO } from './dto/create-class.dto'
 import { UpdateClassDto } from './dto/update-class.dto'
+import { User } from 'src/entities/user.entity'
 
 @Injectable()
 export class ClassesService {
@@ -38,6 +39,7 @@ export class ClassesService {
         return this.classes.find({
             relations: {
                 subjects: true,
+                users: true,
             },
         })
     }
@@ -68,6 +70,7 @@ export class ClassesService {
             relations: {
                 classroom: true,
                 subjects: true,
+                users: true,
             },
         })
 
@@ -78,7 +81,7 @@ export class ClassesService {
         return entity
     }
 
-    async update(id: string, { classroomId, subjects, ...body }: UpdateClassDto) {
+    async update(id: string, { classroomId, subjects, users, ...body }: UpdateClassDto) {
         const obj = await this.findOne(id)
 
         if (classroomId !== null && classroomId !== obj.classroom?.id) {
@@ -87,14 +90,21 @@ export class ClassesService {
             obj.classroom = classroom
         }
 
-        obj.subjects = subjects.map(s => {
+        obj.subjects = subjects.map(uuid => {
             const subject = new Subject()
 
-            subject.id = s
+            subject.id = uuid
 
             return subject
         })
-        console.log('🚀 ~ file: classes.service.ts:83 ~ ClassesService ~ update ~ obj.subjects', obj.subjects)
+
+        obj.users = users.map(uuid => {
+            const user = new User()
+
+            user.id = uuid
+
+            return user
+        })
 
         return this.classes.save({ ...obj, ...body })
     }

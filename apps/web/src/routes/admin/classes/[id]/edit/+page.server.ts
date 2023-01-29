@@ -12,7 +12,8 @@ const schema = z.object({
     period: z.string().regex(/^\d{4}\/\d$/, 'período deve seguir o padrão ano/frac'),
     shift: z.enum(['MORNING', 'AFTERNOON', 'NIGHT']),
     classroomId: z.string().uuid(),
-    subjects: z.array(z.string()).optional(),
+    subjects: z.array(z.string().uuid()).optional(),
+    users: z.array(z.string().uuid()).optional(),
 })
 
 export const actions: Actions = {

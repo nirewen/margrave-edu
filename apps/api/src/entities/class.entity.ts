@@ -34,6 +34,6 @@ export class Class {
     @JoinTable({ name: 'class_subjects' })
     subjects: Subject[]
 
-    @ManyToMany(() => User, user => user.classes)
+    @ManyToMany(() => User, user => user.classes, { cascade: true })
     users: User[]
 }

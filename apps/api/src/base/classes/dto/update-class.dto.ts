@@ -10,5 +10,5 @@ export class UpdateClassDto extends PartialType(CreateClassDTO) {
 
     @IsArray()
     @IsOptional()
-    users: User[]
+    users: string[]
 }

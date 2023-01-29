@@ -6,13 +6,14 @@
     import { enhance } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
     import Option from '$lib/components/Option.svelte'
-    import { classroomTypes, shifts } from '$lib/util'
+    import { classroomTypes, format, shifts } from '$lib/util'
 
     import type { ActionData, PageData } from './$types'
 
     import Avatar from '$lib/components/Avatar.svelte'
     import type { Subject } from '$lib/types/api/Subject'
     import InfoCard from '$lib/components/InfoCard.svelte'
+    import type { User } from '$lib/types/User'
 
     const [send, receive] = crossfade({
         duration: d => Math.sqrt(d * 200),
@@ -41,6 +42,14 @@
         return {
             ...s,
             enabled: !!cs,
+        }
+    })
+    const availableUsers = data.users.map((u): User & { enabled: boolean } => {
+        const cu = data.class.users.find(user => user.id === u.id)
+
+        return {
+            ...u,
+            enabled: !!cu,
         }
     })
 
@@ -177,6 +186,63 @@
                                         <Avatar avatar={subject.teacher.profile.avatar} size={1} />
                                         {subject.teacher.profile.name}
                                     </svelte:fragment>
+                                </InfoCard>
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+            {/if}
+        </div>
+        <div class="box" style:gap="0">
+            <label>
+                <span>Alunos da turma</span>
+                <input type="checkbox" bind:checked={collapsed} style="width: 0; height: 0;" />
+            </label>
+            {#if !collapsed}
+                <div class="box row" transition:slide|local>
+                    <div class="box" style:flex="1">
+                        <h2 class="list-title"><span>Disponíveis</span></h2>
+                        {#each availableUsers.filter(cu => !cu.enabled) as user, i (user.id)}
+                            <div
+                                animate:flip={{ duration: 100 }}
+                                in:receive|local={{ key: user.id }}
+                                out:send|local={{ key: user.id }}
+                            >
+                                <InfoCard on:click={() => (user.enabled = true)}>
+                                    <Avatar
+                                        slot="icon"
+                                        avatar={user.profile.avatar}
+                                        alt="avatar de {user.profile.name}"
+                                        size={3}
+                                    />
+                                    <svelte:fragment slot="title">{user.profile.name}</svelte:fragment>
+                                    <svelte:fragment slot="subtitle"
+                                        >usuário desde {format(user.createdAt)}</svelte:fragment
+                                    >
+                                </InfoCard>
+                            </div>
+                        {/each}
+                    </div>
+                    <div class="box" style:flex="1">
+                        <h2 class="list-title"><span>Associados</span></h2>
+                        {#each availableUsers.filter(cu => cu.enabled) as user, i (user.id)}
+                            <div
+                                animate:flip={{ duration: 100 }}
+                                in:receive|local={{ key: user.id }}
+                                out:send|local={{ key: user.id }}
+                            >
+                                <input type="hidden" name="users.{i}" value={user.id} />
+                                <InfoCard on:click={() => (user.enabled = false)}>
+                                    <Avatar
+                                        slot="icon"
+                                        avatar={user.profile.avatar}
+                                        alt="avatar de {user.profile.name}"
+                                        size={3}
+                                    />
+                                    <svelte:fragment slot="title">{user.profile.name}</svelte:fragment>
+                                    <svelte:fragment slot="subtitle"
+                                        >usuário desde {format(user.createdAt)}</svelte:fragment
+                                    >
                                 </InfoCard>
                             </div>
                         {/each}
