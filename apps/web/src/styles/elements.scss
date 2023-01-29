@@ -24,6 +24,41 @@ textarea {
             border-radius: 0.4rem;
         }
     }
+
+    &[type='checkbox'] {
+        appearance: none;
+        background-color: #fff;
+        margin: 0;
+        font: inherit;
+        color: currentColor;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 0.15em solid currentColor;
+        border-radius: 0.15em;
+        transform: translateY(-0.075em);
+
+        display: grid;
+        place-content: center;
+
+        &::before {
+            content: '';
+            width: 0.75rem;
+            height: 0.75rem;
+            transform: scale(0);
+            transition: 100ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--primary);
+            border-radius: 0.1em;
+        }
+
+        &:checked::before {
+            transform: scale(1);
+        }
+
+        &:focus {
+            outline: max(2px, 0.15em) solid currentColor;
+            outline-offset: max(2px, 0.15em);
+        }
+    }
 }
 
 label {

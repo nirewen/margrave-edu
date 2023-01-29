@@ -1,8 +1,8 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { Assignment } from './assignment.entity'
-import { Attendance } from './attendance.entity'
 import { Class } from './class.entity'
 import { Subject } from './subject.entity'
+import { User } from './user.entity'
 
 @Entity({ name: 'lessons' })
 export class Lesson {
@@ -33,6 +33,7 @@ export class Lesson {
     @OneToMany(() => Assignment, assignment => assignment.lesson)
     assignments: Assignment[]
 
-    @OneToMany(() => Attendance, attendance => attendance.lesson)
-    attendances: Attendance[]
+    @ManyToMany(() => User, user => user.attendances, { cascade: true })
+    @JoinTable({ name: 'attendances' })
+    attendances: User[]
 }

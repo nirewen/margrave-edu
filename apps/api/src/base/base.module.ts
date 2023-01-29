@@ -1,7 +1,6 @@
 import { Global, Module } from '@nestjs/common'
 import { AnswersModule } from './answers/answers.module'
 import { AssignmentsModule } from './assignments/assignments.module'
-import { AttendancesModule } from './attendances/attendances.module'
 import { AvatarModule } from './avatar/avatar.module'
 import { ClassesModule } from './classes/classes.module'
 import { LessonsModule } from './lessons/lessons.module'
@@ -16,7 +15,6 @@ import { ClassroomsModule } from './classrooms/classrooms.module'
     imports: [
         AnswersModule,
         AssignmentsModule,
-        AttendancesModule,
         AvatarModule,
         ClassesModule,
         ClassroomsModule,
@@ -29,7 +27,6 @@ import { ClassroomsModule } from './classrooms/classrooms.module'
     exports: [
         AnswersModule,
         AssignmentsModule,
-        AttendancesModule,
         AvatarModule,
         ClassesModule,
         ClassroomsModule,

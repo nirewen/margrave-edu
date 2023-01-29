@@ -3,6 +3,7 @@ import { Payload } from 'src/auth/auth.interface'
 import { RolesGuard } from 'src/auth/guards'
 import { ReqUser, Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
+import { UsersService } from '../users/users.service'
 import { ClassesService } from './classes.service'
 import { CreateClassDTO } from './dto/create-class.dto'
 import { UpdateClassDto } from './dto/update-class.dto'
@@ -11,7 +12,10 @@ import { UpdateClassDto } from './dto/update-class.dto'
 @UseGuards(RolesGuard)
 @Roles(UserRole.ADMIN)
 export class ClassesController {
-    constructor(private readonly classesService: ClassesService) {}
+    constructor(
+        private readonly classesService: ClassesService,
+        private readonly usersService: UsersService
+    ) {}
 
     @Post()
     create(@Body() body: CreateClassDTO) {
@@ -27,6 +31,12 @@ export class ClassesController {
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.classesService.findOne(id)
+    }
+
+    @Get(':id/students')
+    @Roles(UserRole.TEACHER)
+    findStudents(@Param('id') id: string) {
+        return this.usersService.findAllByClass(id)
     }
 
     @Patch(':id')

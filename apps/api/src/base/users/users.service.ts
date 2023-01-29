@@ -43,6 +43,19 @@ export class UsersService {
         })
     }
 
+    async findAllByClass(id: string) {
+        return this.users.find({
+            where: {
+                classes: {
+                    id,
+                },
+            },
+            relations: {
+                profile: true,
+            },
+        })
+    }
+
     async findOne(email: string) {
         const user = await this.users.findOne({
             where: { email },

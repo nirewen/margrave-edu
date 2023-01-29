@@ -1,19 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Lesson } from 'src/entities/lesson.entity'
 import { Repository } from 'typeorm'
-import { ClassesService } from '../classes/classes.service'
-import { SubjectsService } from '../subjects/subjects.service'
+
+import { Class } from 'src/entities/class.entity'
+import { Lesson } from 'src/entities/lesson.entity'
+import { Subject } from 'src/entities/subject.entity'
 import { CreateLessonDTO } from './dto/create-lesson.dto'
 import { UpdateLessonDTO } from './dto/update-lesson.dto'
+import { User } from 'src/entities/user.entity'
 
 @Injectable()
 export class LessonsService {
     constructor(
         @InjectRepository(Lesson)
-        private readonly lessons: Repository<Lesson>,
-        private readonly classesService: ClassesService,
-        private readonly subjectsService: SubjectsService
+        private readonly lessons: Repository<Lesson>
     ) {}
 
     async count() {
@@ -21,13 +21,13 @@ export class LessonsService {
     }
 
     async create({ classId, subjectId, ...body }: CreateLessonDTO) {
-        const lessonClass = await this.classesService.findOne(classId)
-        const subject = await this.subjectsService.findOne(subjectId)
-
         const lesson = this.lessons.create(body)
 
-        lesson.class = lessonClass
-        lesson.subject = subject
+        lesson.class = new Class()
+        lesson.class.id = classId
+
+        lesson.subject = new Subject()
+        lesson.subject.id = subjectId
 
         return this.lessons.save(lesson)
     }
@@ -47,7 +47,13 @@ export class LessonsService {
     }
 
     async findOne(id: string) {
-        const lesson = await this.lessons.findOneBy({ id })
+        const lesson = await this.lessons.findOne({
+            where: { id },
+            relations: {
+                class: true,
+                attendances: true,
+            },
+        })
 
         if (!lesson) {
             throw new NotFoundException('lesson for provided id was not found')
@@ -56,7 +62,7 @@ export class LessonsService {
         return lesson
     }
 
-    async update(id: string, body: UpdateLessonDTO) {
+    async update(id: string, { classId, subjectId, ...body }: UpdateLessonDTO) {
         const lesson = await this.findOne(id)
 
         return this.lessons.save({ ...lesson, ...body })

@@ -12,8 +12,8 @@ import {
     UpdateDateColumn,
 } from 'typeorm'
 import { Answer } from './answer.entity'
-import { Attendance } from './attendance.entity'
 import { Class } from './class.entity'
+import { Lesson } from './lesson.entity'
 import { Profile } from './profile.entity'
 import { Subject } from './subject.entity'
 
@@ -48,8 +48,8 @@ export class User {
     @OneToMany(() => Answer, answer => answer.user)
     answers: Answer[]
 
-    @OneToMany(() => Attendance, attendance => attendance.user)
-    attendances: Attendance[]
+    @ManyToMany(() => Lesson, lesson => lesson.attendances)
+    attendances: Lesson[]
 
     @ManyToMany(() => Class, entity => entity.users)
     @JoinTable({ name: 'user_classes' })
