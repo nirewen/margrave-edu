@@ -8,7 +8,20 @@
         { name: 'Dashboard', route: '/teacher/dashboard/', icon: 'ic:round-grid-view' },
         { name: 'Calendário', route: '/teacher/schedule/', icon: 'ic:baseline-calendar-month' },
         { name: 'Turmas', route: '/teacher/classes/', icon: 'ic:baseline-groups-2' },
-        { name: 'Aulas', route: '/teacher/lessons/', icon: 'ic:baseline-play-lesson' },
+        {
+            name: 'Aulas',
+            route: '/teacher/lessons/',
+            icon: 'ic:baseline-play-lesson',
+            routes: [
+                {
+                    name: 'Aula',
+                    route: '/teacher/lessons/.+?/edit',
+                    icon: 'material-symbols:book',
+                    hide: true,
+                    blank: true,
+                },
+            ],
+        },
     ]}
 />
 <NavBar />

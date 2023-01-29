@@ -16,12 +16,10 @@ const schema = z.object({
         .string()
         .optional()
         .transform(tags => tags?.split(',')),
-    subjectId: z.string().uuid(),
-    classId: z.string().uuid(),
 })
 
 export const actions: Actions = {
-    default: wrap(async ({ request, api }) => {
+    default: wrap(async ({ request, api, params }) => {
         const formData = await request.formData()
         const data = Object.fromEntries(formData)
         const obj = dot.object(data) as z.infer<typeof schema>
@@ -37,9 +35,9 @@ export const actions: Actions = {
         }
 
         try {
-            const response = await api.patch<Lesson>(`/api/lessons`, result.data)
+            const response = await api.patch<Lesson>(`/api/lessons/${params.id}`, result.data)
 
-            throw redirect(302, `/teacher/lessons/${response.id}/edit`)
+            throw redirect(302, `/teacher/lessons/`)
         } catch (error: unknown) {
             if (error instanceof APIError) {
                 return fail(error.status, {

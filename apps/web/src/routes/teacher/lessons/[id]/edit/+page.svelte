@@ -1,9 +1,6 @@
 <script lang="ts">
     //@ts-ignore
     import Tags from 'svelte-tags-input'
-    import Avatar from '$lib/components/Avatar.svelte'
-    import InfoCard from '$lib/components/InfoCard.svelte'
-    import { slide } from 'svelte/transition'
 
     import type { ActionData, PageData } from './$types'
     import { format } from 'date-fns'
