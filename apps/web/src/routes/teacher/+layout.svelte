@@ -15,8 +15,8 @@
             routes: [
                 {
                     name: 'Aula',
-                    route: '/teacher/lessons/.+?/edit',
-                    icon: 'material-symbols:book',
+                    route: '/teacher/lessons/.+?/',
+                    icon: 'material-symbols:play-circle',
                     hide: true,
                     blank: true,
                 },

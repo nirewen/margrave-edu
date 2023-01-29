@@ -2,16 +2,17 @@
     export let selected = false
     export let scale = false
     export let color: string = '#000000'
+    export let href: string | undefined = undefined
 </script>
 
-<button type="button" class:scale class="profile-card" class:selected on:click style:--color={color}>
+<a role="button" class:scale class="profile-card" class:selected on:click style:--color={color} {href}>
     <slot name="icon" />
     <div class="info">
         <p><slot name="title" /></p>
         <span><slot name="subtitle" /></span>
     </div>
     <slot name="action" />
-</button>
+</a>
 
 <style lang="scss">
     .profile-card {

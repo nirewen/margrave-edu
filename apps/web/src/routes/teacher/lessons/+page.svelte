@@ -27,7 +27,7 @@
     <div class="page">
         <div class="grid">
             {#each data.lessons as lesson}
-                <InfoCard>
+                <InfoCard href="./{lesson.id}/">
                     <svelte:fragment slot="title">{lesson.title}</svelte:fragment>
                     <svelte:fragment slot="subtitle">{format(lesson.date)}</svelte:fragment>
                     <a role="button" href="./{lesson.id}/edit/" class="ghost icon" slot="action">
