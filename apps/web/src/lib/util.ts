@@ -1,3 +1,6 @@
+import { differenceInYears, parseISO } from 'date-fns'
+import { formatInTimeZone } from 'date-fns-tz'
+
 export const plural = (num: number, suffix = 's') => (num === 1 ? '' : suffix)
 
 export type GenderID = 'MALE' | 'FEMALE' | 'OTHER' | string
@@ -174,3 +177,8 @@ export async function encodeBase64(file: File | Blob): Promise<string> {
         reader.onerror = error => reject(error)
     })
 }
+
+export const format = (date: string, format = 'dd/MM/yyyy') =>
+    formatInTimeZone(parseISO(date), 'Etc/UTC', format)
+
+export const getAge = (date: string) => differenceInYears(new Date(), parseISO(date))

@@ -1,8 +1,8 @@
 <script lang="ts">
     import { clipboard } from '$lib/hooks/clipboard'
     import type { PartialUser } from '$lib/types/User'
-    import { genders } from '$lib/util'
-    import { differenceInYears, format } from 'date-fns'
+    import { genders, getAge } from '$lib/util'
+    import { format } from '$lib/util'
     import Avatar from '$lib/components/Avatar.svelte'
 
     export let title: string
@@ -56,14 +56,14 @@
             <div class="field">
                 <h3>Idade</h3>
                 <p>
-                    {user.profile.birthdate
-                        ? differenceInYears(new Date(), new Date(user.profile.birthdate))
-                        : ''}
+                    {user.profile.birthdate ? getAge(user.profile.birthdate) : ''}
                 </p>
             </div>
             <div class="field">
                 <h3>Nascimento</h3>
-                <p>{user.profile.birthdate ? format(new Date(user.profile.birthdate), 'dd/MM/yyyy') : ''}</p>
+                <p>
+                    {user.profile.birthdate ? format(user.profile.birthdate) : ''}
+                </p>
             </div>
         </div>
     </div>

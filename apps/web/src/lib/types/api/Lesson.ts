@@ -7,7 +7,7 @@ export type Lesson = {
     id: string
     title: string
     description: string
-    date: Date
+    date: string
     timespan: number
     tags: string[]
     subject: Subject

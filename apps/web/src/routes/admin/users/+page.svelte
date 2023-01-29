@@ -1,13 +1,11 @@
 <script lang="ts">
-    import { format } from 'date-fns'
-
     import { writable } from 'svelte/store'
     import { flip } from 'svelte/animate'
     import { fade } from 'svelte/transition'
     import { queryParam } from 'sveltekit-search-params'
 
     import Avatar from '$lib/components/Avatar.svelte'
-    import { type RoleID, roles } from '$lib/util'
+    import { type RoleID, roles, format } from '$lib/util'
 
     import Profile from '../components/Profile.svelte'
     import InfoCard from '$lib/components/InfoCard.svelte'
@@ -69,7 +67,7 @@
                         />
                         <svelte:fragment slot="title">{user.profile.name}</svelte:fragment>
                         <svelte:fragment slot="subtitle"
-                            >usuário desde {format(new Date(user.createdAt), 'dd/MM/yyyy')}</svelte:fragment
+                            >usuário desde {format(user.createdAt)}</svelte:fragment
                         >
                     </InfoCard>
                 </div>

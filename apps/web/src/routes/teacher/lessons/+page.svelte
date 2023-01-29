@@ -1,6 +1,6 @@
 <script lang="ts">
     import InfoCard from '$lib/components/InfoCard.svelte'
-    import { format } from 'date-fns'
+    import { format } from '$lib/util'
     import type { PageData } from './$types'
 
     export let data: PageData
@@ -29,9 +29,7 @@
             {#each data.lessons as lesson}
                 <InfoCard>
                     <svelte:fragment slot="title">{lesson.title}</svelte:fragment>
-                    <svelte:fragment slot="subtitle"
-                        >{format(new Date(lesson.date), 'dd/MM/yyyy')}</svelte:fragment
-                    >
+                    <svelte:fragment slot="subtitle">{format(lesson.date)}</svelte:fragment>
                     <a role="button" href="./{lesson.id}/edit/" class="ghost icon" slot="action">
                         <iconify-icon icon="ic:baseline-edit" width="28" />
                     </a>

@@ -3,7 +3,7 @@
     import Tags from 'svelte-tags-input'
 
     import type { ActionData, PageData } from './$types'
-    import { format } from 'date-fns'
+    import { format } from '$lib/util'
 
     export let data: PageData
     export let form: ActionData
@@ -56,7 +56,7 @@
                     <input
                         type="date"
                         name="date"
-                        value={form?.data?.date ?? format(new Date(data.lesson.date), 'yyyy-MM-dd')}
+                        value={form?.data?.date ?? format(data.lesson.date, 'yyyy-MM-dd')}
                         required
                     />
                 </label>
