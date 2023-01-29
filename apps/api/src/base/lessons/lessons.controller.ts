@@ -9,12 +9,11 @@ import { LessonsService } from './lessons.service'
 
 @Controller('lessons')
 @UseGuards(RolesGuard)
-@Roles(UserRole.ADMIN)
+@Roles(UserRole.ADMIN, UserRole.TEACHER)
 export class LessonsController {
     constructor(private readonly lessonsService: LessonsService) {}
 
     @Post()
-    @Roles(UserRole.TEACHER)
     create(@Body() body: CreateLessonDTO) {
         return this.lessonsService.create(body)
     }
@@ -25,13 +24,11 @@ export class LessonsController {
     }
 
     @Get('@me')
-    @Roles(UserRole.TEACHER)
     findAllMe(@ReqUser() payload: Payload) {
         return this.lessonsService.findAllMe(payload.id)
     }
 
     @Get(':id')
-    @Roles(UserRole.TEACHER)
     findOne(@Param('id') id: string) {
         return this.lessonsService.findOne(id)
     }
