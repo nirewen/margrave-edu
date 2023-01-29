@@ -1,4 +1,4 @@
-import { IsArray, IsDate, IsDateString, IsString, IsUUID } from 'class-validator'
+import { IsArray, IsDateString, IsString, IsUUID } from 'class-validator'
 
 export class CreateLessonDTO {
     @IsString()

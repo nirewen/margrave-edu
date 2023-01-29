@@ -9,7 +9,7 @@
     import { slide } from 'svelte/transition'
 
     import type { ActionData, PageData } from './$types'
-    import { format } from 'date-fns'
+    import { format } from '$lib/util'
 
     export let data: PageData
     export let form: ActionData
@@ -61,7 +61,7 @@
                         </InfoCard>
                     {:else}
                         <InfoCard>
-                            <iconify-icon slot="icon" icon="mdi:chevron-down" width="42" />
+                            <iconify-icon slot="action" icon="mdi:chevron-down" width="42" />
                             <svelte:fragment slot="title">Disciplina</svelte:fragment>
                             <svelte:fragment slot="subtitle">Selecione uma disciplina</svelte:fragment>
                         </InfoCard>
@@ -93,7 +93,7 @@
                             </InfoCard>
                         {:else}
                             <InfoCard>
-                                <iconify-icon slot="icon" icon="mdi:chevron-down" width="42" />
+                                <iconify-icon slot="action" icon="mdi:chevron-down" width="42" />
                                 <svelte:fragment slot="title">Turma</svelte:fragment>
                                 <svelte:fragment slot="subtitle">Selecione uma turma</svelte:fragment>
                             </InfoCard>
@@ -116,13 +116,11 @@
             <div class="box">
                 <input type="hidden" name="subjectId" value={selection.subject.id} />
                 <input type="hidden" name="classId" value={selection.class.id} />
-                <div class="box" style:flex="1">
-                    <label data-error={form?.errors?.title}>
-                        <span>Título</span>
-                        <input type="text" name="title" value={form?.data?.title ?? ''} required />
-                    </label>
-                </div>
-                <label data-error={form?.errors?.description} style:flex="0">
+                <label data-error={form?.errors?.title}>
+                    <span>Título</span>
+                    <input type="text" name="title" value={form?.data?.title ?? ''} required />
+                </label>
+                <label data-error={form?.errors?.description}>
                     <span>Descrição</span>
                     <textarea name="description" value={form?.data?.description ?? ''} required />
                 </label>
@@ -136,12 +134,12 @@
                         <input
                             type="date"
                             name="date"
-                            value={form?.data?.date ?? format(new Date(), 'yyyy-MM-dd')}
+                            value={form?.data?.date ?? format(new Date().toISOString(), 'yyyy-MM-dd')}
                             required
                         />
                     </label>
                 </div>
-                <label data-error={form?.errors?.tags} style:flex="0">
+                <label data-error={form?.errors?.tags}>
                     <span>Tags</span>
                     <input type="hidden" name="tags" bind:value={tags} />
                     <Tags addKeys={[9, 13, 32, 188]} bind:tags />

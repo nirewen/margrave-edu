@@ -3,7 +3,7 @@ import dot from 'dot-object'
 
 import { actionWrapper as wrap } from '$lib/api'
 import { APIError } from '$lib/types/APIError'
-import { fail, redirect } from '@sveltejs/kit'
+import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import type { Lesson } from '$lib/types/api/Lesson'
 
@@ -32,10 +32,7 @@ export const actions: Actions = {
 
         try {
             const response = await api.patch<Lesson>(`/api/lessons/${params.id}`, result.data)
-
-            throw redirect(302, `/teacher/lessons/`)
         } catch (error: unknown) {
-            console.log('🚀 ~ file: +page.server.ts:39 ~ saveAttendances:wrap ~ error', error)
             if (error instanceof APIError) {
                 return fail(error.status, {
                     error: true,

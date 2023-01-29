@@ -15,7 +15,7 @@ const schema = z.object({
     tags: z
         .string()
         .optional()
-        .transform(tags => tags?.split(',')),
+        .transform(tags => (tags ? tags.split(',') : [])),
     subjectId: z.string().uuid(),
     classId: z.string().uuid(),
 })
@@ -27,6 +27,7 @@ export const actions: Actions = {
         const obj = dot.object(data) as z.infer<typeof schema>
 
         const result = schema.safeParse(obj)
+        console.log('🚀 ~ file: +page.server.ts:30 ~ default:wrap ~ result', result)
 
         if (!result.success) {
             return fail(400, {

@@ -1,5 +1,6 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
+    import InfoCard from '$lib/components/InfoCard.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData
@@ -22,6 +23,23 @@
         <div class="box">
             <b>Descrição</b>
             <span>{data.lesson.description}</span>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box">
+            <div class="box row" style:justify-content="space-between" style:align-items="center">
+                <b>Tarefas dessa aula</b>
+                <a href="./assignments/add/" role="button" class="ghost icon">
+                    <iconify-icon icon="material-symbols:add" />
+                </a>
+            </div>
+            {#each data.lesson.assignments as assignment}
+                <InfoCard>
+                    <svelte:fragment slot="subtitle">{assignment.description}</svelte:fragment>
+                </InfoCard>
+            {:else}
+                <span>Nenhuma tarefa para essa aula</span>
+            {/each}
         </div>
     </div>
     <form method="POST" action="?/saveAttendances" class="box" use:enhance>
@@ -67,6 +85,10 @@
         box-shadow: var(--elevation-3);
         border-radius: 0.8rem;
         height: fit-content;
+
+        &.row {
+            flex-direction: row;
+        }
 
         > .box {
             box-shadow: none;

@@ -52,6 +52,7 @@ export class LessonsService {
             relations: {
                 class: true,
                 attendances: true,
+                assignments: true,
             },
         })
 
