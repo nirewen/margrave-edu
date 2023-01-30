@@ -1,6 +1,7 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
     import InfoCard from '$lib/components/InfoCard.svelte'
+    import TableRow from '$lib/components/TableRow.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData
@@ -34,9 +35,9 @@
                 </a>
             </div>
             {#each data.lesson.assignments as assignment}
-                <InfoCard href="./assignments/{assignment.id}/">
-                    <svelte:fragment slot="title">{assignment.description}</svelte:fragment>
-                </InfoCard>
+                <TableRow href="./assignments/{assignment.id}/" shadow={false}>
+                    <span>{assignment.description}</span>
+                </TableRow>
             {:else}
                 <span>Nenhuma tarefa para essa aula</span>
             {/each}

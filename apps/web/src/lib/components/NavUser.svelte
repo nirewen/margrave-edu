@@ -7,7 +7,7 @@
     import Avatar from '$lib/components/Avatar.svelte'
     import { slide } from 'svelte/transition'
 
-    const user: User = $page.data.user
+    $: user = $page.data.user as User
 
     const menu = createMenu({ label: 'Actions' })
 
@@ -19,35 +19,39 @@
     ]
 </script>
 
-<menu>
-    <button type="button" use:menu.button>
-        <Avatar avatar={user.profile.avatar} alt="seu avatar" size={2} />
-        <span>{user.profile.name || user.email}</span>
-        <iconify-icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
-    </button>
+{#if user}
+    <menu>
+        <button type="button" use:menu.button>
+            <Avatar avatar={user.profile.avatar} alt="seu avatar" size={2} />
+            <span>{user.profile.name || user.email}</span>
+            <iconify-icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
+        </button>
 
-    {#if $menu.expanded}
-        <div class="menu" use:menu.items transition:slide={{ duration: 150 }}>
-            {#each groups as group}
-                <div class="menu-group">
-                    {#each group as option}
-                        {@const active = $menu.active === option.text}
-                        <a
-                            use:menu.item
-                            class="menu-item"
-                            class:active
-                            href={option.href}
-                            data-sveltekit-preload-data={option.preload}
-                        >
-                            <iconify-icon icon={option.icon} width="1.2rem" />
-                            {option.text}
-                        </a>
-                    {/each}
-                </div>
-            {/each}
-        </div>
-    {/if}
-</menu>
+        {#if $menu.expanded}
+            <div class="menu" use:menu.items transition:slide={{ duration: 150 }}>
+                {#each groups as group}
+                    <div class="menu-group">
+                        {#each group as option}
+                            {@const active = $menu.active === option.text}
+                            <a
+                                use:menu.item
+                                class="menu-item"
+                                class:active
+                                href={option.href}
+                                data-sveltekit-preload-data={option.preload}
+                            >
+                                <iconify-icon icon={option.icon} width="1.2rem" />
+                                {option.text}
+                            </a>
+                        {/each}
+                    </div>
+                {/each}
+            </div>
+        {/if}
+    </menu>
+{:else}
+    <a href="/login/" role="button">Login</a>
+{/if}
 
 <style lang="scss" scoped>
     menu {

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import NavUser from '$lib/components/NavUser.svelte'
 </script>
 
 <svelte:head>
@@ -12,7 +13,7 @@
             <a href="/">Início</a>
         </li>
         <li>
-            <a class="ghost" href="./login/" role="button">Login</a>
+            <NavUser />
         </li>
     </ul>
 </div>

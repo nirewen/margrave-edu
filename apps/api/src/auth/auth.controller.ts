@@ -40,14 +40,6 @@ export class AuthController {
         this.signin(res, user)
     }
 
-    @Get('/logout')
-    public async logout(@Res() res: Response) {
-        res.clearCookie('access_token')
-        res.clearCookie('refresh_token')
-
-        res.json({ ok: true })
-    }
-
     @Public()
     @Post('/refresh')
     @UseGuards(JwtRefreshGuard)
