@@ -1,6 +1,9 @@
 <aside>
     <header>
-        <h1>Escola Margrave</h1>
+        <a role="button" class="ghost icon" href="../" title="Voltar">
+            <iconify-icon icon="mdi:chevron-left" width={32} />
+        </a>
+        <h1>Margrave</h1>
     </header>
 
     <slot />
@@ -21,6 +24,9 @@
         background-color: #ffffff;
 
         header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             height: 5vw;
 
             > h1 {
