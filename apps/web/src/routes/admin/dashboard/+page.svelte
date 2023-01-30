@@ -16,23 +16,23 @@
 </header>
 <section class="stats">
     <CountCard
-        href="./users?role=STUDENT"
+        href="../users/?role=STUDENT"
         count={data.stats.students}
         label={`estudante${p(data.stats.students)}`}
     />
     <CountCard
-        href="./users?role=TEACHER"
+        href="../users/?role=TEACHER"
         count={data.stats.teachers}
         label={`professor${p(data.stats.teachers, 'es')}`}
     />
     <CountCard
-        href="./users?role=TEACHER"
+        href="../users/?role=TEACHER"
         count={data.stats.students}
         label={`estudante${p(data.stats.students)}`}
         style="grid-row: span 2;"
     />
-    <CountCard href="./classes" count={data.stats.lessons} label={`turma${p(data.stats.lessons)}`} />
-    <CountCard href="./lessons" count={data.stats.subjects} label={`aula${p(data.stats.subjects)}`} />
+    <CountCard href="../classes/" count={data.stats.lessons} label={`turma${p(data.stats.lessons)}`} />
+    <CountCard href="../lessons/" count={data.stats.subjects} label={`aula${p(data.stats.subjects)}`} />
 </section>
 
 <style lang="scss">

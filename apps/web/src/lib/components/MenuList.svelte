@@ -12,7 +12,7 @@
         {@const active = new RegExp(`^${route}`).test($page.url.pathname + '?' + $page.url.searchParams)}
 
         <li class:nested={routes && routes.length > 0} class:hide={hide && !active}>
-            <a class="label" class:open class:active href={blank ? '#' : route}>
+            <a class="label" class:open class:active href={blank ? '#' : route.replaceAll('\\', '')}>
                 <iconify-icon {icon} width={28} />
                 <span>{name}</span>
             </a>

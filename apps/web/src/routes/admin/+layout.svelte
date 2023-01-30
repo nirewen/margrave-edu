@@ -14,7 +14,7 @@
             icon: 'mdi:account-multiple',
             routes: [...roles].map(([id, { name, icon }]) => ({
                 name: name.formal.plural,
-                route: `/admin/users/?role=${id}`,
+                route: `/admin/users/\\?role=${id}`,
                 icon,
             })),
         },
