@@ -8,8 +8,8 @@
     export let shadow = false
 </script>
 
-<div class="avatar" class:shadow>
-    <img src={avatar ?? '/assets/default-avatar.png'} {alt} style:--size={size} />
+<div class="avatar" class:shadow style:--size={size}>
+    <img src={avatar ?? '/assets/default-avatar.png'} {alt} />
     {#if role}
         <iconify-icon class="role" icon={roles.get(role)?.icon} width={(size * 16) / 4} />
     {/if}
@@ -19,7 +19,7 @@
     .avatar {
         position: relative;
         border-radius: 9999px;
-        border: calc(var(--size) / 4) solid var(--gray-900);
+        border: calc(var(--size) * 1px / 3) solid var(--gray-900);
         flex-shrink: 0;
 
         > img {
