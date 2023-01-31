@@ -30,32 +30,43 @@
     <Alert variant="danger">{form?.error}</Alert>
 {/if}
 <form method="POST" use:enhance>
-    <label>
-        <span>Prédio</span>
-        <input type="text" name="building" value={form?.data?.building ?? data.classroom.building} required />
-    </label>
-    <label>
-        <span>Capacidade</span>
-        <input
-            type="number"
-            name="capacity"
-            min="0"
-            value={form?.data?.capacity ?? data.classroom.capacity}
-            required
-        />
-    </label>
-    <label for="type">
-        <span>Tipo de sala</span>
-        <fieldset class="inline" id="type" role="radiogroup">
-            {#each [...classroomTypes] as [value, { icon, name }]}
-                <Option name="type" bind:group={$classroom.type} {value}>
-                    <iconify-icon {icon} width="1.6rem" slot="icon" />
-                    {name}
-                </Option>
-            {/each}
-        </fieldset>
-    </label>
-    <button type="submit">Salvar</button>
+    <div class="form">
+        <div class="box">
+            <label>
+                <span>Prédio</span>
+                <input
+                    type="text"
+                    name="building"
+                    value={form?.data?.building ?? data.classroom.building}
+                    required
+                />
+            </label>
+            <label>
+                <span>Capacidade</span>
+                <input
+                    type="number"
+                    name="capacity"
+                    min="0"
+                    value={form?.data?.capacity ?? data.classroom.capacity}
+                    required
+                />
+            </label>
+            <label for="type">
+                <span>Tipo de sala</span>
+                <fieldset class="inline" id="type" role="radiogroup">
+                    {#each [...classroomTypes] as [value, { icon, name }]}
+                        <Option name="type" bind:group={$classroom.type} {value}>
+                            <iconify-icon {icon} width="1.6rem" slot="icon" />
+                            {name}
+                        </Option>
+                    {/each}
+                </fieldset>
+            </label>
+        </div>
+        <div class="box">
+            <button type="submit">Salvar</button>
+        </div>
+    </div>
 </form>
 
 <style lang="scss">
@@ -76,9 +87,26 @@
         }
     }
     form {
-        display: flex;
-        flex-direction: column;
+        display: grid;
         gap: 1rem;
-        width: max-content;
+        grid-template-columns: auto 20rem;
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--gray-900);
+            box-shadow: var(--elevation-3);
+            border-radius: 0.8rem;
+            height: fit-content;
+        }
     }
 </style>
