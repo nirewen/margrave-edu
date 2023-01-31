@@ -15,7 +15,7 @@
 </svelte:head>
 
 <header>
-    <a role="button" class="ghost icon" href="./" title="Voltar">
+    <a role="button" class="ghost icon" href="../" title="Voltar">
         <iconify-icon icon="mdi:chevron-left" width={32} />
     </a>
     <hgroup>
