@@ -42,7 +42,7 @@
                 <p>{answer.content}</p>
             </div>
         {:else}
-            <span>Você não enviou nenhuma resposta ainda</span>
+            <span>Nenhuma resposta foi enviada ainda</span>
         {/each}
     </div>
 
@@ -123,6 +123,7 @@
         margin: -0.5rem;
         padding: 0.5rem !important;
         transition: background-color 100ms ease-in-out;
+        border-radius: 0.6rem;
 
         &:hover {
             background-color: var(--gray-800);

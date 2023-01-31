@@ -1,8 +1,9 @@
 <script lang="ts">
-    import type { PageData } from './edit/$types'
     import { enhance } from '$app/forms'
     import { format } from '$lib/util'
     import Avatar from '$lib/components/Avatar.svelte'
+
+    import type { PageData } from './$types'
 
     export let data: PageData
 </script>
@@ -34,7 +35,7 @@
 
     <div class="box">
         {#each data.assignment.answers.filter(a => a.user.id === data.user?.id) as answer}
-            <div class="box">
+            <div class="box assignment" class:final={answer.final}>
                 <b>
                     <Avatar avatar={answer.user.profile.avatar} size={1.2} />
                     {answer.user.profile.name}
@@ -111,5 +112,25 @@
         p {
             white-space: pre-wrap;
         }
+    }
+
+    .assignment {
+        margin: -0.5rem;
+        padding: 0.5rem !important;
+        transition: background-color 100ms ease-in-out;
+        border-radius: 0.6rem;
+
+        &:hover {
+            background-color: var(--gray-800);
+        }
+
+        &.final {
+            background-color: var(--green);
+        }
+    }
+
+    .sticky {
+        position: sticky;
+        bottom: 0;
     }
 </style>
