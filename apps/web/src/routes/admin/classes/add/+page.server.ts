@@ -33,10 +33,8 @@ export const actions: Actions = {
         try {
             const response = await api.post<Classroom>(`/api/classes`, result.data)
 
-            console.log('🚀 ~ file: +page.server.ts:36 ~ default:wrap ~ response', response)
-            throw redirect(302, `/admin/classes/${response.id}/edit`)
+            throw redirect(302, `/admin/classes/${response.id}/edit/`)
         } catch (error: unknown) {
-            console.log('🚀 ~ file: +page.server.ts:39 ~ default:wrap ~ error', error)
             if (error instanceof APIError) {
                 return fail(error.status, {
                     error: true,
