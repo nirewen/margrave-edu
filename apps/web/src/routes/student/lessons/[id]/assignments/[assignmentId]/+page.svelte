@@ -47,7 +47,7 @@
         {/each}
     </div>
 
-    <form action="?/submitAnswer" method="POST" use:enhance>
+    <form class="sticky" action="?/submitAnswer" method="POST" use:enhance>
         <div class="box">
             <label for="description">
                 <b>Resposta</b>
@@ -107,6 +107,12 @@
 
         &.row {
             flex-direction: row;
+        }
+
+        b {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
 
         p {

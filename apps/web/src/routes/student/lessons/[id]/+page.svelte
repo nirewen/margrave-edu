@@ -1,5 +1,5 @@
 <script lang="ts">
-    import InfoCard from '$lib/components/InfoCard.svelte'
+    import TableRow from '$lib/components/TableRow.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData
@@ -30,9 +30,11 @@
                 <b>Tarefas dessa aula</b>
             </div>
             {#each data.lesson.assignments as assignment}
-                <InfoCard href="./assignments/{assignment.id}/">
-                    <svelte:fragment slot="title">{assignment.description}</svelte:fragment>
-                </InfoCard>
+                {@const answers = assignment.answers.filter(a => a.user.id === data.user?.id)}
+                <TableRow href="./assignments/{assignment.id}/" shadow={false}>
+                    <span class="text-trim">{assignment.description}</span>
+                    <span class="text-right">{answers.length} respostas</span>
+                </TableRow>
             {:else}
                 <span>Nenhuma tarefa para essa aula</span>
             {/each}

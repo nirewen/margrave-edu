@@ -22,28 +22,25 @@
     <div class="page">Nenhuma aula encontrada</div>
 {/if}
 <div class="page">
-    <div class="box">
-        {#each data.classes as it}
-            <div class="box">
-                <span>
-                    <b>{it.number}</b>
-                    <small>{it.period}</small>
-                </span>
-                <div class="page">
-                    {#each it.lessons.sort( (a, b) => compareDesc(new Date(a.date), new Date(b.date)) ) as lesson}
-                        <TableRow href="./{lesson.id}/" columns="auto 1fr auto" shadow={false}>
-                            <span class="ml-2">{lesson.title}</span>
-                            <span class="description">{lesson.description}</span>
-                            <span>{format(lesson.date)}</span>
-                            <a role="button" href="./{lesson.id}/edit/" class="ghost icon" slot="action">
-                                <iconify-icon icon="ic:baseline-edit" width="28" />
-                            </a>
-                        </TableRow>
-                    {/each}
-                </div>
+    {#each data.classes as it}
+        <div class="box">
+            <span>
+                <b>{it.number}</b>
+                <small>{it.period}</small>
+            </span>
+            <div class="page">
+                {#each it.lessons.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))) as lesson}
+                    <TableRow href="./{lesson.id}/" columns="auto 1fr auto" shadow={false}>
+                        <span>{lesson.title}</span>
+                        <span class="description">{lesson.description}</span>
+                        <span>{format(lesson.date)}</span>
+                    </TableRow>
+                {:else}
+                    <span>Nenhuma aula para essa turma</span>
+                {/each}
             </div>
-        {/each}
-    </div>
+        </div>
+    {/each}
 </div>
 
 <style lang="scss">

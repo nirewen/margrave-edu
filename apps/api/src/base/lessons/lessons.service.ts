@@ -53,7 +53,9 @@ export class LessonsService {
                 class: true,
                 attendances: true,
                 assignments: {
-                    answers: true,
+                    answers: {
+                        user: true,
+                    },
                 },
             },
         })
