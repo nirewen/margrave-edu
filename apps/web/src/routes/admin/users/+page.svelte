@@ -29,7 +29,9 @@
 
 <header>
     <hgroup>
-        <h1>{filteredRole?.name.formal.plural ?? 'Usuários'}</h1>
+        <h1>
+            {filteredRole?.name.formal.plural ?? 'Usuários'} <span class="badge">{data.users.length}</span>
+        </h1>
         <h2>Lista de todos os {filteredRole?.name.plural ?? 'usuários'} registrados</h2>
     </hgroup>
     <div class="filter">
@@ -98,6 +100,15 @@
             h2 {
                 color: var(--gray-400);
             }
+        }
+
+        .badge {
+            border-radius: 0.6rem;
+            padding: 0 0.6rem;
+            font-size: 1.3rem;
+            color: var(--gray-900);
+            background-color: var(--accent);
+            vertical-align: text-bottom;
         }
 
         .filter {
