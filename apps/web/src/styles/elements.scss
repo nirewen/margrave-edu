@@ -157,18 +157,3 @@ iconify-icon.inverted {
     background-color: var(--color);
     color: #ffffff;
 }
-
-.text-trim {
-    width: 30ch;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.ml-2 {
-    margin-left: 0.8rem;
-}
