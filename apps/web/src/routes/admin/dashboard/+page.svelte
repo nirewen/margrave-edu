@@ -16,23 +16,36 @@
 </header>
 <section class="stats">
     <CountCard
+        big
+        href="../users/"
+        count={data.stats.users}
+        icon="mdi:account"
+        label={`usuário${p(data.stats.users)}`}
+    />
+    <CountCard
         href="../users/?role=STUDENT"
         count={data.stats.students}
+        icon="ic:round-school"
         label={`estudante${p(data.stats.students)}`}
     />
     <CountCard
         href="../users/?role=TEACHER"
         count={data.stats.teachers}
+        icon="mdi:human-male-board"
         label={`professor${p(data.stats.teachers, 'es')}`}
     />
     <CountCard
-        href="../users/?role=TEACHER"
-        count={data.stats.students}
-        label={`estudante${p(data.stats.students)}`}
-        style="grid-row: span 2;"
+        href="../classes/"
+        count={data.stats.classes}
+        icon="ic:baseline-groups-2"
+        label={`turma${p(data.stats.classes)}`}
     />
-    <CountCard href="../classes/" count={data.stats.lessons} label={`turma${p(data.stats.lessons)}`} />
-    <CountCard href="../lessons/" count={data.stats.subjects} label={`aula${p(data.stats.subjects)}`} />
+    <CountCard
+        href="../lessons/"
+        count={data.stats.lessons}
+        icon="ic:baseline-play-lesson"
+        label={`aula${p(data.stats.lessons)}`}
+    />
 </section>
 
 <style lang="scss">
@@ -50,7 +63,7 @@
     section.stats {
         display: grid;
         gap: 1rem;
-        grid-template-columns: 1fr 1fr 2fr;
+        grid-template-columns: 2fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
     }
 </style>
