@@ -1,5 +1,8 @@
 <script lang="ts">
     import NavUser from '$lib/components/NavUser.svelte'
+    import type { PageData } from './$types'
+
+    export let data: PageData
 </script>
 
 <svelte:head>
@@ -9,12 +12,11 @@
 <div class="navbar">
     <a class="brand" href="/">Margrave</a>
     <ul>
-        <li>
-            <a href="/">Início</a>
-        </li>
-        <li>
-            <NavUser />
-        </li>
+        <li><a href="/">Início</a></li>
+        {#if data.user}
+            <li><a href="/{data.user.role.toLowerCase()}/dashboard/">Painel</a></li>
+        {/if}
+        <li><NavUser /></li>
     </ul>
 </div>
 

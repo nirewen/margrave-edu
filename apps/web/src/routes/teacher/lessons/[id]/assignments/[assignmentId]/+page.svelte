@@ -32,9 +32,9 @@
         </div>
     </div>
 
-    <div class="box">
+    <div class="box" style:gap="1.2rem">
         {#each data.assignment.answers as answer}
-            <div class="box">
+            <div class="box assignment" class:final={answer.final}>
                 <b>
                     <Avatar avatar={answer.user.profile.avatar} size={1.2} />
                     {answer.user.profile.name}
@@ -46,7 +46,7 @@
         {/each}
     </div>
 
-    <form action="?/submitAnswer" method="POST" use:enhance>
+    <form class="sticky" action="?/submitAnswer" method="POST" use:enhance>
         <div class="box">
             <label for="description">
                 <b>Resposta</b>
@@ -117,5 +117,24 @@
         p {
             white-space: pre-wrap;
         }
+    }
+
+    .assignment {
+        margin: -0.5rem;
+        padding: 0.5rem !important;
+        transition: background-color 100ms ease-in-out;
+
+        &:hover {
+            background-color: var(--gray-800);
+        }
+
+        &.final {
+            background-color: var(--green);
+        }
+    }
+
+    .sticky {
+        position: sticky;
+        bottom: 0;
     }
 </style>

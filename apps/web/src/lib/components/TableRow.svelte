@@ -17,10 +17,8 @@
         align-items: center;
         gap: 1rem;
         padding: 0.4rem;
-        padding-left: 0.8rem;
         height: fit-content;
         width: 100%;
-        max-width: min-content;
         border-radius: 8px;
         background-color: var(--gray-900);
         text-align: left;
@@ -29,6 +27,8 @@
         text-transform: none;
         font-weight: 400;
         color: var(--color);
+        overflow: hidden;
+        box-shadow: var(--elevation-0);
 
         &.shadow {
             box-shadow: var(--elevation-3);
@@ -38,10 +38,6 @@
             display: grid;
             gap: 1rem;
             flex: 1;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 15ch;
-            overflow: hidden;
         }
     }
 </style>

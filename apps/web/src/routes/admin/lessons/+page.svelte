@@ -27,7 +27,7 @@
     <div class="page">
         {#each data.lessons as lesson}
             <TableRow href="./{lesson.id}/" columns="auto 1fr auto">
-                <span>{lesson.title}</span>
+                <span class="ml-2">{lesson.title}</span>
                 <span class="description">{lesson.description}</span>
                 <span>{format(lesson.date)}</span>
                 <a role="button" href="./{lesson.id}/edit/" class="ghost icon" slot="action">

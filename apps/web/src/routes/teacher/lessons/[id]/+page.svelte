@@ -1,6 +1,6 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
-    import InfoCard from '$lib/components/InfoCard.svelte'
+    import TableRow from '$lib/components/TableRow.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData
@@ -20,10 +20,8 @@
 </header>
 <div class="page">
     <div class="box">
-        <div class="box">
-            <b>Descrição</b>
-            <span>{data.lesson.description}</span>
-        </div>
+        <b>Descrição</b>
+        <span>{data.lesson.description}</span>
     </div>
     <div class="box">
         <div class="box">
@@ -34,9 +32,10 @@
                 </a>
             </div>
             {#each data.lesson.assignments as assignment}
-                <InfoCard href="./assignments/{assignment.id}/">
-                    <svelte:fragment slot="title">{assignment.description}</svelte:fragment>
-                </InfoCard>
+                <TableRow href="./assignments/{assignment.id}/" shadow={false}>
+                    <span class="text-trim">{assignment.description}</span>
+                    <span class="text-right">{assignment.answers.length} respostas</span>
+                </TableRow>
             {:else}
                 <span>Nenhuma tarefa para essa aula</span>
             {/each}
@@ -79,7 +78,7 @@
     .box {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.6rem;
         padding: 1rem;
         background-color: var(--gray-900);
         box-shadow: var(--elevation-3);
@@ -93,7 +92,6 @@
         > .box {
             box-shadow: none;
             padding: 0;
-            gap: 0;
         }
     }
 

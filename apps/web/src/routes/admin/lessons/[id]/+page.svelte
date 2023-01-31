@@ -1,6 +1,5 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
-    import InfoCard from '$lib/components/InfoCard.svelte'
     import TableRow from '$lib/components/TableRow.svelte'
     import type { PageData } from './$types'
 
@@ -21,10 +20,8 @@
 </header>
 <div class="page">
     <div class="box">
-        <div class="box">
-            <b>Descrição</b>
-            <span>{data.lesson.description}</span>
-        </div>
+        <b>Descrição</b>
+        <span>{data.lesson.description}</span>
     </div>
     <div class="box">
         <div class="box">

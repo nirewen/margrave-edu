@@ -1,9 +1,12 @@
 <script lang="ts">
-    import InfoCard from '$lib/components/InfoCard.svelte'
+    import TableRow from '$lib/components/TableRow.svelte'
     import { format } from '$lib/util'
+    import { compareDesc } from 'date-fns'
     import type { PageData } from './$types'
 
     export let data: PageData
+
+    $: lessons = data.lessons.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
 </script>
 
 <svelte:head>
@@ -21,21 +24,21 @@
         Adicionar
     </a>
 </header>
+
 {#if !data.lessons.length}
     <div class="page">Nenhuma aula encontrada</div>
 {:else}
     <div class="page">
-        <div class="grid">
-            {#each data.lessons as lesson}
-                <InfoCard href="./{lesson.id}/">
-                    <svelte:fragment slot="title">{lesson.title}</svelte:fragment>
-                    <svelte:fragment slot="subtitle">{format(lesson.date)}</svelte:fragment>
-                    <a role="button" href="./{lesson.id}/edit/" class="ghost icon" slot="action">
-                        <iconify-icon icon="ic:baseline-edit" width="28" />
-                    </a>
-                </InfoCard>
-            {/each}
-        </div>
+        {#each lessons as lesson}
+            <TableRow href="./{lesson.id}/" columns="auto 1fr auto">
+                <span class="ml-2">{lesson.title}</span>
+                <span class="description">{lesson.description}</span>
+                <span>{format(lesson.date)}</span>
+                <a role="button" href="./{lesson.id}/edit/" class="ghost icon" slot="action">
+                    <iconify-icon icon="ic:baseline-edit" width="28" />
+                </a>
+            </TableRow>
+        {/each}
     </div>
 {/if}
 
@@ -60,15 +63,12 @@
     }
 
     .page {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: auto 20rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
     }
 
-    .page .grid {
-        display: grid;
-        gap: 0.8rem;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        height: fit-content;
+    span.description {
+        opacity: 60%;
     }
 </style>
