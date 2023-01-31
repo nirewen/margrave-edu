@@ -1,9 +1,12 @@
 <script lang="ts">
     import TableRow from '$lib/components/TableRow.svelte'
     import { format } from '$lib/util'
+    import { compareDesc } from 'date-fns'
     import type { PageData } from './$types'
 
     export let data: PageData
+
+    $: lessons = data.lessons.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
 </script>
 
 <svelte:head>
@@ -25,7 +28,7 @@
     <div class="page">Nenhuma aula encontrada</div>
 {:else}
     <div class="page">
-        {#each data.lessons as lesson}
+        {#each lessons as lesson}
             <TableRow href="./{lesson.id}/" columns="auto 1fr auto">
                 <span class="ml-2">{lesson.title}</span>
                 <span class="description">{lesson.description}</span>

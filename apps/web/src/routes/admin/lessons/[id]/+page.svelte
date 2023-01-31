@@ -33,7 +33,8 @@
             </div>
             {#each data.lesson.assignments as assignment}
                 <TableRow href="./assignments/{assignment.id}/" shadow={false}>
-                    <span>{assignment.description}</span>
+                    <span class="text-trim">{assignment.description}</span>
+                    <span class="text-right">{assignment.answers.length} respostas</span>
                 </TableRow>
             {:else}
                 <span>Nenhuma tarefa para essa aula</span>
