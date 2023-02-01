@@ -22,12 +22,12 @@
 
     let selection = {
         subject: form?.data
-            ? data.subjects.find(s => s.id === (form?.data.subjectId ?? data.lesson.subject.id))
-            : null,
+            ? data.subjects.find(s => s.id === form?.data.subjectId)
+            : data.subjects.find(s => s.id === data.lesson.subject.id),
         class: form?.data
-            ? data.classes.find(s => s.id === (form?.data.classId ?? data.lesson.class.id))
-            : null,
-    } as { subject: Subject | null; class: Class | null }
+            ? data.classes.find(s => s.id === form?.data.classId)
+            : data.classes.find(s => s.id === data.lesson.class.id),
+    } as { subject: Subject; class: Class }
 
     $: availableClasses = data.classes.filter(c => c.subjects.find(s => s.id === selection.subject?.id))
 </script>
@@ -119,6 +119,8 @@
             </div>
         </div>
         <div class="box">
+            <input type="hidden" name="subjectId" value={selection.subject.id} />
+            <input type="hidden" name="classId" value={selection.class.id} />
             <div class="box" style:flex="1">
                 <label data-error={form?.errors?.title}>
                     <span>Título</span>

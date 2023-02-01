@@ -83,6 +83,12 @@ export class LessonsService {
     async update(id: string, { classId, subjectId, ...body }: UpdateLessonDTO) {
         const lesson = await this.findOne(id)
 
+        lesson.class = new Class()
+        lesson.class.id = classId
+
+        lesson.subject = new Subject()
+        lesson.subject.id = subjectId
+
         return this.lessons.save({ ...lesson, ...body })
     }
 

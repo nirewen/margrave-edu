@@ -107,6 +107,8 @@
             </div>
         </div>
         <div class="box">
+            <input type="hidden" name="subjectId" value={selection.subject.id} />
+            <input type="hidden" name="classId" value={selection.class.id} />
             <div class="box" style:flex="1">
                 <label data-error={form?.errors?.title}>
                     <span>Título</span>
