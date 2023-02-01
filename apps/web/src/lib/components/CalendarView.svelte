@@ -24,6 +24,7 @@
     //	You need to call findRowCol() to calc the row/col based on each items start date. Each date box has a Date() property.
     //	And, if an item overlaps rows, then you need to add a 2nd item on the subsequent row.
     type Item = {
+        href?: string
         title: string
         subtitle?: string
         subitems?: Item[]
@@ -161,14 +162,14 @@
     <div class="sidebar">
         {#if monthItems}
             {#each monthItems as item}
-                <TableRow columns="auto 1fr auto" shadow={false}>
+                <TableRow href={item.href} columns="auto 1fr auto" shadow={false}>
                     <span>{item.title}</span>
                     <span class="description">{item.subtitle}</span>
                     <span>{format(item.date.toISOString())}</span>
                     {#if item.subitems}
                         <div style:grid-column="span 3">
                             {#each item.subitems as subitem}
-                                <TableRow columns="auto 1fr auto" shadow={false}>
+                                <TableRow href={subitem.href} columns="auto 1fr auto" shadow={false}>
                                     <span>{subitem.title}</span>
                                     <span class="description">{subitem.subtitle}</span>
                                     <span>{format(subitem.date.toISOString())}</span>

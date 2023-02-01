@@ -43,6 +43,9 @@ export class AssignmentsService {
                     },
                 },
             },
+            relations: {
+                lesson: true,
+            },
         })
     }
 

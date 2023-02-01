@@ -52,9 +52,11 @@
 
     <CalendarView
         items={data.lessons.map(l => ({
+            href: `../lessons/${l.id}/`,
             title: l.title,
             subtitle: l.description,
             subitems: l.assignments.map(a => ({
+                href: `../lessons/${l.id}/assignments/${a.id}/`,
                 title: a.description,
                 date: new Date(a.expiresAt),
             })),

@@ -16,6 +16,7 @@
 <div class="page">
     <CalendarView
         items={data.assignments.map(a => ({
+            href: `../lessons/${a.lesson.id}/assignments/${a.id}/`,
             title: a.description,
             className: 'task--info',
             date: new Date(a.expiresAt),
