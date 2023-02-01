@@ -1,31 +1,23 @@
-import dot from 'dot-object'
-import { z } from 'zod'
 import { fail, redirect } from '@sveltejs/kit'
-
 import { actionWrapper as wrap } from '$lib/api'
-import type { Classroom } from '$lib/types/api/Classroom'
+
+import { type Classroom, schema } from '$lib/types/api/Classroom'
 import { APIError } from '$lib/types/APIError'
 
 import type { Actions } from './$types'
-
-const schema = z.object({
-    building: z.string(),
-    capacity: z.coerce.number(),
-    type: z.enum(['REGULAR', 'COMPUTER', 'LABORATORY', 'GYMNASIUM']),
-})
+import { formatData } from '$lib/util'
 
 export const actions: Actions = {
     default: wrap(async ({ request, api, url }) => {
         const formData = await request.formData()
-        const data = Object.fromEntries(formData)
-        const obj = dot.object(data) as z.infer<typeof schema>
+        const data = formatData(formData, schema)
 
-        const result = schema.safeParse(obj)
+        const result = schema.safeParse(data)
 
         if (!result.success) {
             return fail(401, {
                 error: true,
-                data: obj,
+                data,
                 errors: result.error.formErrors.fieldErrors,
             })
         }
@@ -39,7 +31,7 @@ export const actions: Actions = {
                 return fail(error.status, {
                     errored: true,
                     error: error.message,
-                    data: obj,
+                    data: data,
                 })
             }
         }

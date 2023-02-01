@@ -1,38 +1,23 @@
-import { z } from 'zod'
-import dot from 'dot-object'
-
-import { actionWrapper as wrap } from '$lib/api'
-import { APIError } from '$lib/types/APIError'
 import { fail, redirect } from '@sveltejs/kit'
-import type { Actions } from './$types'
-import type { Lesson } from '$lib/types/api/Lesson'
+import { actionWrapper as wrap } from '$lib/api'
 
-const schema = z.object({
-    title: z.string(),
-    description: z.string(),
-    timespan: z.string(),
-    date: z.string(),
-    tags: z
-        .string()
-        .optional()
-        .transform(tags => (tags ? tags.split(',') : [])),
-    subjectId: z.string().uuid(),
-    classId: z.string().uuid(),
-})
+import { type Lesson, schema } from '$lib/types/api/Lesson'
+import { APIError } from '$lib/types/APIError'
+
+import type { Actions } from './$types'
+import { formatData } from '$lib/util'
 
 export const actions: Actions = {
     default: wrap(async ({ request, api }) => {
         const formData = await request.formData()
-        const data = Object.fromEntries(formData)
-        const obj = dot.object(data) as z.infer<typeof schema>
+        const data = formatData(formData, schema)
 
-        const result = schema.safeParse(obj)
-        console.log('🚀 ~ file: +page.server.ts:30 ~ default:wrap ~ result', result)
+        const result = schema.safeParse(data)
 
         if (!result.success) {
             return fail(400, {
                 error: true,
-                data: obj,
+                data: data,
                 errors: result.error.formErrors.fieldErrors,
             })
         }

@@ -1,5 +1,6 @@
 import { differenceInYears, parseISO } from 'date-fns'
 import { formatInTimeZone } from 'date-fns-tz'
+import type { z } from 'zod'
 
 export const plural = (num: number, suffix = 's') => (num === 1 ? '' : suffix)
 
@@ -182,3 +183,6 @@ export const format = (date: string, format = 'dd/MM/yyyy') =>
     formatInTimeZone(parseISO(date), 'Etc/UTC', format)
 
 export const getAge = (date: string) => differenceInYears(new Date(), parseISO(date))
+
+export const formatData = <T extends z.ZodType>(formData: FormData, schema: T) =>
+    dot.object(Object.fromEntries(formData)) as z.infer<T>

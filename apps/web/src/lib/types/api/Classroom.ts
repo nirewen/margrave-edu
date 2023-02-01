@@ -1,3 +1,4 @@
+import { z } from 'zod'
 import type { Class } from './Class'
 
 export enum ClassroomType {
@@ -14,3 +15,9 @@ export type Classroom = {
     type: ClassroomType
     classes: Class[]
 }
+
+export const schema = z.object({
+    building: z.string(),
+    capacity: z.coerce.number(),
+    type: z.enum(['REGULAR', 'COMPUTER', 'LABORATORY', 'GYMNASIUM']),
+})

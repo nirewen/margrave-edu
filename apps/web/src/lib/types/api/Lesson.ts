@@ -1,3 +1,4 @@
+import { z } from 'zod'
 import type { User } from '../User'
 import type { Assignment } from './Assignment'
 import type { Class } from './Class'
@@ -15,3 +16,23 @@ export type Lesson = {
     assignments: Assignment[]
     attendances: User[]
 }
+
+export const schema = z.object({
+    title: z.string(),
+    description: z.string(),
+    timespan: z.string(),
+    date: z.string(),
+    tags: z
+        .string()
+        .optional()
+        .transform(tags => tags?.split(',')),
+    subjectId: z.string().uuid().optional(),
+    classId: z.string().uuid().optional(),
+})
+
+export const assignmentsSchema = z.object({
+    attendances: z
+        .record(z.string(), z.string())
+        .optional()
+        .transform(obj => (obj ? Object.keys(obj).map(id => ({ id })) : [])),
+})

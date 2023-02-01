@@ -1,39 +1,30 @@
-import { z } from 'zod'
-import dot from 'dot-object'
-
-import { actionWrapper as wrap } from '$lib/api'
-import type { Classroom } from '$lib/types/api/Classroom'
-import { APIError } from '$lib/types/APIError'
 import { fail, redirect } from '@sveltejs/kit'
-import type { Actions } from './$types'
+import { actionWrapper as wrap } from '$lib/api'
 
-const schema = z.object({
-    number: z.string(),
-    period: z.string().regex(/^\d{4}\/\d$/, 'período deve seguir o padrão ano/frac'),
-    shift: z.enum(['MORNING', 'AFTERNOON', 'NIGHT']),
-    classroomId: z.string().uuid(),
-    subjects: z.array(z.string().uuid()).optional(),
-    users: z.array(z.string().uuid()).optional(),
-})
+import { type Class, schema } from '$lib/types/api/Class'
+import { APIError } from '$lib/types/APIError'
+
+import { formatData } from '$lib/util'
+
+import type { Actions } from './$types'
 
 export const actions: Actions = {
     default: wrap(async ({ request, api, params }) => {
         const formData = await request.formData()
-        const data = Object.fromEntries(formData)
-        const obj = dot.object(data) as z.infer<typeof schema>
+        const data = formatData(formData, schema)
 
-        const result = schema.safeParse(obj)
+        const result = schema.safeParse(data)
 
         if (!result.success) {
             return fail(400, {
                 error: true,
-                data: obj,
+                data,
                 errors: result.error.formErrors.fieldErrors,
             })
         }
 
         try {
-            const response = await api.patch<Classroom>(`/api/classes/${params.id}`, result.data)
+            const response = await api.patch<Class>(`/api/classes/${params.id}`, result.data)
 
             throw redirect(302, `/admin/classes`)
         } catch (error: unknown) {

@@ -1,20 +1,18 @@
-import { actionWrapper as wrap } from '$lib/api'
-import { APIError } from '$lib/types/APIError'
-import type { User } from '$lib/types/User'
 import { fail, redirect } from '@sveltejs/kit'
-import { z } from 'zod'
-import type { Actions } from './$types'
+import { actionWrapper as wrap } from '$lib/api'
 
-const schema = z.object({
-    email: z.string().email('Email inválido'),
-    password: z.string().min(6, 'Senha deve ter pelo menos 6 caracteres'),
-})
+import { type User, schema } from '$lib/types/User'
+import { APIError } from '$lib/types/APIError'
+
+import { formatData } from '$lib/util'
+
+import type { Actions } from './$types'
 
 export const actions: Actions = {
     default: wrap(async ({ request, api, url }) => {
         const { role } = Object.fromEntries(url.searchParams)
         const formData = await request.formData()
-        const data = Object.fromEntries(formData)
+        const data = formatData(formData, schema)
 
         const result = schema.safeParse(data)
 
