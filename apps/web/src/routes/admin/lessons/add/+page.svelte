@@ -213,6 +213,9 @@
             color: #000000;
 
             .menu {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
                 position: absolute;
                 top: 5rem;
                 background-color: #ffffff;
@@ -220,8 +223,10 @@
                 border-radius: 0.375rem;
                 border-top-width: 1px;
                 border-color: #f3f4f6;
-                box-shadow: var(--elevation-2);
+                box-shadow: var(--elevation-6);
                 width: 100%;
+                max-height: 20rem;
+                overflow: overlay;
             }
         }
     }

@@ -59,6 +59,11 @@ export class LessonsService {
             where: { id },
             relations: {
                 class: true,
+                subject: {
+                    teacher: {
+                        profile: true,
+                    },
+                },
                 attendances: true,
                 assignments: {
                     answers: {

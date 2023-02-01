@@ -1,15 +1,35 @@
 <script lang="ts">
     //@ts-ignore
     import Tags from 'svelte-tags-input'
+    import type { Class } from '$lib/types/api/Class'
+    import type { Subject } from '$lib/types/api/Subject'
+    import { createMenu } from 'svelte-headlessui'
+    import { slide } from 'svelte/transition'
 
     import type { ActionData, PageData } from './$types'
     import { format } from '$lib/util'
     import { enhance } from '$app/forms'
+    import InfoCard from '$lib/components/InfoCard.svelte'
+    import Avatar from '$lib/components/Avatar.svelte'
 
     export let data: PageData
     export let form: ActionData
 
     let tags: string[] = form?.data.tags ?? data.lesson.tags
+
+    const subjectMenu = createMenu({ label: 'Subjects' })
+    const classesMenu = createMenu({ label: 'Classes' })
+
+    let selection = {
+        subject: form?.data
+            ? data.subjects.find(s => s.id === form?.data.subjectId)
+            : data.subjects.find(s => s.id === data.lesson.subject.id),
+        class: form?.data
+            ? data.classes.find(s => s.id === form?.data.classId)
+            : data.classes.find(s => s.id === data.lesson.class.id),
+    } as { subject: Subject; class: Class }
+
+    $: availableClasses = data.classes.filter(c => c.subjects.find(s => s.id === selection.subject?.id))
 </script>
 
 <svelte:head>
@@ -27,6 +47,65 @@
 </header>
 <form method="POST" use:enhance>
     <div class="form">
+        <div class="box row">
+            <div class="box" style:flex="1">
+                <span>Selecione a disciplina</span>
+                <button type="button" use:subjectMenu.button>
+                    {#if selection.subject}
+                        <InfoCard color={selection.subject?.color}>
+                            <iconify-icon
+                                class="inverted"
+                                slot="icon"
+                                icon={selection.subject?.icon}
+                                width="42"
+                            />
+                            <svelte:fragment slot="title">{selection.subject?.name}</svelte:fragment>
+                            <svelte:fragment slot="subtitle">
+                                <Avatar avatar={selection.subject?.teacher.profile.avatar} size={1} />
+                                {selection.subject?.teacher.profile.name}
+                            </svelte:fragment>
+                        </InfoCard>
+                    {/if}
+                    {#if $subjectMenu.expanded}
+                        <div class="menu" use:subjectMenu.items transition:slide={{ duration: 150 }}>
+                            {#each data.subjects as s}
+                                <InfoCard color={s.color} on:click={() => (selection.subject = s)}>
+                                    <iconify-icon class="inverted" slot="icon" icon={s.icon} width="42" />
+                                    <svelte:fragment slot="title">{s.name}</svelte:fragment>
+                                    <svelte:fragment slot="subtitle">
+                                        <Avatar avatar={s.teacher.profile.avatar} size={1} />
+                                        {s.teacher.profile.name}
+                                    </svelte:fragment>
+                                </InfoCard>
+                            {/each}
+                        </div>
+                    {/if}
+                </button>
+            </div>
+            <div class="box" style:flex="1">
+                {#if selection.subject}
+                    <span>Selecione a turma</span>
+                    <button type="button" use:classesMenu.button>
+                        {#if selection.class}
+                            <InfoCard>
+                                <svelte:fragment slot="title">{selection.class.number}</svelte:fragment>
+                                <svelte:fragment slot="subtitle">{selection.class.period}</svelte:fragment>
+                            </InfoCard>
+                        {/if}
+                        {#if $classesMenu.expanded}
+                            <div class="menu" use:classesMenu.items transition:slide={{ duration: 150 }}>
+                                {#each availableClasses as c}
+                                    <InfoCard on:click={() => (selection.class = c)}>
+                                        <svelte:fragment slot="title">{c.number}</svelte:fragment>
+                                        <svelte:fragment slot="subtitle">{c.period}</svelte:fragment>
+                                    </InfoCard>
+                                {/each}
+                            </div>
+                        {/if}
+                    </button>
+                {/if}
+            </div>
+        </div>
         <div class="box">
             <div class="box" style:flex="1">
                 <label data-error={form?.errors?.title}>
@@ -125,6 +204,29 @@
             > .box {
                 box-shadow: none;
                 padding: 0;
+            }
+        }
+
+        button[type='button'] {
+            position: relative;
+            padding: 0;
+            color: #000000;
+
+            .menu {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
+                position: absolute;
+                top: 5rem;
+                background-color: #ffffff;
+                transform-origin: top right;
+                border-radius: 0.375rem;
+                border-top-width: 1px;
+                border-color: #f3f4f6;
+                box-shadow: var(--elevation-6);
+                width: 100%;
+                max-height: 20rem;
+                overflow: overlay;
             }
         }
     }

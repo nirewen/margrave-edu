@@ -1,5 +1,7 @@
 <script lang="ts">
     import { enhance } from '$app/forms'
+    import Avatar from '$lib/components/Avatar.svelte'
+    import InfoCard from '$lib/components/InfoCard.svelte'
     import TableRow from '$lib/components/TableRow.svelte'
     import type { PageData } from './$types'
 
@@ -10,15 +12,39 @@
     <title>{data.lesson.title} | Margrave</title>
 </svelte:head>
 
-<header>
-    <a role="button" class="ghost icon" href="../" title="Voltar">
-        <iconify-icon icon="mdi:chevron-left" width={32} />
-    </a>
-    <hgroup>
-        <h1>{data.lesson.title}</h1>
-    </hgroup>
-</header>
 <div class="page">
+    <header>
+        <a role="button" class="ghost icon" href="../" title="Voltar">
+            <iconify-icon icon="mdi:chevron-left" width={32} />
+        </a>
+        <hgroup>
+            <h1>{data.lesson.title}</h1>
+        </hgroup>
+        <a role="button" class="ghost round" href="./edit/" title="Editar" style:margin-left="auto">
+            <iconify-icon icon="mdi:edit" width={24} />
+            Editar
+        </a>
+    </header>
+    <div class="box row" style:gap="1rem">
+        <div class="box" style:flex="1">
+            <b>Disciplina</b>
+            <InfoCard color={data.lesson.subject?.color}>
+                <iconify-icon class="inverted" slot="icon" icon={data.lesson.subject?.icon} width="42" />
+                <svelte:fragment slot="title">{data.lesson.subject?.name}</svelte:fragment>
+                <svelte:fragment slot="subtitle">
+                    <Avatar avatar={data.lesson.subject?.teacher.profile.avatar} size={1} />
+                    {data.lesson.subject?.teacher.profile.name}
+                </svelte:fragment>
+            </InfoCard>
+        </div>
+        <div class="box" style:flex="1">
+            <b>Turma</b>
+            <InfoCard>
+                <svelte:fragment slot="title">{data.lesson.class.number}</svelte:fragment>
+                <svelte:fragment slot="subtitle">{data.lesson.class.period}</svelte:fragment>
+            </InfoCard>
+        </div>
+    </div>
     <div class="box">
         <b>Descrição</b>
         <span>{data.lesson.description}</span>
