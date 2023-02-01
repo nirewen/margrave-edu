@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let href: string
+    export let href: string | undefined = undefined
     export let columns: string = '1fr 1fr'
     export let shadow = true
 </script>

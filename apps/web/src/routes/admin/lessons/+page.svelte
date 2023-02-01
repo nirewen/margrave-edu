@@ -69,5 +69,8 @@
 
     span.description {
         opacity: 60%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 </style>

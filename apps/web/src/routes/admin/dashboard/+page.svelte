@@ -1,5 +1,6 @@
 <script lang="ts">
     import { plural as p } from '$lib/util'
+    import CalendarView from '../components/CalendarView.svelte'
     import CountCard from '../components/CountCard.svelte'
     import type { PageData } from './$types'
 
@@ -14,39 +15,55 @@
     <h1>Dashboard</h1>
     <h2>Bem vindo ao dashboard! Aqui você encontra estatísticas sobre o sistema.</h2>
 </header>
-<section class="stats">
-    <CountCard
-        big
-        href="../users/"
-        count={data.stats.users}
-        icon="mdi:account"
-        label={`usuário${p(data.stats.users)}`}
+<div class="page">
+    <section class="stats">
+        <CountCard
+            big
+            href="../users/"
+            count={data.stats.users}
+            icon="mdi:account"
+            label={`usuário${p(data.stats.users)}`}
+        />
+        <CountCard
+            href="../users/?role=STUDENT"
+            count={data.stats.students}
+            icon="ic:round-school"
+            label={`estudante${p(data.stats.students)}`}
+        />
+        <CountCard
+            href="../users/?role=TEACHER"
+            count={data.stats.teachers}
+            icon="mdi:human-male-board"
+            label={`professor${p(data.stats.teachers, 'es')}`}
+        />
+        <CountCard
+            href="../classes/"
+            count={data.stats.classes}
+            icon="ic:baseline-groups-2"
+            label={`turma${p(data.stats.classes)}`}
+        />
+        <CountCard
+            href="../lessons/"
+            count={data.stats.lessons}
+            icon="ic:baseline-play-lesson"
+            label={`aula${p(data.stats.lessons)}`}
+        />
+    </section>
+
+    <CalendarView
+        items={data.lessons.map(l => ({
+            title: l.title,
+            subtitle: l.description,
+            subitems: l.assignments.map(a => ({
+                title: a.description,
+                date: new Date(a.expiresAt),
+            })),
+            className: 'task--info',
+            date: new Date(l.date),
+            len: 1,
+        }))}
     />
-    <CountCard
-        href="../users/?role=STUDENT"
-        count={data.stats.students}
-        icon="ic:round-school"
-        label={`estudante${p(data.stats.students)}`}
-    />
-    <CountCard
-        href="../users/?role=TEACHER"
-        count={data.stats.teachers}
-        icon="mdi:human-male-board"
-        label={`professor${p(data.stats.teachers, 'es')}`}
-    />
-    <CountCard
-        href="../classes/"
-        count={data.stats.classes}
-        icon="ic:baseline-groups-2"
-        label={`turma${p(data.stats.classes)}`}
-    />
-    <CountCard
-        href="../lessons/"
-        count={data.stats.lessons}
-        icon="ic:baseline-play-lesson"
-        label={`aula${p(data.stats.lessons)}`}
-    />
-</section>
+</div>
 
 <style lang="scss">
     header {
@@ -60,10 +77,16 @@
         }
     }
 
-    section.stats {
-        display: grid;
+    .page {
+        display: flex;
+        flex-direction: column;
         gap: 1rem;
-        grid-template-columns: 2fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+
+        section.stats {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
     }
 </style>
