@@ -30,6 +30,22 @@ export class AssignmentsService {
         return this.assignments.find()
     }
 
+    async findAllMe(id: string) {
+        return this.assignments.find({
+            where: {
+                lesson: {
+                    subject: {
+                        classes: {
+                            users: {
+                                id,
+                            },
+                        },
+                    },
+                },
+            },
+        })
+    }
+
     async findOne(id: string) {
         const assignment = await this.assignments.findOne({
             where: { id },

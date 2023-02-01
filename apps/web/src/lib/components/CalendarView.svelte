@@ -165,8 +165,8 @@
                     <span>{item.title}</span>
                     <span class="description">{item.subtitle}</span>
                     <span>{format(item.date.toISOString())}</span>
-                    <div style:grid-column="span 3">
-                        {#if item.subitems}
+                    {#if item.subitems}
+                        <div style:grid-column="span 3">
                             {#each item.subitems as subitem}
                                 <TableRow columns="auto 1fr auto" shadow={false}>
                                     <span>{subitem.title}</span>
@@ -174,8 +174,8 @@
                                     <span>{format(subitem.date.toISOString())}</span>
                                 </TableRow>
                             {/each}
-                        {/if}
-                    </div>
+                        </div>
+                    {/if}
                 </TableRow>
             {:else}
                 <span>Nenhuma aula para esse mês</span>

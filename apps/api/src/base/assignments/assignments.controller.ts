@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
-import { Roles } from 'src/common/decorators'
+import { Payload } from 'src/auth/auth.interface'
+import { ReqUser, Roles } from 'src/common/decorators'
 import { UserRole } from 'src/entities/user.entity'
 import { AssignmentsService } from './assignments.service'
 import { CreateAssignmentDTO } from './dto/create-assignment.dto'
@@ -18,6 +19,12 @@ export class AssignmentsController {
     @Get()
     findAll() {
         return this.assignmentsService.findAll()
+    }
+
+    @Get('@me')
+    @Roles(UserRole.STUDENT)
+    findAllMe(@ReqUser() payload: Payload) {
+        return this.assignmentsService.findAllMe(payload.id)
     }
 
     @Get(':id')

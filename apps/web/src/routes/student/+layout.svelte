@@ -6,7 +6,6 @@
 <Menu
     links={[
         { name: 'Dashboard', route: '/student/dashboard/', icon: 'ic:round-grid-view' },
-        { name: 'Calendário', route: '/student/schedule/', icon: 'ic:baseline-calendar-month' },
         { name: 'Turmas', route: '/student/classes/', icon: 'ic:baseline-groups-2' },
         {
             name: 'Aulas',
