@@ -14,7 +14,7 @@ export class Subject {
     @Column({ default: '#0288d1' })
     color: string
 
-    @Column({ default: 'ic:round-school' })
+    @Column({ default: 'mdi:school' })
     icon: string
 
     @Column({ default: '' })

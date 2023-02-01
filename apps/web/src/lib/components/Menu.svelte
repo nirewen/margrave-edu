@@ -22,7 +22,7 @@
 <nav class:open={$open}>
     <header>
         <button class="ghost icon" on:click={open.toggle}>
-            <iconify-icon icon="ic:baseline-menu" width="2rem" />
+            <iconify-icon icon="mdi:menu" width="2rem" />
         </button>
         <h1>Margrave</h1>
     </header>

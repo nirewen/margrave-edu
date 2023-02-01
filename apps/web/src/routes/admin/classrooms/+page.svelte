@@ -17,7 +17,7 @@
     </hgroup>
 
     <a role="button" href="./add/" class="round ghost">
-        <iconify-icon icon="ic:baseline-add" width={24} />
+        <iconify-icon icon="mdi:add" width={24} />
         Adicionar
     </a>
 </header>
@@ -33,7 +33,7 @@
                     <svelte:fragment slot="title">{classroom.building}</svelte:fragment>
                     <svelte:fragment slot="subtitle">{classroom.capacity}</svelte:fragment>
                     <a role="button" href="./{classroom.id}/edit/" class="ghost icon" slot="action">
-                        <iconify-icon icon="ic:baseline-edit" width="28" />
+                        <iconify-icon icon="mdi:edit" width="28" />
                     </a>
                 </InfoCard>
             {/each}

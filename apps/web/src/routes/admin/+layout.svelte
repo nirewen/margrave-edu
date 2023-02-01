@@ -7,7 +7,7 @@
 
 <Menu
     links={[
-        { name: 'Dashboard', route: '/admin/dashboard/', icon: 'ic:round-grid-view' },
+        { name: 'Dashboard', route: '/admin/dashboard/', icon: 'mdi:view-grid' },
         {
             name: 'Usuários',
             route: '/admin/users/',
@@ -18,10 +18,10 @@
                 icon,
             })),
         },
-        { name: 'Salas de aula', route: '/admin/classrooms/', icon: 'ic:baseline-meeting-room' },
-        { name: 'Aulas', route: '/admin/lessons/', icon: 'ic:baseline-play-lesson' },
-        { name: 'Disciplinas', route: '/admin/subjects/', icon: 'ic:round-menu-book' },
-        { name: 'Turmas', route: '/admin/classes/', icon: 'ic:baseline-groups-2' },
+        { name: 'Salas de aula', route: '/admin/classrooms/', icon: 'mdi:google-classroom' },
+        { name: 'Aulas', route: '/admin/lessons/', icon: 'mdi:book-play' },
+        { name: 'Disciplinas', route: '/admin/subjects/', icon: 'mdi:book-open-variant' },
+        { name: 'Turmas', route: '/admin/classes/', icon: 'mdi:account-group' },
     ]}
 />
 <NavBar />

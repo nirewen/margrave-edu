@@ -32,7 +32,7 @@
             <span>
                 {user.email}
                 <button class="ghost icon" on:click={() => clipboard.push(user.email)}>
-                    <iconify-icon icon="ic:baseline-content-copy" width="0.8rem" />
+                    <iconify-icon icon="mdi:content-copy" width="0.8rem" />
                 </button>
             </span>
         </div>

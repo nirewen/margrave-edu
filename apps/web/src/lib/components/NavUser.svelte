@@ -13,10 +13,10 @@
 
     $: groups = [
         [
-            { href: `/${user?.role.toLowerCase()}/dashboard/`, icon: 'ic:round-grid-view', text: `Painel` },
+            { href: `/${user?.role.toLowerCase()}/dashboard/`, icon: 'mdi:view-grid', text: `Painel` },
             {
                 href: '/logout/',
-                icon: 'ic:baseline-logout',
+                icon: 'mdi:logout-variant',
                 text: `Encerrar sessão`,
                 preload: 'off' as const,
             },
@@ -29,7 +29,7 @@
         <button type="button" use:menu.button>
             <Avatar avatar={user.profile.avatar} alt="seu avatar" size={2} />
             <span>{user.profile.name || user.email}</span>
-            <iconify-icon icon="fluent:chevron-down-24-filled" width="18" height="18" />
+            <iconify-icon icon="mdi:chevron-down" width="18" height="18" />
         </button>
 
         {#if $menu.expanded}

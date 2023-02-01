@@ -28,7 +28,7 @@
             <div class="box row" style:justify-content="space-between" style:align-items="center">
                 <b>Tarefas dessa aula</b>
                 <a href="./assignments/add/" role="button" class="ghost icon">
-                    <iconify-icon icon="material-symbols:add" />
+                    <iconify-icon icon="mdi:add" />
                 </a>
             </div>
             {#each data.lesson.assignments as assignment}

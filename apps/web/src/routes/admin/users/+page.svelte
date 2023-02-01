@@ -35,7 +35,7 @@
         <h2>Lista de todos os {filteredRole?.name.plural ?? 'usuários'} registrados</h2>
     </hgroup>
     <div class="filter">
-        <iconify-icon icon="ic:baseline-filter-alt" width={28} />
+        <iconify-icon icon="mdi:filter-variant" width={28} />
         <div class="buttons">
             <a role="button" href="/admin/users/" class="{!$role ? 'primary' : 'ghost'} round">Todos</a>
             {#each [...roles] as [id, { icon }]}
@@ -50,7 +50,7 @@
         </div>
     </div>
     <a role="button" href="./add?role={$role ?? 'STUDENT'}" class="round ghost">
-        <iconify-icon icon={filteredRole?.icon ?? 'ic:baseline-add'} width={24} />
+        <iconify-icon icon={filteredRole?.icon ?? 'mdi:add'} width={24} />
         Adicionar
     </a>
 </header>

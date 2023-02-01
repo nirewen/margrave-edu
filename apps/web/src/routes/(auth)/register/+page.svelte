@@ -40,11 +40,11 @@
     <!-- TODO: fazer elemento de erro -->
     {#if form?.validationError}
         {#each form?.errors as error}
-            <Alert icon="ic:baseline-error" variant="danger">{error.message}</Alert>
+            <Alert icon="mdi:error" variant="danger">{error.message}</Alert>
         {/each}
     {/if}
     {#if form?.apiError}
-        <Alert icon="ic:baseline-error" variant="danger">{form.message}</Alert>
+        <Alert icon="mdi:error" variant="danger">{form.message}</Alert>
     {/if}
     <button type="submit">Registrar conta</button>
 </form>

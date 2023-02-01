@@ -1,6 +1,6 @@
 <script lang="ts">
     export let variant: 'success' | 'warning' | 'danger' | undefined = undefined
-    export let icon: string = 'ic:baseline-error'
+    export let icon: string = 'mdi:error'
     export let hidden = false
     export let hideable = false
 </script>
@@ -13,7 +13,7 @@
         <slot />
         {#if hideable}
             <button class="close" on:click={() => (hidden = true)}>
-                <iconify-icon icon="ic:baseline-close" width={16} />
+                <iconify-icon icon="mdi:close" width={16} />
             </button>
         {/if}
     </div>

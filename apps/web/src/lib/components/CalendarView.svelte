@@ -136,7 +136,7 @@
         <div class="calendar-header">
             <h1>
                 <button on:click={() => ((month = now.getMonth()), (year = now.getFullYear()))}>
-                    <iconify-icon icon="material-symbols:today" width="2rem" />
+                    <iconify-icon icon="mdi:calendar-today" width="2rem" />
                 </button>
                 <button on:click={() => year--}>
                     <iconify-icon icon="mdi:chevron-double-left" width="2rem" />

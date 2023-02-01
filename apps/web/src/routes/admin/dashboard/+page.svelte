@@ -27,7 +27,7 @@
         <CountCard
             href="../users/?role=STUDENT"
             count={data.stats.students}
-            icon="ic:round-school"
+            icon="mdi:school"
             label={`estudante${p(data.stats.students)}`}
         />
         <CountCard
@@ -39,13 +39,13 @@
         <CountCard
             href="../classes/"
             count={data.stats.classes}
-            icon="ic:baseline-groups-2"
+            icon="mdi:account-group"
             label={`turma${p(data.stats.classes)}`}
         />
         <CountCard
             href="../lessons/"
             count={data.stats.lessons}
-            icon="ic:baseline-play-lesson"
+            icon="mdi:book-play"
             label={`aula${p(data.stats.lessons)}`}
         />
     </section>

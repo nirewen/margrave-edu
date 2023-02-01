@@ -28,7 +28,7 @@
     </button>
     {#if user.profile.avatar}
         <button class="remove" type="button" on:click={() => (user.profile.avatar = undefined)}>
-            <iconify-icon icon="ic:baseline-close" width="2rem" />
+            <iconify-icon icon="mdi:close" width="2rem" />
         </button>
     {/if}
 </div>

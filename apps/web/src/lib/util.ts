@@ -31,7 +31,7 @@ export const genders = new Map<GenderID, GenderInfo>([
     [
         'MALE',
         {
-            icon: 'ic:baseline-male',
+            icon: 'mdi:gender-male',
             name: 'Masculino',
             color: '#226699',
             bgColor: '#ffffff',
@@ -40,7 +40,7 @@ export const genders = new Map<GenderID, GenderInfo>([
     [
         'FEMALE',
         {
-            icon: 'ic:baseline-female',
+            icon: 'mdi:gender-female',
             name: 'Feminino',
             color: '#ea596e',
             bgColor: '#ffffff',
@@ -49,7 +49,7 @@ export const genders = new Map<GenderID, GenderInfo>([
     [
         'OTHER',
         {
-            icon: 'ic:baseline-transgender',
+            icon: 'mdi:gender-transgender',
             name: 'Outro',
             color: '#000000',
             bgColor: '#ffffff',
@@ -61,7 +61,7 @@ export const roles = new Map<RoleID, RoleInfo>([
     [
         'ADMIN',
         {
-            icon: 'ic:baseline-shield',
+            icon: 'mdi:shield',
             name: {
                 single: 'administrador',
                 plural: 'administradores',
@@ -89,7 +89,7 @@ export const roles = new Map<RoleID, RoleInfo>([
     [
         'STUDENT',
         {
-            icon: 'ic:round-school',
+            icon: 'mdi:school',
             name: {
                 single: 'estudante',
                 plural: 'estudantes',
@@ -106,28 +106,28 @@ export const classroomTypes = new Map([
     [
         'REGULAR',
         {
-            icon: 'ic:baseline-edit-note',
+            icon: 'mdi:notebook-edit-outline',
             name: 'Padrão',
         },
     ],
     [
         'COMPUTER',
         {
-            icon: 'ic:baseline-computer',
+            icon: 'mdi:computer-classic',
             name: 'Informática',
         },
     ],
     [
         'LABORATORY',
         {
-            icon: 'ic:baseline-science',
+            icon: 'mdi:flask',
             name: 'Laboratório',
         },
     ],
     [
         'GYMNASIUM',
         {
-            icon: 'ic:baseline-sports-gymnastics',
+            icon: 'mdi:gymnastics',
             name: 'Ginásio',
         },
     ],

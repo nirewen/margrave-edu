@@ -5,17 +5,17 @@
 
 <Menu
     links={[
-        { name: 'Dashboard', route: '/teacher/dashboard/', icon: 'ic:round-grid-view' },
-        { name: 'Turmas', route: '/teacher/classes/', icon: 'ic:baseline-groups-2' },
+        { name: 'Dashboard', route: '/teacher/dashboard/', icon: 'mdi:view-grid' },
+        { name: 'Turmas', route: '/teacher/classes/', icon: 'mdi:account-group' },
         {
             name: 'Aulas',
             route: '/teacher/lessons/',
-            icon: 'ic:baseline-play-lesson',
+            icon: 'mdi:book-play',
             routes: [
                 {
                     name: 'Aula',
                     route: '/teacher/lessons/.+?/',
-                    icon: 'material-symbols:play-circle',
+                    icon: 'mdi:play-circle',
                     hide: true,
                     blank: true,
                 },
