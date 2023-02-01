@@ -36,6 +36,7 @@ export class LessonsService {
         return this.lessons.find({
             relations: {
                 assignments: true,
+                class: true,
             },
         })
     }

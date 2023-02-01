@@ -27,7 +27,6 @@
         text-transform: none;
         font-weight: 400;
         color: var(--color);
-        overflow: hidden;
         box-shadow: var(--elevation-0);
 
         &.shadow {

@@ -29,9 +29,10 @@
 {:else}
     <div class="page">
         {#each lessons as lesson}
-            <TableRow href="./{lesson.id}/" columns="auto 1fr auto">
+            <TableRow href="./{lesson.id}/" columns="auto 1fr auto auto">
                 <span class="ml-2">{lesson.title}</span>
                 <span class="description">{lesson.description}</span>
+                <span data-tooltip="Turma">{lesson.class.number}</span>
                 <span>{format(lesson.date)}</span>
                 <a role="button" href="./{lesson.id}/edit/" class="ghost icon" slot="action">
                     <iconify-icon icon="ic:baseline-edit" width="28" />
