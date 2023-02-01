@@ -11,10 +11,15 @@
 
     const menu = createMenu({ label: 'Actions' })
 
-    const groups = [
+    $: groups = [
         [
-            { href: '/profile', icon: 'ic:baseline-account-circle', text: `Perfil` },
-            { href: '/logout', icon: 'ic:baseline-logout', text: `Encerrar sessão`, preload: 'off' as const },
+            { href: `/${user?.role.toLowerCase()}/dashboard/`, icon: 'ic:round-grid-view', text: `Painel` },
+            {
+                href: '/logout/',
+                icon: 'ic:baseline-logout',
+                text: `Encerrar sessão`,
+                preload: 'off' as const,
+            },
         ],
     ]
 </script>
