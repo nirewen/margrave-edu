@@ -41,7 +41,7 @@
     export let items: Item[]
 
     $: month, year, initContent()
-    $: monthItems = items.filter(i => now.getMonth() === month && now.getFullYear() === year)
+    $: monthItems = items.filter(i => i.date.getMonth() === month && i.date.getFullYear() === year)
 
     // choose what date/day gets displayed in each date box.
     function initContent() {
@@ -166,7 +166,7 @@
                     <span>{item.title}</span>
                     <span class="description">{item.subtitle}</span>
                     <span>{format(item.date.toISOString())}</span>
-                    {#if item.subitems}
+                    {#if item.subitems && item.subitems.length > 0}
                         <div style:grid-column="span 3">
                             {#each item.subitems as subitem}
                                 <TableRow href={subitem.href} columns="auto 1fr auto" shadow={false}>
