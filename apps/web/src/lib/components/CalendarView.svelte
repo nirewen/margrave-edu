@@ -40,7 +40,7 @@
     export let items: Item[]
 
     $: month, year, initContent()
-    $: monthItems = items.filter(i => now.getMonth() === month)
+    $: monthItems = items.filter(i => now.getMonth() === month && now.getFullYear() === year)
 
     // choose what date/day gets displayed in each date box.
     function initContent() {
