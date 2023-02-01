@@ -179,7 +179,7 @@
                     {/if}
                 </TableRow>
             {:else}
-                <span>Nenhuma aula para esse mês</span>
+                <span>Nada para o mês selecionado</span>
             {/each}
         {/if}
     </div>
