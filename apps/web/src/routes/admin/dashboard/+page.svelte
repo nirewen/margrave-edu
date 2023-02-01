@@ -1,6 +1,6 @@
 <script lang="ts">
     import { plural as p } from '$lib/util'
-    import CalendarView from '../components/CalendarView.svelte'
+    import CalendarView from '$lib/components/CalendarView.svelte'
     import CountCard from '../components/CountCard.svelte'
     import type { PageData } from './$types'
 

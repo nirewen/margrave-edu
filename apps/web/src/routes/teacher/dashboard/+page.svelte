@@ -1,7 +1,42 @@
 <script lang="ts">
+    import CalendarView from '$lib/components/CalendarView.svelte'
     import type { PageData } from './$types'
 
     export let data: PageData
 </script>
 
-<pre>{JSON.stringify(data, null, 4)}</pre>
+<svelte:head>
+    <title>Dashboard | Margrave</title>
+</svelte:head>
+
+<header>
+    <h1>Dashboard</h1>
+    <h2>Bem vindo ao dashboard</h2>
+</header>
+
+<CalendarView
+    items={data.lessons.map(l => ({
+        title: l.title,
+        subtitle: l.description,
+        subitems: l.assignments.map(a => ({
+            title: a.description,
+            date: new Date(a.expiresAt),
+        })),
+        className: 'task--info',
+        date: new Date(l.date),
+        len: 1,
+    }))}
+/>
+
+<style lang="scss">
+    header {
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--gray-400);
+        }
+    }
+</style>

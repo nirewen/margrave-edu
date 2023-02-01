@@ -2,12 +2,13 @@
     import Calendar from '$lib/components/Calendar.svelte'
     import TableRow from '$lib/components/TableRow.svelte'
     import { format } from '$lib/util'
+    import { utcToZonedTime } from 'date-fns-tz'
 
     const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
     const monthNames = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ']
 
     let headers: string[] = []
-    let now = new Date()
+    let now = utcToZonedTime(new Date(), 'America/Sao_Paulo')
     let year = now.getFullYear() //	this is the month & year displayed
     let month = now.getMonth()
 
@@ -39,7 +40,7 @@
     export let items: Item[]
 
     $: month, year, initContent()
-    $: monthItems = items.filter(i => new Date(i.date!).getMonth() === month)
+    $: monthItems = items.filter(i => now.getMonth() === month)
 
     // choose what date/day gets displayed in each date box.
     function initContent() {
@@ -133,7 +134,7 @@
     <div class="calendar-container">
         <div class="calendar-header">
             <h1>
-                <button on:click={() => ((month = new Date().getMonth()), (year = new Date().getFullYear()))}>
+                <button on:click={() => ((month = now.getMonth()), (year = now.getFullYear()))}>
                     <iconify-icon icon="material-symbols:today" width="2rem" />
                 </button>
                 <button on:click={() => year--}>

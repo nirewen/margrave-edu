@@ -47,6 +47,9 @@ export class LessonsService {
                     teacher: { id },
                 },
             },
+            relations: {
+                assignments: true,
+            },
         })
     }
 
