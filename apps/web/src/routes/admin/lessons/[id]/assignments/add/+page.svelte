@@ -33,7 +33,7 @@
                 <input
                     type="date"
                     name="expiresAt"
-                    value={form?.data?.expiresAt ?? format(new Date().toISOString(), 'yyyy-MM-dd')}
+                    value={form?.data?.expiresAt ?? format(new Date().toISOString(), true)}
                     required
                 />
             </label>

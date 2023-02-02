@@ -2,13 +2,12 @@
     import Calendar from '$lib/components/Calendar.svelte'
     import TableRow from '$lib/components/TableRow.svelte'
     import { format } from '$lib/util'
-    import { utcToZonedTime } from 'date-fns-tz'
 
     const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
     const monthNames = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ']
 
     let headers: string[] = []
-    let now = utcToZonedTime(new Date(), 'America/Sao_Paulo')
+    let now = new Date()
     let year = now.getFullYear() //	this is the month & year displayed
     let month = now.getMonth()
 

@@ -38,7 +38,7 @@
                 <input
                     type="date"
                     name="expiresAt"
-                    value={form?.data?.expiresAt ?? format(data.assignment.expiresAt, 'yyyy-MM-dd')}
+                    value={form?.data?.expiresAt ?? format(data.assignment.expiresAt, true)}
                     required
                 />
             </label>

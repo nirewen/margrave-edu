@@ -1,5 +1,4 @@
 import { differenceInYears, parseISO } from 'date-fns'
-import { formatInTimeZone } from 'date-fns-tz'
 import dot from 'dot-object'
 import type { z } from 'zod'
 
@@ -180,8 +179,11 @@ export async function encodeBase64(file: File | Blob): Promise<string> {
     })
 }
 
-export const format = (date: string, format = 'dd/MM/yyyy') =>
-    formatInTimeZone(parseISO(date), 'Etc/UTC', format)
+export const format = (date: string, dashed = false) =>
+    Intl.DateTimeFormat(dashed ? 'fr-CA' : 'pt-BR', {
+        dateStyle: 'short',
+        timeZone: 'Etc/UTC',
+    }).format(parseISO(date))
 
 export const getAge = (date: string) => differenceInYears(new Date(), parseISO(date))
 

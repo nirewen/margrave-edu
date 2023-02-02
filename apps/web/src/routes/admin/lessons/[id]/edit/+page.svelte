@@ -161,7 +161,7 @@
                         <input
                             type="date"
                             name="date"
-                            value={form?.data?.date ?? format(data.lesson.date, 'yyyy-MM-dd')}
+                            value={form?.data?.date ?? format(data.lesson.date, true)}
                             required
                         />
                     </label>
