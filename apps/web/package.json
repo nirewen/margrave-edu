@@ -29,6 +29,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-node": "^1.1.5",
 		"copy-anything": "^3.0.3",
 		"merge-anything": "^5.1.4",
 		"svelte-headlessui": "^0.0.14",
