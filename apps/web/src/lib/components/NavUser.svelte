@@ -91,6 +91,7 @@
             border-top-width: 1px;
             border-color: #f3f4f6;
             box-shadow: var(--elevation-2);
+            z-index: 2;
 
             > .menu-group {
                 padding: 0.25rem;
