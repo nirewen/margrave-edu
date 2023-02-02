@@ -188,7 +188,7 @@
 <style lang="scss">
     .calendar-view {
         display: grid;
-        grid-template-columns: auto 24rem;
+        grid-template-columns: auto minmax(24rem, 1fr);
         gap: 1rem;
 
         .sidebar {
