@@ -6,14 +6,20 @@ export const handle = (async ({ event, resolve }) => {
         const response = new Response('', { status: 302 })
 
         response.headers.append(
-            'set-cookie',
+            'Set-Cookie',
             cookie.serialize('access_token', '', {
+                path: '/',
+                httpOnly: true,
+                secure: true,
                 expires: new Date(Date.now() - 3600),
             })
         )
         response.headers.append(
-            'set-cookie',
+            'Set-Cookie',
             cookie.serialize('refresh_token', '', {
+                path: '/',
+                httpOnly: true,
+                secure: true,
                 expires: new Date(Date.now() - 3600),
             })
         )
