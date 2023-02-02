@@ -20,30 +20,30 @@
 </header>
 <div class="page">
     <div class="box">
-        <b>Descrição</b>
-        <span>{data.lesson.description}</span>
+        <div class="box">
+            <b>Descrição</b>
+            <span>{data.lesson.description}</span>
+        </div>
     </div>
     <div class="box">
-        <div class="box">
-            <div class="box row" style:justify-content="space-between" style:align-items="center">
-                <b>Tarefas dessa aula</b>
-                <a href="./assignments/add/" role="button" class="ghost icon">
-                    <iconify-icon icon="mdi:add" />
-                </a>
-            </div>
-            {#each data.lesson.assignments as assignment}
-                <TableRow href="./assignments/{assignment.id}/" shadow={false}>
-                    <span class="text-trim">{assignment.description}</span>
-                    <span class="text-right">{assignment.answers.length} respostas</span>
-                </TableRow>
-            {:else}
-                <span>Nenhuma tarefa para essa aula</span>
-            {/each}
+        <div class="box row" style:justify-content="space-between" style:align-items="center">
+            <b>Tarefas dessa aula</b>
+            <a href="./assignments/add/" role="button" class="ghost icon">
+                <iconify-icon icon="mdi:add" />
+            </a>
         </div>
+        {#each data.lesson.assignments as assignment}
+            <TableRow href="./assignments/{assignment.id}/" shadow={false}>
+                <span class="text-trim">{assignment.description}</span>
+                <span class="text-right">{assignment.answers.length} respostas</span>
+            </TableRow>
+        {:else}
+            <span>Nenhuma tarefa para essa aula</span>
+        {/each}
     </div>
     <form method="POST" action="?/saveAttendances" class="box" use:enhance>
         <b>Lista de presenças</b>
-        <div class="box">
+        <div class="box" style:gap="0.6rem">
             {#each data.students.sort((a, b) => a.profile.name.localeCompare(b.profile.name)) as student, i}
                 <label>
                     <input
