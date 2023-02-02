@@ -5,7 +5,7 @@ import type { PageLoad } from './$types'
 
 export const load = wrap(async ({ api }) => {
     return {
-        subjects: api.get<Subject[]>('/api/subjects/@me'),
+        subjects: api.get<Subject[]>('/api/subjects'),
         classes: api.get<Class[]>(`/api/classes`),
     }
 }) satisfies PageLoad

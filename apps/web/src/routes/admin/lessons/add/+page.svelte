@@ -70,7 +70,10 @@
                     {#if $subjectMenu.expanded}
                         <div class="menu" use:subjectMenu.items transition:slide={{ duration: 150 }}>
                             {#each data.subjects as s}
-                                <InfoCard color={s.color} on:click={() => (selection.subject = s)}>
+                                <InfoCard
+                                    color={s.color}
+                                    on:click={() => ((selection.subject = s), (selection.class = null))}
+                                >
                                     <iconify-icon class="inverted" slot="icon" icon={s.icon} width="42" />
                                     <svelte:fragment slot="title">{s.name}</svelte:fragment>
                                     <svelte:fragment slot="subtitle">
@@ -78,6 +81,8 @@
                                         {s.teacher.profile.name}
                                     </svelte:fragment>
                                 </InfoCard>
+                            {:else}
+                                <span>Nenhuma disciplina encontrada</span>
                             {/each}
                         </div>
                     {/if}
@@ -86,17 +91,25 @@
             <div class="box" style:flex="1">
                 {#if selection.subject}
                     <span>Selecione a turma</span>
-                    <button type="button" use:classesMenu.button>
+                    <button type="button" use:classesMenu.button disabled={availableClasses.length === 0}>
                         {#if selection.class}
                             <InfoCard>
                                 <svelte:fragment slot="title">{selection.class.number}</svelte:fragment>
                                 <svelte:fragment slot="subtitle">{selection.class.period}</svelte:fragment>
                             </InfoCard>
-                        {:else}
+                        {:else if availableClasses.length > 0}
                             <InfoCard>
                                 <iconify-icon slot="action" icon="mdi:chevron-down" width="42" />
                                 <svelte:fragment slot="title">Turma</svelte:fragment>
                                 <svelte:fragment slot="subtitle">Selecione uma turma</svelte:fragment>
+                            </InfoCard>
+                        {:else}
+                            <InfoCard>
+                                <iconify-icon slot="action" icon="mdi:close" width="42" />
+                                <svelte:fragment slot="title">Nenhuma turma</svelte:fragment>
+                                <svelte:fragment slot="subtitle">
+                                    Nenhuma turma tem essa disciplina
+                                </svelte:fragment>
                             </InfoCard>
                         {/if}
                         {#if $classesMenu.expanded}

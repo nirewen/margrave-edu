@@ -27,7 +27,7 @@
         class: form?.data
             ? data.classes.find(s => s.id === form?.data.classId)
             : data.classes.find(s => s.id === data.lesson.class.id),
-    } as { subject: Subject; class: Class }
+    } as { subject: Subject; class: Class | null }
 
     $: availableClasses = data.classes.filter(c => c.subjects.find(s => s.id === selection.subject?.id))
 </script>
@@ -69,7 +69,10 @@
                     {#if $subjectMenu.expanded}
                         <div class="menu" use:subjectMenu.items transition:slide={{ duration: 150 }}>
                             {#each data.subjects as s}
-                                <InfoCard color={s.color} on:click={() => (selection.subject = s)}>
+                                <InfoCard
+                                    color={s.color}
+                                    on:click={() => ((selection.subject = s), (selection.class = null))}
+                                >
                                     <iconify-icon class="inverted" slot="icon" icon={s.icon} width="42" />
                                     <svelte:fragment slot="title">{s.name}</svelte:fragment>
                                     <svelte:fragment slot="subtitle">
@@ -85,11 +88,25 @@
             <div class="box" style:flex="1">
                 {#if selection.subject}
                     <span>Selecione a turma</span>
-                    <button type="button" use:classesMenu.button>
+                    <button type="button" use:classesMenu.button disabled={availableClasses.length === 0}>
                         {#if selection.class}
                             <InfoCard>
                                 <svelte:fragment slot="title">{selection.class.number}</svelte:fragment>
                                 <svelte:fragment slot="subtitle">{selection.class.period}</svelte:fragment>
+                            </InfoCard>
+                        {:else if availableClasses.length > 0}
+                            <InfoCard>
+                                <iconify-icon slot="action" icon="mdi:chevron-down" width="42" />
+                                <svelte:fragment slot="title">Turma</svelte:fragment>
+                                <svelte:fragment slot="subtitle">Selecione uma turma</svelte:fragment>
+                            </InfoCard>
+                        {:else}
+                            <InfoCard>
+                                <iconify-icon slot="action" icon="mdi:close" width="42" />
+                                <svelte:fragment slot="title">Nenhuma turma</svelte:fragment>
+                                <svelte:fragment slot="subtitle">
+                                    Nenhuma turma tem essa disciplina
+                                </svelte:fragment>
                             </InfoCard>
                         {/if}
                         {#if $classesMenu.expanded}
@@ -106,52 +123,59 @@
                 {/if}
             </div>
         </div>
-        <div class="box">
-            <input type="hidden" name="subjectId" value={selection.subject.id} />
-            <input type="hidden" name="classId" value={selection.class.id} />
-            <div class="box" style:flex="1">
-                <label data-error={form?.errors?.title}>
-                    <span>Título</span>
-                    <input type="text" name="title" value={form?.data?.title ?? data.lesson.title} required />
-                </label>
-            </div>
-            <label data-error={form?.errors?.description} style:flex="0">
-                <span>Descrição</span>
-                <textarea
-                    name="description"
-                    value={form?.data?.description ?? data.lesson.description}
-                    required
-                />
-            </label>
-            <div class="box row">
-                <label data-error={form?.errors?.timespan} style:flex="1">
-                    <span>Duração</span>
-                    <input
-                        type="time"
-                        name="timespan"
-                        value={form?.data?.timespan ?? data.lesson.timespan}
+        {#if selection.class && selection.subject}
+            <div class="box">
+                <input type="hidden" name="subjectId" value={selection.subject.id} />
+                <input type="hidden" name="classId" value={selection.class.id} />
+                <div class="box" style:flex="1">
+                    <label data-error={form?.errors?.title}>
+                        <span>Título</span>
+                        <input
+                            type="text"
+                            name="title"
+                            value={form?.data?.title ?? data.lesson.title}
+                            required
+                        />
+                    </label>
+                </div>
+                <label data-error={form?.errors?.description} style:flex="0">
+                    <span>Descrição</span>
+                    <textarea
+                        name="description"
+                        value={form?.data?.description ?? data.lesson.description}
                         required
                     />
                 </label>
-                <label data-error={form?.errors?.timespan} style:flex="1">
-                    <span>Data</span>
-                    <input
-                        type="date"
-                        name="date"
-                        value={form?.data?.date ?? format(data.lesson.date, 'yyyy-MM-dd')}
-                        required
-                    />
+                <div class="box row">
+                    <label data-error={form?.errors?.timespan} style:flex="1">
+                        <span>Duração</span>
+                        <input
+                            type="time"
+                            name="timespan"
+                            value={form?.data?.timespan ?? data.lesson.timespan}
+                            required
+                        />
+                    </label>
+                    <label data-error={form?.errors?.timespan} style:flex="1">
+                        <span>Data</span>
+                        <input
+                            type="date"
+                            name="date"
+                            value={form?.data?.date ?? format(data.lesson.date, 'yyyy-MM-dd')}
+                            required
+                        />
+                    </label>
+                </div>
+                <label data-error={form?.errors?.tags} style:flex="0">
+                    <span>Tags</span>
+                    <input type="hidden" name="tags" bind:value={tags} />
+                    <Tags addKeys={[9, 13, 32, 188]} bind:tags />
                 </label>
             </div>
-            <label data-error={form?.errors?.tags} style:flex="0">
-                <span>Tags</span>
-                <input type="hidden" name="tags" bind:value={tags} />
-                <Tags addKeys={[9, 13, 32, 188]} bind:tags />
-            </label>
-        </div>
-        <div class="box">
-            <button type="submit">Salvar aula</button>
-        </div>
+            <div class="box">
+                <button type="submit">Salvar aula</button>
+            </div>
+        {/if}
     </div>
 </form>
 
