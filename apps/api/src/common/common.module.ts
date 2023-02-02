@@ -1,5 +1,4 @@
-import { Global, MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
-import { LoggerContextMiddleware } from './middlewares/logger-context.middleware'
+import { Global, Module } from '@nestjs/common'
 
 import { ConfigService } from './providers/config.service'
 import { SupabaseService } from './providers/supabase.service'
@@ -9,8 +8,4 @@ import { SupabaseService } from './providers/supabase.service'
     providers: [ConfigService, SupabaseService],
     exports: [ConfigService, SupabaseService],
 })
-export class CommonModule implements NestModule {
-    public configure(consumer: MiddlewareConsumer) {
-        consumer.apply(LoggerContextMiddleware).forRoutes('*')
-    }
-}
+export class CommonModule {}
