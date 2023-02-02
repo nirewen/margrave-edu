@@ -56,7 +56,7 @@ async function bootstrap() {
     app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)))
     app.useGlobalGuards(new JwtAuthGuard(app.get(Reflector)))
 
-    await app.listen(3001)
+    await app.listen(Number(process.env.PORT) || 3001)
 }
 
 bootstrap()
