@@ -37,6 +37,7 @@ export class LessonsService {
             relations: {
                 assignments: true,
                 class: true,
+                subject: true,
             },
         })
     }

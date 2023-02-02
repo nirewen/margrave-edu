@@ -29,8 +29,16 @@
 {:else}
     <div class="page">
         {#each lessons as lesson}
-            <TableRow href="./{lesson.id}/" columns="auto 1fr auto auto">
-                <span class="ml-2">{lesson.title}</span>
+            <TableRow href="./{lesson.id}/" columns="auto auto 1fr auto auto">
+                <iconify-icon
+                    class="inverted"
+                    icon={lesson.subject.icon}
+                    data-tooltip={lesson.subject.name}
+                    width="2rem"
+                    style:margin-left="0.2rem"
+                    style:--color={lesson.subject.color}
+                />
+                <span>{lesson.title}</span>
                 <span class="description">{lesson.description}</span>
                 <span data-tooltip="Turma">{lesson.class.number}</span>
                 <span>{format(lesson.date)}</span>
@@ -68,10 +76,16 @@
         gap: 0.6rem;
     }
 
-    span.description {
-        opacity: 60%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    span {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        &.description {
+            opacity: 60%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 </style>
