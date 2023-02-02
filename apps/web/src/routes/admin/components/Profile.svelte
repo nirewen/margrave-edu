@@ -14,7 +14,7 @@
     <header>
         <h2>{title}</h2>
         {#if editable}
-            <a role="button" class="ghost icon" href="/admin/users/{user.id}/edit" title="Editar">
+            <a role="button" class="ghost icon" href="/admin/users/{user.id}/edit/" title="Editar">
                 <iconify-icon icon="mdi:account-edit" width={24} />
             </a>
         {/if}

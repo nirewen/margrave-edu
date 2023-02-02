@@ -35,11 +35,11 @@ export const actions: Actions = {
             avatar: data.avatar.size > 0 ? await encodeBase64(data.avatar) : null,
         })
 
-        throw redirect(302, `/admin/users`)
+        throw redirect(302, `/admin/users/`)
     }),
     delete: wrap(async ({ request, api, params }) => {
         await api.delete(`/api/profiles/${params.id}`)
 
-        throw redirect(302, `/admin/users`)
+        throw redirect(302, `/admin/users/`)
     }),
 }

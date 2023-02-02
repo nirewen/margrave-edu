@@ -24,13 +24,11 @@ export const schema = z.object({
 })
 
 export const profileSchema = z.object({
-    user: z.intersection(
-        schema,
-        z.object({
-            role: z.enum(['ADMIN', 'TEACHER', 'STUDENT']),
-            password: z.string().optional(),
-        })
-    ),
+    user: z.object({
+        email: z.string().email('Email inválido'),
+        password: z.string().optional(),
+        role: z.enum(['ADMIN', 'TEACHER', 'STUDENT']),
+    }),
     name: z.string().min(2, { message: 'Nome deve ter pelo menos 2 caracteres' }),
     bio: z.string().optional(),
     gender: z.enum(['MALE', 'FEMALE', 'OTHER']),
