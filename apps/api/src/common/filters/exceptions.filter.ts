@@ -21,7 +21,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         let code = 'HttpException'
         let details = (exception as any).response?.message
 
-        // Logger.error(message, (exception as any).stack, `${request.method} ${request.url}`)
+        Logger.error(message, (exception as any).stack, `${request.method} ${request.url}`)
 
         let status = HttpStatus.INTERNAL_SERVER_ERROR
 
