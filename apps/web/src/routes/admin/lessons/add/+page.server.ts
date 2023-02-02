@@ -26,7 +26,7 @@ export const actions: Actions = {
         try {
             const response = await api.post<Lesson>(`/api/lessons`, result.data)
 
-            throw redirect(302, `/teacher/lessons/${response.id}/edit`)
+            throw redirect(302, `/teacher/lessons/${response.id}/`)
         } catch (error: unknown) {
             if (error instanceof APIError) {
                 return fail(error.status, {
