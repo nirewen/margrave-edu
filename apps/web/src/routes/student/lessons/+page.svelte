@@ -68,13 +68,6 @@
         flex-direction: column;
         gap: 1rem;
 
-        .grid {
-            display: grid;
-            gap: 0.8rem;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            height: fit-content;
-        }
-
         .box {
             display: flex;
             flex-direction: column;
@@ -84,11 +77,6 @@
             box-shadow: var(--elevation-3);
             border-radius: 0.8rem;
             height: fit-content;
-
-            > .box {
-                box-shadow: none;
-                padding: 0;
-            }
         }
     }
 </style>
